@@ -1,7 +1,9 @@
 function App() {
   return (
     <div className="App">
-      <button className="btn text-green-600">Hello daisyUI</button>
+      <button type="submit" className="btn text-green-600">
+        Debut du Projet
+      </button>
     </div>
   );
 }
