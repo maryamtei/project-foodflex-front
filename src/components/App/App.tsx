@@ -1,7 +1,7 @@
 function App() {
   return (
     <div className="App">
-      <button type="submit" className="btn text-green-600">
+      <button type="submit" className="btn text-secondary">
         Debut du Projet
       </button>
     </div>
