@@ -9,5 +9,6 @@ module.exports = {
       fourthff: '9DC2B7',
     },
   },
+  // eslint-disable-next-line import/no-extraneous-dependencies, global-require
   plugins: [require('daisyui')],
 };
