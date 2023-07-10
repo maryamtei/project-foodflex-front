@@ -1,11 +1,7 @@
+import Modal from '../settings/Modal';
+
 function App() {
-  return (
-    <div className="App">
-      <button type="submit" className="btn text-secondary">
-        Debut du Projet
-      </button>
-    </div>
-  );
+  return <Modal />;
 }
 
 export default App;
