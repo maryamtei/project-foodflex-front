@@ -1,6 +1,10 @@
 import { Mail, User, Key } from 'react-feather';
+import DataProfil from './fakeProfil.json';
+import ProfilData from '../../../@types/Profil';
 
 function Profil() {
+  const profil: ProfilData = DataProfil;
+
   return (
     <div className="container">
       <div className="mt-10 flex justify-center mb-16	">
@@ -21,15 +25,15 @@ function Profil() {
       <div className="flex bg-bgff border rounded-2xl mx-8 p-8">
         <ul>
           <li className="flex mb-8">
-            <User className="mr-4" /> Name : (utilisateur)
+            <User className="mr-4" /> Name : {profil.user.name}
           </li>
           <li className="flex mb-8">
             <Mail className="mr-4" />
-            Mail : (mail utilisateur)
+            Mail : {profil.user.mail}
           </li>
           <li className="flex mb-8">
             <Key className="mr-4" />
-            Password : ........
+            Password : *********
           </li>
         </ul>
       </div>

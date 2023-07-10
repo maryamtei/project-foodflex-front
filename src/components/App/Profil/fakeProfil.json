@@ -1,0 +1,14 @@
+{
+  "user": {
+    "name": "Mister Flex",
+    "mail": "foodflex@Food.com"
+  },
+  "favorites": [
+    {
+      "idMeal": 1,
+      "name": "steack pate",
+      "image": "image steack pate",
+      "position": 1
+    }
+  ]
+}
