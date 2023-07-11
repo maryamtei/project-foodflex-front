@@ -87,7 +87,7 @@ export const signUp = createAsyncThunk(
 
 const settingsReducer = createReducer(initialValue, (builder) => {
   builder
-    .addCase(toggleIsOpen, (state: { modalIsOpen: boolean }) => {
+    .addCase(toggleIsOpen, (state) => {
       state.modalIsOpen = !state.modalIsOpen;
     })
     .addCase(changeSignInCredentialsField, (state, action) => {
@@ -102,9 +102,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     // SIGN IN
 
     .addCase(signIn.pending, (state) => {
-      // Lorsque mon action login est en cours d'exécution
       state.isLoading = true;
-      // Je remet à null l'erreur, ici je suis dans le cas où ma requête viens d'être lancer
       state.message = null;
     })
     .addCase(signIn.rejected, (state, action) => {
