@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { ChangeEvent, FormEvent } from 'react';
+import { FormEvent } from 'react';
 import { X } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import Field from '../Field';
@@ -11,25 +11,18 @@ import {
   toggleIsOpen,
 } from '../../../store/reducers/settings';
 
-function signup() {
+function signin() {
   const dispatch = useAppDispatch();
   const email = useAppSelector(
-    (state) => state.settingsReducer.signUpCredentials.email
+    (state) => state.settingsReducer.signInCredentials.email
   );
   const password = useAppSelector(
-    (state) => state.settingsReducer.signUpCredentials.password
+    (state) => state.settingsReducer.signInCredentials.password
   );
 
   const isLoading = useAppSelector((state) => state.settingsReducer.isLoading);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    dispatch(
-      signIn({
-        email,
-        password,
-      })
-    );
+  const resetField = () => {
     dispatch(
       changeSignInCredentialsField({
         property: 'email',
@@ -43,7 +36,16 @@ function signup() {
       })
     );
   };
-
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    dispatch(
+      signIn({
+        email,
+        password,
+      })
+    );
+    resetField();
+  };
   const handleChangeField = (name: 'email' | 'password') => (value: string) => {
     dispatch(
       changeSignInCredentialsField({
@@ -54,9 +56,11 @@ function signup() {
   };
   const handleModaltoggle = () => {
     dispatch(toggleIsOpen());
+    resetField();
   };
   const HandleClickButton = () => {
     dispatch(toggleSignUpOpen());
+    resetField();
   };
   return (
     <div className="relative flex flex-col gap-4 z-10 p-10 w-80 text-thirdff bg-bgff rounded-xl shadow-xl items-center p-6">
@@ -76,12 +80,14 @@ function signup() {
         <Field
           label="E-mail"
           onChange={handleChangeField('email')}
-          value={email}
+          value={email.trim()}
+          type="email"
         />
         <Field
           label="Password"
           onChange={handleChangeField('password')}
-          value={password}
+          value={password.trim()}
+          type="password"
         />
         <div className="flex justify-center ">
           <button
@@ -104,4 +110,4 @@ function signup() {
   );
 }
 
-export default signup;
+export default signin;

@@ -22,6 +22,7 @@ function Field({ value, type, label, onChange }: FieldProps) {
         value={value}
         onChange={handleChange}
         // infos de base
+        required
         id={inputId}
         type={type}
         className="mb-4 border-fourthff rounded-lg border-2 h-8 shadow-md hover:border-thirdff hover:shadow-xl ease-in duration-150 p-2"
