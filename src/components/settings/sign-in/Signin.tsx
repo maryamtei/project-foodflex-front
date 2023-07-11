@@ -81,11 +81,13 @@ function signin() {
           label="E-mail"
           onChange={handleChangeField('email')}
           value={email.trim()}
+          type="email"
         />
         <Field
           label="Password"
           onChange={handleChangeField('password')}
           value={password.trim()}
+          type="password"
         />
         <div className="flex justify-center ">
           <button

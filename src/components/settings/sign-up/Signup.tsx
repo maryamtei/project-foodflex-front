@@ -103,22 +103,26 @@ function signup() {
         <Field
           label="Firstname"
           onChange={handleChangeField('firstname')}
+          type="text"
           value={firstname.trim()}
         />
         <Field
           label="Lastname"
           onChange={handleChangeField('lastname')}
+          type="text"
           value={lastname.trim()}
         />
         <Field
           label="E-mail"
           onChange={handleChangeField('email')}
           value={email.trim()}
+          type="email"
         />
         <Field
           label="Password"
           onChange={handleChangeField('password')}
           value={password.trim()}
+          type="password"
         />
 
         <div className="flex justify-center ">
