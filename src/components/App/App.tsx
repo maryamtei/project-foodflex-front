@@ -1,9 +1,11 @@
+import Favoris from './Profil/Favoris';
 import Profil from './Profil/Profil';
 
 function App() {
   return (
     <div className="App">
-      <Profil />
+      {/* <Profil /> */}
+      <Favoris />
     </div>
   );
 }
