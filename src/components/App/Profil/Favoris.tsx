@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import './Field/test.scss';
 
 function Favoris() {
   return (

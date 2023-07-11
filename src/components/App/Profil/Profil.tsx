@@ -13,7 +13,7 @@ function Profil() {
 
   const profil: ProfilData = DataProfil;
 
-  const { firstName, mail } = useAppSelector((state) => state.profil);
+  const { firstName, mail } = useAppSelector((state) => state.profilReducer);
 
   function handleEditProfil() {
     setEditProfil(!editProfil);
