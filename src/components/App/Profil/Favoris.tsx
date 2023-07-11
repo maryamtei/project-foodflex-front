@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import './Field/test.scss';
 
 function Favoris() {
   return (
@@ -6,13 +7,21 @@ function Favoris() {
       <div className="mt-10 flex justify-center mb-16	">
         <NavLink
           to="/favoris"
-          className="btn rounded-3xl text-black w-28 shadow-lg"
+          className={({ isActive }) =>
+            isActive
+              ? 'btn rounded-3xl  w-28 shadow-lg text-activeff'
+              : 'btn rounded-3xl  w-28 shadow-lg'
+          }
         >
           Favorites
         </NavLink>
         <NavLink
           to="/profil"
-          className="ml-10 btn rounded-3xl text-black w-28 shadow-lg"
+          className={({ isActive }) =>
+            isActive
+              ? 'ml-10 btn rounded-3xl  w-28 shadow-lg text-activeff'
+              : 'ml-10 btn rounded-3xl  w-28 shadow-lg'
+          }
         >
           Profil
         </NavLink>

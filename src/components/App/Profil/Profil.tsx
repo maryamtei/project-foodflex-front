@@ -1,80 +1,91 @@
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { NavLink } from 'react-router-dom';
-
 import { Mail, User, Key } from 'react-feather';
+
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import DataProfil from './fakeProfil.json';
 import ProfilData from '../../../@types/Profil';
 import Field from './Field/Field';
+import { editProfilData } from '../../../store/reducers/profilReducer';
 
 function Profil() {
   const [editProfil, setEditProfil] = useState(false);
 
   const profil: ProfilData = DataProfil;
 
+  const { firstName, mail } = useAppSelector((state) => state.profil);
+
   function handleEditProfil() {
+    setEditProfil(!editProfil);
+  }
+
+  const dispatch = useAppDispatch();
+
+  function handleSubmitEditProfil(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    dispatch(editProfilData(formData));
     setEditProfil(!editProfil);
   }
 
   return (
     <div className="container">
-      <div className="mt-10 flex justify-center mb-16	">
+      <div className="mt-10 flex justify-center mb-16">
         <NavLink
           to="/favoris"
-          className="btn rounded-3xl text-black w-28 shadow-lg"
+          className={({ isActive }) =>
+            isActive
+              ? 'btn rounded-3xl  w-28 shadow-lg text-activeff'
+              : 'btn rounded-3xl  w-28 shadow-lg'
+          }
         >
           Favorites
         </NavLink>
         <NavLink
           to="/profil"
-          className="ml-10 btn rounded-3xl text-black w-28 shadow-lg"
+          className={({ isActive }) =>
+            isActive
+              ? 'ml-10 btn rounded-3xl  w-28 shadow-lg text-activeff'
+              : 'ml-10 btn rounded-3xl  w-28 shadow-lg'
+          }
         >
           Profil
         </NavLink>
       </div>
 
-      <div className="flex bg-bgff border rounded-2xl mx-8 py-8 px-4 h-56">
-        <form action="">
+      <div className="flex bg-bgff border rounded-2xl mx-8 py-8 px-4 h-96">
+        <form onSubmit={handleSubmitEditProfil}>
           {editProfil ? (
             <>
               <div className="flex mb-8">
                 <User className="mr-2" />
-                <Field
-                  className="w-40 ml-1 pl-1 bg-bgff border"
-                  label="Name :"
-                  placeholder={profil.user.name}
-                  type="name"
-                  name="name"
-                />
+                <Field name="name" label="Name :" value={firstName} />
               </div>
               <div className="flex mb-8">
                 <Mail className="mr-2" />
-                <Field
-                  className="w-44 ml-1 pl-1 bg-bgff border"
-                  label="Mail :"
-                  placeholder={profil.user.mail}
-                  type="mail"
-                  name="mail"
-                />
+                <Field name="mail" label="Mail :" value={mail} />
               </div>
               <div className="flex mb-8">
                 <Key className="mr-2" />
-                <Field
-                  className="w-36 ml-1 pl-1 bg-bgff border"
-                  label="Password :"
-                  placeholder="********"
-                  type="password"
-                  name="password"
-                />
+                <Field name="password" label="Password :" value="******" />
               </div>
+
+              <button
+                type="submit"
+                className="btn rounded-3xl w-28 ml-16 shadow-lg"
+              >
+                Confirmed
+              </button>
             </>
           ) : (
             <>
               <p className="flex mb-8">
-                <User className="mr-2" /> Name : {profil.user.name}
+                <User className="mr-2" /> Name : {firstName}
               </p>
               <p className="flex mb-8">
                 <Mail className="mr-2" />
-                Mail : {profil.user.mail}
+                Mail : {mail}
               </p>
               <p className="flex mb-8">
                 <Key className="mr-2" />
@@ -90,7 +101,7 @@ function Profil() {
           className="btn text-sm rounded-3xl text-black w-32 mb-5 shadow-lg"
           onClick={() => handleEditProfil()}
         >
-          {editProfil ? 'Confirmed' : 'Edit Profil'}
+          {editProfil ? 'Cancelled' : 'Edit Profil'}
         </button>
         <button
           type="button"

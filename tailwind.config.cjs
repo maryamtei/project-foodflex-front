@@ -6,7 +6,8 @@ module.exports = {
       primaryff: '#D3DFAF',
       secondaryff: '#FFE177',
       thirdff: '#1F7551',
-      fourthff: '9DC2B7',
+      fourthff: '#9DC2B7',
+      activeff: '#FF0000',
     },
   },
   // eslint-disable-next-line import/no-extraneous-dependencies, global-require

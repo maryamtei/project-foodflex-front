@@ -4,31 +4,32 @@ import { ChangeEvent, useId, useState } from 'react';
 
 interface FieldProps {
   name: string;
-  placeholder: string;
   label: string;
+  value: string;
   [prop: string]: unknown;
 }
 
-function Field({ name, placeholder, label, ...props }: FieldProps) {
-  const [value, setValue] = useState(placeholder);
+function Field({ name, label, value, ...props }: FieldProps) {
+  const [valueControl, setValueControl] = useState(value);
 
   const inputId = useId();
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
-    setValue(event.target.value);
+    setValueControl(event.target.value);
   }
 
   return (
-    <div className={value.length ? 'flex' : 'flex'}>
+    <div>
       <label htmlFor={inputId} className="flex">
         {label}
       </label>
       <input
+        className="ml-1 pl-1 bg-bgff border"
         name={name}
-        value={value}
+        value={valueControl}
         onChange={handleChange}
         id={inputId}
-        placeholder={placeholder}
+        placeholder={value}
         {...props}
       />
     </div>

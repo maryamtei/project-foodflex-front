@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import {
   Route,
   RouterProvider,
@@ -11,6 +12,7 @@ import './styles/index.scss';
 import App from './components/App/App';
 import Favoris from './components/App/Profil/Favoris';
 import Profil from './components/App/Profil/Profil';
+import store from './store';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,5 +24,7 @@ const router = createBrowserRouter(
 );
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <RouterProvider router={router} />
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
 );

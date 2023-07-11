@@ -1,6 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
+import profilReducer from './reducers/profilReducer';
 
-const store = configureStore({});
+const store = configureStore({
+  reducer: {
+    profil: profilReducer,
+  },
+});
 
 export default store;
 
