@@ -14,13 +14,13 @@ import {
 function signin() {
   const dispatch = useAppDispatch();
   const email = useAppSelector(
-    (state) => state.settingsReducer.signInCredentials.email
+    (state) => state.settings.signInCredentials.email
   );
   const password = useAppSelector(
-    (state) => state.settingsReducer.signInCredentials.password
+    (state) => state.settings.signInCredentials.password
   );
 
-  const isLoading = useAppSelector((state) => state.settingsReducer.isLoading);
+  const isLoading = useAppSelector((state) => state.settings.isLoading);
 
   const resetField = () => {
     dispatch(

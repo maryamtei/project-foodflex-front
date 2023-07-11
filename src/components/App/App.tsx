@@ -2,10 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      {/* <button type="submit" className="btn text-secondary">
-        Debut du Projet
-      </button> */}
+    <div className="container mx-auto p-4">
       <Outlet />
     </div>
   );

@@ -14,19 +14,19 @@ import {
 function signup() {
   const dispatch = useAppDispatch();
   const email = useAppSelector(
-    (state) => state.settingsReducer.signUpCredentials.email
+    (state) => state.settings.signUpCredentials.email
   );
   const password = useAppSelector(
-    (state) => state.settingsReducer.signUpCredentials.password
+    (state) => state.settings.signUpCredentials.password
   );
   const firstname = useAppSelector(
-    (state) => state.settingsReducer.signUpCredentials.firstname
+    (state) => state.settings.signUpCredentials.firstname
   );
   const lastname = useAppSelector(
-    (state) => state.settingsReducer.signUpCredentials.lastname
+    (state) => state.settings.signUpCredentials.lastname
   );
 
-  const isLoading = useAppSelector((state) => state.settingsReducer.isLoading);
+  const isLoading = useAppSelector((state) => state.settings.isLoading);
   // const message = useAppSelector((state) => state.settingsReducer.message);
 
   const resetField = () => {
