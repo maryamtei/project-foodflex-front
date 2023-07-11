@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import {
   createAction,
   createAsyncThunk,
@@ -14,7 +15,7 @@ interface SettingsState {
   signUpCredentials: {
     email: string;
     password: string;
-    firtname: string;
+    firstname: string;
     lastname: string;
   };
   isLoading: boolean;
@@ -31,7 +32,7 @@ const initialValue: SettingsState = {
   signUpCredentials: {
     email: '',
     password: '',
-    firtname: '',
+    firstname: '',
     lastname: '',
   },
   isLoading: false,
@@ -92,11 +93,11 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(changeSignInCredentialsField, (state, action) => {
       const { property, value } = action.payload;
-      state.credentials[property] = value;
+      state.signInCredentials[property] = value;
     })
     .addCase(changeSignUpCredentialsField, (state, action) => {
       const { property, value } = action.payload;
-      state.credentials[property] = value;
+      state.signUpCredentials[property] = value;
     })
 
     // SIGN IN
@@ -105,33 +106,30 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = true;
       state.message = null;
     })
-    .addCase(signIn.rejected, (state, action) => {
-      state.message = action.payload.message;
+    .addCase(signIn.rejected, (state) => {
+      state.message = 'rejected';
       state.isLoading = false;
     })
     .addCase(signIn.fulfilled, (state, action) => {
       state.message = action.payload.message;
       state.isLoading = false;
-      state.isOpen = false;
+      state.modalIsOpen = false;
     })
 
     // SIGN IN
 
     .addCase(signUp.pending, (state) => {
-      // Lorsque mon action login est en cours d'exécution
       state.isLoading = true;
-      // Je remet à null l'erreur, ici je suis dans le cas où ma requête viens d'être lancer
-      state.error = null;
+      state.message = null;
     })
-    .addCase(signUp.rejected, (state, action) => {
-      state.message = action.payload.message;
+    .addCase(signUp.rejected, (state) => {
+      state.message = 'rejected';
       state.isLoading = false;
     })
     .addCase(signUp.fulfilled, (state, action) => {
       state.message = action.payload.message;
       state.isLoading = false;
-      state.isOpen = false;
+      state.modalIsOpen = false;
     });
 });
-
 export default settingsReducer;

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { ChangeEvent, FormEvent } from 'react';
+import { FormEvent } from 'react';
 import { X } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import Field from '../Field';
@@ -10,32 +10,41 @@ import {
 } from '../../../store/reducers/settings';
 
 function signup() {
+  const dispatch = useAppDispatch();
   const email = useAppSelector(
-    (state) => state.settings.signUpCredentials.email
+    (state) => state.settingsReducer.signUpCredentials.email
   );
   const password = useAppSelector(
-    (state) => state.settings.signUpCredentials.password
+    (state) => state.settingsReducer.signUpCredentials.password
   );
   const firstname = useAppSelector(
-    (state) => state.settings.signUpCredentials.firtname
+    (state) => state.settingsReducer.signUpCredentials.firstname
   );
   const lastname = useAppSelector(
-    (state) => state.settings.signUpCredentials.lastname
+    (state) => state.settingsReducer.signUpCredentials.lastname
   );
 
-  const isLoading = useAppSelector((state) => state.settings.isLoading);
-  const message = useAppSelector((state) => state.settings.message);
+  const isLoading = useAppSelector((state) => state.settingsReducer.isLoading);
+  // const message = useAppSelector((state) => state.settingsReducer.message);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(
+      signUp({
+        email,
+        password,
+        firstname,
+        lastname,
+      })
+    );
   };
 
   const handleChangeField =
     (name: 'email' | 'password' | 'firstname' | 'lastname') =>
     (value: string) => {
-      useAppDispatch(
+      dispatch(
         changeSignUpCredentialsField({
-          field: name,
+          property: name,
           value,
         })
       );
@@ -82,7 +91,7 @@ function signup() {
       </form>
       <button
         type="button"
-        className="fixed hidden rounded-full border-2 w-12 h-12 mt-2"
+        className="absolute rounded-full border-2 w-12 h-12 mt-2"
         // onClick={handleClickToggle}
       >
         <X className="w-12 h-12" />
