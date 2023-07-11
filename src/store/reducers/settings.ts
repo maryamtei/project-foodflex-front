@@ -7,6 +7,7 @@ import {
 
 interface SettingsState {
   modalIsOpen: boolean;
+  isLoged: boolean;
   signUpOpen: boolean;
   signInCredentials: {
     email: string;
@@ -24,6 +25,7 @@ interface SettingsState {
 
 const initialValue: SettingsState = {
   modalIsOpen: false,
+  isLoged: false,
   signUpOpen: true,
   signInCredentials: {
     email: '',
@@ -90,6 +92,9 @@ const settingsReducer = createReducer(initialValue, (builder) => {
   builder
     .addCase(toggleIsOpen, (state) => {
       state.modalIsOpen = !state.modalIsOpen;
+    })
+    .addCase(toggleSignUpOpen, (state) => {
+      state.signUpOpen = !state.signUpOpen;
     })
     .addCase(changeSignInCredentialsField, (state, action) => {
       const { property, value } = action.payload;

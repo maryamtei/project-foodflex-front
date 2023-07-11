@@ -7,6 +7,8 @@ import Field from '../Field';
 import {
   changeSignInCredentialsField,
   signIn,
+  toggleSignUpOpen,
+  toggleIsOpen,
 } from '../../../store/reducers/settings';
 
 function signup() {
@@ -17,12 +19,7 @@ function signup() {
   const password = useAppSelector(
     (state) => state.settingsReducer.signUpCredentials.password
   );
-  const firstname = useAppSelector(
-    (state) => state.settingsReducer.signUpCredentials.firstname
-  );
-  const lastname = useAppSelector(
-    (state) => state.settingsReducer.signUpCredentials.lastname
-  );
+
   const isLoading = useAppSelector((state) => state.settingsReducer.isLoading);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -31,6 +28,18 @@ function signup() {
       signIn({
         email,
         password,
+      })
+    );
+    dispatch(
+      changeSignInCredentialsField({
+        property: 'email',
+        value: '',
+      })
+    );
+    dispatch(
+      changeSignInCredentialsField({
+        property: 'password',
+        value: '',
       })
     );
   };
@@ -43,13 +52,24 @@ function signup() {
       })
     );
   };
-
+  const handleModaltoggle = () => {
+    dispatch(toggleIsOpen());
+  };
+  const HandleClickButton = () => {
+    dispatch(toggleSignUpOpen());
+  };
   return (
-    <div className="relative bg-bgff flex flex-col gap-4 z-10 p-10 w-80 text-thirdff border-2 rounded-lg shadow-2xl items-center p-6">
+    <div className="relative flex flex-col gap-4 z-10 p-10 w-80 text-thirdff bg-bgff rounded-xl shadow-xl items-center p-6">
       <h1 className="text-3xl font-bold text-center "> Sign-In</h1>
       <div className="flex flex-col text-center">
         <p className="text-base ">New customer ?</p>
-        <p className="text-base underline underline-offset-2">Sign-Up !</p>
+        <button
+          type="button"
+          className="text-base underline underline-offset-2"
+          onClick={HandleClickButton}
+        >
+          Sign-up !
+        </button>
       </div>
 
       <form autoComplete="off" onSubmit={handleSubmit}>
@@ -73,15 +93,10 @@ function signup() {
           </button>
         </div>
       </form>
-      <div className="flex flex-col text-center">
-        <p className="text-base underline underline-offset-2">
-          Forgot your password ?
-        </p>
-      </div>
       <button
         type="button"
-        className="fixed hidden rounded-full border-2 w-12 h-12 mt-2"
-        // onClick={handleClickToggle}
+        className="absolute top-1 right-1  w-10 h-10 mt-2"
+        onClick={handleModaltoggle}
       >
         <X className="w-12 h-12" />
       </button>

@@ -5,8 +5,10 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import Field from '../Field';
 
 import {
+  toggleSignUpOpen,
   changeSignUpCredentialsField,
   signUp,
+  toggleIsOpen,
 } from '../../../store/reducers/settings';
 
 function signup() {
@@ -26,7 +28,6 @@ function signup() {
 
   const isLoading = useAppSelector((state) => state.settingsReducer.isLoading);
   // const message = useAppSelector((state) => state.settingsReducer.message);
-
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(
@@ -35,6 +36,30 @@ function signup() {
         password,
         firstname,
         lastname,
+      })
+    );
+    dispatch(
+      changeSignUpCredentialsField({
+        property: 'email',
+        value: '',
+      })
+    );
+    dispatch(
+      changeSignUpCredentialsField({
+        property: 'password',
+        value: '',
+      })
+    );
+    dispatch(
+      changeSignUpCredentialsField({
+        property: 'firstname',
+        value: '',
+      })
+    );
+    dispatch(
+      changeSignUpCredentialsField({
+        property: 'lastname',
+        value: '',
       })
     );
   };
@@ -50,12 +75,24 @@ function signup() {
       );
     };
 
+  const handleModaltoggle = () => {
+    dispatch(toggleIsOpen());
+  };
+  const HandleClickButton = () => {
+    dispatch(toggleSignUpOpen());
+  };
   return (
     <div className="relative flex flex-col gap-4 z-10 p-10 w-80 text-thirdff bg-bgff rounded-xl shadow-xl items-center p-6">
       <h1 className="text-3xl font-bold text-center "> Sign-up</h1>
       <div className="flex flex-col text-center">
         <p className="text-base ">Already registered ?</p>
-        <p className="text-base underline underline-offset-2">Sign-in !</p>
+        <button
+          type="button"
+          className="text-base underline underline-offset-2"
+          onClick={HandleClickButton}
+        >
+          Sign-in !
+        </button>
       </div>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <Field
@@ -91,8 +128,8 @@ function signup() {
       </form>
       <button
         type="button"
-        className="absolute rounded-full border-2 w-12 h-12 mt-2"
-        // onClick={handleClickToggle}
+        className="absolute top-1 right-1  w-10 h-10 mt-2"
+        onClick={handleModaltoggle}
       >
         <X className="w-12 h-12" />
       </button>
