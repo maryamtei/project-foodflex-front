@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import { Mail, User, Key } from 'react-feather';
 import DataProfil from './fakeProfil.json';
@@ -17,18 +18,18 @@ function Profil() {
   return (
     <div className="container">
       <div className="mt-10 flex justify-center mb-16	">
-        <button
-          type="button"
+        <NavLink
+          to="/favoris"
           className="btn rounded-3xl text-black w-28 shadow-lg"
         >
           Favorites
-        </button>
-        <button
-          type="button"
+        </NavLink>
+        <NavLink
+          to="/profil"
           className="ml-10 btn rounded-3xl text-black w-28 shadow-lg"
         >
           Profil
-        </button>
+        </NavLink>
       </div>
 
       <div className="flex bg-bgff border rounded-2xl mx-8 py-8 px-4 h-56">

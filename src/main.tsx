@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
-import App from './components/App/App';
-
+import {
+  Route,
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from 'react-router-dom';
 import './styles/index.scss';
 
+import App from './components/App/App';
+import Favoris from './components/App/Profil/Favoris';
+import Profil from './components/App/Profil/Profil';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route index path="/profil" element={<Profil />} />
+      <Route path="/favoris" element={<Favoris />} />
+    </Route>
+  )
+);
+
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <RouterProvider router={router} />
 );
