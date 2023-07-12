@@ -4,9 +4,7 @@ import { toggleIsOpen } from '../../store/reducers/settings';
 
 function Apptest() {
   const dispatch = useAppDispatch();
-  const modalIsOpen = useAppSelector(
-    (state) => state.settingsReducer.modalIsOpen
-  );
+  const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const HandleClickButton = () => {
     dispatch(toggleIsOpen());
   };

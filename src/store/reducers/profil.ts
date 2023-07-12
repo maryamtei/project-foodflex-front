@@ -42,16 +42,15 @@ export const editProfilData = createAsyncThunk(
 );
 
 const profilReducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(editProfilData.fulfilled, (state, action) => {
-      state.profil = action.payload;
-    })
-    .addCase(editProfilData.pending, (state, action) => {
-      // --------- composant Loading a mettre ------- //
-    })
-    .addCase(editProfilData.rejected, (state, action) => {
-      // --------- message erreur ------- //
-    });
+  builder.addCase(editProfilData.fulfilled, (state, action) => {
+    state.profil = action.payload;
+  });
+  // .addCase(editProfilData.pending, (state, action) => {
+  // --------- composant Loading a mettre ------- //
+  // })
+  // .addCase(editProfilData.rejected, (state, action) => {
+  // --------- message erreur ------- //
+  // });
 });
 
 export default profilReducer;

@@ -8,7 +8,7 @@ function Favoris() {
           to="/favoris"
           className={({ isActive }) =>
             isActive
-              ? 'btn rounded-3xl  w-28 shadow-lg text-activeff'
+              ? 'btn rounded-3xl  w-28 shadow-lg text-red-600'
               : 'btn rounded-3xl  w-28 shadow-lg'
           }
         >
@@ -18,7 +18,7 @@ function Favoris() {
           to="/profil"
           className={({ isActive }) =>
             isActive
-              ? 'ml-10 btn rounded-3xl  w-28 shadow-lg text-activeff'
+              ? 'ml-10 btn rounded-3xl  w-28 shadow-lg text-red-600'
               : 'ml-10 btn rounded-3xl  w-28 shadow-lg'
           }
         >

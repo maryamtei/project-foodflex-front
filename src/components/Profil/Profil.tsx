@@ -2,9 +2,9 @@ import { FormEvent, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Mail, User, Key } from 'react-feather';
 
-import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Field from './Field/Field';
-import { editProfilData, infoProfil } from '../../../store/reducers/profil';
+import { editProfilData, infoProfil } from '../../store/reducers/profil';
 
 function Profil() {
   const [editProfil, setEditProfil] = useState(false);
@@ -27,7 +27,7 @@ function Profil() {
   }
 
   const { firstName, lastName, email, password } = useAppSelector(
-    (state) => state.profilReducer.profil
+    (state) => state.profil.profil
   );
 
   return (
@@ -37,7 +37,7 @@ function Profil() {
           to="/favoris"
           className={({ isActive }) =>
             isActive
-              ? 'btn rounded-3xl  w-28 shadow-lg text-activeff'
+              ? 'btn rounded-3xl  w-28 shadow-lg text-red-600'
               : 'btn rounded-3xl  w-28 shadow-lg'
           }
         >
@@ -47,7 +47,7 @@ function Profil() {
           to="/profil"
           className={({ isActive }) =>
             isActive
-              ? 'ml-10 btn rounded-3xl  w-28 shadow-lg text-activeff'
+              ? 'ml-10 btn rounded-3xl  w-28 shadow-lg text-red-600'
               : 'ml-10 btn rounded-3xl  w-28 shadow-lg'
           }
         >
@@ -55,25 +55,37 @@ function Profil() {
         </NavLink>
       </div>
 
-      <div className="flex bg-bgff border rounded-2xl mx-8 py-8 px-4 h-96">
+      <div className="flex bg-bgff border rounded-2xl mx-8 py-8 px-4">
         <form onSubmit={handleSubmitEditProfil}>
           {editProfil ? (
             <>
               <div className="flex mb-8">
                 <User className="mr-2" />
-                <Field name="firstName" label="Firstname :" value={firstName} />
+                <Field
+                  name="firstName"
+                  label="Firstname :"
+                  value={firstName.trim()}
+                />
               </div>
               <div className="flex mb-8">
                 <User className="mr-2" />
-                <Field name="lastName" label="Lastname :" value={lastName} />
+                <Field
+                  name="lastName"
+                  label="Lastname :"
+                  value={lastName.trim()}
+                />
               </div>
               <div className="flex mb-8">
                 <Mail className="mr-2" />
-                <Field name="email" label="Mail :" value={email} />
+                <Field name="email" label="Mail :" value={email.trim()} />
               </div>
               <div className="flex mb-8">
                 <Key className="mr-2" />
-                <Field name="password" label="Password :" value={password} />
+                <Field
+                  name="password"
+                  label="Password :"
+                  value={password.trim()}
+                />
               </div>
 
               <button
@@ -86,7 +98,7 @@ function Profil() {
           ) : (
             <>
               <p className="flex mb-8">
-                <User className="mr-2" /> Name : {firstName}
+                <User className="mr-2" /> Name : {firstName} {lastName}
               </p>
               <p className="flex mb-8">
                 <Mail className="mr-2" />
@@ -100,10 +112,10 @@ function Profil() {
           )}
         </form>
       </div>
-      <div className="flex flex-col mt-10 items-center">
+      <div className="flex justify-center mt-10">
         <button
           type="button"
-          className="btn text-sm rounded-3xl text-black w-32 mb-5 shadow-lg"
+          className="btn text-sm rounded-3xl text-black w-32 shadow-lg mr-5"
           onClick={() => handleEditProfil()}
         >
           {editProfil ? 'Cancelled' : 'Edit Profil'}
