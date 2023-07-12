@@ -121,7 +121,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.modalIsOpen = false;
     })
 
-    // SIGN UP
+    // SIGN Up
 
     .addCase(signUp.pending, (state) => {
       state.isLoading = true;

@@ -11,7 +11,9 @@ function Modal() {
     return <Signin />;
   };
 
-  return modalCondition();
+  return (
+    <div className="grid justify-items-center py-20 ">{modalCondition()}</div>
+  );
 }
 
 export default Modal;

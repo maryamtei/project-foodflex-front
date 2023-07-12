@@ -30,7 +30,6 @@ function Apptest() {
     <div className="">
       <Header />
       <Modal />
-
       <Footer />
     </div>
   );
