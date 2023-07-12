@@ -1,30 +1,32 @@
 {
   "user": {
     "firstName": "Mister Flex",
+    "lastName": "Mister Flex",
     "mail": "foodflex@Food.com",
+    "password": "foodflex@Food.com",
     "favorites": [
       {
         "idMeal": 1,
-        "name": "steack",
-        "image": "image steack pate",
+        "name": "Escovitch Fish",
+        "image": "https://www.themealdb.com/images/media/meals/1520084413.jpg",
         "position": 1
       },
       {
         "idMeal": 2,
-        "name": "pate",
-        "image": "image pate",
+        "name": "Stuffed Lamb Tomatoes",
+        "image": "https://www.themealdb.com/images/media/meals/u55lbp1585564013.jpg",
         "position": 2
       },
       {
         "idMeal": 3,
-        "name": "riz",
-        "image": "image riz",
+        "name": "Kapsalon",
+        "image": "https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg",
         "position": 3
       },
       {
         "idMeal": 4,
-        "name": "legume",
-        "image": "image legume",
+        "name": "Teriyaki Chicken Casserole",
+        "image": "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg",
         "position": 4
       }
     ]

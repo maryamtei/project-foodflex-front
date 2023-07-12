@@ -4,6 +4,7 @@ import {
   createReducer,
 } from '@reduxjs/toolkit';
 import { User } from '../../@types/Profil';
+import fakeProfil from '../../components/Profil/fakeProfil.json';
 
 interface ProfilState {
   profil: User;
@@ -11,10 +12,10 @@ interface ProfilState {
 
 export const initialState: ProfilState = {
   profil: {
-    firstName: 'Mister Flex',
-    lastName: 'Redux',
-    email: 'foodflex@Food.redux',
-    password: '123456',
+    firstName: fakeProfil.user.firstName,
+    lastName: fakeProfil.user.lastName,
+    email: fakeProfil.user.mail,
+    password: fakeProfil.user.password,
   },
 };
 
