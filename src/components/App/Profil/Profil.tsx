@@ -1,19 +1,13 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Mail, User, Key } from 'react-feather';
 
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import DataProfil from './fakeProfil.json';
-import ProfilData from '../../../@types/Profil';
 import Field from './Field/Field';
-import { editProfilData } from '../../../store/reducers/profilReducer';
+import { editProfilData, infoProfil } from '../../../store/reducers/profil';
 
 function Profil() {
   const [editProfil, setEditProfil] = useState(false);
-
-  const profil: ProfilData = DataProfil;
-
-  const { firstName, mail } = useAppSelector((state) => state.profilReducer);
 
   function handleEditProfil() {
     setEditProfil(!editProfil);
@@ -21,13 +15,20 @@ function Profil() {
 
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(infoProfil());
+  }, [dispatch]);
+
   function handleSubmitEditProfil(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-
     const formData = new FormData(event.currentTarget);
     dispatch(editProfilData(formData));
     setEditProfil(!editProfil);
   }
+
+  const { firstName, lastName, email, password } = useAppSelector(
+    (state) => state.profilReducer.profil
+  );
 
   return (
     <div className="container">
@@ -60,15 +61,19 @@ function Profil() {
             <>
               <div className="flex mb-8">
                 <User className="mr-2" />
-                <Field name="name" label="Name :" value={firstName} />
+                <Field name="firstName" label="Firstname :" value={firstName} />
+              </div>
+              <div className="flex mb-8">
+                <User className="mr-2" />
+                <Field name="lastName" label="Lastname :" value={lastName} />
               </div>
               <div className="flex mb-8">
                 <Mail className="mr-2" />
-                <Field name="mail" label="Mail :" value={mail} />
+                <Field name="email" label="Mail :" value={email} />
               </div>
               <div className="flex mb-8">
                 <Key className="mr-2" />
-                <Field name="password" label="Password :" value="******" />
+                <Field name="password" label="Password :" value={password} />
               </div>
 
               <button
@@ -85,7 +90,7 @@ function Profil() {
               </p>
               <p className="flex mb-8">
                 <Mail className="mr-2" />
-                Mail : {mail}
+                Mail : {email}
               </p>
               <p className="flex mb-8">
                 <Key className="mr-2" />

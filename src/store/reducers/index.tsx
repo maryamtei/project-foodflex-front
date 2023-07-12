@@ -1,5 +1,5 @@
 import settingsReducer from './settings';
-import profilReducer from './profilReducer';
+import profilReducer from './profil';
 
 const reducer = { settingsReducer, profilReducer };
 

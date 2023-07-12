@@ -1,6 +1,8 @@
 export interface User {
   firstName: string;
-  mail: string;
+  lastName: string;
+  email: string;
+  password: string;
 }
 
 export interface Favorite {
