@@ -20,12 +20,19 @@ export interface ApiRecipe {
 export const fetchRecipes = createAsyncThunk(
   'recipes/fetchRecipes',
   async () => {
-    const response = await fetch(
-      'https://www.themealdb.com/api/json/v1/1/search.php?f=b'
-    );
-    const data: { meals: ApiRecipe[] } = await response.json();
+    const promises = [];
+    for (let i = 0; i < 10; i += 1) {
+      promises.push(
+        fetch('https://www.themealdb.com/api/json/v1/1/random.php').then(
+          (response) => response.json()
+        )
+      );
+    }
+    const results = await Promise.all(promises);
 
-    return data.meals.map((meal) => {
+    const meals = results.flatMap((result) => result.meals);
+
+    return meals.map((meal) => {
       return {
         id: meal.idMeal,
         name: meal.strMeal,
