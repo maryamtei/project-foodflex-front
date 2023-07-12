@@ -1,6 +1,21 @@
+import { useState, ChangeEvent } from 'react';
 import { Search } from 'react-feather';
+import { fetchSearchRecipe } from '../../store/reducers/recipes';
+import { useAppDispatch } from '../../hooks/redux';
 
-function SearchComponent() {
+interface SearchProps {
+  name: string;
+}
+
+function SearchComponent({ name }: SearchProps) {
+  const [value, setValue] = useState('');
+  const dispatch = useAppDispatch();
+
+  function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    const newValue = event.target.value;
+    setValue(newValue);
+    dispatch(fetchSearchRecipe(newValue));
+  }
   return (
     <div className="flex max-w-md mx-auto items-center">
       <div className="relative flex items-center w-full h-12 rounded-lg shadow focus-within:shadow-lg transition-all bg-white overflow-hidden ">
@@ -19,6 +34,9 @@ function SearchComponent() {
           type="text"
           id="search"
           placeholder="Search something.."
+          onChange={handleChange}
+          name={name}
+          value={value}
         />
       </div>
     </div>
