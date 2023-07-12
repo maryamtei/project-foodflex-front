@@ -1,5 +1,9 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import {
+  createAction,
+  createAsyncThunk,
+  createReducer,
+} from '@reduxjs/toolkit';
 import fakeProfil from '../../components/Profil/fakeProfil.json';
 
 import { Favorite } from '../../@types/Profil';
@@ -22,10 +26,20 @@ export const getFetchFavori = createAsyncThunk(
   }
 );
 
+export const deleteFavori = createAction<number>('favori/delete-favori');
+
 const favoriReducer = createReducer(initialState, (builder) => {
-  builder.addCase(getFetchFavori.fulfilled, (state, action) => {
-    state.favorisList = action.payload;
-  });
+  builder
+    .addCase(getFetchFavori.fulfilled, (state, action) => {
+      state.favorisList = action.payload;
+    })
+    .addCase(deleteFavori, (state, action) => {
+      const idToDelete = action.payload;
+
+      state.favorisList = state.favorisList.filter(
+        (favori) => favori.idMeal !== idToDelete
+      );
+    });
 });
 
 export default favoriReducer;

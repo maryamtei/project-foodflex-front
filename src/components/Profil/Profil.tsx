@@ -23,6 +23,7 @@ function Profil() {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
     dispatch(editProfilData(formData));
+
     setEditProfil(!editProfil);
   }
 

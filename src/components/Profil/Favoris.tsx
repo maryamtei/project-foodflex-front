@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
-import RecipeCard from '../RecipeCard/RecipeCard';
 import { useAppSelector } from '../../hooks/redux';
+import FavoriCard from './FavoriCard/FavoriCard';
 
 function Favoris() {
   const favorites = useAppSelector((state) => state.favoris.favorisList);
@@ -31,11 +31,7 @@ function Favoris() {
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
         {favorites.map((favori) => (
-          <RecipeCard
-            name={favori.name}
-            key={favori.idMeal}
-            imageUrl={favori.image}
-          />
+          <FavoriCard key={favori.idMeal} favori={favori} />
         ))}
       </div>
     </div>
