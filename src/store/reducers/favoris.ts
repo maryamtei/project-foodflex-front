@@ -1,45 +1,27 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import {
-  createAction,
-  createAsyncThunk,
-  createReducer,
-} from '@reduxjs/toolkit';
+import { createAction, createReducer } from '@reduxjs/toolkit';
 import fakeProfil from '../../components/Profil/fakeProfil.json';
 
 import { Favorite } from '../../@types/Profil';
 
 interface RecipesState {
-  favorisList: Favorite[];
+  favoris: Favorite[];
 }
 
 export const initialState: RecipesState = {
-  favorisList: fakeProfil.user.favorites,
+  favoris: fakeProfil.user.favorites,
 };
-
-export const getFetchFavori = createAsyncThunk(
-  'favori/getFetchFavori',
-  async () => {
-    const response = await fetch('http://localhost:3000/favori');
-    const data = await response.json();
-
-    return data;
-  }
-);
 
 export const deleteFavori = createAction<number>('favori/delete-favori');
 
 const favoriReducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(getFetchFavori.fulfilled, (state, action) => {
-      state.favorisList = action.payload;
-    })
-    .addCase(deleteFavori, (state, action) => {
-      const idToDelete = action.payload;
+  builder.addCase(deleteFavori, (state, action) => {
+    const idToDelete = action.payload;
 
-      state.favorisList = state.favorisList.filter(
-        (favori) => favori.idMeal !== idToDelete
-      );
-    });
+    state.favoris = state.favoris.filter(
+      (favori) => favori.idMeal !== idToDelete
+    );
+  });
 });
 
 export default favoriReducer;

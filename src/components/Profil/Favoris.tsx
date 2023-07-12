@@ -3,7 +3,7 @@ import { useAppSelector } from '../../hooks/redux';
 import FavoriCard from './FavoriCard/FavoriCard';
 
 function Favoris() {
-  const favorites = useAppSelector((state) => state.favoris.favorisList);
+  const favorites = useAppSelector((state) => state.favoris.favoris);
 
   return (
     <div className="container">
