@@ -14,7 +14,7 @@ function Recipes() {
   const recipes = useAppSelector((state) => state.recipes.list);
 
   return (
-    <div className="mt-10">
+    <div className="mt-20 p-6">
       <SearchComponent />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
         {recipes.map((recipe) => (
