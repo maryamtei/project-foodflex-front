@@ -2,7 +2,7 @@
 import { FormEvent } from 'react';
 import { X } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import Field from '../Field';
+import Field from '../Field/index';
 
 import {
   changeSignInCredentialsField,

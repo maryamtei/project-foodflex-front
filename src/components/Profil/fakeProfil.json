@@ -1,0 +1,32 @@
+{
+  "user": {
+    "firstName": "Mister Flex",
+    "mail": "foodflex@Food.com",
+    "favorites": [
+      {
+        "idMeal": 1,
+        "name": "steack",
+        "image": "image steack pate",
+        "position": 1
+      },
+      {
+        "idMeal": 2,
+        "name": "pate",
+        "image": "image pate",
+        "position": 2
+      },
+      {
+        "idMeal": 3,
+        "name": "riz",
+        "image": "image riz",
+        "position": 3
+      },
+      {
+        "idMeal": 4,
+        "name": "legume",
+        "image": "image legume",
+        "position": 4
+      }
+    ]
+  }
+}
