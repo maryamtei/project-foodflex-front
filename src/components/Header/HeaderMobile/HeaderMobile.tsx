@@ -11,20 +11,28 @@ import {
   User,
 } from 'react-feather';
 import { NavLink } from 'react-router-dom';
-import { useAppSelector } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import { toggleIsOpen } from '../../../store/reducers/settings';
 
 function HeaderMobile() {
   const btnMenuRef = useRef<HTMLButtonElement>(null);
   const [menuActive, setmenuActive] = useState(false);
-
   const isLoged = useAppSelector((state) => state.settings.isLoged);
+  const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+  const dispatch = useAppDispatch();
+
+  const toogleSignUpSignIn = () => {
+    if (!isLoged) {
+      dispatch(toggleIsOpen());
+    }
+  };
 
   const menuOnClick = () => {
     setmenuActive(!menuActive);
   };
 
   return (
-    <header className="relative">
+    <header className="relative mt-20">
       <div
         className={`bg-fourthff w-full border-none fixed top-0 px-7 py-4 z-20 ease-in duration-500 overflow-hidden ${
           menuActive ? ' h-screen ' : 'h-16'
@@ -52,44 +60,86 @@ function HeaderMobile() {
             <h2 className="text-md font-bold ">Quick Links :</h2>
             <ul className="flex flex-col gap-1 underline">
               <li>
-                <NavLink to="/" relative="path">
+                <NavLink
+                  to="/"
+                  relative="path"
+                  onClick={() => {
+                    if (modalIsOpen) {
+                      toogleSignUpSignIn();
+                    }
+                    menuOnClick();
+                  }}
+                >
                   Home
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to={`${isLoged ? '/recipes' : '/signin'}`}
+                  to="/recipes"
                   relative="path"
+                  onClick={() => {
+                    if (modalIsOpen) {
+                      toogleSignUpSignIn();
+                    }
+                    menuOnClick();
+                  }}
                 >
                   Recipes
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to={`${isLoged ? '/planning' : '/signin'}`}
+                  to={`${isLoged ? '/planning' : ''}`}
                   relative="path"
+                  onClick={() => {
+                    if (!isLoged && !modalIsOpen) {
+                      toogleSignUpSignIn();
+                    }
+                    menuOnClick();
+                  }}
                 >
                   Planning
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to={`${isLoged ? '/profil' : '/signin'}`}
+                  to={`${isLoged ? '/profil' : ''}`}
                   relative="path"
+                  onClick={() => {
+                    if (!isLoged && !modalIsOpen) {
+                      toogleSignUpSignIn();
+                    }
+                    menuOnClick();
+                  }}
                 >
                   Profil
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to={`${isLoged ? '/profil' : '/signin'}`}
+                  to=""
                   relative="path"
+                  onClick={() => {
+                    if (!isLoged && !modalIsOpen) {
+                      toogleSignUpSignIn();
+                    }
+                    menuOnClick();
+                  }}
                 >
                   Sign-In
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/signup" relative="path">
+                <NavLink
+                  onClick={() => {
+                    if (!isLoged && !modalIsOpen) {
+                      toogleSignUpSignIn();
+                    }
+                    menuOnClick();
+                  }}
+                  to=""
+                  relative="path"
+                >
                   Sign-Up
                 </NavLink>
               </li>
@@ -138,9 +188,42 @@ function HeaderMobile() {
         </div>
       </div>
       <div className="bg-fourthff w-full border-none fixed bottom-0 px-8 py-4 z-10 h-16 overflow-hidden flex justify-between text-bgff">
-        <Search className="h-9 w-9 " />
-        <Calendar className="h-9 w-9" />
-        <User className="h-9 w-9" />
+        <NavLink
+          className="active:text-thirdff"
+          to="/recipes"
+          relative="path"
+          onClick={() => {
+            if (modalIsOpen) {
+              toogleSignUpSignIn();
+            }
+          }}
+        >
+          <Search className="h-9 w-9  hover:text-thirdff duration-300 ease-linear" />
+        </NavLink>
+        <NavLink
+          className="active:text-thirdff"
+          to="/planning"
+          relative="path"
+          onClick={() => {
+            if (!isLoged && !modalIsOpen) {
+              toogleSignUpSignIn();
+            }
+          }}
+        >
+          <Calendar className="h-9 w-9 hover:text-thirdff duration-300 ease-linear" />
+        </NavLink>
+        <NavLink
+          className="active:text-thirdff"
+          to="/profil"
+          relative="path"
+          onClick={() => {
+            if (!isLoged && !modalIsOpen) {
+              toogleSignUpSignIn();
+            }
+          }}
+        >
+          <User className="h-9 w-9  hover:text-thirdff duration-300 ease-linear" />
+        </NavLink>
       </div>
     </header>
   );

@@ -1,19 +1,14 @@
 import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import Modal from '../settings/Modal';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Recipes from '../Recipes/Recipes';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeInnerWidth } from '../../store/reducers/window';
 
 function Apptest() {
   const dispatch = useAppDispatch();
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
-
-  // const HandleClickButton = () => {
-  //  dispatch(toggleIsOpen());
-  // };
-
   useEffect(() => {
     const handleWindowResize = () => {
       dispatch(changeInnerWidth(window.innerWidth));
@@ -29,7 +24,8 @@ function Apptest() {
   return (
     <div className="">
       <Header />
-      <Modal />
+      {modalIsOpen && <Modal />}
+      {!modalIsOpen && <Outlet />}
       <Footer />
     </div>
   );

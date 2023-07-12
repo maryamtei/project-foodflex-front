@@ -18,12 +18,12 @@ import Recipes from './components/Recipes/Recipes';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />}>
+    <Route path="/" element={<Apptest />}>
       <Route index path="/profil" element={<Profil />} />
       <Route path="/favoris" element={<Favoris />} />
-      <Route path="/login" element={<Apptest />} />
+      {/* <Route path="/login" element={<Apptest />} /> */}
       {/* Modifier les routes et l'élement Apptest en fonction de vos taches */}
-      <Route index element={<Apptest />} />
+      {/* <Route index element={<Apptest />} /> */}
       <Route path="recipes" element={<Recipes />} />
     </Route>
   )
