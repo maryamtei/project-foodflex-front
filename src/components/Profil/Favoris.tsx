@@ -6,7 +6,7 @@ function Favoris() {
   const favorites = useAppSelector((state) => state.favoris.favoris);
 
   return (
-    <div className="container">
+    <div className="container px-4">
       <div className="mt-10 flex justify-center mb-16	">
         <NavLink
           to="/favoris"

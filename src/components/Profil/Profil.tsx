@@ -32,7 +32,7 @@ function Profil() {
   );
 
   return (
-    <div className="container">
+    <div className="container px-4">
       <div className="mt-10 flex justify-center mb-16">
         <NavLink
           to="/favoris"
