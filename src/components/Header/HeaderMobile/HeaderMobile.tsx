@@ -12,16 +12,20 @@ import {
 } from 'react-feather';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { toggleIsOpen } from '../../../store/reducers/settings';
+import {
+  toggleIsOpen,
+  toggleSignUpOpen,
+} from '../../../store/reducers/settings';
 
 function HeaderMobile() {
   const btnMenuRef = useRef<HTMLButtonElement>(null);
   const [menuActive, setmenuActive] = useState(false);
   const isLoged = useAppSelector((state) => state.settings.isLoged);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+  const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const dispatch = useAppDispatch();
 
-  const toogleSignUpSignIn = () => {
+  const toogleModalSignUpSignIn = () => {
     if (!isLoged) {
       dispatch(toggleIsOpen());
     }
@@ -30,9 +34,11 @@ function HeaderMobile() {
   const menuOnClick = () => {
     setmenuActive(!menuActive);
   };
-
+  const toggleSignUp = () => {
+    dispatch(toggleSignUpOpen());
+  };
   return (
-    <header className="relative mt-20">
+    <header className="relative mt-20 ">
       <div
         className={`bg-fourthff w-full border-none fixed top-0 px-7 py-4 z-20 ease-in duration-500 overflow-hidden ${
           menuActive ? ' h-screen ' : 'h-16'
@@ -65,7 +71,7 @@ function HeaderMobile() {
                   relative="path"
                   onClick={() => {
                     if (modalIsOpen) {
-                      toogleSignUpSignIn();
+                      toogleModalSignUpSignIn();
                     }
                     menuOnClick();
                   }}
@@ -79,7 +85,7 @@ function HeaderMobile() {
                   relative="path"
                   onClick={() => {
                     if (modalIsOpen) {
-                      toogleSignUpSignIn();
+                      toogleModalSignUpSignIn();
                     }
                     menuOnClick();
                   }}
@@ -87,61 +93,62 @@ function HeaderMobile() {
                   Recipes
                 </NavLink>
               </li>
-              <li>
+              <li className={`${!isLoged ? 'hidden' : ''} `}>
                 <NavLink
-                  to={`${isLoged ? '/planning' : ''}`}
+                  to="/planning"
                   relative="path"
                   onClick={() => {
-                    if (!isLoged && !modalIsOpen) {
-                      toogleSignUpSignIn();
-                    }
                     menuOnClick();
                   }}
                 >
                   Planning
                 </NavLink>
               </li>
-              <li>
+              <li className={`${!isLoged ? 'hidden' : ''} `}>
                 <NavLink
-                  to={`${isLoged ? '/profil' : ''}`}
+                  to="/profil"
                   relative="path"
                   onClick={() => {
-                    if (!isLoged && !modalIsOpen) {
-                      toogleSignUpSignIn();
-                    }
                     menuOnClick();
                   }}
                 >
                   Profil
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to=""
-                  relative="path"
+              <li className={`${isLoged ? 'hidden' : ''} `}>
+                <button
+                  className="underline"
+                  type="button"
                   onClick={() => {
-                    if (!isLoged && !modalIsOpen) {
-                      toogleSignUpSignIn();
+                    if (signUpOpen) {
+                      toggleSignUp();
                     }
+                    if (!modalIsOpen) {
+                      toogleModalSignUpSignIn();
+                    }
+
                     menuOnClick();
                   }}
                 >
                   Sign-In
-                </NavLink>
+                </button>
               </li>
-              <li>
-                <NavLink
+              <li className={`${isLoged ? 'hidden' : ''} `}>
+                <button
+                  className="underline"
+                  type="button"
                   onClick={() => {
-                    if (!isLoged && !modalIsOpen) {
-                      toogleSignUpSignIn();
+                    if (!signUpOpen) {
+                      toggleSignUp();
+                    }
+                    if (!modalIsOpen) {
+                      toogleModalSignUpSignIn();
                     }
                     menuOnClick();
                   }}
-                  to=""
-                  relative="path"
                 >
                   Sign-Up
-                </NavLink>
+                </button>
               </li>
             </ul>
           </div>
@@ -194,7 +201,7 @@ function HeaderMobile() {
           relative="path"
           onClick={() => {
             if (modalIsOpen) {
-              toogleSignUpSignIn();
+              toogleModalSignUpSignIn();
             }
           }}
         >
@@ -206,7 +213,7 @@ function HeaderMobile() {
           relative="path"
           onClick={() => {
             if (!isLoged && !modalIsOpen) {
-              toogleSignUpSignIn();
+              toogleModalSignUpSignIn();
             }
           }}
         >
@@ -218,7 +225,7 @@ function HeaderMobile() {
           relative="path"
           onClick={() => {
             if (!isLoged && !modalIsOpen) {
-              toogleSignUpSignIn();
+              toogleModalSignUpSignIn();
             }
           }}
         >
