@@ -37,6 +37,7 @@ function Apptest() {
       <Header />
       {modalIsOpen && <Modal />}
       {((!modalIsOpen && Mobile) || !Mobile) && <Outlet />}
+      <div className="h-16 " />
       <Footer />
     </div>
   );

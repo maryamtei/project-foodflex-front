@@ -4,7 +4,7 @@ import CarouselSlide from './CarouselSlide';
 
 function Carousel() {
   return (
-    <div className="px-6">
+    <div className="px-6 text-fourthff">
       <NukaCarousel
         slidesToShow={2}
         renderBottomCenterControls={null}

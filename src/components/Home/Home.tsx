@@ -20,7 +20,7 @@ function Home() {
   }, []); // Ne pas supprimer sinon le code fonctionne plus
 
   return (
-    <div className="bg-neutral-50 relative">
+    <div className="bg-bgff relative mb-20">
       <HeadHome />
       <MainHome />
       <FootHome />
