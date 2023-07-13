@@ -21,7 +21,7 @@ function SelectedDay({ day }: DayProps) {
       type="button"
       className={
         full
-          ? 'btn-success text-sm rounded-3xl text-black w-32 shadow-lg mr-5'
+          ? 'btn btn-success text-sm rounded-3xl w-32 shadow-lg mr-5'
           : 'btn text-sm rounded-3xl text-black w-32 shadow-lg mr-5'
       }
       onClick={() => handleClickDay()}

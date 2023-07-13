@@ -32,8 +32,8 @@ function Profil() {
   );
 
   return (
-    <div className="container px-4">
-      <div className="mt-10 flex justify-center mb-16">
+    <div className="container p-3 px-4">
+      <div className="flex justify-center mb-6">
         <NavLink
           to="/favoris"
           className={({ isActive }) =>
@@ -56,11 +56,11 @@ function Profil() {
         </NavLink>
       </div>
 
-      <div className="flex bg-bgff border rounded-2xl mx-8 py-8 px-4">
+      <div className="flex bg-bgff border rounded-2xl mx-8 pt-8 pb-6 px-4">
         <form onSubmit={handleSubmitEditProfil}>
           {editProfil ? (
             <>
-              <div className="flex mb-8">
+              <div className="flex mb-6">
                 <User className="mr-2" />
                 <Field
                   name="firstName"
@@ -68,7 +68,7 @@ function Profil() {
                   value={firstName.trim()}
                 />
               </div>
-              <div className="flex mb-8">
+              <div className="flex mb-6">
                 <User className="mr-2" />
                 <Field
                   name="lastName"
@@ -76,11 +76,11 @@ function Profil() {
                   value={lastName.trim()}
                 />
               </div>
-              <div className="flex mb-8">
+              <div className="flex mb-6">
                 <Mail className="mr-2" />
                 <Field name="email" label="Mail :" value={email.trim()} />
               </div>
-              <div className="flex mb-8">
+              <div className="flex mb-6">
                 <Key className="mr-2" />
                 <Field
                   name="password"
@@ -113,7 +113,7 @@ function Profil() {
           )}
         </form>
       </div>
-      <div className="flex justify-center mt-10">
+      <div className="flex justify-center mt-6">
         <button
           type="button"
           className="btn text-sm rounded-3xl text-black w-32 shadow-lg mr-5"
