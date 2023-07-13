@@ -1,9 +1,7 @@
-import React from 'react';
-
-import myImage from '../../../../img/images.jpeg';
 import RecipeCard from '../../RecipeCard/RecipeCard';
 
 function MenuSemaine() {
+  const myImage = '/images.jpeg';
   return (
     <div className="grid grid-cols-2 md:grid-cols-7 gap-4">
       <div>

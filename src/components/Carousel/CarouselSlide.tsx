@@ -1,11 +1,11 @@
 import RecipeCard from '../RecipeCard/RecipeCard';
-import myImage from '../../../img/images.jpeg';
 
 interface CarouselSlideProps {
   day: string;
 }
 
 export default function CarouselSlide({ day }: CarouselSlideProps) {
+  const myImage = '/images.jpeg';
   return (
     <div className="p-4">
       <div className="py-4 text-center">{day}</div>

@@ -1,8 +1,4 @@
-import { RootState } from '../../store';
-
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import myImage from '../../../img/images.jpeg';
-import headerImage from '../../../img/ingredients-g452bc1b39_1280.jpg';
 
 function HeadHome() {
   return (
@@ -10,7 +6,7 @@ function HeadHome() {
       <div>
         <div className="relative">
           <img
-            src={headerImage}
+            src="/ingredients.jpg"
             alt="Background"
             className="w-full h-auto max-h-128 object-cover object-bottom"
             style={{
@@ -28,7 +24,7 @@ function HeadHome() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
           <div className="flex flex-col items-center">
             <img
-              src={myImage}
+              src="/images.jpeg"
               alt="imageHello"
               className="mt-4 rounded-full w-24 h-24 object-cover"
             />
@@ -38,7 +34,7 @@ function HeadHome() {
           </div>
           <div className="flex flex-col items-center">
             <img
-              src={myImage}
+              src="/images.jpeg"
               alt="image2"
               className="mt-4 rounded-full w-24 h-24 object-cover"
             />
@@ -48,7 +44,7 @@ function HeadHome() {
           </div>
           <div className="flex flex-col items-center">
             <img
-              src={myImage}
+              src="/images.jpeg"
               alt="image3"
               className="mt-4 rounded-full w-24 h-24 object-cover"
             />

@@ -1,6 +1,3 @@
-import React from 'react';
-import { RootState } from '../../store';
-
 function FootHome() {
   const handleClick = () => {
     console.log('Bouton cliqué !');

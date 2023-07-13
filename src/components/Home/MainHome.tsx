@@ -1,8 +1,4 @@
-import React from 'react';
-import { RootState } from '../../store';
-import myImage from '../../../img/images.jpeg';
 import Carousel from '../Carousel/Carousel';
-import RecipeCard from '../RecipeCard/RecipeCard';
 import MenuSemaine from './MenuSemaine/MenuSemaine';
 
 function MainHome() {

@@ -11,7 +11,7 @@ import './styles/index.scss';
 
 import App from './components/App/App';
 import Favoris from './components/Profil/Favoris';
-import Profil from './components/Profil/Profil';
+import Home from './components/Home/Home';
 import Apptest from './components/App/Apptest';
 import store from './store';
 import Recipes from './components/Recipes/Recipes';
@@ -20,6 +20,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Apptest />}>
       {/* <Route index path="/profil" element={<Profil />} /> */}
+      <Route path="/" element={<Home />} />
       <Route path="/favoris" element={<Favoris />} />
       {/* <Route path="/login" element={<Apptest />} /> */}
       {/* Modifier les routes et l'élement Apptest en fonction de vos taches */}
