@@ -1,6 +1,10 @@
 import { NavLink } from 'react-router-dom';
+import { useAppSelector } from '../../hooks/redux';
+import FavoriCard from './FavoriCard/FavoriCard';
 
 function Favoris() {
+  const favorites = useAppSelector((state) => state.favoris.favoris);
+
   return (
     <div className="container">
       <div className="mt-10 flex justify-center mb-16	">
@@ -24,6 +28,11 @@ function Favoris() {
         >
           Profil
         </NavLink>
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
+        {favorites.map((favori) => (
+          <FavoriCard key={favori.idMeal} favori={favori} />
+        ))}
       </div>
     </div>
   );

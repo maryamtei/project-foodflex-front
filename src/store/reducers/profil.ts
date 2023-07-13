@@ -4,53 +4,52 @@ import {
   createReducer,
 } from '@reduxjs/toolkit';
 import { User } from '../../@types/Profil';
+import fakeProfil from '../../components/Profil/fakeProfil.json';
 
 interface ProfilState {
-  profil: User;
+  user: User;
 }
 
 export const initialState: ProfilState = {
-  profil: {
-    firstName: 'Mister Flex',
-    lastName: 'Redux',
-    email: 'foodflex@Food.redux',
-    password: '123456',
+  user: {
+    firstName: fakeProfil.user.firstName,
+    lastName: fakeProfil.user.lastName,
+    email: fakeProfil.user.mail,
+    password: fakeProfil.user.password,
   },
 };
+
+// export const infoProfil = createAsyncThunk('user/InfoProfil', async () => {
+//   const response = await fetch('http://localhost:3000/profil');
+
+//   const data = await response.json();
+//   return data;
+// });
 
 export const changeProfilName = createAction<string>(
   'profil/change-profil-firstName'
 );
 
-export const infoProfil = createAsyncThunk('user/InfoProfil', async () => {
-  const response = await fetch('http://localhost:3000/profil');
-
-  const data = await response.json();
-  return data;
-});
-
 export const editProfilData = createAsyncThunk(
   'user/EditProfil',
   async (formData: FormData) => {
     const objData = Object.fromEntries(formData);
+    // const response = await fetch('http://localhost:3000/profil', objData);
+    // const data = await response.json();
 
-    const response = await fetch('http://localhost:3000/profil', objData);
-
-    const data = await response.json();
-    return data;
+    return objData as {
+      firstName: string;
+      lastName: string;
+      email: string;
+      password: string;
+    };
   }
 );
 
 const profilReducer = createReducer(initialState, (builder) => {
   builder.addCase(editProfilData.fulfilled, (state, action) => {
-    state.profil = action.payload;
+    state.user = action.payload;
   });
-  // .addCase(editProfilData.pending, (state, action) => {
-  // --------- composant Loading a mettre ------- //
-  // })
-  // .addCase(editProfilData.rejected, (state, action) => {
-  // --------- message erreur ------- //
-  // });
 });
 
 export default profilReducer;
