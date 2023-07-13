@@ -1,10 +1,10 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Mail, User, Key } from 'react-feather';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Field from './Field/Field';
-import { editProfilData, infoProfil } from '../../store/reducers/profil';
+import { editProfilData } from '../../store/reducers/profil';
 
 function Profil() {
   const [editProfil, setEditProfil] = useState(false);
@@ -15,19 +15,20 @@ function Profil() {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(infoProfil());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(infoProfil());
+  // }, [dispatch]);
 
   function handleSubmitEditProfil(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+
     dispatch(editProfilData(formData));
     setEditProfil(!editProfil);
   }
 
   const { firstName, lastName, email, password } = useAppSelector(
-    (state) => state.profil.profil
+    (state) => state.profil.user
   );
 
   return (
