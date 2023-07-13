@@ -12,13 +12,17 @@ import {
 } from 'react-feather';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { toggleIsOpen } from '../../../store/reducers/settings';
+import {
+  toggleIsOpen,
+  toggleSignUpOpen,
+} from '../../../store/reducers/settings';
 
 function HeaderMobile() {
   const btnMenuRef = useRef<HTMLButtonElement>(null);
   const [menuActive, setmenuActive] = useState(false);
   const isLoged = useAppSelector((state) => state.settings.isLoged);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+  const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const dispatch = useAppDispatch();
 
   const toogleModalSignUpSignIn = () => {
@@ -30,7 +34,9 @@ function HeaderMobile() {
   const menuOnClick = () => {
     setmenuActive(!menuActive);
   };
-
+  const toggleSignUp = () => {
+    dispatch(toggleSignUpOpen());
+  };
   return (
     <header className="relative mt-20">
       <div
@@ -86,12 +92,12 @@ function HeaderMobile() {
                 </NavLink>
               </li>
               <li className={`${!isLoged ? 'hidden' : ''} `}>
-                <NavLink to={`${isLoged ? '/planning' : ''}`} relative="path">
+                <NavLink to="/planning" relative="path">
                   Planning
                 </NavLink>
               </li>
               <li className={`${!isLoged ? 'hidden' : ''} `}>
-                <NavLink to={`${isLoged ? '/profil' : ''}`} relative="path">
+                <NavLink to="/profil" relative="path">
                   Profil
                 </NavLink>
               </li>
@@ -100,6 +106,9 @@ function HeaderMobile() {
                   className="underline"
                   type="button"
                   onClick={() => {
+                    if (signUpOpen) {
+                      toggleSignUp();
+                    }
                     if (!modalIsOpen) {
                       toogleModalSignUpSignIn();
                     }
@@ -113,6 +122,9 @@ function HeaderMobile() {
                   className="underline"
                   type="button"
                   onClick={() => {
+                    if (!signUpOpen) {
+                      toggleSignUp();
+                    }
                     if (!modalIsOpen) {
                       toogleModalSignUpSignIn();
                     }

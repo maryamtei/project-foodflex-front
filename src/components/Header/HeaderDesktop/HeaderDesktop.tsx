@@ -1,17 +1,24 @@
 import { Twitter, Instagram, Facebook, GitHub, Youtube } from 'react-feather';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { toggleIsOpen } from '../../../store/reducers/settings';
+import {
+  toggleIsOpen,
+  toggleSignUpOpen,
+} from '../../../store/reducers/settings';
 
 function HeaderDesktop() {
   const isLoged = useAppSelector((state) => state.settings.isLoged);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+  const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const dispatch = useAppDispatch();
 
   const toogleModalSignUpSignIn = () => {
     if (!isLoged) {
       dispatch(toggleIsOpen());
     }
+  };
+  const toggleSignUp = () => {
+    dispatch(toggleSignUpOpen());
   };
   return (
     <header className="relative bg-fourthff w-full  border-none fixed top-0 px-7 h-16 text-bgff flex items-center justify-between tracking-wide">
@@ -51,14 +58,14 @@ function HeaderDesktop() {
           Recipes
         </NavLink>
         <NavLink
-          to={`${isLoged ? '/planning' : ''}`}
+          to="/planning"
           relative="path"
           className={!isLoged ? 'hidden' : ''}
         >
           Planning
         </NavLink>
         <NavLink
-          to={`${isLoged ? '/profil' : ''}`}
+          to="/profil"
           relative="path"
           className={!isLoged ? 'hidden' : ''}
         >
@@ -68,6 +75,9 @@ function HeaderDesktop() {
           className={isLoged ? 'hidden' : ''}
           type="button"
           onClick={() => {
+            if (signUpOpen) {
+              toggleSignUp();
+            }
             if (!modalIsOpen) {
               toogleModalSignUpSignIn();
             }
@@ -79,6 +89,9 @@ function HeaderDesktop() {
           className={isLoged ? 'hidden' : ''}
           type="button"
           onClick={() => {
+            if (!signUpOpen) {
+              toggleSignUp();
+            }
             if (!modalIsOpen) {
               toogleModalSignUpSignIn();
             }

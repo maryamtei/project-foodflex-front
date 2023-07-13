@@ -69,12 +69,12 @@ function Footer() {
               </NavLink>
             </li>
             <li className={`${!isLoged ? 'hidden' : ''} `}>
-              <NavLink to={`${isLoged ? '/planning' : ''}`} relative="path">
+              <NavLink to="/planning" relative="path">
                 Planning
               </NavLink>
             </li>
             <li className={`${!isLoged ? 'hidden' : ''} `}>
-              <NavLink to={`${isLoged ? '/profil' : ''}`} relative="path">
+              <NavLink to="/profil" relative="path">
                 Profil
               </NavLink>
             </li>
@@ -83,6 +83,9 @@ function Footer() {
                 className="underline"
                 type="button"
                 onClick={() => {
+                  if (signUpOpen) {
+                    toggleSignUp();
+                  }
                   if (!modalIsOpen) {
                     toogleModalSignUpSignIn();
                   }
@@ -96,6 +99,9 @@ function Footer() {
                 className="underline"
                 type="button"
                 onClick={() => {
+                  if (!signUpOpen) {
+                    toggleSignUp();
+                  }
                   if (!modalIsOpen) {
                     toogleModalSignUpSignIn();
                   }
