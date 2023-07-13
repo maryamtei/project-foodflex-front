@@ -33,7 +33,7 @@ function Apptest() {
   }, [innerWidth, setMobile]);
 
   return (
-    <div className={modalIsOpen ? 'sm:blur-[3px]' : ''}>
+    <div>
       <Header />
       {modalIsOpen && <Modal />}
       {((!modalIsOpen && Mobile) || !Mobile) && <Outlet />}

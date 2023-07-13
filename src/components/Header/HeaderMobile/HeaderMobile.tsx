@@ -38,7 +38,7 @@ function HeaderMobile() {
     dispatch(toggleSignUpOpen());
   };
   return (
-    <header className="relative mt-20">
+    <header className="relative mt-20 ">
       <div
         className={`bg-fourthff w-full border-none fixed top-0 px-7 py-4 z-20 ease-in duration-500 overflow-hidden ${
           menuActive ? ' h-screen ' : 'h-16'

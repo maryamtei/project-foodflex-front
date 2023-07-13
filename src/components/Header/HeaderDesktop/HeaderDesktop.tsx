@@ -21,7 +21,11 @@ function HeaderDesktop() {
     dispatch(toggleSignUpOpen());
   };
   return (
-    <header className="relative bg-fourthff w-full  border-none fixed top-0 px-7 h-16 text-bgff flex items-center justify-between tracking-wide">
+    <header
+      className={`relative bg-fourthff w-full  border-none fixed top-0 px-7 h-16 text-bgff flex items-center justify-between tracking-wide   ${
+        modalIsOpen ? 'sm:blur-[3px] pointer-events-none' : ''
+      }`}
+    >
       <div className="flex gap-3">
         <Facebook className="rounded-full border border-solid p-0.5 w-6 h-6 duration-300 ease-linear hover:scale-125" />
         <Twitter className="rounded-full border border-solid p-0.5 w-6 h-6 duration-300 ease-linear hover:scale-125" />
