@@ -18,6 +18,7 @@ function Modal() {
     scroller.scrollTo('modalSignUpSignIn', {
       duration: 500,
       smooth: true,
+      offset: -150,
     });
   }, [modalIsOpen]);
 
