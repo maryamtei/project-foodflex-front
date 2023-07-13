@@ -21,7 +21,7 @@ function HeaderMobile() {
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const dispatch = useAppDispatch();
 
-  const toogleSignUpSignIn = () => {
+  const toogleModalSignUpSignIn = () => {
     if (!isLoged) {
       dispatch(toggleIsOpen());
     }
@@ -65,7 +65,7 @@ function HeaderMobile() {
                   relative="path"
                   onClick={() => {
                     if (modalIsOpen) {
-                      toogleSignUpSignIn();
+                      toogleModalSignUpSignIn();
                     }
                   }}
                 >
@@ -78,7 +78,7 @@ function HeaderMobile() {
                   relative="path"
                   onClick={() => {
                     if (modalIsOpen) {
-                      toogleSignUpSignIn();
+                      toogleModalSignUpSignIn();
                     }
                   }}
                 >
@@ -96,30 +96,30 @@ function HeaderMobile() {
                 </NavLink>
               </li>
               <li className={`${isLoged ? 'hidden' : ''} `}>
-                <NavLink
-                  to=""
-                  relative="path"
+                <button
+                  className="underline"
+                  type="button"
                   onClick={() => {
                     if (!modalIsOpen) {
-                      toogleSignUpSignIn();
+                      toogleModalSignUpSignIn();
                     }
                   }}
                 >
                   Sign-In
-                </NavLink>
+                </button>
               </li>
               <li className={`${isLoged ? 'hidden' : ''} `}>
-                <NavLink
+                <button
+                  className="underline"
+                  type="button"
                   onClick={() => {
                     if (!modalIsOpen) {
-                      toogleSignUpSignIn();
+                      toogleModalSignUpSignIn();
                     }
                   }}
-                  to=""
-                  relative="path"
                 >
                   Sign-Up
-                </NavLink>
+                </button>
               </li>
             </ul>
           </div>
@@ -172,7 +172,7 @@ function HeaderMobile() {
           relative="path"
           onClick={() => {
             if (modalIsOpen) {
-              toogleSignUpSignIn();
+              toogleModalSignUpSignIn();
             }
           }}
         >
@@ -184,7 +184,7 @@ function HeaderMobile() {
           relative="path"
           onClick={() => {
             if (!isLoged && !modalIsOpen) {
-              toogleSignUpSignIn();
+              toogleModalSignUpSignIn();
             }
           }}
         >
@@ -196,7 +196,7 @@ function HeaderMobile() {
           relative="path"
           onClick={() => {
             if (!isLoged && !modalIsOpen) {
-              toogleSignUpSignIn();
+              toogleModalSignUpSignIn();
             }
           }}
         >

@@ -8,7 +8,7 @@ function HeaderDesktop() {
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const dispatch = useAppDispatch();
 
-  const toogleSignUpSignIn = () => {
+  const toogleModalSignUpSignIn = () => {
     if (!isLoged) {
       dispatch(toggleIsOpen());
     }
@@ -28,7 +28,7 @@ function HeaderDesktop() {
           relative="path"
           onClick={() => {
             if (modalIsOpen) {
-              toogleSignUpSignIn();
+              toogleModalSignUpSignIn();
             }
           }}
         >
@@ -44,7 +44,7 @@ function HeaderDesktop() {
           }
           onClick={() => {
             if (modalIsOpen) {
-              toogleSignUpSignIn();
+              toogleModalSignUpSignIn();
             }
           }}
         >
@@ -64,30 +64,28 @@ function HeaderDesktop() {
         >
           Profil
         </NavLink>
-        <NavLink
-          to=""
-          relative="path"
+        <button
+          className={isLoged ? 'hidden' : ''}
+          type="button"
           onClick={() => {
             if (!modalIsOpen) {
-              toogleSignUpSignIn();
+              toogleModalSignUpSignIn();
             }
           }}
-          className={isLoged ? 'hidden' : ''}
         >
           Sign-In
-        </NavLink>
-        <NavLink
+        </button>
+        <button
+          className={isLoged ? 'hidden' : ''}
+          type="button"
           onClick={() => {
             if (!modalIsOpen) {
-              toogleSignUpSignIn();
+              toogleModalSignUpSignIn();
             }
           }}
-          to=""
-          relative="path"
-          className={isLoged ? 'hidden' : ''}
         >
           Sign-Up
-        </NavLink>
+        </button>
       </div>
     </header>
   );

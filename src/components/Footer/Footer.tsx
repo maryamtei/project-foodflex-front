@@ -1,17 +1,21 @@
 import { Twitter, Instagram, Facebook, GitHub, Youtube } from 'react-feather';
 import { NavLink } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
-import { toggleIsOpen } from '../../store/reducers/settings';
+import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/settings';
 
 function Footer() {
   const isLoged = useAppSelector((state) => state.settings.isLoged);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+  const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const dispatch = useAppDispatch();
 
-  const toogleSignUpSignIn = () => {
+  const toogleModalSignUpSignIn = () => {
     if (!isLoged) {
       dispatch(toggleIsOpen());
     }
+  };
+  const toggleSignUp = () => {
+    dispatch(toggleSignUpOpen());
   };
 
   return (
@@ -44,7 +48,7 @@ function Footer() {
                 relative="path"
                 onClick={() => {
                   if (modalIsOpen) {
-                    toogleSignUpSignIn();
+                    toogleModalSignUpSignIn();
                   }
                 }}
               >
@@ -57,7 +61,7 @@ function Footer() {
                 relative="path"
                 onClick={() => {
                   if (modalIsOpen) {
-                    toogleSignUpSignIn();
+                    toogleModalSignUpSignIn();
                   }
                 }}
               >
@@ -75,30 +79,30 @@ function Footer() {
               </NavLink>
             </li>
             <li className={`${isLoged ? 'hidden' : ''} `}>
-              <NavLink
-                to=""
-                relative="path"
+              <button
+                className="underline"
+                type="button"
                 onClick={() => {
                   if (!modalIsOpen) {
-                    toogleSignUpSignIn();
+                    toogleModalSignUpSignIn();
                   }
                 }}
               >
                 Sign-In
-              </NavLink>
+              </button>
             </li>
             <li className={`${isLoged ? 'hidden' : ''} `}>
-              <NavLink
+              <button
+                className="underline"
+                type="button"
                 onClick={() => {
                   if (!modalIsOpen) {
-                    toogleSignUpSignIn();
+                    toogleModalSignUpSignIn();
                   }
                 }}
-                to=""
-                relative="path"
               >
                 Sign-Up
-              </NavLink>
+              </button>
             </li>
           </ul>
         </div>
