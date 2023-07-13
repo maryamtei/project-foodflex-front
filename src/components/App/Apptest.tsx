@@ -25,7 +25,7 @@ function Apptest() {
     <div className="">
       <Header />
       {modalIsOpen && <Modal />}
-      {!modalIsOpen && <Outlet />}
+      <Outlet />
       <Footer />
     </div>
   );

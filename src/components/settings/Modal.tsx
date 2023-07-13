@@ -11,7 +11,7 @@ function Modal() {
     return <Signup />;
   };
 
-  return <div className="grid justify-items-center ">{modalCondition()}</div>;
+  return <div className="grid justify-items-center">{modalCondition()}</div>;
 }
 
 export default Modal;
