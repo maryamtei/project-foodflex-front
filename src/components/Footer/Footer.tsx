@@ -1,9 +1,18 @@
 import { Twitter, Instagram, Facebook, GitHub, Youtube } from 'react-feather';
 import { NavLink } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
+import { toggleIsOpen } from '../../store/reducers/settings';
 
 function Footer() {
   const isLoged = useAppSelector((state) => state.settings.isLoged);
+  const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+  const dispatch = useAppDispatch();
+
+  const toogleSignUpSignIn = () => {
+    if (!isLoged) {
+      dispatch(toggleIsOpen());
+    }
+  };
 
   return (
     <footer className="hidden sm:block bg-fourthff w-full px-7 py-6 z-10 h-60">
@@ -30,44 +39,64 @@ function Footer() {
           <h2 className="text-md font-bold ">Quick Links :</h2>
           <ul className="flex flex-col gap-1 underline">
             <li>
-              <NavLink to="/" relative="path">
+              <NavLink
+                to="/"
+                relative="path"
+                onClick={() => {
+                  if (modalIsOpen) {
+                    toogleSignUpSignIn();
+                  }
+                }}
+              >
                 Home
               </NavLink>
             </li>
             <li>
               <NavLink
-                to={`${isLoged ? '/recipes' : '/signin'}`}
+                to="/recipes"
                 relative="path"
+                onClick={() => {
+                  if (modalIsOpen) {
+                    toogleSignUpSignIn();
+                  }
+                }}
               >
                 Recipes
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to={`${isLoged ? '/planning' : '/signin'}`}
-                relative="path"
-              >
+            <li className={`${!isLoged ? 'hidden' : ''} `}>
+              <NavLink to={`${isLoged ? '/planning' : ''}`} relative="path">
                 Planning
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to={`${isLoged ? '/profil' : '/signin'}`}
-                relative="path"
-              >
+            <li className={`${!isLoged ? 'hidden' : ''} `}>
+              <NavLink to={`${isLoged ? '/profil' : ''}`} relative="path">
                 Profil
               </NavLink>
             </li>
-            <li>
+            <li className={`${isLoged ? 'hidden' : ''} `}>
               <NavLink
-                to={`${isLoged ? '/profil' : '/signin'}`}
+                to=""
                 relative="path"
+                onClick={() => {
+                  if (!modalIsOpen) {
+                    toogleSignUpSignIn();
+                  }
+                }}
               >
                 Sign-In
               </NavLink>
             </li>
-            <li>
-              <NavLink to="/signup" relative="path">
+            <li className={`${isLoged ? 'hidden' : ''} `}>
+              <NavLink
+                onClick={() => {
+                  if (!modalIsOpen) {
+                    toogleSignUpSignIn();
+                  }
+                }}
+                to=""
+                relative="path"
+              >
                 Sign-Up
               </NavLink>
             </li>

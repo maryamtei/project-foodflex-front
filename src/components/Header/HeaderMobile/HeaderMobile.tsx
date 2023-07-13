@@ -67,7 +67,6 @@ function HeaderMobile() {
                     if (modalIsOpen) {
                       toogleSignUpSignIn();
                     }
-                    menuOnClick();
                   }}
                 >
                   Home
@@ -81,61 +80,40 @@ function HeaderMobile() {
                     if (modalIsOpen) {
                       toogleSignUpSignIn();
                     }
-                    menuOnClick();
                   }}
                 >
                   Recipes
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to={`${isLoged ? '/planning' : ''}`}
-                  relative="path"
-                  onClick={() => {
-                    if (!isLoged && !modalIsOpen) {
-                      toogleSignUpSignIn();
-                    }
-                    menuOnClick();
-                  }}
-                >
+              <li className={`${!isLoged ? 'hidden' : ''} `}>
+                <NavLink to={`${isLoged ? '/planning' : ''}`} relative="path">
                   Planning
                 </NavLink>
               </li>
-              <li>
-                <NavLink
-                  to={`${isLoged ? '/profil' : ''}`}
-                  relative="path"
-                  onClick={() => {
-                    if (!isLoged && !modalIsOpen) {
-                      toogleSignUpSignIn();
-                    }
-                    menuOnClick();
-                  }}
-                >
+              <li className={`${!isLoged ? 'hidden' : ''} `}>
+                <NavLink to={`${isLoged ? '/profil' : ''}`} relative="path">
                   Profil
                 </NavLink>
               </li>
-              <li>
+              <li className={`${isLoged ? 'hidden' : ''} `}>
                 <NavLink
                   to=""
                   relative="path"
                   onClick={() => {
-                    if (!isLoged && !modalIsOpen) {
+                    if (!modalIsOpen) {
                       toogleSignUpSignIn();
                     }
-                    menuOnClick();
                   }}
                 >
                   Sign-In
                 </NavLink>
               </li>
-              <li>
+              <li className={`${isLoged ? 'hidden' : ''} `}>
                 <NavLink
                   onClick={() => {
-                    if (!isLoged && !modalIsOpen) {
+                    if (!modalIsOpen) {
                       toogleSignUpSignIn();
                     }
-                    menuOnClick();
                   }}
                   to=""
                   relative="path"
