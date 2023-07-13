@@ -17,11 +17,35 @@ export interface ApiRecipe {
   strMealThumb: string;
 }
 
-export const fetchRecipes = createAsyncThunk(
-  'recipes/fetchRecipes',
+export const fetchRandomRecipes = createAsyncThunk(
+  'recipes/fetchRandomRecipes',
   async () => {
+    const promises = [];
+    for (let i = 0; i < 10; i += 1) {
+      promises.push(
+        fetch('https://www.themealdb.com/api/json/v1/1/random.php').then(
+          (response) => response.json()
+        )
+      );
+    }
+    const results = await Promise.all(promises);
+    const meals = results.flatMap((result) => result.meals);
+
+    return meals.map((meal) => {
+      return {
+        id: meal.idMeal,
+        name: meal.strMeal,
+        imageUrl: meal.strMealThumb,
+      };
+    });
+  }
+);
+
+export const fetchSearchRecipe = createAsyncThunk(
+  'recipes/fetchSearchRecipes',
+  async (search: string) => {
     const response = await fetch(
-      'https://www.themealdb.com/api/json/v1/1/search.php?f=b'
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`
     );
     const data: { meals: ApiRecipe[] } = await response.json();
 
@@ -36,7 +60,11 @@ export const fetchRecipes = createAsyncThunk(
 );
 
 const recipesReducer = createReducer(initialState, (builder) => {
-  builder.addCase(fetchRecipes.fulfilled, (state, action) => {
+  builder.addCase(fetchRandomRecipes.fulfilled, (state, action) => {
+    state.list = action.payload;
+  });
+
+  builder.addCase(fetchSearchRecipe.fulfilled, (state, action) => {
     state.list = action.payload;
   });
 });

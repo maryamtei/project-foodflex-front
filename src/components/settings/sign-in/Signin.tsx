@@ -63,7 +63,7 @@ function signin() {
     resetField();
   };
   return (
-    <div className="relative flex flex-col gap-4 z-10 p-10 w-80 text-thirdff bg-bgff rounded-xl shadow-xl items-center p-6">
+    <div className="relative flex flex-col gap-4 p-10 w-80 text-thirdff bg-bgff sm:rounded-xl sm:shadow-xl items-center p-6">
       <h1 className="text-3xl font-bold text-center "> Sign-In</h1>
       <div className="flex flex-col text-center">
         <p className="text-base ">New customer ?</p>
@@ -101,7 +101,7 @@ function signin() {
       </form>
       <button
         type="button"
-        className="absolute top-1 right-1  w-10 h-10 mt-2"
+        className="absolute top-1 right-1  w-10 h-10 mt-2 hidden sm:block"
         onClick={handleModaltoggle}
       >
         <X className="w-12 h-12" />

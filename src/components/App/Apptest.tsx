@@ -1,24 +1,32 @@
+import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import Modal from '../settings/Modal';
+import Header from '../Header/Header';
+import Footer from '../Footer/Footer';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { toggleIsOpen } from '../../store/reducers/settings';
+import { changeInnerWidth } from '../../store/reducers/window';
 
 function Apptest() {
   const dispatch = useAppDispatch();
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
-  const HandleClickButton = () => {
-    dispatch(toggleIsOpen());
-  };
+  useEffect(() => {
+    const handleWindowResize = () => {
+      dispatch(changeInnerWidth(window.innerWidth));
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  });
 
   return (
-    <div className="App">
-      {modalIsOpen === true && <Modal />}
-      <button
-        type="submit"
-        className="btn text-secondary"
-        onClick={HandleClickButton}
-      >
-        Ouvrir modal
-      </button>
+    <div className="">
+      <Header />
+      {modalIsOpen && <Modal />}
+      <Outlet />
+      <Footer />
     </div>
   );
 }
