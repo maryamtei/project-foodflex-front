@@ -23,7 +23,7 @@ function HeaderDesktop() {
   return (
     <header
       className={`relative bg-fourthff w-full  border-none fixed top-0 px-7 h-16 text-bgff flex items-center justify-between tracking-wide   ${
-        modalIsOpen ? 'sm:blur-[3px] pointer-events-none' : ''
+        modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       }`}
     >
       <div className="flex gap-3">

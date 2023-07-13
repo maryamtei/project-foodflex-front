@@ -21,7 +21,7 @@ function Footer() {
   return (
     <footer
       className={`hidden sm:block bg-fourthff w-full px-7 py-6 z-10 h-60   ${
-        modalIsOpen ? 'sm:blur-[3px] pointer-events-none' : ''
+        modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       }`}
     >
       <div className="text-bgff flex items-center h-full p-5 text-center gap-3 justify-between flex-row ">

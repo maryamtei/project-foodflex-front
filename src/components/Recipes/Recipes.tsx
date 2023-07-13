@@ -16,7 +16,7 @@ function Recipes() {
   return (
     <div
       className={`my-10 px-3 sm:px-8 ${
-        modalIsOpen ? 'sm:blur-[3px] pointer-events-none' : ''
+        modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       }`}
     >
       <SearchComponent name="RecipeSearch" />
