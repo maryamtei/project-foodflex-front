@@ -10,6 +10,7 @@ function HeaderDesktop() {
   const isLoged = useAppSelector((state) => state.settings.isLoged);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
+  const stateHome = useAppSelector((state) => state.home.stateHome);
   const dispatch = useAppDispatch();
 
   const toogleModalSignUpSignIn = () => {
@@ -24,7 +25,7 @@ function HeaderDesktop() {
     <header
       className={`relative bg-fourthff w-full  border-none fixed top-0 px-7 h-16 text-bgff flex items-center justify-between tracking-wide   ${
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
-      }`}
+      } ${stateHome ? 'sm:bg-transparent' : ''}`}
     >
       <div className="flex gap-3">
         <Facebook className="rounded-full border border-solid p-0.5 w-6 h-6 duration-300 ease-linear hover:scale-125" />
