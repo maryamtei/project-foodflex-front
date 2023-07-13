@@ -22,7 +22,10 @@ function Modal() {
   }, [modalIsOpen]);
 
   return (
-    <div id="modalSignUpSignIn" className="grid justify-items-center">
+    <div
+      id="modalSignUpSignIn"
+      className="grid justify-items-center sm:absolute sm:top-2/4 sm:left-2/4 sm:z-50 sm:translate-y-[-50%] sm:translate-x-[-50%]"
+    >
       {modalCondition()}
     </div>
   );

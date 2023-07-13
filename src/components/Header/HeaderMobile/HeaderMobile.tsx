@@ -73,6 +73,7 @@ function HeaderMobile() {
                     if (modalIsOpen) {
                       toogleModalSignUpSignIn();
                     }
+                    menuOnClick();
                   }}
                 >
                   Home
@@ -86,18 +87,31 @@ function HeaderMobile() {
                     if (modalIsOpen) {
                       toogleModalSignUpSignIn();
                     }
+                    menuOnClick();
                   }}
                 >
                   Recipes
                 </NavLink>
               </li>
               <li className={`${!isLoged ? 'hidden' : ''} `}>
-                <NavLink to="/planning" relative="path">
+                <NavLink
+                  to="/planning"
+                  relative="path"
+                  onClick={() => {
+                    menuOnClick();
+                  }}
+                >
                   Planning
                 </NavLink>
               </li>
               <li className={`${!isLoged ? 'hidden' : ''} `}>
-                <NavLink to="/profil" relative="path">
+                <NavLink
+                  to="/profil"
+                  relative="path"
+                  onClick={() => {
+                    menuOnClick();
+                  }}
+                >
                   Profil
                 </NavLink>
               </li>
@@ -112,6 +126,8 @@ function HeaderMobile() {
                     if (!modalIsOpen) {
                       toogleModalSignUpSignIn();
                     }
+
+                    menuOnClick();
                   }}
                 >
                   Sign-In
@@ -128,6 +144,7 @@ function HeaderMobile() {
                     if (!modalIsOpen) {
                       toogleModalSignUpSignIn();
                     }
+                    menuOnClick();
                   }}
                 >
                   Sign-Up
