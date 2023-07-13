@@ -3,19 +3,19 @@
     {
       "idMeal": 7,
       "name": "Classic Christmas pudding",
-      "image": "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg",
+      "imageUrl": "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg",
       "position": 1
     },
     {
       "idMeal": 8,
       "name": "Split Pea Soup",
-      "image": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
+      "imageUrl": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
       "position": 4
     },
     {
       "idMeal": 9,
       "name": "Treacle Tart",
-      "image": "https://www.themealdb.com/images/media/meals/wprvrw1511641295.jpg",
+      "imageUrl": "https://www.themealdb.com/images/media/meals/wprvrw1511641295.jpg",
       "position": 8
     }
   ]

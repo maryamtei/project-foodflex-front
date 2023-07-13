@@ -1,6 +1,6 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createAction, createReducer } from '@reduxjs/toolkit';
-import fakeProfil from '../../components/Profil/fakeProfil.json';
+import fakeProfil from '../../fakeData/fakeProfil.json';
 
 import { Favorite } from '../../@types/Profil';
 

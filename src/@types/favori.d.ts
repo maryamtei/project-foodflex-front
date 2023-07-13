@@ -1,5 +1,6 @@
 export interface Favori {
-  id: number;
+  idMeal: number;
   name: string;
   imageUrl: string;
+  position: number;
 }

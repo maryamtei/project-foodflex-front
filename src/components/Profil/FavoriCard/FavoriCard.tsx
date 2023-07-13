@@ -1,7 +1,7 @@
 import { Plus, Heart } from 'react-feather';
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { deleteFavori } from '../../../store/reducers/favoris';
-import { addFavori } from '../../../store/reducers/schedule';
+import { addFavori, displaySchedule } from '../../../store/reducers/schedule';
 import { Favorite } from '../../../@types/Profil';
 
 interface CardProps {
@@ -9,6 +9,10 @@ interface CardProps {
 }
 
 function FavoriCard({ favori }: CardProps) {
+  const clickAddFavori = useAppSelector(
+    (state) => state.schedule.clickAddFavori
+  );
+
   const dispatch = useAppDispatch();
 
   function handleDeleteFavori() {
@@ -16,13 +20,14 @@ function FavoriCard({ favori }: CardProps) {
   }
 
   function handleAddFavori() {
+    dispatch(displaySchedule(!clickAddFavori));
     dispatch(addFavori(favori));
   }
 
   return (
     <div className="shadow-md rounded-lg relative hover:shadow-lg transition-all">
       <img
-        src={favori.image}
+        src={favori.imageUrl}
         alt={favori.name}
         className="rounded-t-md cover"
       />

@@ -1,7 +1,7 @@
 export interface Week {
   idMeal: number;
   name: string;
-  image: string;
+  imageUrl: string;
   position: number;
 }
 

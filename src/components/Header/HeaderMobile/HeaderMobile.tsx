@@ -89,7 +89,7 @@ function HeaderMobile() {
               </li>
               <li>
                 <NavLink
-                  to={`${isLoged ? '/planning' : ''}`}
+                  to={`${isLoged ? '/Schedule' : ''}`}
                   relative="path"
                   onClick={() => {
                     if (!isLoged && !modalIsOpen) {
@@ -202,7 +202,7 @@ function HeaderMobile() {
         </NavLink>
         <NavLink
           className="active:text-thirdff"
-          to="/planning"
+          to="/Schedule"
           relative="path"
           onClick={() => {
             if (!isLoged && !modalIsOpen) {
