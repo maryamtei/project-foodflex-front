@@ -46,7 +46,20 @@ function HeaderMobile() {
       >
         <div className="sm:hidden text-bgff flex items-center justify-between ">
           <div className="h-9 w-9" />
-          <h1 className="text-3xl font-bold ">FoodFlex</h1>
+          <h1 className="text-3xl font-bold ">
+            <NavLink
+              to="/"
+              relative="path"
+              onClick={() => {
+                if (modalIsOpen) {
+                  toogleModalSignUpSignIn();
+                }
+                menuOnClick();
+              }}
+            >
+              FoodFlex
+            </NavLink>
+          </h1>
           <button
             ref={btnMenuRef}
             type="button"
