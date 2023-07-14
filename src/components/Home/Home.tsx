@@ -8,7 +8,7 @@ import { changeStateHome } from '../../store/reducers/home';
 function Home() {
   const dispatch = useAppDispatch();
   const stateHome = useAppSelector((state) => state.home.stateHome);
-
+  const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   // update the stateHome state to change header background to transparent
   useEffect(() => {
     if (stateHome === false) {
@@ -22,7 +22,11 @@ function Home() {
   }, []); // Ne pas supprimer sinon le code fonctionne plus
 
   return (
-    <div className="bg-bgff relative mb-20">
+    <div
+      className={`bg-bgff relative mb-20 ${
+        modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
+      } `}
+    >
       <HeadHome />
       <MainHome />
       <FootHome />
