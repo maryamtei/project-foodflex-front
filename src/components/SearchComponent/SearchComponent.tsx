@@ -1,5 +1,6 @@
 import { useState, ChangeEvent } from 'react';
 import { Search } from 'react-feather';
+import { useDebounce } from 'react-use';
 import { fetchSearchRecipe } from '../../store/reducers/recipes';
 import { useAppDispatch } from '../../hooks/redux';
 
@@ -14,8 +15,15 @@ function SearchComponent({ name }: SearchProps) {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const newValue = event.target.value;
     setValue(newValue);
-    dispatch(fetchSearchRecipe(newValue));
   }
+
+  useDebounce(
+    () => {
+      dispatch(fetchSearchRecipe(value));
+    },
+    400,
+    [dispatch, value]
+  );
   return (
     <div className="flex max-w-md mx-auto items-center">
       <div className="relative flex items-center w-full h-12 rounded-lg shadow focus-within:shadow-lg transition-all bg-white overflow-hidden ">
