@@ -1,21 +1,30 @@
 import { Twitter, Instagram, Facebook, GitHub, Youtube } from 'react-feather';
+
 import { NavLink } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/settings';
 
 function Footer() {
-  const isLoged = useAppSelector((state) => state.settings.isLoged);
+  const isLogged = useAppSelector((state) => state.settings.isLogged);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const dispatch = useAppDispatch();
 
   const toogleModalSignUpSignIn = () => {
-    if (!isLoged) {
+    if (!isLogged) {
       dispatch(toggleIsOpen());
     }
   };
   const toggleSignUp = () => {
     dispatch(toggleSignUpOpen());
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -54,6 +63,7 @@ function Footer() {
                   if (modalIsOpen) {
                     toogleModalSignUpSignIn();
                   }
+                  scrollToTop();
                 }}
               >
                 Home
@@ -67,22 +77,29 @@ function Footer() {
                   if (modalIsOpen) {
                     toogleModalSignUpSignIn();
                   }
+                  scrollToTop();
                 }}
               >
                 Recipes
               </NavLink>
             </li>
-            <li className={`${!isLoged ? 'hidden' : ''} `}>
-              <NavLink to="/planning" relative="path">
+            <li className={`${!isLogged ? 'hidden' : ''} `}>
+              <NavLink
+                to="/schedule"
+                relative="path"
+                onClick={() => {
+                  scrollToTop();
+                }}
+              >
                 Planning
               </NavLink>
             </li>
-            <li className={`${!isLoged ? 'hidden' : ''} `}>
+            <li className={`${!isLogged ? 'hidden' : ''} `}>
               <NavLink to="/profil" relative="path">
                 Profil
               </NavLink>
             </li>
-            <li className={`${isLoged ? 'hidden' : ''} `}>
+            <li className={`${isLogged ? 'hidden' : ''} `}>
               <button
                 className="underline"
                 type="button"
@@ -98,7 +115,7 @@ function Footer() {
                 Sign-In
               </button>
             </li>
-            <li className={`${isLoged ? 'hidden' : ''} `}>
+            <li className={`${isLogged ? 'hidden' : ''} `}>
               <button
                 className="underline"
                 type="button"
@@ -120,12 +137,24 @@ function Footer() {
           <h2 className="text-md font-bold ">Team :</h2>
           <ul className="flex flex-col gap-1 underline">
             <li>
-              <NavLink to="/" relative="path">
+              <NavLink
+                to="/"
+                relative="path"
+                onClick={() => {
+                  scrollToTop();
+                }}
+              >
                 About us
               </NavLink>
             </li>
             <li>
-              <NavLink to="/" relative="path">
+              <NavLink
+                to="/"
+                relative="path"
+                onClick={() => {
+                  scrollToTop();
+                }}
+              >
                 Contact
               </NavLink>
             </li>
@@ -135,12 +164,24 @@ function Footer() {
           <h2 className="text-md font-bold ">Legal :</h2>
           <ul className="flex flex-col gap-1 underline">
             <li>
-              <NavLink to="/" relative="path">
+              <NavLink
+                to="/"
+                relative="path"
+                onClick={() => {
+                  scrollToTop();
+                }}
+              >
                 Privacy Policy
               </NavLink>
             </li>
             <li>
-              <NavLink to="/" relative="path">
+              <NavLink
+                to="/"
+                relative="path"
+                onClick={() => {
+                  scrollToTop();
+                }}
+              >
                 Terms & Conditions
               </NavLink>
             </li>

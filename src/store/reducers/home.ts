@@ -6,7 +6,7 @@ interface SettingsState {
 }
 
 const initialValue: SettingsState = {
-  stateHome: true,
+  stateHome: false,
 };
 
 export const changeStateHome = createAction<boolean>('settings/CHANGE_STATE');
