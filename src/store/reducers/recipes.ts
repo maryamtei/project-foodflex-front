@@ -35,7 +35,18 @@ export const fetchRandomRecipes = createAsyncThunk(
     // Transformation des résultats en un seul tableau de repas.
     const meals = results.flatMap((result) => result.meals);
 
-    return meals.map((meal) => {
+    // Suppression des doublons de recettes en fonction de leur id.
+    const mealIds = new Set<number>();
+
+    const uniqueMeals = meals.filter((meal) => {
+      if (!mealIds.has(meal.idMeal)) {
+        mealIds.add(meal.idMeal);
+        return true;
+      }
+      return false;
+    });
+
+    return uniqueMeals.map((meal) => {
       return {
         id: meal.idMeal,
         name: meal.strMeal,
