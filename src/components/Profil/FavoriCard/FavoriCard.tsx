@@ -1,6 +1,7 @@
 import { Plus, Heart } from 'react-feather';
-import { useAppDispatch } from '../../../hooks/redux';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { deleteFavori } from '../../../store/reducers/favoris';
+import { addFavori, displaySchedule } from '../../../store/reducers/schedule';
 import { Favorite } from '../../../@types/Profil';
 
 interface CardProps {
@@ -8,26 +9,37 @@ interface CardProps {
 }
 
 function FavoriCard({ favori }: CardProps) {
+  const clickAddFavori = useAppSelector(
+    (state) => state.schedule.clickAddFavori
+  );
+
   const dispatch = useAppDispatch();
 
   function handleDeleteFavori() {
     dispatch(deleteFavori(favori.idMeal));
   }
 
+  function handleAddFavori() {
+    dispatch(displaySchedule(!clickAddFavori));
+    dispatch(addFavori(favori));
+  }
+
   return (
     <div className="shadow-md rounded-lg relative hover:shadow-lg transition-all">
       <img
-        src={favori.image}
+        src={favori.imageUrl}
         alt={favori.name}
         className="rounded-t-md cover"
       />
       <div className="text-bgff absolute top-2 right-1">
         <div className="card-actions justify-end">
-          <Heart fill="red" onClick={() => handleDeleteFavori()} />
+          <Heart
+            color="black"
+            fill="red"
+            onClick={() => handleDeleteFavori()}
+          />
 
-          <a href="./">
-            <Plus />
-          </a>
+          <Plus color="red" onClick={() => handleAddFavori()} />
         </div>
       </div>
       <div className="rounded-b-lg">
