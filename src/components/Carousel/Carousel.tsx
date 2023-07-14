@@ -8,11 +8,27 @@ interface RecipeProps {
   recipes: Recipe[];
 }
 function Carousel({ recipes }: RecipeProps) {
-  const mobileView = useAppSelector((state) => state.window.mobileView);
+  const innerWidth = useAppSelector((state) => state.window.innerWidth);
+  const changeSlidesToShow = () => {
+    switch (true) {
+      case innerWidth < 640:
+        return 2;
+      case innerWidth >= 640 && innerWidth < 800:
+        return 3;
+      case innerWidth >= 800 && innerWidth < 960:
+        return 4;
+      case innerWidth >= 960 && innerWidth < 1120:
+        return 5;
+      case innerWidth >= 1120 && innerWidth < 1280:
+        return 6;
+      default:
+        return 7;
+    }
+  };
   return (
     <div className="px-6 text-fourthff">
       <NukaCarousel
-        slidesToShow={mobileView ? 2 : 7}
+        slidesToShow={changeSlidesToShow()}
         renderBottomCenterControls={null}
         enableKeyboardControls
         renderCenterLeftControls={({ previousSlide, previousDisabled }) => {
