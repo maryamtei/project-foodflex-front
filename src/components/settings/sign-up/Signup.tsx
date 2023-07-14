@@ -128,7 +128,7 @@ function signup() {
         <div className="flex justify-center ">
           <button
             type="submit"
-            className="text-2xl font-bold pt-1 pr-1 pb-2 pl-2  border-fourthff rounded-lg border-2 h-8 shadow-md hover:shadow-xl ease-in duration-150 w-7/12 h-full"
+            className="text-2xl font-bold pt-1 pr-1 pb-2 pl-2 mt-10 border-fourthff rounded-lg border-2 h-8 shadow-md hover:shadow-xl ease-in duration-150 w-7/12 h-full"
             disabled={isLoading}
           >
             Sign-Up
