@@ -13,7 +13,7 @@ function Recipes() {
   const dispatch = useAppDispatch();
 
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
-  // debounce uniquement sur la recherche
+  // Utilisation du debounce pour limiter le nombre d'appel à l'api
   useDebounce(
     () => {
       if (search) {
@@ -24,7 +24,7 @@ function Recipes() {
     [dispatch, search]
   );
 
-  // déclenchement immédiat sur une chaîne de recherche vide
+  // déclenchement du random sur une chaîne de recherche vide dans la search
   useEffect(() => {
     if (!search) {
       dispatch(fetchRandomRecipes());

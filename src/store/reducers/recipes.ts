@@ -1,25 +1,27 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 
 import { Recipe } from '../../@types/recipe';
-
+// Définition de l'interface pour l'état des recettes.
 interface RecipesState {
   list: Recipe[];
 }
-
+// Initialisation de l'état initial des recettes.
 export const initialState: RecipesState = {
   list: [],
 };
 
+// Définition de l'interface pour une recette provenant de l'API.
 export interface ApiRecipe {
   idMeal: number;
   strMeal: string;
   strMealThumb: string;
 }
 
+// Création d'une action Redux async pour fetch des recettes aléatoires.
 export const fetchRandomRecipes = createAsyncThunk(
   'recipes/fetchRandomRecipes',
   async () => {
+    // Création d'un tableau de promises pour récupérer plusieurs recettes aléatoires.
     const promises = [];
     for (let i = 0; i < 10; i += 1) {
       promises.push(
@@ -28,7 +30,9 @@ export const fetchRandomRecipes = createAsyncThunk(
         }).then((response) => response.json())
       );
     }
+    // Attente du résultat de toutes les promises.
     const results = await Promise.all(promises);
+    // Transformation des résultats en un seul tableau de repas.
     const meals = results.flatMap((result) => result.meals);
 
     return meals.map((meal) => {
@@ -41,6 +45,7 @@ export const fetchRandomRecipes = createAsyncThunk(
   }
 );
 
+// Création d'une action Redux async pour fetch des recettes en fonction d'une recherche.
 export const fetchSearchRecipe = createAsyncThunk(
   'recipes/fetchSearchRecipes',
   async (search: string) => {
@@ -48,6 +53,7 @@ export const fetchSearchRecipe = createAsyncThunk(
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`
     );
     const data: { meals: ApiRecipe[] | null } = await response.json();
+    // Si data.meals est null, assignation d'un tableau vide pour éviter les erreurs.
     const meals = data.meals || [];
     return meals.map((meal) => {
       return {
@@ -59,6 +65,7 @@ export const fetchSearchRecipe = createAsyncThunk(
   }
 );
 
+// Création d'un reducer pour gérer l'état des recettes.
 const recipesReducer = createReducer(initialState, (builder) => {
   builder.addCase(fetchRandomRecipes.fulfilled, (state, action) => {
     state.list = action.payload;
