@@ -2,15 +2,17 @@ import NukaCarousel from 'nuka-carousel';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import CarouselSlide from './CarouselSlide';
 import { Recipe } from '../../@types/recipe';
+import { useAppSelector } from '../../hooks/redux';
 
 interface RecipeProps {
   recipes: Recipe[];
 }
 function Carousel({ recipes }: RecipeProps) {
+  const mobileView = useAppSelector((state) => state.window.mobileView);
   return (
     <div className="px-6 text-fourthff">
       <NukaCarousel
-        slidesToShow={2}
+        slidesToShow={mobileView ? 2 : 7}
         renderBottomCenterControls={null}
         enableKeyboardControls
         renderCenterLeftControls={({ previousSlide, previousDisabled }) => {
