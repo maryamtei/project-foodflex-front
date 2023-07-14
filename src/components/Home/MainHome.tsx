@@ -14,7 +14,7 @@ function MainHome({ recipes }: RecipeProps) {
       </h2>
 
       <div className="md:hidden mt-10 block">
-        <Carousel />
+        <Carousel recipes={recipes} />
       </div>
 
       <div className="md:block md:mt-20 hidden ">
