@@ -15,18 +15,18 @@ function RecipeCard({ name, imageUrl }: CardProps) {
       <img src={imageUrl} alt={name} className="rounded-t-md cover" />
       <div className="text-bgff absolute top-2 right-1 ">
         <div className="card-actions justify-end bg-t">
-          <Link
-            to="/"
+          <button
+            type="button"
             className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
           >
             <Heart size={20} />
-          </Link>
-          <Link
-            to="/"
+          </button>
+          <button
+            type="button"
             className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
           >
             <Plus size={20} />
-          </Link>
+          </button>
         </div>
       </div>
       <div className="rounded-b-lg">
