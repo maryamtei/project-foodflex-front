@@ -13,15 +13,27 @@ export const initialState: RecipesState = {
 };
 
 export const deleteFavori = createAction<number>('favori/delete-favori');
+export const addFavori = createAction<Favorite>('favori/add-favori');
 
 const favoriReducer = createReducer(initialState, (builder) => {
-  builder.addCase(deleteFavori, (state, action) => {
-    const idToDelete = action.payload;
+  builder
+    .addCase(deleteFavori, (state, action) => {
+      const idToDelete = action.payload;
 
-    state.favoris = state.favoris.filter(
-      (favori) => favori.idMeal !== idToDelete
-    );
-  });
+      state.favoris = state.favoris.filter(
+        (favori) => favori.idMeal !== idToDelete
+      );
+    })
+    .addCase(addFavori, (state, action) => {
+      const favoriToAdd = action.payload;
+      console.log(action.payload);
+      const findFavori = state.favoris.find(
+        (favori) => favori.idMeal === favoriToAdd.idMeal
+      );
+      if (!findFavori) {
+        state.favoris.push(favoriToAdd);
+      }
+    });
 });
 
 export default favoriReducer;

@@ -6,13 +6,13 @@ import { Week } from '../../@types/schedule';
 
 interface ScheduleState {
   schedule: Week[];
-  clickAddFavori: boolean;
+  clickAddSchedule: boolean;
   MealFavoriToAdd: Week;
 }
 
 export const initialState: ScheduleState = {
   schedule: fakeschedule.week,
-  clickAddFavori: false,
+  clickAddSchedule: false,
   MealFavoriToAdd: {
     idMeal: 0,
     name: '',
@@ -21,17 +21,17 @@ export const initialState: ScheduleState = {
   },
 };
 
-export const addFavori = createAction<Week>('favori/add-favori');
+export const addSchedule = createAction<Week>('favori/add-planning');
 export const displaySchedule = createAction<boolean>('favori/click-add-favori');
 export const selectedDay = createAction<number>('favori/selected-day');
 
 const scheduleReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(addFavori, (state, action) => {
+    .addCase(addSchedule, (state, action) => {
       state.MealFavoriToAdd = action.payload;
     })
     .addCase(displaySchedule, (state, action) => {
-      state.clickAddFavori = action.payload;
+      state.clickAddSchedule = action.payload;
     })
     .addCase(selectedDay, (state, action) => {
       const dayPosition = action.payload;
@@ -43,7 +43,7 @@ const scheduleReducer = createReducer(initialState, (builder) => {
         state.MealFavoriToAdd.position = action.payload;
         state.schedule.push(state.MealFavoriToAdd);
         // fermer la modale planning
-        state.clickAddFavori = false;
+        state.clickAddSchedule = false;
       }
     });
 });

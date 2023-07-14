@@ -36,7 +36,7 @@ function Recipes() {
 
   // affichage modale planning si on clique sur le '+'
   const displaySchedule = useAppSelector(
-    (state) => state.schedule.clickAddFavori
+    (state) => state.schedule.clickAddSchedule
   );
 
   return (
@@ -45,6 +45,7 @@ function Recipes() {
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       }`}
     >
+      {/* // affichage modale planning si on clique sur le '+' */}
       {displaySchedule && <ScheduleFavori />}
       <h1 className="text-thirdff text-2xl sm:text-4xl font-bold md:mb-12 mb-6 text-center sm:text-center md:text-center">
         Find exactly what you need !
