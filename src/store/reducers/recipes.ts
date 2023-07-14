@@ -23,9 +23,9 @@ export const fetchRandomRecipes = createAsyncThunk(
     const promises = [];
     for (let i = 0; i < 10; i += 1) {
       promises.push(
-        fetch('https://www.themealdb.com/api/json/v1/1/random.php').then(
-          (response) => response.json()
-        )
+        fetch('https://www.themealdb.com/api/json/v1/1/random.php', {
+          cache: 'no-store',
+        }).then((response) => response.json())
       );
     }
     const results = await Promise.all(promises);
