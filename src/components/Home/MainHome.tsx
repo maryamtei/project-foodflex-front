@@ -1,19 +1,24 @@
 import Carousel from '../Carousel/Carousel';
 import MenuSemaine from './MenuSemaine/MenuSemaine';
+import { Recipe } from '../../@types/recipe';
 
-function MainHome() {
+interface RecipeProps {
+  recipes: Recipe[];
+}
+
+function MainHome({ recipes }: RecipeProps) {
   return (
     <div className="">
       <h2 className="text-3xl sm:text-4xl font-bold mt-36 text-center sm:text-center md:text-center text-thirdff">
         EXAMPLE MENU
       </h2>
 
-      <div className="sm:hidden mt-10 block">
+      <div className="md:hidden mt-10 block">
         <Carousel />
       </div>
 
       <div className="md:block md:mt-20 hidden ">
-        <MenuSemaine />
+        <MenuSemaine recipes={recipes} />
       </div>
     </div>
   );

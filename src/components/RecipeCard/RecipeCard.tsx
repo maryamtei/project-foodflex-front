@@ -1,4 +1,5 @@
 import { Plus, Heart } from 'react-feather';
+import { useAppSelector } from '../../hooks/redux';
 
 interface CardProps {
   name: string;
@@ -6,11 +7,14 @@ interface CardProps {
 }
 
 function RecipeCard({ name, imageUrl }: CardProps) {
+  const stateHome = useAppSelector((state) => state.home.stateHome);
   return (
     <div className="shadow-md rounded-lg relative hover:shadow-lg transition-all">
       <img src={imageUrl} alt={name} className="rounded-t-md cover" />
       <div className="text-bgff absolute top-2 right-1">
-        <div className="card-actions justify-end">
+        <div
+          className={`card-actions justify-end ${stateHome ? 'hidden' : ''}`}
+        >
           <a href="./">
             <Heart />
           </a>

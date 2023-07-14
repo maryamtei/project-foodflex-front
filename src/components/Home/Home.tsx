@@ -4,11 +4,17 @@ import MainHome from './MainHome';
 import FootHome from './FootHome';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateHome } from '../../store/reducers/home';
+import { fetchRandomRecipes } from '../../store/reducers/recipes';
 
 function Home() {
   const dispatch = useAppDispatch();
   const stateHome = useAppSelector((state) => state.home.stateHome);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+
+  useEffect(() => {
+    dispatch(fetchRandomRecipes());
+  }, [dispatch]);
+  const recipes = useAppSelector((state) => state.recipes.list);
   // update the stateHome state to change header background to transparent
   useEffect(() => {
     if (stateHome === false) {
@@ -28,7 +34,7 @@ function Home() {
       } `}
     >
       <HeadHome />
-      <MainHome />
+      <MainHome recipes={recipes} />
       <FootHome />
     </div>
   );
