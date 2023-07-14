@@ -3,7 +3,7 @@ import MenuSemaine from './MenuSemaine/MenuSemaine';
 
 function MainHome() {
   return (
-    <div>
+    <div className="">
       <h2 className="text-3xl sm:text-4xl font-bold mt-36 text-center sm:text-center md:text-center text-thirdff">
         EXAMPLE MENU
       </h2>
