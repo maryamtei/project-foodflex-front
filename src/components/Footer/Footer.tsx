@@ -1,4 +1,5 @@
 import { Twitter, Instagram, Facebook, GitHub, Youtube } from 'react-feather';
+
 import { NavLink } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/settings';
@@ -9,7 +10,6 @@ function Footer() {
   const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const dispatch = useAppDispatch();
 
-  // if isLoged
   const toogleModalSignUpSignIn = () => {
     if (!isLogged) {
       dispatch(toggleIsOpen());
@@ -17,6 +17,14 @@ function Footer() {
   };
   const toggleSignUp = () => {
     dispatch(toggleSignUpOpen());
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -55,6 +63,7 @@ function Footer() {
                   if (modalIsOpen) {
                     toogleModalSignUpSignIn();
                   }
+                  scrollToTop();
                 }}
               >
                 Home
@@ -68,13 +77,20 @@ function Footer() {
                   if (modalIsOpen) {
                     toogleModalSignUpSignIn();
                   }
+                  scrollToTop();
                 }}
               >
                 Recipes
               </NavLink>
             </li>
             <li className={`${!isLogged ? 'hidden' : ''} `}>
-              <NavLink to="/planning" relative="path">
+              <NavLink
+                to="/planning"
+                relative="path"
+                onClick={() => {
+                  scrollToTop();
+                }}
+              >
                 Planning
               </NavLink>
             </li>
@@ -121,12 +137,24 @@ function Footer() {
           <h2 className="text-md font-bold ">Team :</h2>
           <ul className="flex flex-col gap-1 underline">
             <li>
-              <NavLink to="/" relative="path">
+              <NavLink
+                to="/"
+                relative="path"
+                onClick={() => {
+                  scrollToTop();
+                }}
+              >
                 About us
               </NavLink>
             </li>
             <li>
-              <NavLink to="/" relative="path">
+              <NavLink
+                to="/"
+                relative="path"
+                onClick={() => {
+                  scrollToTop();
+                }}
+              >
                 Contact
               </NavLink>
             </li>
@@ -136,12 +164,24 @@ function Footer() {
           <h2 className="text-md font-bold ">Legal :</h2>
           <ul className="flex flex-col gap-1 underline">
             <li>
-              <NavLink to="/" relative="path">
+              <NavLink
+                to="/"
+                relative="path"
+                onClick={() => {
+                  scrollToTop();
+                }}
+              >
                 Privacy Policy
               </NavLink>
             </li>
             <li>
-              <NavLink to="/" relative="path">
+              <NavLink
+                to="/"
+                relative="path"
+                onClick={() => {
+                  scrollToTop();
+                }}
+              >
                 Terms & Conditions
               </NavLink>
             </li>
