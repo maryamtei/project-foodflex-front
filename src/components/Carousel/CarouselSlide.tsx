@@ -12,7 +12,6 @@ export default function CarouselSlide({
   recipe1,
   recipe2,
 }: CarouselSlideProps) {
-  const myImage = '/images.jpeg';
   return (
     <div className="p-4">
       <div className="py-4 text-center">{day}</div>

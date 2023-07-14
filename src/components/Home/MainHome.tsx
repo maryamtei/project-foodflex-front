@@ -13,13 +13,13 @@ function MainHome({ recipes }: RecipeProps) {
         EXAMPLE MENU
       </h2>
 
-      <div className="md:hidden mt-10 block">
+      <div className="mt-10 block">
         <Carousel recipes={recipes} />
       </div>
 
-      <div className="md:block md:mt-20 hidden ">
+      {/* <div className="md:block md:mt-20 hidden ">
         <MenuSemaine recipes={recipes} />
-      </div>
+      </div> */}
     </div>
   );
 }
