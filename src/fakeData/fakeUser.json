@@ -1,0 +1,72 @@
+[
+  {
+    "firstName": "Romain",
+    "lastName": "Vicidomi",
+    "mail": "r.vicidomi@foodflex.com",
+    "password": "foodflex",
+    "favorites": [
+      {
+        "idMeal": 1,
+        "name": "Escovitch Fish",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/1520084413.jpg",
+        "position": 2
+      }
+    ]
+  },
+  {
+    "firstName": "Gabrielle",
+    "lastName": "Pagnard",
+    "mail": "g.pagnard@foodflex.com",
+    "password": "foodflex",
+    "favorites": [
+      {
+        "idMeal": 2,
+        "name": "Stuffed Lamb Tomatoes",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/u55lbp1585564013.jpg",
+        "position": 6
+      }
+    ]
+  },
+  {
+    "firstName": "Maryam",
+    "lastName": "Tei",
+    "mail": "m.tei@foodflex.com",
+    "password": "foodflex",
+    "favorites": [
+      {
+        "idMeal": 3,
+        "name": "Kapsalon",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg",
+        "position": 10
+      }
+    ]
+  },
+  {
+    "firstName": "Mathilde",
+    "lastName": "Louradour",
+    "mail": "m.louradour@foodflex.com",
+    "password": "foodflex",
+    "favorites": [
+      {
+        "idMeal": 4,
+        "name": "Shakshuka",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/g373701551450225.jpg",
+        "position": 12
+      }
+    ]
+  },
+  {
+    "firstName": "Jonathan",
+    "lastName": "FLamme",
+    "mail": "j.flamme@foodflex.com",
+    "password": "foodflex",
+    "favorites": [
+      {
+        "idMeal": 1,
+        "name": "Escovitch Fish",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/1520084413.jpg",
+        "position": 2
+      }
+    ]
+  }
+]
