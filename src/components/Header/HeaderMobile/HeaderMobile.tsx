@@ -20,13 +20,13 @@ import {
 function HeaderMobile() {
   const btnMenuRef = useRef<HTMLButtonElement>(null);
   const [menuActive, setmenuActive] = useState(false);
-  const isLoged = useAppSelector((state) => state.settings.isLoged);
+  const isLogged = useAppSelector((state) => state.settings.isLogged);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const dispatch = useAppDispatch();
 
   const toogleModalSignUpSignIn = () => {
-    if (!isLoged) {
+    if (!isLogged) {
       dispatch(toggleIsOpen());
     }
   };
@@ -93,7 +93,7 @@ function HeaderMobile() {
                   Recipes
                 </NavLink>
               </li>
-              <li className={`${!isLoged ? 'hidden' : ''} `}>
+              <li className={`${!isLogged ? 'hidden' : ''} `}>
                 <NavLink
                   to="/planning"
                   relative="path"
@@ -104,7 +104,7 @@ function HeaderMobile() {
                   Planning
                 </NavLink>
               </li>
-              <li className={`${!isLoged ? 'hidden' : ''} `}>
+              <li className={`${!isLogged ? 'hidden' : ''} `}>
                 <NavLink
                   to="/profil"
                   relative="path"
@@ -115,7 +115,7 @@ function HeaderMobile() {
                   Profil
                 </NavLink>
               </li>
-              <li className={`${isLoged ? 'hidden' : ''} `}>
+              <li className={`${isLogged ? 'hidden' : ''} `}>
                 <button
                   className="underline"
                   type="button"
@@ -133,7 +133,7 @@ function HeaderMobile() {
                   Sign-In
                 </button>
               </li>
-              <li className={`${isLoged ? 'hidden' : ''} `}>
+              <li className={`${isLogged ? 'hidden' : ''} `}>
                 <button
                   className="underline"
                   type="button"
@@ -212,7 +212,7 @@ function HeaderMobile() {
           to="/planning"
           relative="path"
           onClick={() => {
-            if (!isLoged && !modalIsOpen) {
+            if (!isLogged && !modalIsOpen) {
               toogleModalSignUpSignIn();
             }
           }}
@@ -224,7 +224,7 @@ function HeaderMobile() {
           to="/profil"
           relative="path"
           onClick={() => {
-            if (!isLoged && !modalIsOpen) {
+            if (!isLogged && !modalIsOpen) {
               toogleModalSignUpSignIn();
             }
           }}

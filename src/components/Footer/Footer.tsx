@@ -4,13 +4,14 @@ import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/settings';
 
 function Footer() {
-  const isLoged = useAppSelector((state) => state.settings.isLoged);
+  const isLogged = useAppSelector((state) => state.settings.isLogged);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const dispatch = useAppDispatch();
 
+  // if isLoged
   const toogleModalSignUpSignIn = () => {
-    if (!isLoged) {
+    if (!isLogged) {
       dispatch(toggleIsOpen());
     }
   };
@@ -72,17 +73,17 @@ function Footer() {
                 Recipes
               </NavLink>
             </li>
-            <li className={`${!isLoged ? 'hidden' : ''} `}>
+            <li className={`${!isLogged ? 'hidden' : ''} `}>
               <NavLink to="/planning" relative="path">
                 Planning
               </NavLink>
             </li>
-            <li className={`${!isLoged ? 'hidden' : ''} `}>
+            <li className={`${!isLogged ? 'hidden' : ''} `}>
               <NavLink to="/profil" relative="path">
                 Profil
               </NavLink>
             </li>
-            <li className={`${isLoged ? 'hidden' : ''} `}>
+            <li className={`${isLogged ? 'hidden' : ''} `}>
               <button
                 className="underline"
                 type="button"
@@ -98,7 +99,7 @@ function Footer() {
                 Sign-In
               </button>
             </li>
-            <li className={`${isLoged ? 'hidden' : ''} `}>
+            <li className={`${isLogged ? 'hidden' : ''} `}>
               <button
                 className="underline"
                 type="button"

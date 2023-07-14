@@ -43,6 +43,7 @@ function Apptest() {
       {modalIsOpen && <Modal />}
       {/* Render the Outlet component if modalIsOpen is false and Mobile is true or Mobile is false */}
       {((!modalIsOpen && Mobile) || !Mobile) && <Outlet />}
+      {/* fake div to margin bottom in mobile because footer component is sticky  */}
       <div className="h-16 " />
       <Footer />
     </div>

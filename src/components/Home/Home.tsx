@@ -8,6 +8,8 @@ import { changeStateHome } from '../../store/reducers/home';
 function Home() {
   const dispatch = useAppDispatch();
   const stateHome = useAppSelector((state) => state.home.stateHome);
+
+  // update the stateHome state to change header background to transparent
   useEffect(() => {
     if (stateHome === false) {
       dispatch(changeStateHome(true));
