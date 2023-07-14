@@ -25,7 +25,7 @@ interface SettingsState {
 
 const initialValue: SettingsState = {
   modalIsOpen: false,
-  isLoged: false,
+  isLoged: true,
   signUpOpen: true,
   signInCredentials: {
     email: '',
