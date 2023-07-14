@@ -23,6 +23,11 @@ function Recipes() {
         Find exactly what you need !
       </h1>
       <SearchComponent name="RecipeSearch" />
+      {recipes.length === 0 && (
+        <div className="text-center text-thirdff text-2xl font-bold  mt-10">
+          No recipes found
+        </div>
+      )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
         {recipes.map((recipe) => (
           <RecipeCard

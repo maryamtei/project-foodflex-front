@@ -47,9 +47,9 @@ export const fetchSearchRecipe = createAsyncThunk(
     const response = await fetch(
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`
     );
-    const data: { meals: ApiRecipe[] } = await response.json();
-
-    return data.meals.map((meal) => {
+    const data: { meals: ApiRecipe[] | null } = await response.json();
+    const meals = data.meals || [];
+    return meals.map((meal) => {
       return {
         id: meal.idMeal,
         name: meal.strMeal,
