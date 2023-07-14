@@ -1,12 +1,29 @@
 import { Twitter, Instagram, Facebook, GitHub, Youtube } from 'react-feather';
 import { NavLink } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
+import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/settings';
 
 function Footer() {
   const isLoged = useAppSelector((state) => state.settings.isLoged);
+  const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+  const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
+  const dispatch = useAppDispatch();
+
+  const toogleModalSignUpSignIn = () => {
+    if (!isLoged) {
+      dispatch(toggleIsOpen());
+    }
+  };
+  const toggleSignUp = () => {
+    dispatch(toggleSignUpOpen());
+  };
 
   return (
-    <footer className="hidden sm:block bg-fourthff w-full px-7 py-6 z-10 h-60">
+    <footer
+      className={`hidden sm:block bg-fourthff w-full px-7 py-6 z-10 h-60   ${
+        modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
+      }`}
+    >
       <div className="text-bgff flex items-center h-full p-5 text-center gap-3 justify-between flex-row ">
         <div className="flex flex-col gap-3 ">
           <p className="text-md font-medium">
@@ -30,46 +47,72 @@ function Footer() {
           <h2 className="text-md font-bold ">Quick Links :</h2>
           <ul className="flex flex-col gap-1 underline">
             <li>
-              <NavLink to="/" relative="path">
+              <NavLink
+                to="/"
+                relative="path"
+                onClick={() => {
+                  if (modalIsOpen) {
+                    toogleModalSignUpSignIn();
+                  }
+                }}
+              >
                 Home
               </NavLink>
             </li>
             <li>
               <NavLink
-                to={`${isLoged ? '/recipes' : '/signin'}`}
+                to="/recipes"
                 relative="path"
+                onClick={() => {
+                  if (modalIsOpen) {
+                    toogleModalSignUpSignIn();
+                  }
+                }}
               >
                 Recipes
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to={`${isLoged ? '/planning' : '/signin'}`}
-                relative="path"
-              >
+            <li className={`${!isLoged ? 'hidden' : ''} `}>
+              <NavLink to="/planning" relative="path">
                 Planning
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to={`${isLoged ? '/profil' : '/signin'}`}
-                relative="path"
-              >
+            <li className={`${!isLoged ? 'hidden' : ''} `}>
+              <NavLink to="/profil" relative="path">
                 Profil
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                to={`${isLoged ? '/profil' : '/signin'}`}
-                relative="path"
+            <li className={`${isLoged ? 'hidden' : ''} `}>
+              <button
+                className="underline"
+                type="button"
+                onClick={() => {
+                  if (signUpOpen) {
+                    toggleSignUp();
+                  }
+                  if (!modalIsOpen) {
+                    toogleModalSignUpSignIn();
+                  }
+                }}
               >
                 Sign-In
-              </NavLink>
+              </button>
             </li>
-            <li>
-              <NavLink to="/signup" relative="path">
+            <li className={`${isLoged ? 'hidden' : ''} `}>
+              <button
+                className="underline"
+                type="button"
+                onClick={() => {
+                  if (!signUpOpen) {
+                    toggleSignUp();
+                  }
+                  if (!modalIsOpen) {
+                    toogleModalSignUpSignIn();
+                  }
+                }}
+              >
                 Sign-Up
-              </NavLink>
+              </button>
             </li>
           </ul>
         </div>
