@@ -14,6 +14,7 @@ function Home() {
   useEffect(() => {
     dispatch(fetchRandomRecipes());
   }, [dispatch]);
+
   const recipes = useAppSelector((state) => state.recipes.list);
   // update the stateHome state to change header background to transparent
   useEffect(() => {

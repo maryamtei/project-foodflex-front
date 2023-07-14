@@ -1,12 +1,18 @@
 import { NavLink } from 'react-router-dom';
 import { useAppSelector } from '../../hooks/redux';
 import FavoriCard from './FavoriCard/FavoriCard';
+import ScheduleFavori from './ScheduleFavori/ScheduleFavori';
 
 function Favoris() {
   const favorites = useAppSelector((state) => state.favoris.favoris);
 
+  const displaySchedule = useAppSelector(
+    (state) => state.schedule.clickAddFavori
+  );
+
   return (
-    <div className="container">
+    <div className="container px-4">
+      {displaySchedule && <ScheduleFavori />}
       <div className="mt-10 flex justify-center mb-16	">
         <NavLink
           to="/favoris"

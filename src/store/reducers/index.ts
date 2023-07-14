@@ -4,6 +4,7 @@ import recipesReducer from './recipes';
 import settingsReducer from './settings';
 import favorisReducer from './favoris';
 import windowReducer from './window';
+import scheduleReducer from './schedule';
 
 const reducer = {
   recipes: recipesReducer,
@@ -11,6 +12,7 @@ const reducer = {
   window: windowReducer,
   profil: profilReducer,
   favoris: favorisReducer,
+  schedule: scheduleReducer,
   home: homeReducer,
 };
 

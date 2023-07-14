@@ -63,7 +63,7 @@ function HeaderDesktop() {
           Recipes
         </NavLink>
         <NavLink
-          to="/planning"
+          to="/schedule"
           relative="path"
           className={!isLogged ? 'hidden' : ''}
         >

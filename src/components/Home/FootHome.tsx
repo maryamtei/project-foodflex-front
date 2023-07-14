@@ -46,7 +46,7 @@ function FootHome() {
               ? 'px-8 py-4 bg-thirdff text-bgff rounded-lg text-2xl font-bold'
               : 'hidden'
           }
-          to="/planning"
+          to="/schedule"
           relative="path"
         >
           My planning !

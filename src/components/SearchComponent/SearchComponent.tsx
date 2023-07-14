@@ -1,21 +1,20 @@
-import { useState, ChangeEvent } from 'react';
+import { ChangeEvent } from 'react';
 import { Search } from 'react-feather';
-import { fetchSearchRecipe } from '../../store/reducers/recipes';
-import { useAppDispatch } from '../../hooks/redux';
 
 interface SearchProps {
   name: string;
+  value: string;
+  onChange: (value: string) => void;
 }
 
-function SearchComponent({ name }: SearchProps) {
-  const [value, setValue] = useState('');
-  const dispatch = useAppDispatch();
-
+function SearchComponent({ name, value, onChange }: SearchProps) {
+  // Définition de la fonction à appeler quand la valeur du champ de saisie change.
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const newValue = event.target.value;
-    setValue(newValue);
-    dispatch(fetchSearchRecipe(newValue));
+    // Appel de la fonction onChange passée en prop avec la nouvelle valeur.
+    onChange(newValue);
   }
+
   return (
     <div className="flex max-w-md mx-auto items-center">
       <div className="relative flex items-center w-full h-12 rounded-lg shadow focus-within:shadow-lg transition-all bg-white overflow-hidden ">

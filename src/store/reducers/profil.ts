@@ -4,7 +4,7 @@ import {
   createReducer,
 } from '@reduxjs/toolkit';
 import { User } from '../../@types/Profil';
-import fakeProfil from '../../components/Profil/fakeProfil.json';
+import fakeProfil from '../../fakeData/fakeProfil.json';
 
 interface ProfilState {
   user: User;

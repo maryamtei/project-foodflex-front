@@ -8,7 +8,7 @@ export interface User {
 export interface Favorite {
   idMeal: number;
   name: string;
-  image: string;
+  imageUrl: string;
   position: number;
 }
 export default interface Profil {

@@ -85,7 +85,7 @@ function Footer() {
             </li>
             <li className={`${!isLogged ? 'hidden' : ''} `}>
               <NavLink
-                to="/planning"
+                to="/schedule"
                 relative="path"
                 onClick={() => {
                   scrollToTop();

@@ -20,6 +20,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.14.1",
     "react-scroll": "^1.8.9",
+    "react-use": "^17.4.0",
     "redux": "^4.2.1"
   },
   "devDependencies": {
