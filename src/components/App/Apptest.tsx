@@ -49,7 +49,9 @@ function Apptest() {
       {modalIsOpenSign && <ModalSign />}
       {modalIsOpenFavoriProfil && <ModalFavoriProfil />}
       {/* Render the Outlet component if modalIsOpen is false and Mobile is true or Mobile is false */}
-      {((!modalIsOpenSign && mobileView) || !mobileView) && <Outlet />}
+      {((!modalIsOpenSign && !modalIsOpenFavoriProfil && mobileView) ||
+        !mobileView) && <Outlet />}
+
       {/* fake div to margin bottom in mobile because footer component is sticky  */}
       <div className="h-16 " />
       <Footer />

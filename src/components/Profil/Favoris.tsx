@@ -4,10 +4,13 @@ import ScheduleFavori from './ScheduleFavori/ScheduleFavori';
 import { changeFavoriIsOpen } from '../../store/reducers/favoris';
 
 function Favoris() {
-  const favorites = useAppSelector((state) => state.favoris.favoris);
   const dispatch = useAppDispatch();
+  const favorites = useAppSelector(
+    (state) => state.settings.currentUser.favorites
+  );
+
   const displaySchedule = useAppSelector(
-    (state) => state.schedule.clickAddSchedule
+    (state) => state.settings.clickAddSchedule
   );
   const toggleFavoriProfil = () => {
     dispatch(changeFavoriIsOpen(false));

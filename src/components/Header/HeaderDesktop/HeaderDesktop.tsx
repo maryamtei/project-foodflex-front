@@ -13,6 +13,9 @@ import {
 function HeaderDesktop() {
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+  const modalIsOpenFavoriProfil = useAppSelector(
+    (state) => state.favoris.modalIsOpen
+  );
   const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const stateHome = useAppSelector((state) => state.home.stateHome);
   const dispatch = useAppDispatch();
@@ -28,6 +31,9 @@ function HeaderDesktop() {
   const openProfilModal = () => {
     dispatch(changeFavoriIsOpen(true));
     dispatch(toggleIsOpenProfil());
+  };
+  const closeProfilModal = () => {
+    dispatch(changeFavoriIsOpen(false));
   };
   return (
     <header
@@ -50,6 +56,9 @@ function HeaderDesktop() {
             if (modalIsOpen) {
               toogleModalSignUpSignIn();
             }
+            if (modalIsOpenFavoriProfil) {
+              closeProfilModal();
+            }
           }}
         >
           FoodFlex
@@ -66,6 +75,9 @@ function HeaderDesktop() {
             if (modalIsOpen) {
               toogleModalSignUpSignIn();
             }
+            if (modalIsOpenFavoriProfil) {
+              closeProfilModal();
+            }
           }}
         >
           Recipes
@@ -74,6 +86,11 @@ function HeaderDesktop() {
           to="/schedule"
           relative="path"
           className={!isLogged ? 'hidden' : ''}
+          onClick={() => {
+            if (modalIsOpenFavoriProfil) {
+              closeProfilModal();
+            }
+          }}
         >
           Planning
         </NavLink>

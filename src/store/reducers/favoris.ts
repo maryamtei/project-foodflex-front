@@ -1,6 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createAction, createReducer } from '@reduxjs/toolkit';
-import fakeProfil from '../../fakeData/fakeProfil.json';
 
 import { Favorite } from '../../@types/Profil';
 
@@ -11,9 +10,9 @@ interface RecipesState {
 }
 
 export const initialState: RecipesState = {
-  modalIsOpen: true,
+  modalIsOpen: false,
   favoriIsOpen: true,
-  favoris: fakeProfil.user.favorites,
+  favoris: [],
 };
 
 export const deleteFavori = createAction<number>('favori/delete-favori');

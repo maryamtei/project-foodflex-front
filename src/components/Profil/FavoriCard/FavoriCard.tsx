@@ -1,7 +1,10 @@
 import { Plus, Heart } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { deleteFavori } from '../../../store/reducers/favoris';
-import { addSchedule, displaySchedule } from '../../../store/reducers/schedule';
+import {
+  addSchedule,
+  displaySchedule,
+  deleteFavori,
+} from '../../../store/reducers/settings';
 import { Favorite } from '../../../@types/Profil';
 
 interface CardProps {
@@ -9,7 +12,7 @@ interface CardProps {
 }
 
 function FavoriCard({ favori }: CardProps) {
-  const clickAddFavori = useAppSelector(
+  const clickAddSchedule = useAppSelector(
     (state) => state.schedule.clickAddSchedule
   );
 
@@ -22,7 +25,7 @@ function FavoriCard({ favori }: CardProps) {
 
   // Function to handle adding the recipe to the schedule
   function handleAddSchedule() {
-    dispatch(displaySchedule(!clickAddFavori));
+    dispatch(displaySchedule(!clickAddSchedule));
     dispatch(addSchedule(favori));
   }
 

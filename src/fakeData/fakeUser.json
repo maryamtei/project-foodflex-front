@@ -1,8 +1,8 @@
 [
   {
     "firstName": "Romain",
-    "lastName": "Vicidomi",
-    "mail": "r.vicidomi@foodflex.com",
+    "lastName": "Vicidomini",
+    "email": "r.vicidomini@foodflex.com",
     "password": "foodflex",
     "favorites": [
       {
@@ -41,7 +41,7 @@
   {
     "firstName": "Gabrielle",
     "lastName": "Pagnard",
-    "mail": "g.pagnard@foodflex.com",
+    "email": "g.pagnard@foodflex.com",
     "password": "foodflex",
     "favorites": [
       {
@@ -50,12 +50,30 @@
         "imageUrl": "https://www.themealdb.com/images/media/meals/u55lbp1585564013.jpg",
         "position": 6
       }
+    ],
+    "schedule": [
+      {
+        "week": 1,
+        "meals": []
+      },
+      {
+        "week": 2,
+        "meals": []
+      },
+      {
+        "week": 3,
+        "meals": []
+      },
+      {
+        "week": 4,
+        "meals": []
+      }
     ]
   },
   {
     "firstName": "Maryam",
     "lastName": "Tei",
-    "mail": "m.tei@foodflex.com",
+    "email": "m.tei@foodflex.com",
     "password": "foodflex",
     "favorites": [
       {
@@ -64,12 +82,13 @@
         "imageUrl": "https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg",
         "position": 10
       }
-    ]
+    ],
+    "schedule": []
   },
   {
     "firstName": "Mathilde",
     "lastName": "Louradour",
-    "mail": "m.louradour@foodflex.com",
+    "email": "m.louradour@foodflex.com",
     "password": "foodflex",
     "favorites": [
       {
@@ -78,12 +97,13 @@
         "imageUrl": "https://www.themealdb.com/images/media/meals/g373701551450225.jpg",
         "position": 12
       }
-    ]
+    ],
+    "schedule": []
   },
   {
     "firstName": "Jonathan",
     "lastName": "FLamme",
-    "mail": "j.flamme@foodflex.com",
+    "email": "j.flamme@foodflex.com",
     "password": "foodflex",
     "favorites": [
       {

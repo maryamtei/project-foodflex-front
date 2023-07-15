@@ -1,9 +1,10 @@
 import { FormEvent, useState } from 'react';
 import { Mail, User, Key } from 'react-feather';
 
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Field from './Field/Field';
-import { editProfilData } from '../../store/reducers/profil';
+import { editInfoProfil, logout } from '../../store/reducers/settings';
 import { changeFavoriIsOpen } from '../../store/reducers/favoris';
 
 function Profil() {
@@ -14,21 +15,24 @@ function Profil() {
   }
 
   const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   dispatch(infoProfil());
-  // }, [dispatch]);
+  const navigate = useNavigate();
 
   function handleSubmitEditProfil(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    dispatch(editProfilData(formData));
+    dispatch(editInfoProfil(formData));
     setEditProfil(!editProfil);
   }
 
+  function handleLogout() {
+    dispatch(logout());
+    // Redirection to HomePage
+    navigate('/');
+  }
+
   const { firstName, lastName, email, password } = useAppSelector(
-    (state) => state.profil.user
+    (state) => state.settings.currentUser
   );
 
   const toggleFavoriProfil = () => {
@@ -120,8 +124,9 @@ function Profil() {
         <button
           type="button"
           className="btn rounded-3xl text-black w-32 h-1 shadow-lg"
+          onClick={() => handleLogout()}
         >
-          Sign out
+          Logout
         </button>
       </div>
     </div>
