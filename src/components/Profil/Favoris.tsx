@@ -4,7 +4,9 @@ import FavoriCard from './FavoriCard/FavoriCard';
 import ScheduleFavori from './ScheduleFavori/ScheduleFavori';
 
 function Favoris() {
-  const favorites = useAppSelector((state) => state.favoris.favoris);
+  const favorites = useAppSelector(
+    (state) => state.settings.currentUser.favorites
+  );
 
   const displaySchedule = useAppSelector(
     (state) => state.schedule.clickAddSchedule

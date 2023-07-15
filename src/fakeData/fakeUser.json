@@ -50,7 +50,8 @@
         "imageUrl": "https://www.themealdb.com/images/media/meals/u55lbp1585564013.jpg",
         "position": 6
       }
-    ]
+    ],
+    "schedule": []
   },
   {
     "firstName": "Maryam",
@@ -64,7 +65,8 @@
         "imageUrl": "https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg",
         "position": 10
       }
-    ]
+    ],
+    "schedule": []
   },
   {
     "firstName": "Mathilde",
@@ -78,7 +80,8 @@
         "imageUrl": "https://www.themealdb.com/images/media/meals/g373701551450225.jpg",
         "position": 12
       }
-    ]
+    ],
+    "schedule": []
   },
   {
     "firstName": "Jonathan",

@@ -44,9 +44,9 @@ export const editProfilData = createAsyncThunk(
 );
 
 const profilReducer = createReducer(initialState, (builder) => {
-  builder.addCase(editProfilData.fulfilled, (state, action) => {
-    // state.user = action.payload;
-  });
+  // builder.addCase(editProfilData.fulfilled, (state, action) => {
+  // state.user = action.payload;
+  // });
 });
 
 export default profilReducer;
