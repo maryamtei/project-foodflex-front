@@ -6,7 +6,7 @@
     "password": "foodflex",
     "favorites": [
       {
-        "idMeal": 1,
+        "idMeal": "52944",
         "name": "Escovitch Fish",
         "imageUrl": "https://www.themealdb.com/images/media/meals/1520084413.jpg",
         "position": 3
@@ -17,24 +17,36 @@
         "week": 1,
         "meals": [
           {
-            "idMeal": 7,
+            "idMeal": "52988",
             "name": "Classic Christmas pudding",
             "imageUrl": "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg",
             "position": 1
           },
           {
-            "idMeal": 8,
+            "idMeal": "52925",
             "name": "Split Pea Soup",
             "imageUrl": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
             "position": 4
           },
           {
-            "idMeal": 9,
+            "idMeal": "52892",
             "name": "Treacle Tart",
             "imageUrl": "https://www.themealdb.com/images/media/meals/wprvrw1511641295.jpg",
             "position": 8
           }
         ]
+      },
+      {
+        "week": 2,
+        "meals": []
+      },
+      {
+        "week": 3,
+        "meals": []
+      },
+      {
+        "week": 4,
+        "meals": []
       }
     ]
   },
@@ -45,7 +57,7 @@
     "password": "foodflex",
     "favorites": [
       {
-        "idMeal": 2,
+        "idMeal": "53008",
         "name": "Stuffed Lamb Tomatoes",
         "imageUrl": "https://www.themealdb.com/images/media/meals/u55lbp1585564013.jpg",
         "position": 6
@@ -77,13 +89,30 @@
     "password": "foodflex",
     "favorites": [
       {
-        "idMeal": 3,
+        "idMeal": "52769",
         "name": "Kapsalon",
         "imageUrl": "https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg",
         "position": 10
       }
     ],
-    "schedule": []
+    "schedule": [
+      {
+        "week": 1,
+        "meals": []
+      },
+      {
+        "week": 2,
+        "meals": []
+      },
+      {
+        "week": 3,
+        "meals": []
+      },
+      {
+        "week": 4,
+        "meals": []
+      }
+    ]
   },
   {
     "firstName": "Mathilde",
@@ -92,13 +121,30 @@
     "password": "foodflex",
     "favorites": [
       {
-        "idMeal": 4,
+        "idMeal": "52963",
         "name": "Shakshuka",
         "imageUrl": "https://www.themealdb.com/images/media/meals/g373701551450225.jpg",
         "position": 12
       }
     ],
-    "schedule": []
+    "schedule": [
+      {
+        "week": 1,
+        "meals": []
+      },
+      {
+        "week": 2,
+        "meals": []
+      },
+      {
+        "week": 3,
+        "meals": []
+      },
+      {
+        "week": 4,
+        "meals": []
+      }
+    ]
   },
   {
     "firstName": "Jonathan",
@@ -107,7 +153,7 @@
     "password": "foodflex",
     "favorites": [
       {
-        "idMeal": 1,
+        "idMeal": "52944",
         "name": "Escovitch Fish",
         "imageUrl": "https://www.themealdb.com/images/media/meals/1520084413.jpg",
         "position": 2
@@ -115,27 +161,39 @@
     ],
     "schedule": [
       {
+        "week": 1,
+        "meals": []
+      },
+      {
         "week": 2,
         "meals": [
           {
-            "idMeal": 7,
+            "idMeal": "52988",
             "name": "Classic Christmas pudding",
             "imageUrl": "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg",
             "position": 1
           },
           {
-            "idMeal": 8,
+            "idMeal": "52925",
             "name": "Split Pea Soup",
             "imageUrl": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
             "position": 4
           },
           {
-            "idMeal": 9,
+            "idMeal": "52892",
             "name": "Treacle Tart",
             "imageUrl": "https://www.themealdb.com/images/media/meals/wprvrw1511641295.jpg",
             "position": 8
           }
         ]
+      },
+      {
+        "week": 3,
+        "meals": []
+      },
+      {
+        "week": 4,
+        "meals": []
       }
     ]
   }

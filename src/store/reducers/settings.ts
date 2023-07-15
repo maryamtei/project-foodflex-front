@@ -3,9 +3,8 @@ import {
   createAsyncThunk,
   createReducer,
 } from '@reduxjs/toolkit';
-import { Favorite, User } from '../../@types/Profil';
+import { Favorite, Meal, User } from '../../@types/Profil';
 import usersData from '../../fakeData/fakeUser.json';
-import { Week } from '../../@types/schedule';
 
 interface SettingsState {
   users: User[];
@@ -25,7 +24,7 @@ interface SettingsState {
   };
   isLoading: boolean;
   message: string | null;
-  MealFavoriToAdd: Week;
+  MealFavoriToAdd: Meal;
   clickAddSchedule: boolean;
   currentWeek: number;
 }
@@ -56,7 +55,7 @@ const initialValue: SettingsState = {
   isLoading: false,
   message: null,
   MealFavoriToAdd: {
-    idMeal: 0,
+    idMeal: '',
     name: '',
     imageUrl: '',
     position: 0,
@@ -132,16 +131,14 @@ export const editInfoProfil = createAsyncThunk(
   }
 );
 // ---------------- EDIT FAVORIS -------------------//
-export const deleteFavori = createAction<number>('user/delete-favori');
+export const deleteFavori = createAction<string>('user/delete-favori');
 export const addFavori = createAction<Favorite>('user/add-favori');
 
 // ----------------------- ADD SCHEDULE ------------------------//
 
-export const addSchedule = createAction<Week>('favori/add-planning');
+export const addSchedule = createAction<Meal>('favori/add-planning');
 export const displaySchedule = createAction<boolean>('favori/click-add-favori');
-export const selectedDay = createAction<{ day: number; currentWeek: number }>(
-  'favori/selected-day'
-);
+export const selectedDay = createAction<number>('favori/selected-day');
 export const nextWeek = createAction<boolean>('schedule/current-week');
 
 // ----------------- BEGIN REDUCER ------------------------- //
@@ -286,7 +283,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.clickAddSchedule = action.payload;
     })
     .addCase(selectedDay, (state, action) => {
-      const dayPosition = action.payload.day;
+      const dayPosition = action.payload;
 
       const findWeek = state.currentUser.schedule.find(
         (week) => week.week === state.currentWeek
@@ -297,7 +294,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       );
 
       if (!findFavori) {
-        state.MealFavoriToAdd.position = action.payload.day;
+        state.MealFavoriToAdd.position = action.payload;
 
         // Pour chaque semaine, on vérifie si c'est la semaine courant
         // et on change la valeur
