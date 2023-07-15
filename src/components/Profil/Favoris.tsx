@@ -21,13 +21,13 @@ function Favoris() {
       <div className="mt-10 gap-3  flex justify-center mb-16	">
         <button
           type="button"
-          className=" text-fourthff btn rounded-3xl  w-28 shadow-lg"
+          className=" text-bgff bg-fourthff sm:text-fourthff sm:bg-bgff  btn rounded-3xl  w-28 shadow-lg"
         >
           Favorites
         </button>
         <button
           type="button"
-          className=" btn rounded-3xl  w-28 shadow-lg"
+          className=" text-fourthff bg-bgff sm:text-bgff sm:bg-fourthff btn rounded-3xl  w-28 shadow-lg"
           onClick={toggleFavoriProfil}
         >
           Profil

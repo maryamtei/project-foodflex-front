@@ -16,6 +16,7 @@ function Apptest() {
   const modalIsOpenFavoriProfil = useAppSelector(
     (state) => state.favoris.modalIsOpen
   );
+  const isLogged = useAppSelector((state) => state.settings.isLogged);
   const mobileView = useAppSelector((state) => state.window.mobileView);
   // Triggered when the window is resized
   useEffect(() => {
@@ -47,7 +48,9 @@ function Apptest() {
       <Header />
       {/* Render the Modal component if modalIsOpen is true */}
       {modalIsOpenSign && <ModalSign />}
-      {modalIsOpenFavoriProfil && <ModalFavoriProfil />}
+      {(modalIsOpenFavoriProfil || !mobileView) && isLogged && (
+        <ModalFavoriProfil />
+      )}
       {/* Render the Outlet component if modalIsOpen is false and Mobile is true or Mobile is false */}
       {((!modalIsOpenSign && !modalIsOpenFavoriProfil && mobileView) ||
         !mobileView) && <Outlet />}
