@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { nextWeek } from '../../../store/reducers/settings';
 
 function Favoris() {
-  const currentWeek = useAppSelector((state) => state.schedule.currentWeek);
+  const currentWeek = useAppSelector((state) => state.settings.currentWeek);
 
   const currentSchedule = fakeDay?.find((week) => week.week === currentWeek);
 

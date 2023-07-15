@@ -139,7 +139,9 @@ export const addFavori = createAction<Favorite>('user/add-favori');
 
 export const addSchedule = createAction<Week>('favori/add-planning');
 export const displaySchedule = createAction<boolean>('favori/click-add-favori');
-export const selectedDay = createAction<number>('favori/selected-day');
+export const selectedDay = createAction<{ day: number; currentWeek: number }>(
+  'favori/selected-day'
+);
 export const nextWeek = createAction<boolean>('schedule/current-week');
 
 // ----------------- BEGIN REDUCER ------------------------- //
@@ -284,7 +286,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.clickAddSchedule = action.payload;
     })
     .addCase(selectedDay, (state, action) => {
-      const dayPosition = action.payload;
+      const dayPosition = action.payload.day;
 
       const findWeek = state.currentUser.schedule.find(
         (week) => week.week === state.currentWeek
@@ -295,14 +297,15 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       );
 
       if (!findFavori) {
-        state.MealFavoriToAdd.position = action.payload;
+        state.MealFavoriToAdd.position = action.payload.day;
 
         // Pour chaque semaine, on vérifie si c'est la semaine courant
         // et on change la valeur
-        state.currentUser.schedule.forEach((week) => {
+        state.currentUser.schedule = state.currentUser.schedule.map((week) => {
           if (week.week === state.currentWeek) {
             week.meals.push(state.MealFavoriToAdd);
           }
+          return week;
         });
 
         state.users = state.users.map((user) => {
@@ -310,13 +313,12 @@ const settingsReducer = createReducer(initialValue, (builder) => {
             return {
               ...user,
               // spread operator, on fusionne le planning avec le nouveau
-              schedule: [...state.currentUser.schedule],
+              schedule: state.currentUser.schedule,
             };
           }
           return user;
         });
 
-        findWeek?.meals.push(state.MealFavoriToAdd);
         // fermer la modale planning
         state.clickAddSchedule = false;
       }

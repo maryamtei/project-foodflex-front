@@ -51,7 +51,24 @@
         "position": 6
       }
     ],
-    "schedule": []
+    "schedule": [
+      {
+        "week": 1,
+        "meals": []
+      },
+      {
+        "week": 2,
+        "meals": []
+      },
+      {
+        "week": 3,
+        "meals": []
+      },
+      {
+        "week": 4,
+        "meals": []
+      }
+    ]
   },
   {
     "firstName": "Maryam",
