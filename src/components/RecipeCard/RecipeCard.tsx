@@ -63,6 +63,7 @@ function RecipeCard({ recipeCard }: CardProps) {
     }
   }, [recipeCard, searchFavori]);
 
+  const stateHome = useAppSelector((state) => state.home.stateHome);
   return (
     <Link
       to="/recipe"
@@ -74,7 +75,11 @@ function RecipeCard({ recipeCard }: CardProps) {
         className="rounded-t-md cover"
       />
       <div className="text-bgff absolute top-2 right-1 ">
-        <div className="card-actions justify-end bg-t">
+        <div
+          className={`card-actions justify-end bg-t ${
+            stateHome ? 'hidden' : ''
+          }`}
+        >
           <button
             type="button"
             className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"

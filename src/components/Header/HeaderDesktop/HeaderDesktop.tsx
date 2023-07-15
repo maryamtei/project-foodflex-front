@@ -7,14 +7,14 @@ import {
 } from '../../../store/reducers/settings';
 
 function HeaderDesktop() {
-  const isLoged = useAppSelector((state) => state.settings.isLoged);
+  const isLogged = useAppSelector((state) => state.settings.isLogged);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const stateHome = useAppSelector((state) => state.home.stateHome);
   const dispatch = useAppDispatch();
 
   const toogleModalSignUpSignIn = () => {
-    if (!isLoged) {
+    if (!isLogged) {
       dispatch(toggleIsOpen());
     }
   };
@@ -63,21 +63,21 @@ function HeaderDesktop() {
           Recipes
         </NavLink>
         <NavLink
-          to="/planning"
+          to="/schedule"
           relative="path"
-          className={!isLoged ? 'hidden' : ''}
+          className={!isLogged ? 'hidden' : ''}
         >
           Planning
         </NavLink>
         <NavLink
           to="/profil"
           relative="path"
-          className={!isLoged ? 'hidden' : ''}
+          className={!isLogged ? 'hidden' : ''}
         >
           Profil
         </NavLink>
         <button
-          className={isLoged ? 'hidden' : ''}
+          className={isLogged ? 'hidden' : ''}
           type="button"
           onClick={() => {
             if (signUpOpen) {
@@ -91,7 +91,7 @@ function HeaderDesktop() {
           Sign-In
         </button>
         <button
-          className={isLoged ? 'hidden' : ''}
+          className={isLogged ? 'hidden' : ''}
           type="button"
           onClick={() => {
             if (!signUpOpen) {

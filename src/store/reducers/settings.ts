@@ -6,7 +6,7 @@ import {
 
 interface SettingsState {
   modalIsOpen: boolean;
-  isLoged: boolean;
+  isLogged: boolean;
   signUpOpen: boolean;
   signInCredentials: {
     email: string;
@@ -24,7 +24,7 @@ interface SettingsState {
 
 const initialValue: SettingsState = {
   modalIsOpen: false,
-  isLoged: true,
+  isLogged: true,
   signUpOpen: true,
   signInCredentials: {
     email: '',

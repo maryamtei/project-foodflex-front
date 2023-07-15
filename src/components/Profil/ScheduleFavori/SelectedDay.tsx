@@ -8,7 +8,8 @@ interface DayProps {
 function SelectedDay({ day }: DayProps) {
   const schedules = useAppSelector((state) => state.schedule.schedule);
 
-  const full = schedules.find((schedule) => schedule.position === day);
+  const weekFind = schedules.find((week) => week.week === 1);
+  const full = weekFind?.meals.find((meal) => meal.position === day);
 
   const dispatch = useAppDispatch();
 

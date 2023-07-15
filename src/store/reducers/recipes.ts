@@ -23,7 +23,7 @@ export const fetchRandomRecipes = createAsyncThunk(
   async () => {
     // Création d'un tableau de promises pour récupérer plusieurs recettes aléatoires.
     const promises = [];
-    for (let i = 0; i < 10; i += 1) {
+    for (let i = 0; i < 15; i += 1) {
       promises.push(
         fetch('https://www.themealdb.com/api/json/v1/1/random.php', {
           cache: 'no-store',

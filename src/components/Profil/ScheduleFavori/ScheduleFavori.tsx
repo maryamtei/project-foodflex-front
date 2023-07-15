@@ -5,9 +5,11 @@ function Favoris() {
   return (
     <div className="container mt-26 px-6">
       <div className="grid m-2 grid-cols-2 gap-6">
-        {fakeDay.map((day) => (
-          <SelectedDay key={day.id} day={day.position} />
-        ))}
+        {fakeDay.map((week) =>
+          week.meal.map((day) => (
+            <SelectedDay key={day.id} day={day.position} />
+          ))
+        )}
       </div>
     </div>
   );

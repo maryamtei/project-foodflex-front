@@ -2,12 +2,14 @@ import { useAppSelector } from '../../hooks/redux';
 
 interface DayProps {
   day: number;
+  currentWeek: number;
 }
 
-function SelectedDay({ day }: DayProps) {
+function SelectedDay({ day, currentWeek }: DayProps) {
   const schedules = useAppSelector((state) => state.schedule.schedule);
 
-  const full = schedules.find((schedule) => schedule.position === day);
+  const weekFind = schedules.find((week) => week.week === currentWeek);
+  const full = weekFind?.meals.find((meal) => meal.position === day);
 
   return (
     <button
