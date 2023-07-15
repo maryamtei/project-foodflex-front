@@ -17,7 +17,9 @@ function RecipeCard({ recipeCard }: CardProps) {
     (state) => state.schedule.clickAddSchedule
   );
 
-  const favoris = useAppSelector((state) => state.favoris.favoris);
+  const favoris = useAppSelector(
+    (state) => state.settings.currentUser.favorites
+  );
 
   const dispatch = useAppDispatch();
 
