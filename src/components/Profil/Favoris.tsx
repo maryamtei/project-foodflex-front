@@ -1,9 +1,10 @@
-import { NavLink } from 'react-router-dom';
-import { useAppSelector } from '../../hooks/redux';
+import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import FavoriCard from './FavoriCard/FavoriCard';
 import ScheduleFavori from './ScheduleFavori/ScheduleFavori';
+import { changeFavoriIsOpen } from '../../store/reducers/favoris';
 
 function Favoris() {
+  const dispatch = useAppDispatch();
   const favorites = useAppSelector(
     (state) => state.settings.currentUser.favorites
   );
@@ -11,33 +12,28 @@ function Favoris() {
   const displaySchedule = useAppSelector(
     (state) => state.settings.clickAddSchedule
   );
-
+  const toggleFavoriProfil = () => {
+    dispatch(changeFavoriIsOpen(false));
+  };
   return (
-    <div className="container px-4">
+    <div className="container px-1">
       {displaySchedule && <ScheduleFavori />}
-      <div className="mt-10 flex justify-center mb-16	">
-        <NavLink
-          to="/favoris"
-          className={({ isActive }) =>
-            isActive
-              ? 'btn rounded-3xl  w-28 shadow-lg text-red-600'
-              : 'btn rounded-3xl  w-28 shadow-lg'
-          }
+      <div className="mt-10 gap-3  flex justify-center mb-16	">
+        <button
+          type="button"
+          className=" text-bgff bg-fourthff sm:text-fourthff sm:bg-bgff  btn rounded-3xl  w-28 shadow-lg"
         >
           Favorites
-        </NavLink>
-        <NavLink
-          to="/profil"
-          className={({ isActive }) =>
-            isActive
-              ? 'ml-10 btn rounded-3xl  w-28 shadow-lg text-red-600'
-              : 'ml-10 btn rounded-3xl  w-28 shadow-lg'
-          }
+        </button>
+        <button
+          type="button"
+          className=" text-fourthff bg-bgff sm:text-bgff sm:bg-fourthff btn rounded-3xl  w-28 shadow-lg"
+          onClick={toggleFavoriProfil}
         >
           Profil
-        </NavLink>
+        </button>
       </div>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
+      <div className="grid grid-cols-2  gap-4 mt-10">
         {favorites.map((favori) => (
           <FavoriCard key={favori.idMeal} favori={favori} />
         ))}

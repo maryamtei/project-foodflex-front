@@ -3,10 +3,17 @@ import { Twitter, Instagram, Facebook, GitHub, Youtube } from 'react-feather';
 import { NavLink } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/settings';
+import {
+  toggleIsOpenProfil,
+  changeFavoriIsOpen,
+} from '../../store/reducers/favoris';
 
 function Footer() {
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+  const modalIsOpenFavoriProfil = useAppSelector(
+    (state) => state.favoris.modalIsOpen
+  );
   const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const dispatch = useAppDispatch();
 
@@ -26,7 +33,13 @@ function Footer() {
       behavior: 'smooth',
     });
   };
-
+  const openProfilModal = () => {
+    dispatch(changeFavoriIsOpen(true));
+    dispatch(toggleIsOpenProfil());
+  };
+  const closeProfilModal = () => {
+    dispatch(changeFavoriIsOpen(false));
+  };
   return (
     <footer
       className={`hidden sm:block bg-fourthff w-full px-7 py-6 z-10 h-60   ${
@@ -63,6 +76,9 @@ function Footer() {
                   if (modalIsOpen) {
                     toogleModalSignUpSignIn();
                   }
+                  if (modalIsOpenFavoriProfil) {
+                    closeProfilModal();
+                  }
                   scrollToTop();
                 }}
               >
@@ -77,6 +93,9 @@ function Footer() {
                   if (modalIsOpen) {
                     toogleModalSignUpSignIn();
                   }
+                  if (modalIsOpenFavoriProfil) {
+                    closeProfilModal();
+                  }
                   scrollToTop();
                 }}
               >
@@ -88,6 +107,9 @@ function Footer() {
                 to="/schedule"
                 relative="path"
                 onClick={() => {
+                  if (modalIsOpenFavoriProfil) {
+                    closeProfilModal();
+                  }
                   scrollToTop();
                 }}
               >
@@ -95,9 +117,9 @@ function Footer() {
               </NavLink>
             </li>
             <li className={`${!isLogged ? 'hidden' : ''} `}>
-              <NavLink to="/profil" relative="path">
+              <button type="button" onClick={openProfilModal}>
                 Profil
-              </NavLink>
+              </button>
             </li>
             <li className={`${isLogged ? 'hidden' : ''} `}>
               <button

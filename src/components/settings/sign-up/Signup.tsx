@@ -13,17 +13,8 @@ import {
 
 function signup() {
   const dispatch = useAppDispatch();
-  const email = useAppSelector(
-    (state) => state.settings.signUpCredentials.email
-  );
-  const password = useAppSelector(
-    (state) => state.settings.signUpCredentials.password
-  );
-  const firstname = useAppSelector(
-    (state) => state.settings.signUpCredentials.firstname
-  );
-  const lastname = useAppSelector(
-    (state) => state.settings.signUpCredentials.lastname
+  const { email, password, firstname, lastname } = useAppSelector(
+    (state) => state.settings.signUpCredentials
   );
 
   const isLoading = useAppSelector((state) => state.settings.isLoading);
