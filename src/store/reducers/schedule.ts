@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { createAction, createReducer, current } from '@reduxjs/toolkit';
+import { createAction, createReducer } from '@reduxjs/toolkit';
 import fakeschedule from '../../fakeData/fakeschedule.json';
 
 import { ScheduleType, Week } from '../../@types/schedule';
@@ -46,7 +46,9 @@ const scheduleReducer = createReducer(initialState, (builder) => {
     .addCase(selectedDay, (state, action) => {
       const dayPosition = action.payload;
 
-      const weekFind = state.schedule.find((week) => week.week === 1);
+      const weekFind = state.schedule.find(
+        (week) => week.week === state.currentWeek
+      );
 
       const findFavori = weekFind?.meals.find(
         (day) => day.position === dayPosition

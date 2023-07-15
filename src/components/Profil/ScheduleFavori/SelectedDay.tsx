@@ -3,12 +3,13 @@ import { selectedDay } from '../../../store/reducers/schedule';
 
 interface DayProps {
   day: number;
+  currentWeek: number;
 }
 
-function SelectedDay({ day }: DayProps) {
+function SelectedDay({ day, currentWeek }: DayProps) {
   const schedules = useAppSelector((state) => state.schedule.schedule);
 
-  const weekFind = schedules.find((week) => week.week === 1);
+  const weekFind = schedules.find((week) => week.week === currentWeek);
   const full = weekFind?.meals.find((meal) => meal.position === day);
 
   const dispatch = useAppDispatch();
