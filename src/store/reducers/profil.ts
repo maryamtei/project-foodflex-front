@@ -4,7 +4,6 @@ import {
   createReducer,
 } from '@reduxjs/toolkit';
 import { User } from '../../@types/Profil';
-import fakeProfil from '../../fakeData/fakeProfil.json';
 
 interface ProfilState {
   user: User;
@@ -12,10 +11,12 @@ interface ProfilState {
 
 export const initialState: ProfilState = {
   user: {
-    firstName: fakeProfil.user.firstName,
-    lastName: fakeProfil.user.lastName,
-    email: fakeProfil.user.mail,
-    password: fakeProfil.user.password,
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    favorites: [],
+    schedule: [],
   },
 };
 
@@ -44,7 +45,7 @@ export const editProfilData = createAsyncThunk(
 
 const profilReducer = createReducer(initialState, (builder) => {
   builder.addCase(editProfilData.fulfilled, (state, action) => {
-    state.user = action.payload;
+    // state.user = action.payload;
   });
 });
 

@@ -8,6 +8,7 @@ import usersData from '../../fakeData/fakeUser.json';
 
 interface SettingsState {
   users: User[];
+  currentUser: User;
   modalIsOpen: boolean;
   isLogged: boolean;
   signUpOpen: boolean;
@@ -27,6 +28,14 @@ interface SettingsState {
 
 const initialValue: SettingsState = {
   users: usersData,
+  currentUser: {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    favorites: [],
+    schedule: [],
+  },
   modalIsOpen: false,
   isLogged: false,
   signUpOpen: true,
@@ -94,6 +103,22 @@ export const signUp = createAsyncThunk(
   }
 );
 
+export const editInfoProfil = createAsyncThunk(
+  'user/Edit-Info-Profil',
+  async (formData: FormData) => {
+    const objData = Object.fromEntries(formData);
+    // const response = await fetch('http://localhost:3000/profil', objData);
+    // const data = await response.json();
+
+    return objData as {
+      firstName: string;
+      lastName: string;
+      email: string;
+      password: string;
+    };
+  }
+);
+
 const settingsReducer = createReducer(initialValue, (builder) => {
   builder
     .addCase(toggleIsOpen, (state) => {
@@ -135,6 +160,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       // state.message = action.payload.message;
       if (userFind) {
         state.isLogged = true;
+        state.currentUser = userFind;
       }
       state.isLoading = false;
       state.modalIsOpen = false;
@@ -154,6 +180,29 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.message = action.payload.message;
       state.isLoading = false;
       state.modalIsOpen = false;
+    })
+
+    .addCase(editInfoProfil.fulfilled, (state, action) => {
+      const editUser = action.payload;
+
+      // Edit Profil in Redux
+      state.users = state.users.map((user) => {
+        if (user.email === state.currentUser.email) {
+          return {
+            ...user,
+            ...editUser,
+          };
+        }
+        return user;
+      });
+
+      // Edit Profil Current User
+      if (state.currentUser.email === editUser.email) {
+        state.currentUser = {
+          ...state.currentUser,
+          ...editUser,
+        };
+      }
     });
 });
 export default settingsReducer;

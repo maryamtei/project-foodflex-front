@@ -1,11 +1,11 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { Mail, User, Key } from 'react-feather';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Field from './Field/Field';
 import { editProfilData } from '../../store/reducers/profil';
-import { logout } from '../../store/reducers/settings';
+import { editInfoProfil, logout } from '../../store/reducers/settings';
 
 function Profil() {
   const [editProfil, setEditProfil] = useState(false);
@@ -21,18 +21,18 @@ function Profil() {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    dispatch(editProfilData(formData));
+    dispatch(editInfoProfil(formData));
     setEditProfil(!editProfil);
   }
 
   function handleLogout() {
     dispatch(logout());
-
+    // Redirection to HomePage
     navigate('/');
   }
 
   const { firstName, lastName, email, password } = useAppSelector(
-    (state) => state.profil.user
+    (state) => state.settings.currentUser
   );
 
   return (
