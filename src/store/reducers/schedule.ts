@@ -29,38 +29,35 @@ export const selectedDay = createAction<number>('favori/selected-day');
 export const nextWeek = createAction<boolean>('schedule/current-week');
 
 const scheduleReducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(nextWeek, (state, action) => {
-      if (action.payload && state.currentWeek < state.schedule.length) {
-        state.currentWeek += 1;
-      } else if (state.currentWeek > 1) {
-        state.currentWeek -= 1;
-      }
-    })
-    .addCase(addSchedule, (state, action) => {
-      state.MealFavoriToAdd = action.payload;
-    })
-    .addCase(displaySchedule, (state, action) => {
-      state.clickAddSchedule = action.payload;
-    })
-    .addCase(selectedDay, (state, action) => {
-      const dayPosition = action.payload;
-
-      const weekFind = state.schedule.find(
-        (week) => week.week === state.currentWeek
-      );
-
-      const findFavori = weekFind?.meals.find(
-        (day) => day.position === dayPosition
-      );
-
-      if (!findFavori) {
-        state.MealFavoriToAdd.position = action.payload;
-        weekFind?.meals.push(state.MealFavoriToAdd);
-        // fermer la modale planning
-        state.clickAddSchedule = false;
-      }
-    });
+  // builder
+  //   .addCase(nextWeek, (state, action) => {
+  //     if (action.payload && state.currentWeek < state.schedule.length) {
+  //       state.currentWeek += 1;
+  //     } else if (state.currentWeek > 1) {
+  //       state.currentWeek -= 1;
+  //     }
+  //   })
+  //   .addCase(addSchedule, (state, action) => {
+  //     state.MealFavoriToAdd = action.payload;
+  //   })
+  //   .addCase(displaySchedule, (state, action) => {
+  //     state.clickAddSchedule = action.payload;
+  //   })
+  //   .addCase(selectedDay, (state, action) => {
+  //     const dayPosition = action.payload;
+  //     const weekFind = state.schedule.find(
+  //       (week) => week.week === state.currentWeek
+  //     );
+  //     const findFavori = weekFind?.meals.find(
+  //       (day) => day.position === dayPosition
+  //     );
+  //     if (!findFavori) {
+  //       state.MealFavoriToAdd.position = action.payload;
+  //       weekFind?.meals.push(state.MealFavoriToAdd);
+  //       // fermer la modale planning
+  //       state.clickAddSchedule = false;
+  //     }
+  //   });
 });
 
 export default scheduleReducer;

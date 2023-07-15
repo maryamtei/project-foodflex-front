@@ -36,7 +36,7 @@ function Recipes() {
 
   // affichage modale planning si on clique sur le '+'
   const displaySchedule = useAppSelector(
-    (state) => state.schedule.clickAddSchedule
+    (state) => state.settings.clickAddSchedule
   );
 
   return (

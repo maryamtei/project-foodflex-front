@@ -9,7 +9,7 @@ interface RecipesState {
 }
 
 export const initialState: RecipesState = {
-  favoris: fakeProfil.user.favorites,
+  favoris: [],
 };
 
 export const deleteFavori = createAction<number>('favori/delete-favori');
