@@ -2,8 +2,12 @@ import { useCallback, useEffect, useState } from 'react';
 import { Plus, Heart } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { addSchedule, displaySchedule } from '../../store/reducers/schedule';
-import { addFavori, deleteFavori } from '../../store/reducers/settings';
+import {
+  addFavori,
+  deleteFavori,
+  addSchedule,
+  displaySchedule,
+} from '../../store/reducers/settings';
 import { Recipe } from '../../@types/recipe';
 
 interface CardProps {

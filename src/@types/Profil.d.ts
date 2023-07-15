@@ -8,14 +8,14 @@ export interface User {
 }
 
 export interface Favorite {
-  idMeal: number;
+  idMeal: string;
   name: string;
   imageUrl: string;
   position: number;
 }
 
 export interface Meal {
-  idMeal: number;
+  idMeal: string;
   name: string;
   imageUrl: string;
   position: number;
