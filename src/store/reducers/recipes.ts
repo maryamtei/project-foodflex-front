@@ -12,7 +12,7 @@ export const initialState: RecipesState = {
 
 // Définition de l'interface pour une recette provenant de l'API.
 export interface ApiRecipe {
-  idMeal: number;
+  idMeal: string;
   strMeal: string;
   strMealThumb: string;
 }
