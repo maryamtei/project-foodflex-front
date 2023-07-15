@@ -48,9 +48,10 @@ export const fetchRandomRecipes = createAsyncThunk(
 
     return uniqueMeals.map((meal) => {
       return {
-        id: meal.idMeal,
+        idMeal: meal.idMeal,
         name: meal.strMeal,
         imageUrl: meal.strMealThumb,
+        position: 0,
       };
     });
   }
@@ -68,9 +69,10 @@ export const fetchSearchRecipe = createAsyncThunk(
     const meals = data.meals || [];
     return meals.map((meal) => {
       return {
-        id: meal.idMeal,
+        idMeal: meal.idMeal,
         name: meal.strMeal,
         imageUrl: meal.strMealThumb,
+        position: 0,
       };
     });
   }

@@ -1,22 +1,94 @@
-{
-  "week": [
-    {
-      "idMeal": 7,
-      "name": "Classic Christmas pudding",
-      "imageUrl": "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg",
-      "position": 1
-    },
-    {
-      "idMeal": 8,
-      "name": "Split Pea Soup",
-      "imageUrl": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
-      "position": 4
-    },
-    {
-      "idMeal": 9,
-      "name": "Treacle Tart",
-      "imageUrl": "https://www.themealdb.com/images/media/meals/wprvrw1511641295.jpg",
-      "position": 8
-    }
-  ]
-}
+[
+  {
+    "week": 1,
+    "meals": [
+      {
+        "idMeal": 7,
+        "name": "Classic Christmas pudding",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg",
+        "position": 1
+      },
+      {
+        "idMeal": 8,
+        "name": "Split Pea Soup",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
+        "position": 4
+      },
+      {
+        "idMeal": 9,
+        "name": "Treacle Tart",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/wprvrw1511641295.jpg",
+        "position": 8
+      }
+    ]
+  },
+  {
+    "week": 2,
+    "meals": [
+      {
+        "idMeal": 7,
+        "name": "Classic Christmas pudding",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg",
+        "position": 2
+      },
+      {
+        "idMeal": 8,
+        "name": "Split Pea Soup",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
+        "position": 5
+      },
+      {
+        "idMeal": 9,
+        "name": "Treacle Tart",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/wprvrw1511641295.jpg",
+        "position": 9
+      }
+    ]
+  },
+  {
+    "week": 3,
+    "meals": [
+      {
+        "idMeal": 7,
+        "name": "Classic Christmas pudding",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg",
+        "position": 4
+      },
+      {
+        "idMeal": 8,
+        "name": "Split Pea Soup",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
+        "position": 8
+      },
+      {
+        "idMeal": 9,
+        "name": "Treacle Tart",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/wprvrw1511641295.jpg",
+        "position": 14
+      }
+    ]
+  },
+  {
+    "week": 4,
+    "meals": [
+      {
+        "idMeal": 7,
+        "name": "Classic Christmas pudding",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg",
+        "position": 7
+      },
+      {
+        "idMeal": 8,
+        "name": "Split Pea Soup",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
+        "position": 1
+      },
+      {
+        "idMeal": 9,
+        "name": "Treacle Tart",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/wprvrw1511641295.jpg",
+        "position": 4
+      }
+    ]
+  }
+]

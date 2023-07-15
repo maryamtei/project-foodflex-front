@@ -1,7 +1,7 @@
 import { Plus, Heart } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { deleteFavori } from '../../../store/reducers/favoris';
-import { addFavori, displaySchedule } from '../../../store/reducers/schedule';
+import { addSchedule, displaySchedule } from '../../../store/reducers/schedule';
 import { Favorite } from '../../../@types/Profil';
 
 interface CardProps {
@@ -10,18 +10,20 @@ interface CardProps {
 
 function FavoriCard({ favori }: CardProps) {
   const clickAddFavori = useAppSelector(
-    (state) => state.schedule.clickAddFavori
+    (state) => state.schedule.clickAddSchedule
   );
 
   const dispatch = useAppDispatch();
 
+  // Function to handle deleting the favorite item
   function handleDeleteFavori() {
     dispatch(deleteFavori(favori.idMeal));
   }
 
-  function handleAddFavori() {
+  // Function to handle adding the recipe to the schedule
+  function handleAddSchedule() {
     dispatch(displaySchedule(!clickAddFavori));
-    dispatch(addFavori(favori));
+    dispatch(addSchedule(favori));
   }
 
   return (
@@ -39,7 +41,7 @@ function FavoriCard({ favori }: CardProps) {
             onClick={() => handleDeleteFavori()}
           />
 
-          <Plus color="red" onClick={() => handleAddFavori()} />
+          <Plus color="red" onClick={() => handleAddSchedule()} />
         </div>
       </div>
       <div className="rounded-b-lg">

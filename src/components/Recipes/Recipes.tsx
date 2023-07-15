@@ -7,6 +7,7 @@ import {
   fetchSearchRecipe,
 } from '../../store/reducers/recipes';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import ScheduleFavori from '../Profil/ScheduleFavori/ScheduleFavori';
 
 function Recipes() {
   const [search, setSearch] = useState('');
@@ -33,12 +34,19 @@ function Recipes() {
 
   const recipes = useAppSelector((state) => state.recipes.list);
 
+  // affichage modale planning si on clique sur le '+'
+  const displaySchedule = useAppSelector(
+    (state) => state.schedule.clickAddSchedule
+  );
+
   return (
     <div
       className={`my-10 px-3 sm:px-8 ${
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       }`}
     >
+      {/* // affichage modale planning si on clique sur le '+' */}
+      {displaySchedule && <ScheduleFavori />}
       <h1 className="text-thirdff text-2xl sm:text-4xl font-bold md:mb-12 mb-6 text-center sm:text-center md:text-center">
         Find exactly what you need !
       </h1>
@@ -54,11 +62,7 @@ function Recipes() {
       )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
         {recipes.map((recipe) => (
-          <RecipeCard
-            name={recipe.name}
-            key={recipe.id}
-            imageUrl={recipe.imageUrl}
-          />
+          <RecipeCard recipeCard={recipe} key={recipe.idMeal} />
         ))}
       </div>
     </div>

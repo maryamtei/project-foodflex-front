@@ -5,6 +5,7 @@ export interface Week {
   position: number;
 }
 
-export interface Schedule {
-  week: Week[];
+export interface ScheduleType {
+  week: number;
+  meals: Week[];
 }
