@@ -1,10 +1,10 @@
 import { FormEvent, useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Mail, User, Key } from 'react-feather';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Field from './Field/Field';
 import { editProfilData } from '../../store/reducers/profil';
+import { changeFavoriIsOpen } from '../../store/reducers/favoris';
 
 function Profil() {
   const [editProfil, setEditProfil] = useState(false);
@@ -31,29 +31,25 @@ function Profil() {
     (state) => state.profil.user
   );
 
+  const toggleFavoriProfil = () => {
+    dispatch(changeFavoriIsOpen(true));
+  };
   return (
     <div className="container p-3 px-4">
-      <div className="flex justify-center mb-6">
-        <NavLink
-          to="/favoris"
-          className={({ isActive }) =>
-            isActive
-              ? 'btn rounded-3xl  w-28 shadow-lg text-red-600'
-              : 'btn rounded-3xl  w-28 shadow-lg'
-          }
+      <div className="mt-10 gap-3 flex justify-center mb-16">
+        <button
+          type="button"
+          className=" btn rounded-3xl  w-28 shadow-lg"
+          onClick={toggleFavoriProfil}
         >
           Favorites
-        </NavLink>
-        <NavLink
-          to="/profil"
-          className={({ isActive }) =>
-            isActive
-              ? 'ml-10 btn rounded-3xl  w-28 shadow-lg text-red-600'
-              : 'ml-10 btn rounded-3xl  w-28 shadow-lg'
-          }
+        </button>
+        <button
+          type="button"
+          className="text-fourthff btn rounded-3xl  w-28 shadow-lg"
         >
           Profil
-        </NavLink>
+        </button>
       </div>
 
       <div className="flex bg-bgff border rounded-2xl mx-8 pt-8 pb-6 px-4">

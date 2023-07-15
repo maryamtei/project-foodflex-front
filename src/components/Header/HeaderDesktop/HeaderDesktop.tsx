@@ -5,6 +5,10 @@ import {
   toggleIsOpen,
   toggleSignUpOpen,
 } from '../../../store/reducers/settings';
+import {
+  toggleIsOpenProfil,
+  changeFavoriIsOpen,
+} from '../../../store/reducers/favoris';
 
 function HeaderDesktop() {
   const isLogged = useAppSelector((state) => state.settings.isLogged);
@@ -20,6 +24,10 @@ function HeaderDesktop() {
   };
   const toggleSignUp = () => {
     dispatch(toggleSignUpOpen());
+  };
+  const openProfilModal = () => {
+    dispatch(changeFavoriIsOpen(true));
+    dispatch(toggleIsOpenProfil());
   };
   return (
     <header
@@ -69,13 +77,13 @@ function HeaderDesktop() {
         >
           Planning
         </NavLink>
-        <NavLink
-          to="/profil"
-          relative="path"
+        <button
           className={!isLogged ? 'hidden' : ''}
+          type="button"
+          onClick={openProfilModal}
         >
           Profil
-        </NavLink>
+        </button>
         <button
           className={isLogged ? 'hidden' : ''}
           type="button"

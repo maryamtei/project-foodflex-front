@@ -45,7 +45,7 @@ function FavoriCard({ favori }: CardProps) {
         </div>
       </div>
       <div className="rounded-b-lg">
-        <h2 className="text-thirdff p-2 text-center truncate">{favori.name}</h2>
+        <h2 className="text-bgff p-2 text-center truncate">{favori.name}</h2>
       </div>
     </div>
   );
