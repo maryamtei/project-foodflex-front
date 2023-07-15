@@ -3,8 +3,11 @@ import {
   createAsyncThunk,
   createReducer,
 } from '@reduxjs/toolkit';
+import { User } from '../../@types/Profil';
+import usersData from '../../fakeData/fakeUser.json';
 
 interface SettingsState {
+  users: User[];
   modalIsOpen: boolean;
   isLogged: boolean;
   signUpOpen: boolean;
@@ -23,8 +26,9 @@ interface SettingsState {
 }
 
 const initialValue: SettingsState = {
+  users: usersData,
   modalIsOpen: false,
-  isLogged: true,
+  isLogged: false,
   signUpOpen: true,
   signInCredentials: {
     email: '',
@@ -47,6 +51,8 @@ export const toggleIsOpen = createAction('settings/TOGGLE_IS_OPEN');
 
 export const toggleSignUpOpen = createAction('settings/TOGGLE_SIGN_UP');
 
+export const logout = createAction('settings/LOGOUT');
+
 export const changeSignInCredentialsField = createAction<{
   property: KeysOfSignInCredentials;
   value: string;
@@ -60,15 +66,16 @@ export const changeSignUpCredentialsField = createAction<{
 export const signIn = createAsyncThunk(
   'settings/SIGNIN',
   async (credentials: SettingsState['signInCredentials']) => {
-    const response = await fetch('http://localhost:3000/signin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
-    });
-    const data = await response.json();
-    return data;
+    // const response = await fetch('http://localhost:3000/signin', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(credentials),
+    // });
+    // const data = await response.json();
+
+    return credentials;
   }
 );
 
@@ -103,6 +110,9 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       const { property, value } = action.payload;
       state.signUpCredentials[property] = value;
     })
+    .addCase(logout, (state) => {
+      state.isLogged = false;
+    })
 
     // SIGN IN
 
@@ -115,7 +125,17 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(signIn.fulfilled, (state, action) => {
-      state.message = action.payload.message;
+      const userSignIn = action.payload;
+      const userFind = state.users.find(
+        (user) =>
+          user.email === userSignIn.email &&
+          user.password === userSignIn.password
+      );
+
+      // state.message = action.payload.message;
+      if (userFind) {
+        state.isLogged = true;
+      }
       state.isLoading = false;
       state.modalIsOpen = false;
     })

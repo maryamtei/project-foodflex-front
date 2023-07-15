@@ -1,10 +1,11 @@
 import { FormEvent, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { Mail, User, Key } from 'react-feather';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Field from './Field/Field';
 import { editProfilData } from '../../store/reducers/profil';
+import { logout } from '../../store/reducers/settings';
 
 function Profil() {
   const [editProfil, setEditProfil] = useState(false);
@@ -14,10 +15,7 @@ function Profil() {
   }
 
   const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   dispatch(infoProfil());
-  // }, [dispatch]);
+  const navigate = useNavigate();
 
   function handleSubmitEditProfil(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -25,6 +23,12 @@ function Profil() {
 
     dispatch(editProfilData(formData));
     setEditProfil(!editProfil);
+  }
+
+  function handleLogout() {
+    dispatch(logout());
+
+    navigate('/');
   }
 
   const { firstName, lastName, email, password } = useAppSelector(
@@ -124,8 +128,9 @@ function Profil() {
         <button
           type="button"
           className="btn rounded-3xl text-black w-32 h-1 shadow-lg"
+          onClick={() => handleLogout()}
         >
-          Sign out
+          Logout
         </button>
       </div>
     </div>

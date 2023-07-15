@@ -26,10 +26,6 @@ export const initialState: ProfilState = {
 //   return data;
 // });
 
-export const changeProfilName = createAction<string>(
-  'profil/change-profil-firstName'
-);
-
 export const editProfilData = createAsyncThunk(
   'user/EditProfil',
   async (formData: FormData) => {

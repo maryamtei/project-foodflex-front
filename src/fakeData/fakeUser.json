@@ -2,7 +2,7 @@
   {
     "firstName": "Romain",
     "lastName": "Vicidomi",
-    "mail": "r.vicidomi@foodflex.com",
+    "email": "r.vicidomi@foodflex.com",
     "password": "foodflex",
     "favorites": [
       {
@@ -41,7 +41,7 @@
   {
     "firstName": "Gabrielle",
     "lastName": "Pagnard",
-    "mail": "g.pagnard@foodflex.com",
+    "email": "g.pagnard@foodflex.com",
     "password": "foodflex",
     "favorites": [
       {
@@ -55,7 +55,7 @@
   {
     "firstName": "Maryam",
     "lastName": "Tei",
-    "mail": "m.tei@foodflex.com",
+    "email": "m.tei@foodflex.com",
     "password": "foodflex",
     "favorites": [
       {
@@ -69,7 +69,7 @@
   {
     "firstName": "Mathilde",
     "lastName": "Louradour",
-    "mail": "m.louradour@foodflex.com",
+    "email": "m.louradour@foodflex.com",
     "password": "foodflex",
     "favorites": [
       {
@@ -83,7 +83,7 @@
   {
     "firstName": "Jonathan",
     "lastName": "FLamme",
-    "mail": "j.flamme@foodflex.com",
+    "email": "j.flamme@foodflex.com",
     "password": "foodflex",
     "favorites": [
       {
