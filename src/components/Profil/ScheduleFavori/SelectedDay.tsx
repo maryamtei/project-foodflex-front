@@ -17,7 +17,7 @@ function SelectedDay({ day, currentWeek }: DayProps) {
   const dispatch = useAppDispatch();
 
   function handleClickDay() {
-    dispatch(selectedDay({ day, currentWeek }));
+    dispatch(selectedDay(day));
   }
 
   return (
