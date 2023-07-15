@@ -1,7 +1,7 @@
 import SelectedDay from './SelectedDay';
 import fakeDay from '../../../fakeData/fakeDay.json';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { nextWeek } from '../../../store/reducers/schedule';
+import { nextWeek } from '../../../store/reducers/settings';
 
 function Favoris() {
   const currentWeek = useAppSelector((state) => state.schedule.currentWeek);
@@ -36,7 +36,7 @@ function Favoris() {
         </button>
       </div>
       <div className="grid m-2 grid-cols-2 gap-6">
-        {currentSchedule?.meal.map((meal) => (
+        {currentSchedule?.meals.map((meal) => (
           <SelectedDay
             key={meal.id}
             day={meal.position}

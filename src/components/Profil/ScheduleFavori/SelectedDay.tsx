@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { selectedDay } from '../../../store/reducers/schedule';
+import { selectedDay } from '../../../store/reducers/settings';
 
 interface DayProps {
   day: number;
@@ -7,7 +7,9 @@ interface DayProps {
 }
 
 function SelectedDay({ day, currentWeek }: DayProps) {
-  const schedules = useAppSelector((state) => state.schedule.schedule);
+  const schedules = useAppSelector(
+    (state) => state.settings.currentUser.schedule
+  );
 
   const weekFind = schedules.find((week) => week.week === currentWeek);
   const full = weekFind?.meals.find((meal) => meal.position === day);

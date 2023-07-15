@@ -3,8 +3,9 @@ import {
   createAsyncThunk,
   createReducer,
 } from '@reduxjs/toolkit';
-import { User } from '../../@types/Profil';
+import { Favorite, User } from '../../@types/Profil';
 import usersData from '../../fakeData/fakeUser.json';
+import { Week } from '../../@types/schedule';
 
 interface SettingsState {
   users: User[];
@@ -24,6 +25,9 @@ interface SettingsState {
   };
   isLoading: boolean;
   message: string | null;
+  MealFavoriToAdd: Week;
+  clickAddSchedule: boolean;
+  currentWeek: number;
 }
 
 const initialValue: SettingsState = {
@@ -51,6 +55,14 @@ const initialValue: SettingsState = {
   },
   isLoading: false,
   message: null,
+  MealFavoriToAdd: {
+    idMeal: 0,
+    name: '',
+    imageUrl: '',
+    position: 0,
+  },
+  currentWeek: 1,
+  clickAddSchedule: false,
 };
 
 export type KeysOfSignInCredentials = keyof SettingsState['signInCredentials'];
@@ -103,6 +115,7 @@ export const signUp = createAsyncThunk(
   }
 );
 
+// ------------ EDIT PROFIL --------------//
 export const editInfoProfil = createAsyncThunk(
   'user/Edit-Info-Profil',
   async (formData: FormData) => {
@@ -118,7 +131,18 @@ export const editInfoProfil = createAsyncThunk(
     };
   }
 );
+// ---------------- EDIT FAVORIS -------------------//
+export const deleteFavori = createAction<number>('user/delete-favori');
+export const addFavori = createAction<Favorite>('user/add-favori');
 
+// ----------------------- ADD SCHEDULE ------------------------//
+
+export const addSchedule = createAction<Week>('favori/add-planning');
+export const displaySchedule = createAction<boolean>('favori/click-add-favori');
+export const selectedDay = createAction<number>('favori/selected-day');
+export const nextWeek = createAction<boolean>('schedule/current-week');
+
+// ----------------- BEGIN REDUCER ------------------------- //
 const settingsReducer = createReducer(initialValue, (builder) => {
   builder
     .addCase(toggleIsOpen, (state) => {
@@ -182,12 +206,17 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.modalIsOpen = false;
     })
 
+    // ------------ EDIT PROFIL --------------//
     .addCase(editInfoProfil.fulfilled, (state, action) => {
       const editUser = action.payload;
 
       // Edit Profil in Redux
       state.users = state.users.map((user) => {
         if (user.email === state.currentUser.email) {
+          state.currentUser = {
+            ...state.currentUser,
+            ...editUser,
+          };
           return {
             ...user,
             ...editUser,
@@ -195,13 +224,101 @@ const settingsReducer = createReducer(initialValue, (builder) => {
         }
         return user;
       });
+    })
 
-      // Edit Profil Current User
-      if (state.currentUser.email === editUser.email) {
-        state.currentUser = {
-          ...state.currentUser,
-          ...editUser,
-        };
+    // ---------------- DELETE FAVORIS -------------------//
+    .addCase(deleteFavori, (state, action) => {
+      const idToDelete = action.payload;
+      const updatedFavorites = state.currentUser.favorites.filter(
+        (favori) => favori.idMeal !== idToDelete
+      );
+
+      // Edit favorites in BDD/Redux
+      state.users = state.users.map((user) => {
+        if (user.email === state.currentUser.email) {
+          state.currentUser = {
+            ...state.currentUser,
+            favorites: updatedFavorites,
+          };
+          return {
+            ...user,
+            favorites: updatedFavorites,
+          };
+        }
+        return user;
+      });
+    })
+
+    // ---------------- ADD FAVORIS -------------------//
+    .addCase(addFavori, (state, action) => {
+      const favoriToAdd = action.payload;
+      state.currentUser.favorites.push(favoriToAdd);
+
+      state.users = state.users.map((user) => {
+        if (user.email === state.currentUser.email) {
+          state.currentUser = {
+            ...state.currentUser,
+            favorites: state.currentUser.favorites,
+          };
+          return {
+            ...user,
+            favorites: state.currentUser.favorites,
+          };
+        }
+        return user;
+      });
+    })
+    // ---------------- ADD SCHEDULE -------------------//
+    .addCase(nextWeek, (state, action) => {
+      if (action.payload && state.currentWeek < 4) {
+        state.currentWeek += 1;
+      }
+      if (!action.payload && state.currentWeek > 1) {
+        state.currentWeek -= 1;
+      }
+    })
+    .addCase(addSchedule, (state, action) => {
+      state.MealFavoriToAdd = action.payload;
+    })
+    .addCase(displaySchedule, (state, action) => {
+      state.clickAddSchedule = action.payload;
+    })
+    .addCase(selectedDay, (state, action) => {
+      const dayPosition = action.payload;
+
+      const findWeek = state.currentUser.schedule.find(
+        (week) => week.week === state.currentWeek
+      );
+
+      const findFavori = findWeek?.meals.find(
+        (day) => day.position === dayPosition
+      );
+
+      if (!findFavori) {
+        state.MealFavoriToAdd.position = action.payload;
+
+        // Pour chaque semaine, on vérifie si c'est la semaine courant
+        // et on change la valeur
+        state.currentUser.schedule.forEach((week) => {
+          if (week.week === state.currentWeek) {
+            week.meals.push(state.MealFavoriToAdd);
+          }
+        });
+
+        state.users = state.users.map((user) => {
+          if (user.email === state.currentUser.email) {
+            return {
+              ...user,
+              // spread operator, on fusionne le planning avec le nouveau
+              schedule: [...state.currentUser.schedule],
+            };
+          }
+          return user;
+        });
+
+        findWeek?.meals.push(state.MealFavoriToAdd);
+        // fermer la modale planning
+        state.clickAddSchedule = false;
       }
     });
 });

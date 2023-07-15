@@ -4,7 +4,7 @@ export interface User {
   email: string;
   password: string;
   favorites: Favorite[];
-  schedule?: Schedule[];
+  schedule: Schedule[];
 }
 
 export interface Favorite {

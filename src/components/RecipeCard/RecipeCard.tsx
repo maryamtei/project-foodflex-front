@@ -3,7 +3,7 @@ import { Plus, Heart } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { addSchedule, displaySchedule } from '../../store/reducers/schedule';
-import { addFavori } from '../../store/reducers/favoris';
+import { addFavori } from '../../store/reducers/settings';
 import { Recipe } from '../../@types/recipe';
 
 interface CardProps {

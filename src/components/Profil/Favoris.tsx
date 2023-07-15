@@ -9,7 +9,7 @@ function Favoris() {
   );
 
   const displaySchedule = useAppSelector(
-    (state) => state.schedule.clickAddSchedule
+    (state) => state.settings.clickAddSchedule
   );
 
   return (
