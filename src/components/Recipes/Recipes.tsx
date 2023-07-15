@@ -62,7 +62,7 @@ function Recipes() {
       )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
         {recipes.map((recipe) => (
-          <RecipeCard recipe={recipe} key={recipe.idMeal} />
+          <RecipeCard recipeCard={recipe} key={recipe.idMeal} />
         ))}
       </div>
     </div>

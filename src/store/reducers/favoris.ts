@@ -26,13 +26,8 @@ const favoriReducer = createReducer(initialState, (builder) => {
     })
     .addCase(addFavori, (state, action) => {
       const favoriToAdd = action.payload;
-      console.log(action.payload);
-      const findFavori = state.favoris.find(
-        (favori) => favori.idMeal === favoriToAdd.idMeal
-      );
-      if (!findFavori) {
-        state.favoris.push(favoriToAdd);
-      }
+
+      state.favoris.push(favoriToAdd);
     });
 });
 

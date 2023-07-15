@@ -15,10 +15,12 @@ function FavoriCard({ favori }: CardProps) {
 
   const dispatch = useAppDispatch();
 
+  // Function to handle deleting the favorite item
   function handleDeleteFavori() {
     dispatch(deleteFavori(favori.idMeal));
   }
 
+  // Function to handle adding the recipe to the schedule
   function handleAddSchedule() {
     dispatch(displaySchedule(!clickAddFavori));
     dispatch(addSchedule(favori));
