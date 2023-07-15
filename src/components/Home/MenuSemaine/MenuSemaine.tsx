@@ -14,16 +14,8 @@ function MenuSemaine({ recipes }: RecipeProps) {
         </div>
         <div className="flex flex-col items-center">
           <div className="space-y-4">
-            <RecipeCard
-              name={recipes[0].name}
-              key={recipes[0].id}
-              imageUrl={recipes[0].imageUrl}
-            />
-            <RecipeCard
-              name={recipes[1].name}
-              key={recipes[1].id}
-              imageUrl={recipes[1].imageUrl}
-            />
+            <RecipeCard recipeCard={recipes[0]} key={recipes[0].idMeal} />
+            <RecipeCard recipeCard={recipes[1]} key={recipes[1].idMeal} />
           </div>
         </div>
       </div>
@@ -33,16 +25,8 @@ function MenuSemaine({ recipes }: RecipeProps) {
         </div>
         <div className="flex flex-col items-center">
           <div className="space-y-4">
-            <RecipeCard
-              name={recipes[2].name}
-              key={recipes[2].id}
-              imageUrl={recipes[2].imageUrl}
-            />
-            <RecipeCard
-              name={recipes[3].name}
-              key={recipes[3].id}
-              imageUrl={recipes[3].imageUrl}
-            />
+            <RecipeCard recipeCard={recipes[2]} key={recipes[2].idMeal} />
+            <RecipeCard recipeCard={recipes[3]} key={recipes[3].idMeal} />
           </div>
         </div>
       </div>
@@ -52,16 +36,8 @@ function MenuSemaine({ recipes }: RecipeProps) {
         </div>
         <div className="flex flex-col items-center">
           <div className="space-y-4">
-            <RecipeCard
-              name={recipes[4].name}
-              key={recipes[4].id}
-              imageUrl={recipes[4].imageUrl}
-            />
-            <RecipeCard
-              name={recipes[5].name}
-              key={recipes[5].id}
-              imageUrl={recipes[5].imageUrl}
-            />
+            <RecipeCard recipeCard={recipes[4]} key={recipes[4].idMeal} />
+            <RecipeCard recipeCard={recipes[5]} key={recipes[5].idMeal} />
           </div>
         </div>
       </div>
@@ -71,16 +47,8 @@ function MenuSemaine({ recipes }: RecipeProps) {
         </div>
         <div className="flex flex-col items-center">
           <div className="space-y-4">
-            <RecipeCard
-              name={recipes[6].name}
-              key={recipes[6].id}
-              imageUrl={recipes[6].imageUrl}
-            />
-            <RecipeCard
-              name={recipes[7].name}
-              key={recipes[7].id}
-              imageUrl={recipes[7].imageUrl}
-            />
+            <RecipeCard recipeCard={recipes[6]} key={recipes[6].idMeal} />
+            <RecipeCard recipeCard={recipes[7]} key={recipes[7].idMeal} />
           </div>
         </div>
       </div>
@@ -90,16 +58,8 @@ function MenuSemaine({ recipes }: RecipeProps) {
         </div>
         <div className="flex flex-col items-center">
           <div className="space-y-4">
-            <RecipeCard
-              name={recipes[8].name}
-              key={recipes[8].id}
-              imageUrl={recipes[8].imageUrl}
-            />
-            <RecipeCard
-              name={recipes[9].name}
-              key={recipes[9].id}
-              imageUrl={recipes[9].imageUrl}
-            />
+            <RecipeCard recipeCard={recipes[8]} key={recipes[8].idMeal} />
+            <RecipeCard recipeCard={recipes[9]} key={recipes[9].idMeal} />
           </div>
         </div>
       </div>
@@ -109,16 +69,8 @@ function MenuSemaine({ recipes }: RecipeProps) {
         </div>
         <div className="flex flex-col items-center">
           <div className="space-y-4">
-            <RecipeCard
-              name={recipes[10].name}
-              key={recipes[10].id}
-              imageUrl={recipes[10].imageUrl}
-            />
-            <RecipeCard
-              name={recipes[11].name}
-              key={recipes[11].id}
-              imageUrl={recipes[11].imageUrl}
-            />
+            <RecipeCard recipeCard={recipes[10]} key={recipes[10].idMeal} />
+            <RecipeCard recipeCard={recipes[11]} key={recipes[11].idMeal} />
           </div>
         </div>
       </div>
@@ -128,16 +80,8 @@ function MenuSemaine({ recipes }: RecipeProps) {
         </div>
         <div className="flex flex-col items-center">
           <div className="space-y-4">
-            <RecipeCard
-              name={recipes[12].name}
-              key={recipes[12].id}
-              imageUrl={recipes[12].imageUrl}
-            />
-            <RecipeCard
-              name={recipes[13].name}
-              key={recipes[13].id}
-              imageUrl={recipes[13].imageUrl}
-            />
+            <RecipeCard recipeCard={recipes[12]} key={recipes[12].idMeal} />
+            <RecipeCard recipeCard={recipes[13]} key={recipes[13].idMeal} />
           </div>
         </div>
       </div>

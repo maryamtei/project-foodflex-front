@@ -9,7 +9,32 @@
         "idMeal": 1,
         "name": "Escovitch Fish",
         "imageUrl": "https://www.themealdb.com/images/media/meals/1520084413.jpg",
-        "position": 2
+        "position": 3
+      }
+    ],
+    "schedule": [
+      {
+        "week": 1,
+        "meals": [
+          {
+            "idMeal": 7,
+            "name": "Classic Christmas pudding",
+            "imageUrl": "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg",
+            "position": 1
+          },
+          {
+            "idMeal": 8,
+            "name": "Split Pea Soup",
+            "imageUrl": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
+            "position": 4
+          },
+          {
+            "idMeal": 9,
+            "name": "Treacle Tart",
+            "imageUrl": "https://www.themealdb.com/images/media/meals/wprvrw1511641295.jpg",
+            "position": 8
+          }
+        ]
       }
     ]
   },
@@ -66,6 +91,31 @@
         "name": "Escovitch Fish",
         "imageUrl": "https://www.themealdb.com/images/media/meals/1520084413.jpg",
         "position": 2
+      }
+    ],
+    "schedule": [
+      {
+        "week": 2,
+        "meals": [
+          {
+            "idMeal": 7,
+            "name": "Classic Christmas pudding",
+            "imageUrl": "https://www.themealdb.com/images/media/meals/1d85821576790598.jpg",
+            "position": 1
+          },
+          {
+            "idMeal": 8,
+            "name": "Split Pea Soup",
+            "imageUrl": "https://www.themealdb.com/images/media/meals/xxtsvx1511814083.jpg",
+            "position": 4
+          },
+          {
+            "idMeal": 9,
+            "name": "Treacle Tart",
+            "imageUrl": "https://www.themealdb.com/images/media/meals/wprvrw1511641295.jpg",
+            "position": 8
+          }
+        ]
       }
     ]
   }

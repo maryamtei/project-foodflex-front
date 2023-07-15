@@ -16,16 +16,8 @@ export default function CarouselSlide({
     <div className="p-4">
       <div className="py-4 text-center">{day}</div>
       <div className="space-y-4">
-        <RecipeCard
-          name={recipe1.name}
-          key={recipe1.id}
-          imageUrl={recipe1.imageUrl}
-        />
-        <RecipeCard
-          name={recipe2.name}
-          key={recipe2.id}
-          imageUrl={recipe2.imageUrl}
-        />
+        <RecipeCard recipeCard={recipe1} key={recipe1.idMeal} />
+        <RecipeCard recipeCard={recipe2} key={recipe2.idMeal} />
       </div>
     </div>
   );
