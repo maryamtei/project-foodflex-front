@@ -13,7 +13,7 @@ interface CardProps {
 
 function FavoriCard({ favori }: CardProps) {
   const clickAddSchedule = useAppSelector(
-    (state) => state.schedule.clickAddSchedule
+    (state) => state.settings.clickAddSchedule
   );
 
   const dispatch = useAppDispatch();
