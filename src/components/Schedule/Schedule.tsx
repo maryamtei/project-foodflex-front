@@ -1,4 +1,4 @@
-import fakeDay from '../../fakeData/fakeDay.json';
+import fakeDay from '../../Data/fakeDay.json';
 import Day from './Day';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { nextWeek } from '../../store/reducers/settings';

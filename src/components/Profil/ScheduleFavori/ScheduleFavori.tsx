@@ -1,5 +1,5 @@
 import SelectedDay from './SelectedDay';
-import fakeDay from '../../../fakeData/fakeDay.json';
+import fakeDay from '../../../Data/fakeDay.json';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { nextWeek } from '../../../store/reducers/settings';
 

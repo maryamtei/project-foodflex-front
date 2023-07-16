@@ -1,0 +1,25 @@
+{
+  "firstName": "",
+  "lastName": "",
+  "email": "",
+  "password": "",
+  "favorites": [],
+  "schedule": [
+    {
+      "week": 1,
+      "meals": []
+    },
+    {
+      "week": 2,
+      "meals": []
+    },
+    {
+      "week": 3,
+      "meals": []
+    },
+    {
+      "week": 4,
+      "meals": []
+    }
+  ]
+}
