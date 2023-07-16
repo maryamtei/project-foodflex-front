@@ -10,50 +10,55 @@ export const initialState: RecipesState = {
   list: [],
 };
 
-// Définition de l'interface pour une recette provenant de l'API.
 export interface ApiRecipe {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
 }
 
-// Création d'une action Redux async pour fetch des recettes aléatoires.
 export const fetchRandomRecipes = createAsyncThunk(
   'recipes/fetchRandomRecipes',
-  async () => {
-    // Création d'un tableau de promises pour récupérer plusieurs recettes aléatoires.
-    const promises = [];
-    for (let i = 0; i < 15; i += 1) {
-      promises.push(
-        fetch('https://www.themealdb.com/api/json/v1/1/random.php', {
-          cache: 'no-store',
-        }).then((response) => response.json())
-      );
-    }
-    // Attente du résultat de toutes les promises.
-    const results = await Promise.all(promises);
-    // Transformation des résultats en un seul tableau de repas.
-    const meals = results.flatMap((result) => result.meals);
-
-    // Suppression des doublons de recettes en fonction de leur id.
+  async ({ count }: { count: number }) => {
+    const uniqueMeals = [];
     const mealIds = new Set<number>();
 
-    const uniqueMeals = meals.filter((meal) => {
-      if (!mealIds.has(meal.idMeal)) {
-        mealIds.add(meal.idMeal);
-        return true;
-      }
-      return false;
-    });
+    while (uniqueMeals.length < count) {
+      const remaining: number = count - uniqueMeals.length;
 
-    return uniqueMeals.map((meal) => {
-      return {
-        idMeal: meal.idMeal,
-        name: meal.strMeal,
-        imageUrl: meal.strMealThumb,
-        position: 0,
-      };
-    });
+      // eslint-disable-next-line no-await-in-loop
+      const responses = await Promise.all(
+        Array(remaining + 4)
+          .fill(null)
+          .map(() =>
+            fetch('https://www.themealdb.com/api/json/v1/1/random.php', {
+              cache: 'no-store',
+            })
+          )
+      );
+
+      // eslint-disable-next-line no-restricted-syntax
+      for (const response of responses) {
+        if (uniqueMeals.length >= 14) {
+          break;
+        }
+
+        // eslint-disable-next-line no-await-in-loop
+        const data = await response.json();
+        const meal = data.meals[0];
+
+        if (!mealIds.has(meal.idMeal)) {
+          mealIds.add(meal.idMeal);
+          uniqueMeals.push({
+            idMeal: meal.idMeal,
+            name: meal.strMeal,
+            imageUrl: meal.strMealThumb,
+            position: 0,
+          });
+        }
+      }
+    }
+
+    return uniqueMeals;
   }
 );
 
