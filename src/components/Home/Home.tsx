@@ -13,7 +13,7 @@ function Home() {
   const recipes = useAppSelector((state) => state.recipes.list);
 
   useEffect(() => {
-    dispatch(fetchRandomRecipes());
+    dispatch(fetchRandomRecipes({ count: 14 }));
   }, [dispatch]);
 
   // update the stateHome state to change header background to transparent

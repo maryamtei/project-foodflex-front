@@ -28,7 +28,7 @@ function Recipes() {
   // déclenchement du random sur une chaîne de recherche vide dans la search
   useEffect(() => {
     if (!search) {
-      dispatch(fetchRandomRecipes());
+      dispatch(fetchRandomRecipes({ count: 10 }));
     }
   }, [dispatch, search]);
 
