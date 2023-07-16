@@ -1,18 +1,15 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createAction, createReducer } from '@reduxjs/toolkit';
-import fakeschedule from '../../fakeData/fakeschedule.json';
 
 import { ScheduleType, Week } from '../../@types/schedule';
 
 interface ScheduleState {
-  schedule: ScheduleType[];
   clickAddSchedule: boolean;
   MealFavoriToAdd: Week;
   currentWeek: number;
 }
 
 export const initialState: ScheduleState = {
-  schedule: fakeschedule,
   currentWeek: 1,
   clickAddSchedule: false,
   MealFavoriToAdd: {
