@@ -30,6 +30,7 @@ function Schedule() {
     dispatch(nextWeek(false));
   }
   useEffect(() => {
+    dispatch(changeStateSchedule(true));
     const newCurrentSchedule = [];
     // eslint-disable-next-line no-plusplus
     for (let position = 0; position < 14; position++) {
@@ -53,18 +54,11 @@ function Schedule() {
       }
     }
     setNewSchedule(newCurrentSchedule);
-  }, [weekFind]);
-
-  useEffect(() => {
-    if (stateSchedule === false) {
-      dispatch(changeStateSchedule(true));
-    }
 
     return () => {
       dispatch(changeStateSchedule(false));
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []); // Ne pas supprimer sinon le code fonctionne plus
+  }, [weekFind, dispatch]);
 
   return (
     <div className="flex flex-col justify-center my-10 px-3 sm:px-8">
