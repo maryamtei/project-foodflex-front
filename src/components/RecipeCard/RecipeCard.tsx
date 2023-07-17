@@ -19,6 +19,7 @@ interface CardProps {
 function RecipeCard({ recipeCard }: CardProps) {
   const [recipeFavori, setRecipeFavori] = useState(false);
   const isLogged = useAppSelector((state) => state.settings.isLogged);
+  const stateSchedule = useAppSelector((state) => state.schedule.stateSchedule);
   const clickAddFavori = useAppSelector(
     (state) => state.schedule.clickAddSchedule
   );
@@ -91,9 +92,8 @@ function RecipeCard({ recipeCard }: CardProps) {
       />
       <div className="text-bgff absolute top-2 right-1 ">
         <div
-          className={`card-actions justify-end bg-t ${
-            stateHome ? 'hidden' : ''
-          }`}
+          className={`card-actions justify-end bg-t ${stateHome ? 'hidden' : ''}
+          ${stateSchedule ? 'hidden' : ''}`}
         >
           <button
             type="button"

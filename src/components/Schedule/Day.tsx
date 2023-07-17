@@ -12,7 +12,6 @@ function SelectedDay({ day, currentWeek }: DayProps) {
 
   const weekFind = schedules.find((week) => week.week === currentWeek);
   const full = weekFind?.meals.find((meal) => meal.position === day);
-
   return (
     <button
       type="button"
@@ -22,7 +21,10 @@ function SelectedDay({ day, currentWeek }: DayProps) {
           : 'btn text-sm rounded-3xl text-black w-32 shadow-lg mr-5'
       }
     >
-      Jour {day}
+      <p>{full?.idMeal}</p>
+      <p>{full?.imageUrl}</p>
+      <p>{full?.name}</p>
+      <p>{full?.position}</p>
     </button>
   );
 }
