@@ -4,7 +4,7 @@ import {
   createReducer,
 } from '@reduxjs/toolkit';
 import { Favorite, Meal, User } from '../../@types/Profil';
-import usersData from '../../fakeData/fakeUser.json';
+import usersData from '../../Data/UserData.json';
 
 interface SettingsState {
   users: User[];
@@ -19,8 +19,8 @@ interface SettingsState {
   signUpCredentials: {
     email: string;
     password: string;
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
   };
   isLoading: boolean;
   message: string | null;
@@ -49,8 +49,8 @@ const initialValue: SettingsState = {
   signUpCredentials: {
     email: '',
     password: '',
-    firstname: '',
-    lastname: '',
+    firstName: '',
+    lastName: '',
   },
   isLoading: false,
   message: null,
@@ -83,6 +83,7 @@ export const changeSignUpCredentialsField = createAction<{
   value: string;
 }>('settings/CHANGE_SIGN_UP_CREDENTIALS_FIELD');
 
+// ---------------- SIGN IN -------------------//
 export const signIn = createAsyncThunk(
   'settings/SIGNIN',
   async (credentials: SettingsState['signInCredentials']) => {
@@ -99,18 +100,19 @@ export const signIn = createAsyncThunk(
   }
 );
 
+// ---------------- SIGN UP -------------------//
 export const signUp = createAsyncThunk(
   'settings/SIGNUP',
   async (credentials: SettingsState['signUpCredentials']) => {
-    const response = await fetch('http://localhost:3000/signup', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(credentials),
-    });
-    const data = await response.json();
-    return data;
+    // const response = await fetch('http://localhost:3000/signup', {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    //   body: JSON.stringify(credentials),
+    // });
+    // const data = await response.json();
+    return credentials;
   }
 );
 
@@ -162,8 +164,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLogged = false;
     })
 
-    // SIGN IN
-
+    // ---------------- SIGN IN -------------------//
     .addCase(signIn.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -189,8 +190,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.modalIsOpen = false;
     })
 
-    // SIGN Up
-
+    // -------------- SIGN UP ---------------- //
     .addCase(signUp.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -200,7 +200,35 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(signUp.fulfilled, (state, action) => {
-      state.message = action.payload.message;
+      const userSignIn = action.payload;
+      const userFind = state.users.find(
+        (user) => user.email === userSignIn.email
+      );
+
+      // state.message = action.payload.message;
+
+      // ----------------- CREATION ACCOUNT USER ----------------------//
+      if (!userFind) {
+        const newUser = {
+          firstName: userSignIn.firstName || '',
+          lastName: userSignIn.lastName || '',
+          email: userSignIn.email,
+          password: userSignIn.password,
+          favorites: [],
+          // on crée un tableau de taille 10 et pour chaque élément du tableau,
+          // on met un objet week,meal[]
+          schedule: Array.from({ length: 10 }, (_, index) => ({
+            week: index,
+            meals: [],
+          })),
+        };
+
+        state.users.push(newUser);
+        state.message = `Your account is created, please Sign In`;
+      } else {
+        state.message = `User ${userSignIn.email} already exists`;
+      }
+      // state.message = action.payload.message;
       state.isLoading = false;
       state.modalIsOpen = false;
     })
@@ -309,7 +337,6 @@ const settingsReducer = createReducer(initialValue, (builder) => {
           if (user.email === state.currentUser.email) {
             return {
               ...user,
-              // spread operator, on fusionne le planning avec le nouveau
               schedule: state.currentUser.schedule,
             };
           }
