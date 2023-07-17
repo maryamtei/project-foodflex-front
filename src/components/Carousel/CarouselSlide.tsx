@@ -15,7 +15,7 @@ export default function CarouselSlide({
   return (
     <div className="p-4">
       <div className="py-4 text-center">{day}</div>
-      <div className="space-y-4">
+      <div className="space-y-4 space-x-4">
         <RecipeCard recipeCard={recipe1} key={recipe1.idMeal} />
         <RecipeCard recipeCard={recipe2} key={recipe2.idMeal} />
       </div>

@@ -9,6 +9,7 @@ import {
   displaySchedule,
 } from '../../store/reducers/settings';
 import { Recipe } from '../../@types/recipe';
+import './RecipeCard.css';
 
 interface CardProps {
   recipeCard: Recipe;
@@ -109,8 +110,8 @@ function RecipeCard({ recipeCard }: CardProps) {
           </button>
         </div>
       </div>
-      <div className="rounded-b-lg">
-        <h2 className="text-fourthff font-bold p-2 text-center truncate">
+      <div className="rounded-b-lg foodPattern">
+        <h2 className="text-white font-semibold p-2 text-center truncate">
           {recipeCard.name}
         </h2>
       </div>
