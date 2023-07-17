@@ -40,6 +40,10 @@ function RecipeCard({ recipeCard }: CardProps) {
     event.preventDefault();
     dispatch(displaySchedule(!clickAddFavori));
     dispatch(addSchedule(recipeCard));
+    window.scrollTo({
+      behavior: 'smooth',
+      top: 0,
+    });
   }
 
   // useCallback to memoize the searchFavori function and prevent unnecessary

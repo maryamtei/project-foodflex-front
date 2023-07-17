@@ -6,6 +6,7 @@ import {
   deleteFavori,
 } from '../../../store/reducers/settings';
 import { Favorite } from '../../../@types/Profil';
+import { toggleIsOpenProfil } from '../../../store/reducers/favoris';
 
 interface CardProps {
   favori: Favorite;
@@ -22,7 +23,9 @@ function FavoriCard({ favori }: CardProps) {
   function handleDeleteFavori() {
     dispatch(deleteFavori(favori.idMeal));
   }
-
+  const handleModaltoggle = () => {
+    dispatch(toggleIsOpenProfil());
+  };
   // Function to handle adding the recipe to the schedule
   function handleAddSchedule() {
     dispatch(displaySchedule(!clickAddSchedule));
@@ -44,7 +47,13 @@ function FavoriCard({ favori }: CardProps) {
             onClick={() => handleDeleteFavori()}
           />
 
-          <Plus color="red" onClick={() => handleAddSchedule()} />
+          <Plus
+            color="red"
+            onClick={() => {
+              handleModaltoggle();
+              handleAddSchedule();
+            }}
+          />
         </div>
       </div>
       <div className="rounded-b-lg">
