@@ -7,6 +7,8 @@ import {
   deleteFavori,
   addSchedule,
   displaySchedule,
+  toggleIsOpen,
+  toggleSignUpOpen,
 } from '../../store/reducers/settings';
 import { Recipe } from '../../@types/recipe';
 
@@ -16,7 +18,7 @@ interface CardProps {
 
 function RecipeCard({ recipeCard }: CardProps) {
   const [recipeFavori, setRecipeFavori] = useState(false);
-
+  const isLogged = useAppSelector((state) => state.settings.isLogged);
   const clickAddFavori = useAppSelector(
     (state) => state.schedule.clickAddSchedule
   );
@@ -72,6 +74,10 @@ function RecipeCard({ recipeCard }: CardProps) {
     }
   }, [recipeCard, searchFavori]);
 
+  const toggleSignUp = () => {
+    dispatch(toggleSignUpOpen());
+    dispatch(toggleIsOpen());
+  };
   const stateHome = useAppSelector((state) => state.home.stateHome);
   return (
     <Link
@@ -92,7 +98,13 @@ function RecipeCard({ recipeCard }: CardProps) {
           <button
             type="button"
             className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
-            onClick={(event) => handleAddFavori(event)}
+            onClick={(event) => {
+              if (!isLogged) {
+                toggleSignUp();
+              } else {
+                handleAddFavori(event);
+              }
+            }}
           >
             {recipeFavori ? (
               <Heart size={20} fill="red" />
