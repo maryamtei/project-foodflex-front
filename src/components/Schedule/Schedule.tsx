@@ -15,12 +15,14 @@ function Schedule() {
     },
   ]);
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
-  const stateSchedule = useAppSelector((state) => state.schedule.stateSchedule);
   const schedules = useAppSelector(
     (state) => state.settings.currentUser.schedule
   );
   const weekFind = schedules.find((week) => week.week === currentWeek);
-
+  // affichage modale planning si on clique sur le '+'
+  const displaySchedule = useAppSelector(
+    (state) => state.settings.clickAddSchedule
+  );
   const dispatch = useAppDispatch();
 
   function handleClickNextWeek() {
@@ -61,7 +63,11 @@ function Schedule() {
   }, [weekFind, dispatch]);
 
   return (
-    <div className="flex flex-col justify-center my-10 px-3 sm:px-8">
+    <div
+      className={` flex flex-col justify-center my-10 px-3 sm:px-8 ${
+        displaySchedule ? 'absolute z-50 bg-bgff ' : ''
+      }`}
+    >
       <div className="flex justify-center items-center gap-4 mb-8">
         <button type="button" onClick={() => handleClickBeforeWeek()}>
           <ChevronLeft className="text-thirdff h-16 w-16" />

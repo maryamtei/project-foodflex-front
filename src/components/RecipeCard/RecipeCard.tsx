@@ -3,6 +3,7 @@ import { Plus, Heart } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
+  selectedDay,
   addFavori,
   deleteFavori,
   addSchedule,
@@ -31,7 +32,9 @@ function RecipeCard({ recipeCard }: CardProps) {
   );
 
   const dispatch = useAppDispatch();
-
+  function handleClickDay(position: number) {
+    dispatch(selectedDay(position));
+  }
   // Function to handle adding the recipe to the schedule
   function handleAddSchedule(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
@@ -91,6 +94,7 @@ function RecipeCard({ recipeCard }: CardProps) {
         if (displayScheduleModal) {
           event.preventDefault();
         }
+        handleClickDay(recipeCard.position);
       }}
     >
       <img

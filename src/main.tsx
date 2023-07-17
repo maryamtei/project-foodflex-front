@@ -8,7 +8,6 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom';
 import './styles/index.scss';
-
 import App from './components/App/App';
 import Favoris from './components/Profil/Favoris';
 import Home from './components/Home/Home';

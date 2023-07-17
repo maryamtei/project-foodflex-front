@@ -1,6 +1,5 @@
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import FavoriCard from './FavoriCard/FavoriCard';
-import Schedule from '../Schedule/Schedule';
 import { changeFavoriIsOpen } from '../../store/reducers/favoris';
 
 function Favoris() {
@@ -9,15 +8,11 @@ function Favoris() {
     (state) => state.settings.currentUser.favorites
   );
 
-  const displaySchedule = useAppSelector(
-    (state) => state.settings.clickAddSchedule
-  );
   const toggleFavoriProfil = () => {
     dispatch(changeFavoriIsOpen(false));
   };
   return (
     <div className="container px-1">
-      {displaySchedule && <Schedule />}
       <div className="mt-10 gap-3  flex justify-center mb-16	">
         <button
           type="button"
