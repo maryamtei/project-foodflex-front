@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'react-use';
 import SearchComponent from '../SearchComponent/SearchComponent';
+import Schedule from '../Schedule/Schedule';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import {
   fetchRandomRecipes,
   fetchSearchRecipe,
 } from '../../store/reducers/recipes';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import ScheduleFavori from '../Profil/ScheduleFavori/ScheduleFavori';
 
 function Recipes() {
   const [search, setSearch] = useState('');
@@ -46,7 +46,7 @@ function Recipes() {
       }`}
     >
       {/* // affichage modale planning si on clique sur le '+' */}
-      {displaySchedule && <ScheduleFavori />}
+      {displaySchedule && <Schedule />}
       <h1 className="text-thirdff text-2xl sm:text-4xl font-bold md:mb-12 mb-6 text-center">
         Find exactly what you need !
       </h1>

@@ -123,7 +123,13 @@ function RecipeCard({ recipeCard }: CardProps) {
           <button
             type="button"
             className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
-            onClick={(event) => handleAddSchedule(event)}
+            onClick={(event) => {
+              if (!isLogged) {
+                toggleSignUp();
+              } else {
+                handleAddFavori(event);
+              }
+            }}
           >
             <Plus size={20} />
           </button>
