@@ -107,6 +107,7 @@ function RecipeCard({ recipeCard }: CardProps) {
             type="button"
             className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
             onClick={(event) => {
+              event.preventDefault();
               if (!isLogged) {
                 toggleSignUp();
               } else {
@@ -124,10 +125,11 @@ function RecipeCard({ recipeCard }: CardProps) {
             type="button"
             className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
             onClick={(event) => {
+              event.preventDefault();
               if (!isLogged) {
                 toggleSignUp();
               } else {
-                handleAddFavori(event);
+                handleAddSchedule(event);
               }
             }}
           >
