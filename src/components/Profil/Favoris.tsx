@@ -1,6 +1,6 @@
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
 import FavoriCard from './FavoriCard/FavoriCard';
-import ScheduleFavori from './ScheduleFavori/ScheduleFavori';
+import Schedule from '../Schedule/Schedule';
 import { changeFavoriIsOpen } from '../../store/reducers/favoris';
 
 function Favoris() {
@@ -17,7 +17,7 @@ function Favoris() {
   };
   return (
     <div className="container px-1">
-      {displaySchedule && <ScheduleFavori />}
+      {displaySchedule && <Schedule />}
       <div className="mt-10 gap-3  flex justify-center mb-16	">
         <button
           type="button"

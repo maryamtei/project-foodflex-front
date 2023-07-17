@@ -23,7 +23,9 @@ function RecipeCard({ recipeCard }: CardProps) {
   const clickAddFavori = useAppSelector(
     (state) => state.schedule.clickAddSchedule
   );
-
+  const displayScheduleModal = useAppSelector(
+    (state) => state.settings.clickAddSchedule
+  );
   const favoris = useAppSelector(
     (state) => state.settings.currentUser.favorites
   );
@@ -80,10 +82,16 @@ function RecipeCard({ recipeCard }: CardProps) {
     dispatch(toggleIsOpen());
   };
   const stateHome = useAppSelector((state) => state.home.stateHome);
+
   return (
     <Link
       to="/recipe"
       className="shadow-md rounded-lg relative hover:shadow-lg transition-all"
+      onClick={(event: { preventDefault: () => void }) => {
+        if (displayScheduleModal) {
+          event.preventDefault();
+        }
+      }}
     >
       <img
         src={recipeCard.imageUrl}
