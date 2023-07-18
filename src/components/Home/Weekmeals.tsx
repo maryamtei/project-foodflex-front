@@ -1,11 +1,11 @@
-import RecipeCard from '../../RecipeCard/RecipeCard';
-import { Recipe } from '../../../@types/recipe';
+import RecipeCard from '../RecipeCard/RecipeCard';
+import { Recipe } from '../../@types/recipe';
 
 interface RecipeProps {
   recipes: Recipe[];
 }
 
-function MenuSemaine({ recipes }: RecipeProps) {
+function Weekmeals({ recipes }: RecipeProps) {
   return (
     <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-7 gap-4 p-8 ">
       <div>
@@ -145,4 +145,4 @@ function MenuSemaine({ recipes }: RecipeProps) {
   );
 }
 
-export default MenuSemaine;
+export default Weekmeals;
