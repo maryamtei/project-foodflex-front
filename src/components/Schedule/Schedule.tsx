@@ -7,6 +7,7 @@ import Carousel from '../Carousel/Carousel';
 import { changeStateSchedule } from '../../store/reducers/schedule';
 
 function Schedule() {
+  const [showAnimation, setShowAnimation] = useState(true);
   const [newSchedule, setNewSchedule] = useState([
     {
       idMeal: '',
@@ -24,7 +25,6 @@ function Schedule() {
   const displaySchedule = useAppSelector(
     (state) => state.settings.clickAddSchedule
   );
-  const mobileView = useAppSelector((state) => state.window.mobileView);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -68,6 +68,12 @@ function Schedule() {
     };
   }, [weekFind, dispatch, isLogged, navigate]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShowAnimation(false);
+    }, 600);
+  }, []);
+
   return (
     <div className={` flex flex-col justify-center my-10 px-3 sm:px-8 `}>
       <div className="flex justify-center items-center gap-4 mb-8">
@@ -82,7 +88,11 @@ function Schedule() {
         </button>
       </div>
       {newSchedule.length === 14 && (
-        <div className="mt-10 block">
+        <div
+          className={`mt-10 block ${
+            showAnimation ? 'animate-scheduleSlideLeft' : ''
+          }`}
+        >
           <Carousel recipes={newSchedule} />
         </div>
       )}
