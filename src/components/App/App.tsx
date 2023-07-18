@@ -1,7 +1,9 @@
+import { Outlet } from 'react-router-dom';
+
 function App() {
   return (
-    <div className="App">
-      <button className="btn text-green-600">Hello daisyUI</button>
+    <div className="">
+      <Outlet />
     </div>
   );
 }

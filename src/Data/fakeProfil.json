@@ -1,0 +1,34 @@
+{
+  "user": {
+    "firstName": "Mister Flex",
+    "lastName": "Redux",
+    "mail": "foodflex@Food.com",
+    "password": "foodflex@Food.com",
+    "favorites": [
+      {
+        "idMeal": 1,
+        "name": "Escovitch Fish",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/1520084413.jpg",
+        "position": 2
+      },
+      {
+        "idMeal": 2,
+        "name": "Stuffed Lamb Tomatoes",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/u55lbp1585564013.jpg",
+        "position": 6
+      },
+      {
+        "idMeal": 3,
+        "name": "Kapsalon",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/sxysrt1468240488.jpg",
+        "position": 10
+      },
+      {
+        "idMeal": 4,
+        "name": "Teriyaki Chicken Casserole",
+        "imageUrl": "https://www.themealdb.com/images/media/meals/wvpsxx1468256321.jpg",
+        "position": 12
+      }
+    ]
+  }
+}
