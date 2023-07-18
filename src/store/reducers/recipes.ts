@@ -62,17 +62,36 @@ export const fetchRandomRecipes = createAsyncThunk(
   }
 );
 
-// Création d'une action Redux async pour fetch des recettes en fonction d'une recherche.
+// Création d'une action Redux async pour fetch des recettes en fonction d'une recherche nom et ingredients
 export const fetchSearchRecipe = createAsyncThunk(
   'recipes/fetchSearchRecipes',
   async (search: string) => {
-    const response = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`
-    );
-    const data: { meals: ApiRecipe[] | null } = await response.json();
-    // Si data.meals est null, assignation d'un tableau vide pour éviter les erreurs.
-    const meals = data.meals || [];
-    return meals.map((meal) => {
+    const [recipeResponse, ingredientResponse] = await Promise.all([
+      fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`),
+      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`),
+    ]);
+
+    const recipeData: { meals: ApiRecipe[] | null } =
+      await recipeResponse.json();
+    const ingredientData: { meals: ApiRecipe[] | null } =
+      await ingredientResponse.json();
+
+    const recipeMeals = recipeData.meals || [];
+    const ingredientMeals = ingredientData.meals || [];
+
+    const combinedMeals = [...recipeMeals, ...ingredientMeals];
+
+    // Élimination des doublons
+    const mealIds = new Set();
+    const uniqueMeals = combinedMeals.filter((meal) => {
+      if (!mealIds.has(meal.idMeal)) {
+        mealIds.add(meal.idMeal);
+        return true;
+      }
+      return false;
+    });
+
+    return uniqueMeals.map((meal) => {
       return {
         idMeal: meal.idMeal,
         name: meal.strMeal,
