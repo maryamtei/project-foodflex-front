@@ -12,4 +12,5 @@ export interface RecipeDetails {
   instruction: string;
   ingredients: string[];
   mesures: string[];
+  videoUrl: string;
 }

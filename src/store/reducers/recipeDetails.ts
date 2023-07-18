@@ -39,6 +39,7 @@ export const fetchRecipeDetails = createAsyncThunk(
       instruction: meal.strInstructions,
       ingredients,
       mesures,
+      videoUrl: meal.strYoutube,
     };
 
     return recipeDetails;

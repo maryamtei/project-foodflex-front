@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchRecipeDetails } from '../../store/reducers/recipeDetails';
 import '../RecipeCard/RecipeCard.css';
+import ReactPlayer from 'react-player';
 
 function Recipe() {
   const { id } = useParams<{ id: string }>();
@@ -28,6 +29,7 @@ function Recipe() {
           className="mb-6 rounded-lg flex"
         />
       </div>
+      <h2 className="text-3xl font-bold m-10 text-center">Meal Preparation</h2>
       <div className="flex flex-col md:flex-row p-4">
         <div className="md:hidden  md:w-1/3 md:pl-8">
           <h2 className="text-xl font-bold mb-2">Ingredients:</h2>
@@ -56,6 +58,13 @@ function Recipe() {
             ))}
           </ol>
         </div>
+      </div>
+      <h2 className="text-3xl font-bold m-10 text-center">
+        Step-by-Step Video Guide
+      </h2>
+      <div className="py-4 flex justify-center">
+        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+        <ReactPlayer url={recipe.videoUrl} />
       </div>
     </div>
   );
