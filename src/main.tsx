@@ -29,7 +29,7 @@ const router = createBrowserRouter(
       {/* Modifier les routes et l'élement Apptest en fonction de vos taches */}
       {/* <Route index element={<Apptest />} /> */}
       <Route path="recipes" element={<Recipes />} />
-      <Route path="recipe" element={<Recipe />} />
+      <Route path="recipes/:id" element={<Recipe />} />
     </Route>
   )
 );

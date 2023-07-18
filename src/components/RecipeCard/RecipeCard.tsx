@@ -93,7 +93,7 @@ function RecipeCard({ recipeCard }: CardProps) {
 
   return (
     <Link
-      to="/recipe"
+      to={`/recipes/${recipeCard.idMeal}`}
       className="shadow-md rounded-lg relative hover:shadow-lg transition-all"
       onClick={(event: { preventDefault: () => void }) => {
         if (displayScheduleModal) {
