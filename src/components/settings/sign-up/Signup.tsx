@@ -13,17 +13,8 @@ import {
 
 function signup() {
   const dispatch = useAppDispatch();
-  const email = useAppSelector(
-    (state) => state.settings.signUpCredentials.email
-  );
-  const password = useAppSelector(
-    (state) => state.settings.signUpCredentials.password
-  );
-  const firstname = useAppSelector(
-    (state) => state.settings.signUpCredentials.firstname
-  );
-  const lastname = useAppSelector(
-    (state) => state.settings.signUpCredentials.lastname
+  const { email, password, firstName, lastName } = useAppSelector(
+    (state) => state.settings.signUpCredentials
   );
 
   const isLoading = useAppSelector((state) => state.settings.isLoading);
@@ -44,13 +35,13 @@ function signup() {
     );
     dispatch(
       changeSignUpCredentialsField({
-        property: 'firstname',
+        property: 'firstName',
         value: '',
       })
     );
     dispatch(
       changeSignUpCredentialsField({
-        property: 'lastname',
+        property: 'lastName',
         value: '',
       })
     );
@@ -61,14 +52,14 @@ function signup() {
       signUp({
         email,
         password,
-        firstname,
-        lastname,
+        firstName,
+        lastName,
       })
     );
     resetField();
   };
   const handleChangeField =
-    (name: 'email' | 'password' | 'firstname' | 'lastname') =>
+    (name: 'email' | 'password' | 'firstName' | 'lastName') =>
     (value: string) => {
       dispatch(
         changeSignUpCredentialsField({
@@ -101,16 +92,16 @@ function signup() {
       </div>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <Field
-          label="Firstname"
-          onChange={handleChangeField('firstname')}
+          label="FirstName"
+          onChange={handleChangeField('firstName')}
           type="text"
-          value={firstname.trim()}
+          value={firstName.trim()}
         />
         <Field
-          label="Lastname"
-          onChange={handleChangeField('lastname')}
+          label="lastName"
+          onChange={handleChangeField('lastName')}
           type="text"
-          value={lastname.trim()}
+          value={lastName.trim()}
         />
         <Field
           label="E-mail"

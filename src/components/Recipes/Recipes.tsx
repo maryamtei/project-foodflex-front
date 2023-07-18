@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDebounce } from 'react-use';
 import SearchComponent from '../SearchComponent/SearchComponent';
+import Schedule from '../Schedule/Schedule';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import {
   fetchRandomRecipes,
@@ -27,11 +28,16 @@ function Recipes() {
   // déclenchement du random sur une chaîne de recherche vide dans la search
   useEffect(() => {
     if (!search) {
-      dispatch(fetchRandomRecipes());
+      dispatch(fetchRandomRecipes({ count: 10 }));
     }
   }, [dispatch, search]);
 
   const recipes = useAppSelector((state) => state.recipes.list);
+
+  // affichage modale planning si on clique sur le '+'
+  const displaySchedule = useAppSelector(
+    (state) => state.settings.clickAddSchedule
+  );
 
   return (
     <div
@@ -39,7 +45,9 @@ function Recipes() {
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       }`}
     >
-      <h1 className="text-thirdff text-2xl sm:text-4xl font-bold md:mb-12 mb-6 text-center sm:text-center md:text-center">
+      {/* // affichage modale planning si on clique sur le '+' */}
+      {displaySchedule && <Schedule />}
+      <h1 className="text-thirdff text-2xl sm:text-4xl font-bold md:mb-12 mb-6 text-center">
         Find exactly what you need !
       </h1>
       <SearchComponent
@@ -54,11 +62,7 @@ function Recipes() {
       )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
         {recipes.map((recipe) => (
-          <RecipeCard
-            name={recipe.name}
-            key={recipe.id}
-            imageUrl={recipe.imageUrl}
-          />
+          <RecipeCard recipeCard={recipe} key={recipe.idMeal} />
         ))}
       </div>
     </div>

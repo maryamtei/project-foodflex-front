@@ -1,27 +1,31 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createAction, createReducer } from '@reduxjs/toolkit';
-import fakeProfil from '../../fakeData/fakeProfil.json';
-
-import { Favorite } from '../../@types/Profil';
 
 interface RecipesState {
-  favoris: Favorite[];
+  modalIsOpen: boolean;
+  favoriIsOpen: boolean;
 }
 
 export const initialState: RecipesState = {
-  favoris: fakeProfil.user.favorites,
+  modalIsOpen: false,
+  favoriIsOpen: true,
 };
 
-export const deleteFavori = createAction<number>('favori/delete-favori');
+export const toggleIsOpenProfil = createAction('favori/TOGGLE_IS_OPEN');
 
-const favoriReducer = createReducer(initialState, (builder) => {
-  builder.addCase(deleteFavori, (state, action) => {
-    const idToDelete = action.payload;
+export const changeFavoriIsOpen = createAction<boolean>(
+  'favori/TOGGLE_FAVORI_IS_OPEN'
+);
 
-    state.favoris = state.favoris.filter(
-      (favori) => favori.idMeal !== idToDelete
-    );
-  });
+const favorisReducer = createReducer(initialState, (builder) => {
+  builder
+
+    .addCase(toggleIsOpenProfil, (state) => {
+      state.modalIsOpen = !state.modalIsOpen;
+    })
+    .addCase(changeFavoriIsOpen, (state, action) => {
+      state.favoriIsOpen = action.payload;
+    });
 });
 
-export default favoriReducer;
+export default favorisReducer;

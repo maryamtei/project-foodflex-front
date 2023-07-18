@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import Modal from '../settings/Modal';
+import ModalSign from '../settings/Modal';
+import ModalFavoriProfil from '../Profil/Modal';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -11,7 +12,11 @@ import {
 
 function Apptest() {
   const dispatch = useAppDispatch();
-  const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+  const modalIsOpenSign = useAppSelector((state) => state.settings.modalIsOpen);
+  const modalIsOpenFavoriProfil = useAppSelector(
+    (state) => state.favoris.modalIsOpen
+  );
+  const isLogged = useAppSelector((state) => state.settings.isLogged);
   const mobileView = useAppSelector((state) => state.window.mobileView);
   // Triggered when the window is resized
   useEffect(() => {
@@ -42,9 +47,14 @@ function Apptest() {
     <div>
       <Header />
       {/* Render the Modal component if modalIsOpen is true */}
-      {modalIsOpen && <Modal />}
+      {modalIsOpenSign && <ModalSign />}
+      {(modalIsOpenFavoriProfil || !mobileView) && isLogged && (
+        <ModalFavoriProfil />
+      )}
       {/* Render the Outlet component if modalIsOpen is false and Mobile is true or Mobile is false */}
-      {((!modalIsOpen && mobileView) || !mobileView) && <Outlet />}
+      {((!modalIsOpenSign && !modalIsOpenFavoriProfil && mobileView) ||
+        !mobileView) && <Outlet />}
+
       {/* fake div to margin bottom in mobile because footer component is sticky  */}
       <div className="h-16 " />
       <Footer />

@@ -1,27 +1,35 @@
 import { Plus, Heart } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import { deleteFavori } from '../../../store/reducers/favoris';
-import { addFavori, displaySchedule } from '../../../store/reducers/schedule';
+import {
+  addSchedule,
+  displaySchedule,
+  deleteFavori,
+} from '../../../store/reducers/settings';
 import { Favorite } from '../../../@types/Profil';
+import { toggleIsOpenProfil } from '../../../store/reducers/favoris';
 
 interface CardProps {
   favori: Favorite;
 }
 
 function FavoriCard({ favori }: CardProps) {
-  const clickAddFavori = useAppSelector(
-    (state) => state.schedule.clickAddFavori
+  const clickAddSchedule = useAppSelector(
+    (state) => state.settings.clickAddSchedule
   );
 
   const dispatch = useAppDispatch();
 
+  // Function to handle deleting the favorite item
   function handleDeleteFavori() {
     dispatch(deleteFavori(favori.idMeal));
   }
-
-  function handleAddFavori() {
-    dispatch(displaySchedule(!clickAddFavori));
-    dispatch(addFavori(favori));
+  const handleModaltoggle = () => {
+    dispatch(toggleIsOpenProfil());
+  };
+  // Function to handle adding the recipe to the schedule
+  function handleAddSchedule() {
+    dispatch(displaySchedule(!clickAddSchedule));
+    dispatch(addSchedule(favori));
   }
 
   return (
@@ -39,11 +47,19 @@ function FavoriCard({ favori }: CardProps) {
             onClick={() => handleDeleteFavori()}
           />
 
-          <Plus color="red" onClick={() => handleAddFavori()} />
+          <Plus
+            color="red"
+            onClick={() => {
+              handleModaltoggle();
+              handleAddSchedule();
+            }}
+          />
         </div>
       </div>
       <div className="rounded-b-lg">
-        <h2 className="text-thirdff p-2 text-center truncate">{favori.name}</h2>
+        <h2 className="text-fourthff sm:text-bgff p-2 text-center truncate">
+          {favori.name}
+        </h2>
       </div>
     </div>
   );

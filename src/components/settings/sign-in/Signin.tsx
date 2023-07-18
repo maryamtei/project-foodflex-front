@@ -13,11 +13,8 @@ import {
 
 function signin() {
   const dispatch = useAppDispatch();
-  const email = useAppSelector(
-    (state) => state.settings.signInCredentials.email
-  );
-  const password = useAppSelector(
-    (state) => state.settings.signInCredentials.password
+  const { email, password } = useAppSelector(
+    (state) => state.settings.signInCredentials
   );
 
   const isLoading = useAppSelector((state) => state.settings.isLoading);

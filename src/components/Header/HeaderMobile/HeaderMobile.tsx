@@ -16,11 +16,18 @@ import {
   toggleIsOpen,
   toggleSignUpOpen,
 } from '../../../store/reducers/settings';
+import {
+  toggleIsOpenProfil,
+  changeFavoriIsOpen,
+} from '../../../store/reducers/favoris';
 
 function HeaderMobile() {
   const btnMenuRef = useRef<HTMLButtonElement>(null);
   const [menuActive, setmenuActive] = useState(false);
   const isLogged = useAppSelector((state) => state.settings.isLogged);
+  const modalIsOpenFavoriProfil = useAppSelector(
+    (state) => state.favoris.modalIsOpen
+  );
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const dispatch = useAppDispatch();
@@ -36,6 +43,13 @@ function HeaderMobile() {
   };
   const toggleSignUp = () => {
     dispatch(toggleSignUpOpen());
+  };
+  const openProfilModal = () => {
+    dispatch(changeFavoriIsOpen(true));
+    dispatch(toggleIsOpenProfil());
+  };
+  const closeProfilModal = () => {
+    dispatch(toggleIsOpenProfil());
   };
   return (
     <header className="relative mt-20 ">
@@ -54,7 +68,12 @@ function HeaderMobile() {
                 if (modalIsOpen) {
                   toogleModalSignUpSignIn();
                 }
-                menuOnClick();
+                if (modalIsOpenFavoriProfil) {
+                  closeProfilModal();
+                }
+                if (menuActive) {
+                  menuOnClick();
+                }
               }}
             >
               FoodFlex
@@ -86,6 +105,9 @@ function HeaderMobile() {
                     if (modalIsOpen) {
                       toogleModalSignUpSignIn();
                     }
+                    if (modalIsOpenFavoriProfil) {
+                      closeProfilModal();
+                    }
                     menuOnClick();
                   }}
                 >
@@ -100,6 +122,9 @@ function HeaderMobile() {
                     if (modalIsOpen) {
                       toogleModalSignUpSignIn();
                     }
+                    if (modalIsOpenFavoriProfil) {
+                      closeProfilModal();
+                    }
                     menuOnClick();
                   }}
                 >
@@ -111,6 +136,9 @@ function HeaderMobile() {
                   to="/schedule"
                   relative="path"
                   onClick={() => {
+                    if (modalIsOpenFavoriProfil) {
+                      closeProfilModal();
+                    }
                     menuOnClick();
                   }}
                 >
@@ -118,15 +146,16 @@ function HeaderMobile() {
                 </NavLink>
               </li>
               <li className={`${!isLogged ? 'hidden' : ''} `}>
-                <NavLink
-                  to="/profil"
-                  relative="path"
+                <button
+                  className="underline"
+                  type="button"
                   onClick={() => {
                     menuOnClick();
+                    openProfilModal();
                   }}
                 >
                   Profil
-                </NavLink>
+                </button>
               </li>
               <li className={`${isLogged ? 'hidden' : ''} `}>
                 <button
@@ -216,6 +245,9 @@ function HeaderMobile() {
             if (modalIsOpen) {
               toogleModalSignUpSignIn();
             }
+            if (modalIsOpenFavoriProfil) {
+              closeProfilModal();
+            }
           }}
         >
           <Search className="h-9 w-9  hover:text-thirdff duration-300 ease-linear" />
@@ -228,22 +260,27 @@ function HeaderMobile() {
             if (!isLogged && !modalIsOpen) {
               toogleModalSignUpSignIn();
             }
+            if (modalIsOpenFavoriProfil) {
+              closeProfilModal();
+            }
           }}
         >
           <Calendar className="h-9 w-9 hover:text-thirdff duration-300 ease-linear" />
         </NavLink>
-        <NavLink
-          className="active:text-thirdff"
-          to="/profil"
-          relative="path"
+        <button
+          className={modalIsOpenFavoriProfil ? 'text-thirdff' : 'text-bgff'}
+          type="button"
           onClick={() => {
             if (!isLogged && !modalIsOpen) {
               toogleModalSignUpSignIn();
             }
+            if (isLogged && !modalIsOpenFavoriProfil) {
+              openProfilModal();
+            }
           }}
         >
           <User className="h-9 w-9  hover:text-thirdff duration-300 ease-linear" />
-        </NavLink>
+        </button>
       </div>
     </header>
   );

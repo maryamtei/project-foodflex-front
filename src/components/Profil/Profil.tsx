@@ -1,10 +1,11 @@
 import { FormEvent, useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { Mail, User, Key } from 'react-feather';
 
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Field from './Field/Field';
-import { editProfilData } from '../../store/reducers/profil';
+import { editInfoProfil, logout } from '../../store/reducers/settings';
+import { changeFavoriIsOpen } from '../../store/reducers/favoris';
 
 function Profil() {
   const [editProfil, setEditProfil] = useState(false);
@@ -14,49 +15,47 @@ function Profil() {
   }
 
   const dispatch = useAppDispatch();
-
-  // useEffect(() => {
-  //   dispatch(infoProfil());
-  // }, [dispatch]);
+  const navigate = useNavigate();
 
   function handleSubmitEditProfil(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    dispatch(editProfilData(formData));
+    dispatch(editInfoProfil(formData));
     setEditProfil(!editProfil);
   }
 
+  function handleLogout() {
+    dispatch(logout());
+    // Redirection to HomePage
+    navigate('/');
+  }
+
   const { firstName, lastName, email, password } = useAppSelector(
-    (state) => state.profil.user
+    (state) => state.settings.currentUser
   );
 
+  const toggleFavoriProfil = () => {
+    dispatch(changeFavoriIsOpen(true));
+  };
   return (
-    <div className="container p-3 px-4">
-      <div className="flex justify-center mb-6">
-        <NavLink
-          to="/favoris"
-          className={({ isActive }) =>
-            isActive
-              ? 'btn rounded-3xl  w-28 shadow-lg text-red-600'
-              : 'btn rounded-3xl  w-28 shadow-lg'
-          }
+    <div className="flex flex-col gap-8 h-full container p-3 px-4">
+      <div className="mt-10 gap-3 flex justify-center mb-16">
+        <button
+          type="button"
+          className="text-fourthff bg-bgff sm:text-bgff sm:bg-fourthff btn rounded-3xl  w-28 shadow-lg"
+          onClick={toggleFavoriProfil}
         >
           Favorites
-        </NavLink>
-        <NavLink
-          to="/profil"
-          className={({ isActive }) =>
-            isActive
-              ? 'ml-10 btn rounded-3xl  w-28 shadow-lg text-red-600'
-              : 'ml-10 btn rounded-3xl  w-28 shadow-lg'
-          }
+        </button>
+        <button
+          type="button"
+          className="text-bgff bg-fourthff sm:text-fourthff sm:bg-bgff btn rounded-3xl  w-28 shadow-lg"
         >
           Profil
-        </NavLink>
+        </button>
       </div>
-
-      <div className="flex bg-bgff border rounded-2xl mx-8 pt-8 pb-6 px-4">
+      <div className="flex flex-col sm:text-bgff text-fourthff">
         <form onSubmit={handleSubmitEditProfil}>
           {editProfil ? (
             <>
@@ -91,41 +90,52 @@ function Profil() {
 
               <button
                 type="submit"
-                className="btn rounded-3xl w-28 ml-16 shadow-lg"
+                className="text-fourthff bg-bgff btn rounded-3xl w-28 ml-16 shadow-lg"
               >
                 Confirmed
               </button>
             </>
           ) : (
-            <>
-              <p className="flex mb-8">
-                <User className="mr-2" /> Name : {firstName} {lastName}
-              </p>
-              <p className="flex mb-8">
-                <Mail className="mr-2" />
-                Mail : {email}
-              </p>
-              <p className="flex mb-8">
-                <Key className="mr-2" />
-                Password : *********
-              </p>
-            </>
+            <div className=" flex flex-col justify-center">
+              <p className="  mb-2 font-semibold">Basic information :</p>
+              <div className=" flex gap-1 mb-4 border rounded-lg border-fourthff sm:border-bgff p-1">
+                <p className=" flex ">
+                  <User className="mr-2" />
+                </p>
+                <p className="flex ">
+                  {firstName} {lastName}
+                </p>
+              </div>
+              <div className=" flex gap-1 mb-4 border rounded-lg border-fourthff sm:border-bgff p-1">
+                <p className=" flex ">
+                  <Mail className="mr-2" />
+                </p>
+                <p className="flex ">{email}</p>
+              </div>
+              <div className=" flex gap-1 mb-4 border rounded-lg border-fourthff sm:border-bgff p-1">
+                <p className=" flex">
+                  <Key className="mr-2" />
+                </p>
+                <p className="flex"> *********</p>
+              </div>
+            </div>
           )}
         </form>
       </div>
       <div className="flex justify-center mt-6">
         <button
           type="button"
-          className="btn text-sm rounded-3xl text-black w-32 shadow-lg mr-5"
+          className=" text-fourthff bg-bgff btn text-sm rounded-3xl  w-32 shadow-lg mr-5"
           onClick={() => handleEditProfil()}
         >
           {editProfil ? 'Cancelled' : 'Edit Profil'}
         </button>
         <button
           type="button"
-          className="btn rounded-3xl text-black w-32 h-1 shadow-lg"
+          className="text-bgff bg-fourthff btn rounded-3xl  w-32 h-1 shadow-lg"
+          onClick={() => handleLogout()}
         >
-          Sign out
+          Logout
         </button>
       </div>
     </div>
