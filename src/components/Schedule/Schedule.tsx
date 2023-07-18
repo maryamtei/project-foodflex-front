@@ -1,12 +1,24 @@
-import fakeDay from '../../Data/fakeDay.json';
-import Day from './Day';
+import { useEffect, useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { nextWeek } from '../../store/reducers/settings';
+import Carousel from '../Carousel/Carousel';
+import { changeStateSchedule } from '../../store/reducers/schedule';
 
 function Schedule() {
+  const [newSchedule, setNewSchedule] = useState([
+    {
+      idMeal: '',
+      name: '',
+      imageUrl: '',
+      position: 0,
+    },
+  ]);
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
-
-  const currentSchedule = fakeDay?.find((week) => week.week === currentWeek);
+  const schedules = useAppSelector(
+    (state) => state.settings.currentUser.schedule
+  );
+  const weekFind = schedules.find((week) => week.week === currentWeek);
 
   const dispatch = useAppDispatch();
 
@@ -16,31 +28,55 @@ function Schedule() {
   function handleClickBeforeWeek() {
     dispatch(nextWeek(false));
   }
+  useEffect(() => {
+    dispatch(changeStateSchedule(true));
+    const newCurrentSchedule = [];
+    // eslint-disable-next-line no-plusplus
+    for (let position = 0; position < 14; position++) {
+      const userSchedule = weekFind?.meals.find(
+        (mealUser) => mealUser.position === position
+      );
+      if (userSchedule !== undefined) {
+        newCurrentSchedule.push({
+          idMeal: userSchedule.idMeal.toString(),
+          name: userSchedule.name,
+          imageUrl: userSchedule.imageUrl,
+          position: userSchedule.position,
+        });
+      } else {
+        newCurrentSchedule.push({
+          idMeal: position.toString(),
+          name: 'test',
+          imageUrl: '/images.jpeg',
+          position,
+        });
+      }
+    }
+    setNewSchedule(newCurrentSchedule);
+    console.log(newCurrentSchedule);
+    return () => {
+      dispatch(changeStateSchedule(false));
+    };
+  }, [weekFind, dispatch]);
 
   return (
-    <div className="container px-6">
+    <div className={` flex flex-col justify-center my-10 px-3 sm:px-8 `}>
       <div className="flex justify-center items-center gap-4 mb-8">
-        <button
-          type="button"
-          className="btn"
-          onClick={() => handleClickBeforeWeek()}
-        >
-          Before
+        <button type="button" onClick={() => handleClickBeforeWeek()}>
+          <ChevronLeft className="text-thirdff h-16 w-16" />
         </button>
-        <p>Week : {currentSchedule?.week} </p>
-        <button
-          type="button"
-          className="btn"
-          onClick={() => handleClickNextWeek()}
-        >
-          Next
+        <p className="text-thirdff text-2xl sm:text-4xl font-bold text-center">
+          Week {currentWeek}
+        </p>
+        <button type="button" onClick={() => handleClickNextWeek()}>
+          <ChevronRight className="text-thirdff h-16 w-16" />
         </button>
       </div>
-      <div className="grid m-2 grid-cols-2 gap-6">
-        {currentSchedule?.meals.map((meal) => (
-          <Day key={meal.id} day={meal.position} currentWeek={currentWeek} />
-        ))}
-      </div>
+      {newSchedule.length === 14 && (
+        <div className="mt-10 block">
+          <Carousel recipes={newSchedule} />
+        </div>
+      )}
     </div>
   );
 }

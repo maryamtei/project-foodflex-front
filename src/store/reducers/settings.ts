@@ -297,7 +297,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     // ---------------- ADD SCHEDULE -------------------//
     .addCase(nextWeek, (state, action) => {
-      if (action.payload && state.currentWeek < 4) {
+      if (action.payload && state.currentWeek < 52) {
         state.currentWeek += 1;
       }
       if (!action.payload && state.currentWeek > 1) {

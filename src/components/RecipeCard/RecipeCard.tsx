@@ -3,10 +3,13 @@ import { Plus, Heart } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
+  selectedDay,
   addFavori,
   deleteFavori,
   addSchedule,
   displaySchedule,
+  toggleIsOpen,
+  toggleSignUpOpen,
 } from '../../store/reducers/settings';
 import { Recipe } from '../../@types/recipe';
 import './RecipeCard.css';
@@ -17,22 +20,31 @@ interface CardProps {
 
 function RecipeCard({ recipeCard }: CardProps) {
   const [recipeFavori, setRecipeFavori] = useState(false);
-
+  const isLogged = useAppSelector((state) => state.settings.isLogged);
+  const stateSchedule = useAppSelector((state) => state.schedule.stateSchedule);
   const clickAddFavori = useAppSelector(
     (state) => state.schedule.clickAddSchedule
   );
-
+  const displayScheduleModal = useAppSelector(
+    (state) => state.settings.clickAddSchedule
+  );
   const favoris = useAppSelector(
     (state) => state.settings.currentUser.favorites
   );
 
   const dispatch = useAppDispatch();
-
+  function handleClickDay(position: number) {
+    dispatch(selectedDay(position));
+  }
   // Function to handle adding the recipe to the schedule
   function handleAddSchedule(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     dispatch(displaySchedule(!clickAddFavori));
     dispatch(addSchedule(recipeCard));
+    window.scrollTo({
+      behavior: 'smooth',
+      top: 0,
+    });
   }
 
   // useCallback to memoize the searchFavori function and prevent unnecessary
@@ -73,11 +85,22 @@ function RecipeCard({ recipeCard }: CardProps) {
     }
   }, [recipeCard, searchFavori]);
 
+  const toggleSignUp = () => {
+    dispatch(toggleSignUpOpen());
+    dispatch(toggleIsOpen());
+  };
   const stateHome = useAppSelector((state) => state.home.stateHome);
+
   return (
     <Link
       to="/recipe"
       className="shadow-md rounded-lg relative hover:shadow-lg transition-all"
+      onClick={(event: { preventDefault: () => void }) => {
+        if (displayScheduleModal) {
+          event.preventDefault();
+        }
+        handleClickDay(recipeCard.position);
+      }}
     >
       <img
         src={recipeCard.imageUrl}
@@ -86,14 +109,20 @@ function RecipeCard({ recipeCard }: CardProps) {
       />
       <div className="text-bgff absolute top-2 right-1 ">
         <div
-          className={`card-actions justify-end bg-t ${
-            stateHome ? 'hidden' : ''
-          }`}
+          className={`card-actions justify-end bg-t ${stateHome ? 'hidden' : ''}
+          ${stateSchedule ? 'hidden' : ''}`}
         >
           <button
             type="button"
             className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
-            onClick={(event) => handleAddFavori(event)}
+            onClick={(event) => {
+              event.preventDefault();
+              if (!isLogged) {
+                toggleSignUp();
+              } else {
+                handleAddFavori(event);
+              }
+            }}
           >
             {recipeFavori ? (
               <Heart size={20} fill="red" />
@@ -104,7 +133,14 @@ function RecipeCard({ recipeCard }: CardProps) {
           <button
             type="button"
             className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
-            onClick={(event) => handleAddSchedule(event)}
+            onClick={(event) => {
+              event.preventDefault();
+              if (!isLogged) {
+                toggleSignUp();
+              } else {
+                handleAddSchedule(event);
+              }
+            }}
           >
             <Plus size={20} />
           </button>

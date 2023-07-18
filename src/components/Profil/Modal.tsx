@@ -1,5 +1,4 @@
 import { X } from 'react-feather';
-import { useState } from 'react';
 import Profil from './Profil';
 import Favoris from './Favoris';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
