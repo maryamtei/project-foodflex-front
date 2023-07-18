@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchRecipeDetails } from '../../store/reducers/recipeDetails';
+import '../RecipeCard/RecipeCard.css';
 
 function Recipe() {
   const { id } = useParams<{ id: string }>();
@@ -40,14 +41,17 @@ function Recipe() {
         </div>
         <div className="md:w-2/3 md:pr-8 pt-4 md:p-0 ">
           <h2 className="text-xl font-bold mb-2">Instructions:</h2>
-          <p>{recipe.instruction}</p>
+          <p className="leading-8">{recipe.instruction}</p>
         </div>
-        <div className="hidden md:block md:w-1/3  justify-center text-center bg-fourthff bg-opacity-25 p-4 rounded-xl border-fourthff">
-          <h2 className="text-xl font-bold py-2">Ingredients you need:</h2>
-          <ol className="list-none list-inside py-2 ">
+        <div className="hidden md:block md:w-1/3  justify-center text-center foodPattern bg-opacity-25 p-4 rounded-xl shadow-md border border-fourthff text-bgff">
+          <h2 className="text-xl font-bold py-2 text-bgff">
+            Ingredients you need:
+          </h2>
+          <ol className="list-none list-inside py-2 p-10 text-md ">
             {recipe.ingredients.map((ingredient, index) => (
-              <li key={index}>
-                {ingredient} - {recipe.mesures[index]}
+              <li className="flex justify-center" key={index}>
+                <p className="font-semibold pr-2"> {ingredient}</p> -
+                <p className="pl-2">{recipe.mesures[index]}</p>
               </li>
             ))}
           </ol>
