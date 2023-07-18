@@ -20,13 +20,13 @@ function Recipe() {
     return <p>Loading...</p>;
   }
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto  ">
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-3xl font-bold mb-6 text-red">{recipe.name}</h1>
+        <h1 className="text-4xl font-bold m-8 text-red">{recipe.name}</h1>
         <img
           src={recipe.imageUrl}
           alt={recipe.name}
-          className="mb-6 rounded-lg flex"
+          className=" rounded-lg flex"
         />
       </div>
       <h2 className="text-3xl font-bold m-10 text-center">Meal Preparation</h2>
@@ -59,13 +59,18 @@ function Recipe() {
           </ol>
         </div>
       </div>
-      <h2 className="text-3xl font-bold m-10 text-center">
-        Step-by-Step Video Guide
-      </h2>
-      <div className="py-4 flex justify-center">
-        {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-        <ReactPlayer url={recipe.videoUrl} />
-      </div>
+
+      {recipe.videoUrl && (
+        <>
+          <h2 className="text-3xl font-bold m-10 text-center">
+            Step-by-Step Video Guide
+          </h2>
+          <div className="py-4 flex justify-center">
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
+            <ReactPlayer url={recipe.videoUrl} />
+          </div>
+        </>
+      )}
     </div>
   );
 }
