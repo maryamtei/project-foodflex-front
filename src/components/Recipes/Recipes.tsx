@@ -3,6 +3,7 @@ import { useDebounce } from 'react-use';
 import SearchComponent from '../SearchComponent/SearchComponent';
 import Schedule from '../Schedule/Schedule';
 import RecipeCard from '../RecipeCard/RecipeCard';
+
 import {
   fetchRandomRecipes,
   fetchSearchRecipe,
