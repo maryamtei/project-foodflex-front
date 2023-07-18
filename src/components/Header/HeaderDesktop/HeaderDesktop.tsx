@@ -68,9 +68,7 @@ function HeaderDesktop() {
         <NavLink
           to="/recipes"
           relative="path"
-          className={({ isActive }) =>
-            isActive ? 'active font-bold text-thirdff' : ''
-          }
+          className={({ isActive }) => (isActive ? 'active font-bold' : '')}
           onClick={() => {
             if (modalIsOpen) {
               toogleModalSignUpSignIn();

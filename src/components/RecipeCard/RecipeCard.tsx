@@ -19,6 +19,7 @@ interface CardProps {
 }
 
 function RecipeCard({ recipeCard }: CardProps) {
+  const [showAnimation, setShowAnimation] = useState(true);
   const [recipeFavori, setRecipeFavori] = useState(false);
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const stateSchedule = useAppSelector((state) => state.schedule.stateSchedule);
@@ -85,6 +86,12 @@ function RecipeCard({ recipeCard }: CardProps) {
     }
   }, [recipeCard, searchFavori]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setShowAnimation(false);
+    }, 600);
+  }, []);
+
   const toggleSignUp = () => {
     dispatch(toggleSignUpOpen());
     dispatch(toggleIsOpen());
@@ -94,7 +101,9 @@ function RecipeCard({ recipeCard }: CardProps) {
   return (
     <Link
       to="/recipe"
-      className="shadow-md rounded-lg relative hover:shadow-lg transition-all"
+      className={`shadow-md rounded-lg relative hover:shadow-lg transition-all ${
+        showAnimation ? 'animate-CardOpen' : ''
+      }`}
       onClick={(event: { preventDefault: () => void }) => {
         if (displayScheduleModal) {
           event.preventDefault();
@@ -147,7 +156,7 @@ function RecipeCard({ recipeCard }: CardProps) {
         </div>
       </div>
       <div className="rounded-b-lg foodPattern">
-        <h2 className="text-white font-semibold p-2 text-center truncate">
+        <h2 className="text-white font-semibold p-2 text-center truncate text-sm sm:text-md">
           {recipeCard.name}
         </h2>
       </div>
