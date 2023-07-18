@@ -156,7 +156,7 @@ function RecipeCard({ recipeCard }: CardProps) {
         </div>
       </div>
       <div className="rounded-b-lg foodPattern">
-        <h2 className="text-white font-semibold p-2 text-center truncate">
+        <h2 className="text-white font-semibold p-2 text-center truncate text-sm sm:text-md">
           {recipeCard.name}
         </h2>
       </div>
