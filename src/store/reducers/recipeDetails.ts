@@ -1,14 +1,13 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+import { RecipeDetails } from '../../@types/recipe';
 
-interface RecipeProps {
-  strMeal: string;
-  imageUrl: string;
-  ingredients: string[];
-  mesures: [];
-  strInstructions: string;
-  idMeal: string;
-  strMealThumb: string;
+interface RecipeDetailsState {
+  recipe: RecipeDetails | null;
 }
+// Initialisation de l'état initial des recettes.
+export const initialState: RecipeDetailsState = {
+  recipe: null,
+};
 
 export const fetchRecipeDetails = createAsyncThunk(
   'recipes/fetchRecipeDetails',
@@ -33,31 +32,24 @@ export const fetchRecipeDetails = createAsyncThunk(
       }
     }
 
-    return {
-      strMeal: meal.strMeal,
+    const recipeDetails: RecipeDetails = {
+      id: meal.idMeal,
+      name: meal.strMeal,
       imageUrl: meal.strMealThumb,
+      instruction: meal.strInstructions,
       ingredients,
       mesures,
-      strInstructions: meal.strInstructions,
-      idMeal: meal.idMeal,
-      strMealThumb: meal.strMealThumb,
     };
+
+    return recipeDetails;
   }
 );
 
-const initialState: RecipeProps = {
-  strMeal: '',
-  imageUrl: '',
-  ingredients: [],
-  mesures: [],
-  strInstructions: '',
-  idMeal: '',
-  strMealThumb: '',
-};
-
 const recipeDetailsReducer = createReducer(initialState, (builder) => {
   builder.addCase(fetchRecipeDetails.fulfilled, (state, action) => {
-    return action.payload;
+    return {
+      recipe: action.payload,
+    };
   });
 });
 
