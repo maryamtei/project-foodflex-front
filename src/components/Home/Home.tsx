@@ -35,7 +35,7 @@ function Home() {
       } `}
     >
       <HeadHome />
-      {recipes.length && <MainHome recipes={recipes} />}
+      {recipes.length === 14 && <MainHome recipes={recipes} />}
       <FootHome />
     </div>
   );

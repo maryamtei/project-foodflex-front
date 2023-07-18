@@ -15,10 +15,6 @@ function MainHome({ recipes }: RecipeProps) {
       <div className="mt-10 block ">
         <Carousel recipes={recipes} />
       </div>
-
-      {/* <div className="md:block md:mt-20 hidden ">
-        <MenuSemaine recipes={recipes} />
-      </div> */}
     </div>
   );
 }
