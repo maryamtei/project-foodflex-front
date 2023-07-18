@@ -28,7 +28,7 @@ function Recipe() {
         <img
           src={recipe.imageUrl}
           alt={recipe.name}
-          className=" rounded-lg flex"
+          className="rounded-lg flex"
         />
       </div>
       <h2 className="text-3xl font-bold m-10 text-center">Meal Preparation</h2>
@@ -46,7 +46,11 @@ function Recipe() {
         </div>
         <div className="md:w-2/3 md:pr-8 pt-4 md:p-0 ">
           <h2 className="text-xl font-bold mb-2">Instructions:</h2>
-          <p className="leading-8">{recipe.instruction}</p>
+          <div className="prose  lg:prose-lg">
+            {recipe.instruction.split('\n').map((line) => (
+              <p key={line}>{line}</p>
+            ))}
+          </div>
         </div>
         <div className="hidden md:block md:w-1/3  justify-center text-center foodPattern bg-opacity-25 p-4 rounded-xl shadow-md border border-fourthff text-bgff">
           <h2 className="text-xl font-bold py-2 text-bgff">
