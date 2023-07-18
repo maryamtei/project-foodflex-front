@@ -1,11 +1,13 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 
 interface RecipeProps {
-  name: string;
+  strMeal: string;
   imageUrl: string;
   ingredients: string[];
-  instructions: string[];
+  mesures: [];
+  strInstructions: string;
   idMeal: string;
+  strMealThumb: string;
 }
 
 export const fetchRecipeDetails = createAsyncThunk(
@@ -15,18 +17,42 @@ export const fetchRecipeDetails = createAsyncThunk(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
     );
     const data = await response.json();
-    console.log(data);
-    return data.meals[0];
-    console.log(`reducer: ${data.meals[0]}`);
+    const meal = data.meals[0];
+
+    const ingredients = [];
+    for (let i = 1; i <= 20; i += 1) {
+      if (meal[`strIngredient${i}`]) {
+        ingredients.push(meal[`strIngredient${i}`]);
+      }
+    }
+
+    const mesures = [];
+    for (let i = 1; i <= 20; i += 1) {
+      if (meal[`strMeasure${i}`]) {
+        mesures.push(meal[`strMeasure${i}`]);
+      }
+    }
+
+    return {
+      strMeal: meal.strMeal,
+      imageUrl: meal.strMealThumb,
+      ingredients,
+      mesures,
+      strInstructions: meal.strInstructions,
+      idMeal: meal.idMeal,
+      strMealThumb: meal.strMealThumb,
+    };
   }
 );
 
 const initialState: RecipeProps = {
-  name: '',
+  strMeal: '',
   imageUrl: '',
   ingredients: [],
-  instructions: [],
+  mesures: [],
+  strInstructions: '',
   idMeal: '',
+  strMealThumb: '',
 };
 
 const recipeDetailsReducer = createReducer(initialState, (builder) => {
