@@ -21,6 +21,10 @@ function Schedule() {
   );
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const weekFind = schedules.find((week) => week.week === currentWeek);
+  const displaySchedule = useAppSelector(
+    (state) => state.settings.clickAddSchedule
+  );
+  const mobileView = useAppSelector((state) => state.window.mobileView);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -62,7 +66,7 @@ function Schedule() {
     return () => {
       dispatch(changeStateSchedule(false));
     };
-  }, [weekFind, dispatch]);
+  }, [weekFind, dispatch, isLogged, navigate]);
 
   return (
     <div className={` flex flex-col justify-center my-10 px-3 sm:px-8 `}>

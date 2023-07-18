@@ -18,10 +18,15 @@ module.exports = {
           '0%': { right: '0px' },
           '100%': { right: '-20rem' },
         },
+        CardOpen: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
       },
       animation: {
         modalProfilOpen: 'modalProfilOpen 0.6s ease-in-out',
         modalProfilClose: 'modalProfilClose 0.6s ease-in-out',
+        CardOpen: 'CardOpen 0.6s ease-in-out',
       },
     },
   },
