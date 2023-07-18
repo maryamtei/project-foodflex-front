@@ -100,10 +100,8 @@ function RecipeCard({ recipeCard }: CardProps) {
 
   return (
     <Link
-      to="/recipe"
-      className={`shadow-md rounded-lg relative hover:shadow-lg transition-all ${
-        showAnimation ? 'animate-CardOpen' : ''
-      }`}
+      to={`/recipes/${recipeCard.idMeal}`}
+      className="shadow-md rounded-lg relative hover:shadow-lg transition-all"
       onClick={(event: { preventDefault: () => void }) => {
         if (displayScheduleModal) {
           event.preventDefault();
