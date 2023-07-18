@@ -1,6 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/settings';
+import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
+import {
+  toggleIsOpen,
+  toggleSignUpOpen,
+} from '../../../store/reducers/settings';
 
 function FootHome() {
   const isLogged = useAppSelector((state) => state.settings.isLogged);

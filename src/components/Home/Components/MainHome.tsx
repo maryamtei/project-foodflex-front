@@ -1,6 +1,5 @@
-import Carousel from '../Carousel/Carousel';
-import MenuSemaine from './MenuSemaine/MenuSemaine';
-import { Recipe } from '../../@types/recipe';
+import Carousel from '../../Carousel/Carousel';
+import { Recipe } from '../../../@types/recipe';
 
 interface RecipeProps {
   recipes: Recipe[];

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import HeadHome from './HeadHome';
-import MainHome from './MainHome';
-import FootHome from './FootHome';
+import HeadHome from './Components/HeadHome';
+import MainHome from './Components/MainHome';
+import FootHome from './Components/FootHome';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateHome } from '../../store/reducers/home';
 import { fetchRandomRecipes } from '../../store/reducers/recipes';
