@@ -238,7 +238,9 @@ function HeaderMobile() {
       </div>
       <div className="bg-fourthff w-full border-none fixed bottom-0 px-8 py-4 z-10 h-16 overflow-hidden flex justify-between text-bgff">
         <NavLink
-          className="active:text-thirdff"
+          className={({ isActive }) =>
+            isActive ? 'active font-bold text-bgff ' : 'text-thirdff'
+          }
           to="/recipes"
           relative="path"
           onClick={() => {
@@ -250,10 +252,12 @@ function HeaderMobile() {
             }
           }}
         >
-          <Search className="h-9 w-9  hover:text-thirdff duration-300 ease-linear" />
+          <Search className="h-9 w-9" />
         </NavLink>
         <NavLink
-          className="active:text-thirdff"
+          className={({ isActive }) =>
+            isActive ? 'active font-bold text-bgff ' : 'text-thirdff'
+          }
           to="/schedule"
           relative="path"
           onClick={() => {
@@ -265,10 +269,14 @@ function HeaderMobile() {
             }
           }}
         >
-          <Calendar className="h-9 w-9 hover:text-thirdff duration-300 ease-linear" />
+          <Calendar className="h-9 w-9" />
         </NavLink>
         <button
-          className={modalIsOpenFavoriProfil ? 'text-thirdff' : 'text-bgff'}
+          className={
+            modalIsOpenFavoriProfil
+              ? 'text-bgff font-bold active'
+              : 'text-thirdff'
+          }
           type="button"
           onClick={() => {
             if (!isLogged && !modalIsOpen) {
@@ -279,7 +287,7 @@ function HeaderMobile() {
             }
           }}
         >
-          <User className="h-9 w-9  hover:text-thirdff duration-300 ease-linear" />
+          <User className="h-9 w-9 " />
         </button>
       </div>
     </header>

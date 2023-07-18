@@ -1,6 +1,5 @@
-import Carousel from '../Carousel/Carousel';
-import Weekmeals from './Weekmeals';
-import { Recipe } from '../../@types/recipe';
+import Carousel from '../../Carousel/Carousel';
+import { Recipe } from '../../../@types/recipe';
 
 interface RecipeProps {
   recipes: Recipe[];
@@ -16,10 +15,6 @@ function MainHome({ recipes }: RecipeProps) {
       <div className="mt-10 block ">
         <Carousel recipes={recipes} />
       </div>
-
-      {/* <div className="md:block md:mt-20 hidden ">
-        <Weekmeals recipes={recipes} />
-      </div> */}
     </div>
   );
 }

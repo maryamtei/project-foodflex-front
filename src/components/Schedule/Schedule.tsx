@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { nextWeek } from '../../store/reducers/settings';
 import Carousel from '../Carousel/Carousel';
 import { changeStateSchedule } from '../../store/reducers/schedule';
 
 function Schedule() {
+  const [showAnimation, setShowAnimation] = useState(true);
   const [newSchedule, setNewSchedule] = useState([
     {
       idMeal: '',
@@ -18,9 +20,14 @@ function Schedule() {
   const schedules = useAppSelector(
     (state) => state.settings.currentUser.schedule
   );
+  const isLogged = useAppSelector((state) => state.settings.isLogged);
   const weekFind = schedules.find((week) => week.week === currentWeek);
+  const displaySchedule = useAppSelector(
+    (state) => state.settings.clickAddSchedule
+  );
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   function handleClickNextWeek() {
     dispatch(nextWeek(true));
@@ -29,6 +36,9 @@ function Schedule() {
     dispatch(nextWeek(false));
   }
   useEffect(() => {
+    if (!isLogged) {
+      navigate('/');
+    }
     dispatch(changeStateSchedule(true));
     const newCurrentSchedule = [];
     // eslint-disable-next-line no-plusplus
@@ -53,11 +63,16 @@ function Schedule() {
       }
     }
     setNewSchedule(newCurrentSchedule);
-    console.log(newCurrentSchedule);
     return () => {
       dispatch(changeStateSchedule(false));
     };
-  }, [weekFind, dispatch]);
+  }, [weekFind, dispatch, isLogged, navigate]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setShowAnimation(false);
+    }, 600);
+  }, []);
 
   return (
     <div className={` flex flex-col justify-center my-10 px-3 sm:px-8 `}>
@@ -73,7 +88,11 @@ function Schedule() {
         </button>
       </div>
       {newSchedule.length === 14 && (
-        <div className="mt-10 block">
+        <div
+          className={`mt-10 block ${
+            showAnimation ? 'animate-scheduleSlideLeft' : ''
+          }`}
+        >
           <Carousel recipes={newSchedule} />
         </div>
       )}
