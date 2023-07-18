@@ -1,12 +1,15 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
+import ReactPlayer from 'react-player';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchRecipeDetails } from '../../store/reducers/recipeDetails';
 import '../RecipeCard/RecipeCard.css';
-import ReactPlayer from 'react-player';
 
 function Recipe() {
   const { id } = useParams<{ id: string }>();
+  if (!id) {
+    throw new Error('No id provided');
+  }
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -14,7 +17,6 @@ function Recipe() {
   }, [dispatch, id]);
 
   const recipe = useAppSelector((state) => state.recipeDetails.recipe);
-  console.log(recipe);
 
   if (!recipe) {
     return <p>Loading...</p>;
@@ -35,7 +37,8 @@ function Recipe() {
           <h2 className="text-xl font-bold mb-2">Ingredients:</h2>
           <ol className="list-disc list-inside">
             {recipe.ingredients.map((ingredient, index) => (
-              <li key={index}>
+              // eslint-disable-next-line react/no-array-index-key
+              <li key={`${ingredient}${index}`}>
                 {ingredient} - {recipe.mesures[index]}
               </li>
             ))}
@@ -51,7 +54,8 @@ function Recipe() {
           </h2>
           <ol className="list-none list-inside py-2 p-10 text-md ">
             {recipe.ingredients.map((ingredient, index) => (
-              <li className="flex justify-center" key={index}>
+              // eslint-disable-next-line react/no-array-index-key
+              <li className="flex justify-center" key={`${ingredient}${index}`}>
                 <p className="font-semibold pr-2"> {ingredient}</p> -
                 <p className="pl-2">{recipe.mesures[index]}</p>
               </li>
@@ -66,7 +70,6 @@ function Recipe() {
             Step-by-Step Video Guide
           </h2>
           <div className="py-4 flex justify-center">
-            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <ReactPlayer url={recipe.videoUrl} />
           </div>
         </>
