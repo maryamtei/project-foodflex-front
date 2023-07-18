@@ -27,7 +27,7 @@ function Recipe() {
           className="mb-6 rounded-lg flex"
         />
       </div>
-      <div className="flex flex-col md:flex-row">
+      <div className="flex flex-col md:flex-row p-4">
         <div className="md:hidden  md:w-1/3 md:pl-8">
           <h2 className="text-xl font-bold mb-2">Ingredients:</h2>
           <ol className="list-disc list-inside">
@@ -38,14 +38,13 @@ function Recipe() {
             ))}
           </ol>
         </div>
-
-        <div className="md:w-2/3 md:pr-8">
+        <div className="md:w-2/3 md:pr-8 pt-4 md:p-0 ">
           <h2 className="text-xl font-bold mb-2">Instructions:</h2>
           <p>{recipe.instruction}</p>
         </div>
-        <div className="hidden md:block md:w-1/3 md:pl-8">
-          <h2 className="text-xl font-bold mb-2">Ingredients:</h2>
-          <ol className="list-disc list-inside">
+        <div className="hidden md:block md:w-1/3  justify-center text-center bg-fourthff bg-opacity-25 p-4 rounded-xl border-fourthff">
+          <h2 className="text-xl font-bold py-2">Ingredients you need:</h2>
+          <ol className="list-none list-inside py-2 ">
             {recipe.ingredients.map((ingredient, index) => (
               <li key={index}>
                 {ingredient} - {recipe.mesures[index]}
