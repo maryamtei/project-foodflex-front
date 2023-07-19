@@ -1,12 +1,14 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
 
-interface RecipeProps {
-  name: string;
-  imageUrl: string;
-  ingredients: string[];
-  instructions: string[];
-  idMeal: string;
+import { RecipeDetails } from '../../@types/recipe';
+
+interface RecipeDetailsState {
+  recipe: RecipeDetails | null;
 }
+// Initialisation de l'état initial des recettes.
+export const initialState: RecipeDetailsState = {
+  recipe: null,
+};
 
 export const fetchRecipeDetails = createAsyncThunk(
   'recipes/fetchRecipeDetails',
@@ -15,23 +17,42 @@ export const fetchRecipeDetails = createAsyncThunk(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
     );
     const data = await response.json();
-    console.log(data);
-    return data.meals[0];
-    console.log(`reducer: ${data.meals[0]}`);
+
+    const meal = data.meals[0];
+
+    const ingredients = [];
+    for (let i = 1; i <= 20; i += 1) {
+      if (meal[`strIngredient${i}`]) {
+        ingredients.push(meal[`strIngredient${i}`]);
+      }
+    }
+
+    const mesures = [];
+    for (let i = 1; i <= 20; i += 1) {
+      if (meal[`strMeasure${i}`]) {
+        mesures.push(meal[`strMeasure${i}`]);
+      }
+    }
+
+    const recipeDetails: RecipeDetails = {
+      id: meal.idMeal,
+      name: meal.strMeal,
+      imageUrl: meal.strMealThumb,
+      instruction: meal.strInstructions,
+      ingredients,
+      mesures,
+      videoUrl: meal.strYoutube,
+    };
+
+    return recipeDetails;
   }
 );
 
-const initialState: RecipeProps = {
-  name: '',
-  imageUrl: '',
-  ingredients: [],
-  instructions: [],
-  idMeal: '',
-};
-
 const recipeDetailsReducer = createReducer(initialState, (builder) => {
   builder.addCase(fetchRecipeDetails.fulfilled, (state, action) => {
-    return action.payload;
+    return {
+      recipe: action.payload,
+    };
   });
 });
 
