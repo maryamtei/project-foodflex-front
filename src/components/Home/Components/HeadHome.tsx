@@ -1,5 +1,5 @@
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import HowItWorks from '../HowItWorks';
+import HowItWorks from './HowItWorks';
 
 function HeadHome() {
   return (

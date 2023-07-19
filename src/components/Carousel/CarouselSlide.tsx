@@ -22,12 +22,12 @@ export default function CarouselSlide({
           Lunch :
         </p>
 
-        <RecipeCard recipeCard={recipe1} key={recipe1.idMeal} />
+        <RecipeCard recipeCard={recipe1} key={recipe1.idDbMeal} />
 
-        <p className="text-fourthff text-sm sm:text-md font-bold text-center mb-2 bt-2 mb-4 mt-4 ">
+        <p className="text-fourthff text-sm sm:text-md font-bold text-center mb-2 bt-2 sm:mb-4 sm:mt-4 ">
           Dinner :
         </p>
-        <RecipeCard recipeCard={recipe2} key={recipe2.idMeal} />
+        <RecipeCard recipeCard={recipe2} key={recipe2.idDbMeal} />
       </div>
     </div>
   );

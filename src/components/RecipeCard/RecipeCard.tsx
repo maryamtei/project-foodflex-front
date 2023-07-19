@@ -53,7 +53,7 @@ function RecipeCard({ recipeCard }: CardProps) {
   const searchFavori = useCallback(
     (recipe: Recipe) => {
       const findFavori = favoris.find(
-        (favori) => favori.idDbMeal === recipe.idMeal
+        (favori) => favori.idDbMeal === recipe.idDbMeal
       );
       return findFavori;
     },
@@ -69,7 +69,7 @@ function RecipeCard({ recipeCard }: CardProps) {
       dispatch(addFavori(recipeCard));
       setRecipeFavori(true);
     } else {
-      dispatch(deleteFavori(recipeCard.idMeal));
+      dispatch(deleteFavori(recipeCard.idDbMeal));
       setRecipeFavori(false);
     }
   }
@@ -100,7 +100,7 @@ function RecipeCard({ recipeCard }: CardProps) {
 
   return (
     <Link
-      to={`/recipes/${recipeCard.idMeal}`}
+      to={`/recipes/${recipeCard.idDbMeal}`}
       className="shadow-md rounded-lg relative hover:shadow-lg transition-all"
       onClick={(event: { preventDefault: () => void }) => {
         if (displayScheduleModal) {
@@ -110,7 +110,7 @@ function RecipeCard({ recipeCard }: CardProps) {
       }}
     >
       <img
-        src={recipeCard.imageUrl}
+        src={recipeCard.image}
         alt={recipeCard.name}
         className="rounded-t-md cover"
       />

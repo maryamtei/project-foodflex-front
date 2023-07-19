@@ -30,7 +30,7 @@ function Favoris() {
       </div>
       <div className="grid grid-cols-2  gap-4 mt-10">
         {favorites.map((favori) => (
-          <FavoriCard key={favori.idMeal} favori={favori} />
+          <FavoriCard key={favori.id} favori={favori} />
         ))}
       </div>
     </div>
