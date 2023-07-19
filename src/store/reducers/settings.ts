@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { Favorite, Meal, User } from '../../@types/Profil';
 import usersData from '../../Data/UserData.json';
-import { fetchPost, fetchGet } from '../../utils/fetch';
+import { fetchPost, fetchGet, fetchDelete } from '../../utils/fetch';
 
 interface SettingsState {
   users: User[];
@@ -136,7 +136,16 @@ export const editInfoProfil = createAsyncThunk(
 );
 
 // ---------------- EDIT FAVORIS -------------------//
-export const deleteFavori = createAction<string>('user/delete-favori');
+export const deleteFavori = createAsyncThunk(
+  'user/user/delete-favori',
+  async (idToDelete) => {
+    const response = await fetchDelete(`profil`, idToDelete);
+    const data = await response.json();
+
+    return data;
+  }
+);
+
 export const addFavori = createAsyncThunk(
   'user/add-favori',
   async (favorite) => {
@@ -191,7 +200,6 @@ const settingsReducer = createReducer(initialValue, (builder) => {
         state.isLogged = true;
         state.currentUser = response.user;
       }
-      console.log(response.user);
     })
     // ---------------- SIGN IN -------------------//
     .addCase(signIn.pending, (state) => {
@@ -279,26 +287,17 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
 
     // ---------------- DELETE FAVORIS -------------------//
-    .addCase(deleteFavori, (state, action) => {
-      const idToDelete = action.payload;
-      const updatedFavorites = state.currentUser.favorites.filter(
-        (favori) => favori.idMeal !== idToDelete
-      );
-
-      // Edit favorites in BDD/Redux
-      state.users = state.users.map((user) => {
-        if (user.email === state.currentUser.email) {
-          state.currentUser = {
-            ...state.currentUser,
-            favorites: updatedFavorites,
-          };
-          return {
-            ...user,
-            favorites: updatedFavorites,
-          };
-        }
-        return user;
-      });
+    .addCase(deleteFavori.pending, (state) => {
+      state.isLoading = true;
+      state.message = null;
+    })
+    .addCase(deleteFavori.rejected, (state) => {
+      state.message = 'rejected';
+      state.isLoading = false;
+    })
+    .addCase(deleteFavori.fulfilled, (state, action) => {
+      const response = action.payload;
+      state.currentUser = response.user;
     })
 
     // ---------------- ADD FAVORIS -------------------//
@@ -314,24 +313,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       const response = action.payload;
       state.currentUser = response.user;
     })
-    // .addCase(addFavori, (state, action) => {
-    //  const favoriToAdd = action.payload;
-    //  state.currentUser.favorites.push(favoriToAdd);
-    //
-    //  state.users = state.users.map((user) => {
-    //    if (user.email === state.currentUser.email) {
-    //      state.currentUser = {
-    //        ...state.currentUser,
-    //        favorites: state.currentUser.favorites,
-    //      };
-    //      return {
-    //        ...user,
-    //        favorites: state.currentUser.favorites,
-    //      };
-    //    }
-    //    return user;
-    //  });
-    // })
+
     // ---------------- ADD SCHEDULE -------------------//
     .addCase(nextWeek, (state, action) => {
       if (action.payload && state.currentWeek < 52) {
