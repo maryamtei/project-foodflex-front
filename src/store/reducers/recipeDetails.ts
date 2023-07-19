@@ -1,4 +1,5 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
+
 import { RecipeDetails } from '../../@types/recipe';
 
 interface RecipeDetailsState {
@@ -16,6 +17,7 @@ export const fetchRecipeDetails = createAsyncThunk(
       `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
     );
     const data = await response.json();
+
     const meal = data.meals[0];
 
     const ingredients = [];
