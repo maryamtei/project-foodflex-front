@@ -85,9 +85,9 @@ function Recipes() {
                   <div className=" flex justify-end">
                     <X onClick={closeModal} />
                   </div>
-                  <Dialog.Title className="text-lg font-medium leading-6 text-gray-900">
+                  <h2 className="text-2xl  font-bold text-gray-900">
                     Which day to eat this dish?
-                  </Dialog.Title>
+                  </h2>
 
                   <div className="mt-2">
                     <Schedule />
@@ -96,7 +96,7 @@ function Recipes() {
                   <div className="mt-4">
                     <button
                       type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-fourthff px-4 py-2 text-sm font-medium text-bgff hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      className="inline-flex justify-center rounded-md border border-transparent hover:border-fourthff bg-fourthff px-4 py-2 text-sm font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2"
                       onClick={closeModal}
                     >
                       This schedule looks awesome !
