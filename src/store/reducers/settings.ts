@@ -4,11 +4,9 @@ import {
   createReducer,
 } from '@reduxjs/toolkit';
 import { Favorite, Meal, User } from '../../@types/Profil';
-import usersData from '../../Data/UserData.json';
 import { fetchPost, fetchGet, fetchDelete } from '../../utils/fetch';
 
 interface SettingsState {
-  // users: User[];
   currentUser: User;
   modalIsOpen: boolean;
   isLogged: boolean;
@@ -32,7 +30,6 @@ interface SettingsState {
 }
 
 const initialValue: SettingsState = {
-  // users: usersData,
   currentUser: {
     firstName: '',
     lastName: '',
@@ -108,18 +105,12 @@ export const getUserData = createAsyncThunk('settings/USER_DATA', async () => {
 export const signUp = createAsyncThunk(
   'settings/SIGNUP',
   async (credentials: SettingsState['signUpCredentials']) => {
-    // const response = await fetch('http://localhost:3000/signup', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(credentials),
-    // });
-    // const data = await response.json();
-    return credentials;
+    const response = await fetchPost(`signup`, credentials);
+    const data = await response.json();
+
+    return data;
   }
 );
-
 // ------------ EDIT PROFIL --------------//
 export const editInfoProfil = createAsyncThunk(
   'user/Edit-Info-Profil',
@@ -235,34 +226,8 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(signUp.fulfilled, (state, action) => {
-      // const userSignIn = action.payload;
-      //  const userFind = state.users.find(
-      //    (user) => user.email === userSignIn.email
-      //  );
-      //  state.message = action.payload.message;
-      //  ----------------- CREATION ACCOUNT USER ----------------------//
-      // if (!userFind) {
-      //   const newUser = {
-      //     firstName: userSignIn.firstName || '',
-      //     lastName: userSignIn.lastName || '',
-      //     email: userSignIn.email,
-      //     password: userSignIn.password,
-      //     favorites: [],
-      //     // on crée un tableau de taille 10 et pour chaque élément du tableau,
-      //     // on met un objet week,meal[]
-      //     schedule: Array.from({ length: 10 }, (_, index) => ({
-      //       week: index,
-      //       meals: [],
-      //     })),
-      //   };
-      //   state.users.push(newUser);
-      //   state.message = `Your account is created, please Sign In`;
-      // } else {
-      //   state.message = `User ${userSignIn.email} already exists`;
-      // }
-      // // state.message = action.payload.message;
-      // state.isLoading = false;
-      // state.modalIsOpen = false;
+      state.isLoading = false;
+      state.modalIsOpen = false;
     })
 
     // ------------ EDIT PROFIL --------------//
