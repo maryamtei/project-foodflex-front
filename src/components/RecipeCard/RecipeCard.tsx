@@ -1,25 +1,24 @@
-import { useCallback, useEffect, useState } from 'react';
-import { Plus, Heart } from 'react-feather';
+import { useEffect, useMemo, useState } from 'react';
+import { Heart, Plus } from 'react-feather';
 import { Link } from 'react-router-dom';
+import { Recipe } from '../../@types/recipe';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
-  selectedDay,
   addFavori,
-  deleteFavori,
   addSchedule,
+  deleteFavori,
   displaySchedule,
+  selectedDay,
   toggleIsOpen,
   toggleSignUpOpen,
 } from '../../store/reducers/settings';
-import { Recipe } from '../../@types/recipe';
 import './RecipeCard.css';
 
 interface CardProps {
-  recipeCard: Recipe;
+  recipe: Recipe;
 }
 
-function RecipeCard({ recipeCard }: CardProps) {
-  const [showAnimation, setShowAnimation] = useState(true);
+function RecipeCard({ recipe }: CardProps) {
   const [recipeFavori, setRecipeFavori] = useState(false);
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const stateSchedule = useAppSelector((state) => state.schedule.stateSchedule);
@@ -41,7 +40,7 @@ function RecipeCard({ recipeCard }: CardProps) {
   function handleAddSchedule(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     dispatch(displaySchedule(!clickAddFavori));
-    dispatch(addSchedule(recipeCard));
+    dispatch(addSchedule(recipe));
     window.scrollTo({
       behavior: 'smooth',
       top: 0,
@@ -50,26 +49,22 @@ function RecipeCard({ recipeCard }: CardProps) {
 
   // useCallback to memoize the searchFavori function and prevent unnecessary
   // re-renders
-  const searchFavori = useCallback(
-    (recipe: Recipe) => {
-      const findFavori = favoris.find(
-        (favori) => favori.idMeal === recipe.idMeal
-      );
-      return findFavori;
-    },
-    [favoris]
-  );
+  const matchingFavori = useMemo(() => {
+    const findFavori = favoris.find(
+      (favori) => favori.idMeal === recipe.idMeal
+    );
+    return findFavori;
+  }, [favoris, recipe.idMeal]);
 
   // Function to handle adding the recipe to favorites
   function handleAddFavori(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
 
-    const findFavori = searchFavori(recipeCard);
-    if (!findFavori) {
-      dispatch(addFavori(recipeCard));
+    if (!matchingFavori) {
+      dispatch(addFavori(recipe));
       setRecipeFavori(true);
     } else {
-      dispatch(deleteFavori(recipeCard.idMeal));
+      dispatch(deleteFavori(recipe.idMeal));
       setRecipeFavori(false);
     }
   }
@@ -77,20 +72,12 @@ function RecipeCard({ recipeCard }: CardProps) {
   // useEffect to check if the recipe is in favorites and update recipeFavori
   // accordingly
   useEffect(() => {
-    const findFavori = searchFavori(recipeCard);
-
-    if (findFavori) {
+    if (matchingFavori) {
       setRecipeFavori(true);
     } else {
       setRecipeFavori(false);
     }
-  }, [recipeCard, searchFavori]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowAnimation(false);
-    }, 600);
-  }, []);
+  }, [recipe, matchingFavori]);
 
   const toggleSignUp = () => {
     dispatch(toggleSignUpOpen());
@@ -100,18 +87,18 @@ function RecipeCard({ recipeCard }: CardProps) {
 
   return (
     <Link
-      to={`/recipes/${recipeCard.idMeal}`}
+      to={`/recipes/${recipe.idMeal}`}
       className="shadow-md rounded-lg relative hover:shadow-lg transition-all"
       onClick={(event: { preventDefault: () => void }) => {
         if (displayScheduleModal) {
           event.preventDefault();
         }
-        handleClickDay(recipeCard.position);
+        handleClickDay(recipe.position);
       }}
     >
       <img
-        src={recipeCard.imageUrl}
-        alt={recipeCard.name}
+        src={recipe.imageUrl}
+        alt={recipe.name}
         className="rounded-t-md cover"
       />
       <div className="text-bgff absolute top-2 right-1 ">
@@ -155,7 +142,7 @@ function RecipeCard({ recipeCard }: CardProps) {
       </div>
       <div className="rounded-b-lg foodPattern">
         <h2 className="text-white font-semibold p-2 text-center truncate text-sm sm:text-md">
-          {recipeCard.name}
+          {recipe.name}
         </h2>
       </div>
     </Link>

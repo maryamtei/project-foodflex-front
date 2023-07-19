@@ -1,17 +1,17 @@
-import { useEffect, useState, Fragment } from 'react';
-import { useDebounce } from 'react-use';
 import { Dialog, Transition } from '@headlessui/react';
-import SearchComponent from '../SearchComponent/SearchComponent';
-import Schedule from '../Schedule/Schedule';
+import { Fragment, useEffect, useState } from 'react';
+import { useDebounce } from 'react-use';
 import RecipeCard from '../RecipeCard/RecipeCard';
+import Schedule from '../Schedule/Schedule';
+import SearchComponent from '../SearchComponent/SearchComponent';
 
+import { X } from 'react-feather';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   fetchRandomRecipes,
   fetchSearchRecipe,
 } from '../../store/reducers/recipes';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { displaySchedule } from '../../store/reducers/settings';
-import { X } from 'react-feather';
 
 function Recipes() {
   const [search, setSearch] = useState('');
@@ -124,7 +124,7 @@ function Recipes() {
       )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
         {recipes.map((recipe) => (
-          <RecipeCard recipeCard={recipe} key={recipe.idMeal} />
+          <RecipeCard recipe={recipe} key={recipe.idMeal} />
         ))}
       </div>
     </div>
