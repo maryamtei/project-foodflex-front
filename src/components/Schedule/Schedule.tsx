@@ -10,18 +10,20 @@ function Schedule() {
   const [showAnimation, setShowAnimation] = useState(true);
   const [newSchedule, setNewSchedule] = useState([
     {
-      idMeal: '',
+      idDbMeal: '',
       name: '',
-      imageUrl: '',
+      image: '',
       position: 0,
     },
   ]);
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const schedules = useAppSelector(
-    (state) => state.settings.currentUser.schedule
+    (state) => state.settings.currentUser.schedules
   );
+  console.log(schedules);
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const weekFind = schedules.find((week) => week.week === currentWeek);
+
   const displaySchedule = useAppSelector(
     (state) => state.settings.clickAddSchedule
   );
@@ -48,16 +50,16 @@ function Schedule() {
       );
       if (userSchedule !== undefined) {
         newCurrentSchedule.push({
-          idMeal: userSchedule.idMeal.toString(),
+          idDbMeal: userSchedule.idDbMeal.toString(),
           name: userSchedule.name,
-          imageUrl: userSchedule.imageUrl,
+          image: userSchedule.image,
           position: userSchedule.position,
         });
       } else {
         newCurrentSchedule.push({
-          idMeal: position.toString(),
+          idDbMeal: position.toString(),
           name: 'test',
-          imageUrl: '/images.jpeg',
+          image: '/images.jpeg',
           position,
         });
       }
