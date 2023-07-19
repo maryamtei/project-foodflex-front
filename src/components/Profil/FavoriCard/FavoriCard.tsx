@@ -21,7 +21,7 @@ function FavoriCard({ favori }: CardProps) {
 
   // Function to handle deleting the favorite item
   function handleDeleteFavori() {
-    dispatch(deleteFavori(favori.idDbMeal));
+    dispatch(deleteFavori(favori.id));
   }
   const handleModaltoggle = () => {
     dispatch(toggleIsOpenProfil());

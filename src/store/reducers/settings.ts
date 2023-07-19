@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { Favorite, Meal, User } from '../../@types/Profil';
 import usersData from '../../Data/UserData.json';
-import { fetchPost, fetchGet } from '../../utils/fetch';
+import { fetchPost, fetchGet, fetchDelete } from '../../utils/fetch';
 
 interface SettingsState {
   // users: User[];
@@ -141,9 +141,7 @@ export const editInfoProfil = createAsyncThunk(
 export const deleteFavori = createAsyncThunk(
   'user/delete-favori',
   async (idToDelete: SettingsState['idToDelete']) => {
-    const response = await fetchPost(`favorite-delete`, {
-      idDbMeal: idToDelete,
-    });
+    const response = await fetchDelete(`favorite-delete/${idToDelete}`);
     const data = await response.json();
 
     return data;
@@ -298,7 +296,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(deleteFavori.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.status) {
-        console.log(response.use);
+        console.log(response.user);
         state.currentUser = response.user;
       }
     })
@@ -315,7 +313,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(addFavori.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.status) {
-        console.log(response.use);
+        console.log(response.user);
         state.currentUser = response.user;
       }
     })

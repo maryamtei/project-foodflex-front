@@ -31,5 +31,14 @@ const fetchPost = (url: any, data: any) => {
   });
 };
 
+const fetchDelete = (url: any) => {
+  return fetchWithHeaders(url, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+};
+
 // Exporter les fonctions utilitaires
-export { fetchGet, fetchPost };
+export { fetchGet, fetchPost, fetchDelete };
