@@ -17,6 +17,7 @@ import Recipe from './components/Recipe/Recipe';
 import Schedule from './components/Schedule/Schedule';
 import Profil from './components/Profil/Profil';
 import store from './store';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,7 +30,8 @@ const router = createBrowserRouter(
       {/* Modifier les routes et l'élement Apptest en fonction de vos taches */}
       {/* <Route index element={<Apptest />} /> */}
       <Route path="recipes" element={<Recipes />} />
-      <Route path="recipe" element={<Recipe />} />
+      <Route path="recipes/:id" element={<Recipe />} />
+      <Route path="/404" element={<NotFoundPage />} />
     </Route>
   )
 );
