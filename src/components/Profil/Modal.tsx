@@ -3,12 +3,18 @@ import { useEffect } from 'react';
 import Profil from './Profil';
 import Favoris from './Favoris';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { toggleIsOpenProfil } from '../../store/reducers/favoris';
+import {
+  toggleIsOpenProfil,
+  changeStateModalAnimation,
+} from '../../store/reducers/favoris';
 import { getUserData } from '../../store/reducers/settings';
 
 function Modal() {
   const favoriIsOpen = useAppSelector((state) => state.favoris.favoriIsOpen);
   const modalIsOpen = useAppSelector((state) => state.favoris.modalIsOpen);
+  const modalAnimationState = useAppSelector(
+    (state) => state.favoris.modalAnimationState
+  );
   const mobileView = useAppSelector((state) => state.window.mobileView);
   const dispatch = useAppDispatch();
 
@@ -22,18 +28,28 @@ function Modal() {
     }
     return <Favoris />;
   };
+
+  useEffect(() => {
+    if (modalIsOpen) {
+      dispatch(changeStateModalAnimation(2));
+    }
+  }, [modalIsOpen, dispatch]);
+
   const handleModaltoggle = () => {
+    dispatch(changeStateModalAnimation(1));
     dispatch(toggleIsOpenProfil());
   };
   return (
     <div
       className={`flex flex-col items-center h-screen p-4 sm:p-6 w-full  sm:w-80 sm:fixed bg-bgff sm:bg-fourthff sm:top-0 sm:z-50 overflow-auto ${
-        modalIsOpen && !mobileView ? 'right-0 animate-modalProfilOpen' : ''
+        modalAnimationState === 2 && !mobileView
+          ? 'right-0 animate-modalProfilOpen'
+          : ''
       }${
-        !modalIsOpen && !mobileView
+        modalAnimationState === 1 && !mobileView
           ? 'right-[-20rem] animate-modalProfilClose'
           : ''
-      }`}
+      }${modalAnimationState === 0 && !mobileView ? 'right-[-20rem]' : ''}`}
     >
       <button
         type="button"
