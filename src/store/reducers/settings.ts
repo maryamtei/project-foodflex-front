@@ -137,7 +137,15 @@ export const editInfoProfil = createAsyncThunk(
 
 // ---------------- EDIT FAVORIS -------------------//
 export const deleteFavori = createAction<string>('user/delete-favori');
-export const addFavori = createAction<Favorite>('user/add-favori');
+export const addFavori = createAsyncThunk(
+  'user/add-favori',
+  async (favorite) => {
+    const response = await fetchPost(`profil`, favorite);
+    const data = await response.json();
+
+    return data;
+  }
+);
 
 // ----------------------- ADD SCHEDULE ------------------------//
 
@@ -183,6 +191,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
         state.isLogged = true;
         state.currentUser = response.user;
       }
+      console.log(response.user);
     })
     // ---------------- SIGN IN -------------------//
     .addCase(signIn.pending, (state) => {
@@ -199,7 +208,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
         const authToken = response.token;
         localStorage.removeItem('token');
         localStorage.setItem('token', authToken);
-        console.log(authToken);
+        state.currentUser = response.user;
         state.isLogged = true;
       }
       state.isLoading = false;
@@ -293,24 +302,36 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
 
     // ---------------- ADD FAVORIS -------------------//
-    .addCase(addFavori, (state, action) => {
-      const favoriToAdd = action.payload;
-      state.currentUser.favorites.push(favoriToAdd);
-
-      state.users = state.users.map((user) => {
-        if (user.email === state.currentUser.email) {
-          state.currentUser = {
-            ...state.currentUser,
-            favorites: state.currentUser.favorites,
-          };
-          return {
-            ...user,
-            favorites: state.currentUser.favorites,
-          };
-        }
-        return user;
-      });
+    .addCase(addFavori.pending, (state) => {
+      state.isLoading = true;
+      state.message = null;
     })
+    .addCase(addFavori.rejected, (state) => {
+      state.message = 'rejected';
+      state.isLoading = false;
+    })
+    .addCase(addFavori.fulfilled, (state, action) => {
+      const response = action.payload;
+      state.currentUser = response.user;
+    })
+    // .addCase(addFavori, (state, action) => {
+    //  const favoriToAdd = action.payload;
+    //  state.currentUser.favorites.push(favoriToAdd);
+    //
+    //  state.users = state.users.map((user) => {
+    //    if (user.email === state.currentUser.email) {
+    //      state.currentUser = {
+    //        ...state.currentUser,
+    //        favorites: state.currentUser.favorites,
+    //      };
+    //      return {
+    //        ...user,
+    //        favorites: state.currentUser.favorites,
+    //      };
+    //    }
+    //    return user;
+    //  });
+    // })
     // ---------------- ADD SCHEDULE -------------------//
     .addCase(nextWeek, (state, action) => {
       if (action.payload && state.currentWeek < 52) {

@@ -1,14 +1,21 @@
 import { X } from 'react-feather';
+import { useEffect } from 'react';
 import Profil from './Profil';
 import Favoris from './Favoris';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { toggleIsOpenProfil } from '../../store/reducers/favoris';
+import { getUserData } from '../../store/reducers/settings';
 
 function Modal() {
   const favoriIsOpen = useAppSelector((state) => state.favoris.favoriIsOpen);
   const modalIsOpen = useAppSelector((state) => state.favoris.modalIsOpen);
   const mobileView = useAppSelector((state) => state.window.mobileView);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getUserData());
+  }, [dispatch]);
+
   const modalCondition = () => {
     if (!favoriIsOpen) {
       return <Profil />;
