@@ -11,6 +11,7 @@
     "lint:fix": "eslint src/**/*.{js,jsx,ts,tsx} --fix"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.15",
     "@reduxjs/toolkit": "^1.9.5",
     "@tailwindcss/typography": "^0.5.9",
     "nuka-carousel": "^6.0.3",

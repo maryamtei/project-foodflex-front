@@ -1,13 +1,19 @@
 import NukaCarousel from 'nuka-carousel';
+import { useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
-import CarouselSlide from './CarouselSlide';
 import { Recipe } from '../../@types/recipe';
 import { useAppSelector } from '../../hooks/redux';
+import CarouselSlide from './CarouselSlide';
+
+const PLACEHOLDER_MEAL = {
+  name: 'No recipe',
+  imageUrl: '/images.jpeg',
+};
 
 interface RecipeProps {
-  recipes: Recipe[];
+  meals: Recipe[];
 }
-function Carousel({ recipes }: RecipeProps) {
+function Carousel({ meals }: RecipeProps) {
   const innerWidth = useAppSelector((state) => state.window.innerWidth);
   const changeSlidesToShow = () => {
     switch (true) {
@@ -25,6 +31,24 @@ function Carousel({ recipes }: RecipeProps) {
         return 7;
     }
   };
+
+  const getMealByPosition = useCallback(
+    (position: number) => {
+      const foundMeal = meals.find((meal) => meal.position === position);
+
+      if (!foundMeal) {
+        return {
+          ...PLACEHOLDER_MEAL,
+          position,
+          idMeal: position.toString(),
+        };
+      }
+
+      return foundMeal;
+    },
+    [meals]
+  );
+
   return (
     <div className="px-6 text-fourthff">
       <NukaCarousel
@@ -62,31 +86,39 @@ function Carousel({ recipes }: RecipeProps) {
           );
         }}
       >
-        <CarouselSlide recipe1={recipes[0]} recipe2={recipes[1]} day="Monday" />
         <CarouselSlide
-          recipe1={recipes[2]}
-          recipe2={recipes[3]}
+          recipe1={getMealByPosition(0)}
+          recipe2={getMealByPosition(1)}
+          day="Monday"
+        />
+        <CarouselSlide
+          recipe1={getMealByPosition(2)}
+          recipe2={getMealByPosition(3)}
           day="Tuesday"
         />
         <CarouselSlide
-          recipe1={recipes[4]}
-          recipe2={recipes[5]}
+          recipe1={getMealByPosition(4)}
+          recipe2={getMealByPosition(5)}
           day="Wednesday"
         />
         <CarouselSlide
-          recipe1={recipes[6]}
-          recipe2={recipes[7]}
+          recipe1={getMealByPosition(6)}
+          recipe2={getMealByPosition(7)}
           day="Thursday"
         />
-        <CarouselSlide recipe1={recipes[8]} recipe2={recipes[9]} day="Friday" />
         <CarouselSlide
-          recipe1={recipes[10]}
-          recipe2={recipes[11]}
+          recipe1={getMealByPosition(8)}
+          recipe2={getMealByPosition(9)}
+          day="Friday"
+        />
+        <CarouselSlide
+          recipe1={getMealByPosition(10)}
+          recipe2={getMealByPosition(11)}
           day="Saturday"
         />
         <CarouselSlide
-          recipe1={recipes[12]}
-          recipe2={recipes[13]}
+          recipe1={getMealByPosition(12)}
+          recipe2={getMealByPosition(13)}
           day="Sunday"
         />
       </NukaCarousel>

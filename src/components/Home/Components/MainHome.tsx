@@ -13,7 +13,7 @@ function MainHome({ recipes }: RecipeProps) {
       </h2>
 
       <div className="mt-10 block ">
-        <Carousel recipes={recipes} />
+        <Carousel meals={recipes} />
       </div>
     </div>
   );
