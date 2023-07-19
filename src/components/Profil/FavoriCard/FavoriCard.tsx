@@ -29,7 +29,7 @@ function FavoriCard({ favori }: CardProps) {
   // Function to handle adding the recipe to the schedule
   function handleAddSchedule() {
     dispatch(displaySchedule(!clickAddSchedule));
-    //  dispatch(addSchedule(favori));
+    // dispatch(addSchedule(favori));
   }
 
   return (

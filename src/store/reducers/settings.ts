@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { Favorite, Meal, User } from '../../@types/Profil';
 import usersData from '../../Data/UserData.json';
-import { fetchPost, fetchGet, fetchDelete } from '../../utils/fetch';
+import { fetchPost, fetchGet } from '../../utils/fetch';
 
 interface SettingsState {
   // users: User[];
@@ -139,9 +139,11 @@ export const editInfoProfil = createAsyncThunk(
 
 // ---------------- EDIT FAVORIS -------------------//
 export const deleteFavori = createAsyncThunk(
-  'user/user/delete-favori',
+  'user/delete-favori',
   async (idToDelete: SettingsState['idToDelete']) => {
-    const response = await fetchDelete(`profil`, idToDelete);
+    const response = await fetchPost(`favorite-delete`, {
+      idDbMeal: idToDelete,
+    });
     const data = await response.json();
 
     return data;
@@ -151,7 +153,7 @@ export const deleteFavori = createAsyncThunk(
 export const addFavori = createAsyncThunk(
   'user/add-favori',
   async (MealFavoriToAdd: SettingsState['MealFavoriToAdd']) => {
-    const response = await fetchPost(`profil`, MealFavoriToAdd);
+    const response = await fetchPost(`favorite-add`, MealFavoriToAdd);
     const data = await response.json();
 
     return data;
@@ -201,7 +203,6 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       if (response.message === 'Authentification réussie.') {
         state.isLogged = true;
         state.currentUser = response.user;
-        console.log(state.currentUser);
       }
     })
     // ---------------- SIGN IN -------------------//
@@ -296,7 +297,10 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(deleteFavori.fulfilled, (state, action) => {
       const response = action.payload;
-      state.currentUser = response.user;
+      if (response.status) {
+        console.log(response.use);
+        state.currentUser = response.user;
+      }
     })
 
     // ---------------- ADD FAVORIS -------------------//
@@ -310,7 +314,10 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(addFavori.fulfilled, (state, action) => {
       const response = action.payload;
-      state.currentUser = response.user;
+      if (response.status) {
+        console.log(response.use);
+        state.currentUser = response.user;
+      }
     })
 
     // ---------------- ADD SCHEDULE -------------------//
