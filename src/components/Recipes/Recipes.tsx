@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Fragment } from 'react';
 import { useDebounce } from 'react-use';
+import { Dialog, Transition } from '@headlessui/react';
 import SearchComponent from '../SearchComponent/SearchComponent';
 import Schedule from '../Schedule/Schedule';
 import RecipeCard from '../RecipeCard/RecipeCard';
@@ -9,6 +10,8 @@ import {
   fetchSearchRecipe,
 } from '../../store/reducers/recipes';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { displaySchedule } from '../../store/reducers/settings';
+import { X } from 'react-feather';
 
 function Recipes() {
   const [search, setSearch] = useState('');
@@ -26,6 +29,10 @@ function Recipes() {
     [dispatch, search]
   );
 
+  const closeModal = () => {
+    dispatch(displaySchedule(false));
+  };
+
   // déclenchement du random sur une chaîne de recherche vide dans la search
   useEffect(() => {
     if (!search) {
@@ -36,7 +43,7 @@ function Recipes() {
   const recipes = useAppSelector((state) => state.recipes.list);
 
   // affichage modale planning si on clique sur le '+'
-  const displaySchedule = useAppSelector(
+  const showSchedule = useAppSelector(
     (state) => state.settings.clickAddSchedule
   );
 
@@ -47,7 +54,61 @@ function Recipes() {
       }`}
     >
       {/* // affichage modale planning si on clique sur le '+' */}
-      {displaySchedule && <Schedule />}
+      {/* {showSchedule && <Schedule />} */}
+
+      <Transition appear show={showSchedule} as={Fragment}>
+        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <div className="fixed inset-0 bg-black bg-opacity-25" />
+          </Transition.Child>
+
+          <div className="fixed inset-0 overflow-y-auto">
+            <div className="flex min-h-full items-center justify-center p-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <Dialog.Panel className="w-full transform overflow-hidden rounded-2xl bg-white p-6  align-middle shadow-xl transition-all">
+                  <div className=" flex justify-end">
+                    <X onClick={closeModal} />
+                  </div>
+                  <Dialog.Title className="text-lg font-medium leading-6 text-gray-900">
+                    Which day to eat this dish?
+                  </Dialog.Title>
+
+                  <div className="mt-2">
+                    <Schedule />
+                  </div>
+
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center rounded-md border border-transparent bg-fourthff px-4 py-2 text-sm font-medium text-bgff hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
+                      onClick={closeModal}
+                    >
+                      This schedule looks awesome !
+                    </button>
+                  </div>
+                </Dialog.Panel>
+              </Transition.Child>
+            </div>
+          </div>
+        </Dialog>
+      </Transition>
+
       <h1 className="text-thirdff text-2xl sm:text-4xl font-bold md:mb-12 mb-6 text-center">
         Find exactly what you need !
       </h1>
