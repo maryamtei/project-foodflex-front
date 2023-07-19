@@ -9,6 +9,7 @@ import {
   changeInnerWidth,
   changeMobileView,
 } from '../../store/reducers/window';
+import { getUserData } from '../../store/reducers/settings';
 
 function Apptest() {
   const dispatch = useAppDispatch();
@@ -42,6 +43,10 @@ function Apptest() {
       dispatch(changeMobileView(false));
     }
   }, [innerWidth, dispatch]);
+
+  useEffect(() => {
+    dispatch(getUserData());
+  }, [dispatch]);
 
   return (
     <div>

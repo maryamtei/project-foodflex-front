@@ -5,6 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { Favorite, Meal, User } from '../../@types/Profil';
 import usersData from '../../Data/UserData.json';
+import { fetchPost, fetchGet } from '../../utils/fetch';
 
 interface SettingsState {
   users: User[];
@@ -87,18 +88,19 @@ export const changeSignUpCredentialsField = createAction<{
 export const signIn = createAsyncThunk(
   'settings/SIGNIN',
   async (credentials: SettingsState['signInCredentials']) => {
-    // const response = await fetch('http://localhost:3000/signin', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify(credentials),
-    // });
-    // const data = await response.json();
+    const response = await fetchPost(`login`, credentials);
+    const data = await response.json();
 
-    return credentials;
+    return data;
   }
 );
+// ---------------- DATA USER -------------------//
+export const getUserData = createAsyncThunk('settings/USER_DATA', async () => {
+  const response = await fetchGet(`user`);
+  const data = await response.json();
+
+  return data;
+});
 
 // ---------------- SIGN UP -------------------//
 export const signUp = createAsyncThunk(
@@ -132,6 +134,7 @@ export const editInfoProfil = createAsyncThunk(
     };
   }
 );
+
 // ---------------- EDIT FAVORIS -------------------//
 export const deleteFavori = createAction<string>('user/delete-favori');
 export const addFavori = createAction<Favorite>('user/add-favori');
@@ -162,8 +165,25 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(logout, (state) => {
       state.isLogged = false;
+      localStorage.removeItem('token');
     })
 
+    // ---------------- USER -------------------//
+    .addCase(getUserData.pending, (state) => {
+      state.isLoading = true;
+      state.message = null;
+    })
+    .addCase(getUserData.rejected, (state) => {
+      state.message = 'rejected';
+      state.isLoading = false;
+    })
+    .addCase(getUserData.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response.message === 'Authentification réussie.') {
+        state.isLogged = true;
+        state.currentUser = response.user;
+      }
+    })
     // ---------------- SIGN IN -------------------//
     .addCase(signIn.pending, (state) => {
       state.isLoading = true;
@@ -174,17 +194,13 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(signIn.fulfilled, (state, action) => {
-      const userSignIn = action.payload;
-      const userFind = state.users.find(
-        (user) =>
-          user.email === userSignIn.email &&
-          user.password === userSignIn.password
-      );
-
-      // state.message = action.payload.message;
-      if (userFind) {
+      const response = action.payload;
+      if (response.message === 'Connexion réussie.') {
+        const authToken = response.token;
+        localStorage.removeItem('token');
+        localStorage.setItem('token', authToken);
+        console.log(authToken);
         state.isLogged = true;
-        state.currentUser = userFind;
       }
       state.isLoading = false;
       state.modalIsOpen = false;
