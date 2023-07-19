@@ -8,7 +8,7 @@ import usersData from '../../Data/UserData.json';
 import { fetchPost, fetchGet, fetchDelete } from '../../utils/fetch';
 
 interface SettingsState {
-  users: User[];
+  // users: User[];
   currentUser: User;
   modalIsOpen: boolean;
   isLogged: boolean;
@@ -26,12 +26,13 @@ interface SettingsState {
   isLoading: boolean;
   message: string | null;
   MealFavoriToAdd: Meal;
+  idToDelete: string;
   clickAddSchedule: boolean;
   currentWeek: number;
 }
 
 const initialValue: SettingsState = {
-  users: usersData,
+  // users: usersData,
   currentUser: {
     firstName: '',
     lastName: '',
@@ -61,6 +62,7 @@ const initialValue: SettingsState = {
     imageUrl: '',
     position: 0,
   },
+  idToDelete: '',
   currentWeek: 1,
   clickAddSchedule: false,
 };
@@ -138,7 +140,7 @@ export const editInfoProfil = createAsyncThunk(
 // ---------------- EDIT FAVORIS -------------------//
 export const deleteFavori = createAsyncThunk(
   'user/user/delete-favori',
-  async (idToDelete) => {
+  async (idToDelete: SettingsState['idToDelete']) => {
     const response = await fetchDelete(`profil`, idToDelete);
     const data = await response.json();
 
@@ -148,8 +150,8 @@ export const deleteFavori = createAsyncThunk(
 
 export const addFavori = createAsyncThunk(
   'user/add-favori',
-  async (favorite) => {
-    const response = await fetchPost(`profil`, favorite);
+  async (MealFavoriToAdd: SettingsState['MealFavoriToAdd']) => {
+    const response = await fetchPost(`profil`, MealFavoriToAdd);
     const data = await response.json();
 
     return data;
@@ -199,6 +201,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       if (response.message === 'Authentification réussie.') {
         state.isLogged = true;
         state.currentUser = response.user;
+        console.log(state.currentUser);
       }
     })
     // ---------------- SIGN IN -------------------//
@@ -233,57 +236,53 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(signUp.fulfilled, (state, action) => {
-      const userSignIn = action.payload;
-      const userFind = state.users.find(
-        (user) => user.email === userSignIn.email
-      );
-
-      // state.message = action.payload.message;
-
-      // ----------------- CREATION ACCOUNT USER ----------------------//
-      if (!userFind) {
-        const newUser = {
-          firstName: userSignIn.firstName || '',
-          lastName: userSignIn.lastName || '',
-          email: userSignIn.email,
-          password: userSignIn.password,
-          favorites: [],
-          // on crée un tableau de taille 10 et pour chaque élément du tableau,
-          // on met un objet week,meal[]
-          schedule: Array.from({ length: 10 }, (_, index) => ({
-            week: index,
-            meals: [],
-          })),
-        };
-
-        state.users.push(newUser);
-        state.message = `Your account is created, please Sign In`;
-      } else {
-        state.message = `User ${userSignIn.email} already exists`;
-      }
-      // state.message = action.payload.message;
-      state.isLoading = false;
-      state.modalIsOpen = false;
+      // const userSignIn = action.payload;
+      //  const userFind = state.users.find(
+      //    (user) => user.email === userSignIn.email
+      //  );
+      //  state.message = action.payload.message;
+      //  ----------------- CREATION ACCOUNT USER ----------------------//
+      // if (!userFind) {
+      //   const newUser = {
+      //     firstName: userSignIn.firstName || '',
+      //     lastName: userSignIn.lastName || '',
+      //     email: userSignIn.email,
+      //     password: userSignIn.password,
+      //     favorites: [],
+      //     // on crée un tableau de taille 10 et pour chaque élément du tableau,
+      //     // on met un objet week,meal[]
+      //     schedule: Array.from({ length: 10 }, (_, index) => ({
+      //       week: index,
+      //       meals: [],
+      //     })),
+      //   };
+      //   state.users.push(newUser);
+      //   state.message = `Your account is created, please Sign In`;
+      // } else {
+      //   state.message = `User ${userSignIn.email} already exists`;
+      // }
+      // // state.message = action.payload.message;
+      // state.isLoading = false;
+      // state.modalIsOpen = false;
     })
 
     // ------------ EDIT PROFIL --------------//
     .addCase(editInfoProfil.fulfilled, (state, action) => {
-      const editUser = action.payload;
-
-      // Edit Profil in Redux
-      state.users = state.users.map((user) => {
-        if (user.email === state.currentUser.email) {
-          state.currentUser = {
-            ...state.currentUser,
-            ...editUser,
-          };
-          return {
-            ...user,
-            ...editUser,
-          };
-        }
-        return user;
-      });
+      // const editUser = action.payload;
+      /// / Edit Profil in Redux
+      // state.users = state.users.map((user) => {
+      //  if (user.email === state.currentUser.email) {
+      //    state.currentUser = {
+      //      ...state.currentUser,
+      //      ...editUser,
+      //    };
+      //    return {
+      //      ...user,
+      //      ...editUser,
+      //    };
+      //  }
+      //  return user;
+      // });
     })
 
     // ---------------- DELETE FAVORIS -------------------//
@@ -330,41 +329,35 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.clickAddSchedule = action.payload;
     })
     .addCase(selectedDay, (state, action) => {
-      const dayPosition = action.payload;
-
-      const findWeek = state.currentUser.schedule.find(
-        (week) => week.week === state.currentWeek
-      );
-
-      const findFavori = findWeek?.meals.find(
-        (day) => day.position === dayPosition
-      );
-
-      if (!findFavori) {
-        state.MealFavoriToAdd.position = action.payload;
-
-        // Pour chaque semaine, on vérifie si c'est la semaine courant
-        // et on change la valeur
-        state.currentUser.schedule = state.currentUser.schedule.map((week) => {
-          if (week.week === state.currentWeek) {
-            week.meals.push(state.MealFavoriToAdd);
-          }
-          return week;
-        });
-
-        state.users = state.users.map((user) => {
-          if (user.email === state.currentUser.email) {
-            return {
-              ...user,
-              schedule: state.currentUser.schedule,
-            };
-          }
-          return user;
-        });
-
-        // fermer la modale planning
-        state.clickAddSchedule = false;
-      }
+      // const dayPosition = action.payload;
+      // const findWeek = state.currentUser.schedule.find(
+      //   (week) => week.week === state.currentWeek
+      // );
+      // const findFavori = findWeek?.meals.find(
+      //   (day) => day.position === dayPosition
+      // );
+      // if (!findFavori) {
+      //   state.MealFavoriToAdd.position = action.payload;
+      //   // Pour chaque semaine, on vérifie si c'est la semaine courant
+      //   // et on change la valeur
+      //   state.currentUser.schedule = state.currentUser.schedule.map((week) => {
+      //     if (week.week === state.currentWeek) {
+      //       week.meals.push(state.MealFavoriToAdd);
+      //     }
+      //     return week;
+      //   });
+      //   state.users = state.users.map((user) => {
+      //     if (user.email === state.currentUser.email) {
+      //       return {
+      //         ...user,
+      //         schedule: state.currentUser.schedule,
+      //       };
+      //     }
+      //     return user;
+      //   });
+      //   // fermer la modale planning
+      //   state.clickAddSchedule = false;
+      // }
     });
 });
 export default settingsReducer;

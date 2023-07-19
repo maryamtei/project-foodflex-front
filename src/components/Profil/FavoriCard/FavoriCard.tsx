@@ -21,7 +21,7 @@ function FavoriCard({ favori }: CardProps) {
 
   // Function to handle deleting the favorite item
   function handleDeleteFavori() {
-    dispatch(deleteFavori(favori.idMeal));
+    dispatch(deleteFavori(favori.idDbMeal));
   }
   const handleModaltoggle = () => {
     dispatch(toggleIsOpenProfil());
@@ -29,13 +29,13 @@ function FavoriCard({ favori }: CardProps) {
   // Function to handle adding the recipe to the schedule
   function handleAddSchedule() {
     dispatch(displaySchedule(!clickAddSchedule));
-    dispatch(addSchedule(favori));
+    //  dispatch(addSchedule(favori));
   }
 
   return (
     <div className="shadow-md rounded-lg relative hover:shadow-lg transition-all">
       <img
-        src={favori.imageUrl}
+        src={favori.image}
         alt={favori.name}
         className="rounded-t-md cover"
       />

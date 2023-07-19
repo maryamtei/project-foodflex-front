@@ -33,6 +33,7 @@ const fetchPost = (url: any, data: any) => {
 
 // Function utilitaire pour effectuer les requêtes POST avec les headers mis à jour
 const fetchDelete = (url: any, data: any) => {
+  console.log(data);
   return fetchWithHeaders(url, {
     method: 'DELETE',
     headers: {

@@ -53,7 +53,7 @@ function RecipeCard({ recipeCard }: CardProps) {
   const searchFavori = useCallback(
     (recipe: Recipe) => {
       const findFavori = favoris.find(
-        (favori) => favori.idMeal === recipe.idMeal
+        (favori) => favori.idDbMeal === recipe.idMeal
       );
       return findFavori;
     },

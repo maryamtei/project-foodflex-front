@@ -8,9 +8,10 @@ export interface User {
 }
 
 export interface Favorite {
-  idMeal: string;
+  id: string;
+  idDbMeal: string;
   name: string;
-  imageUrl: string;
+  image: string;
   position: number;
 }
 
