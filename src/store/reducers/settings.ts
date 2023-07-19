@@ -71,8 +71,6 @@ export const toggleIsOpen = createAction('settings/TOGGLE_IS_OPEN');
 
 export const toggleSignUpOpen = createAction('settings/TOGGLE_SIGN_UP');
 
-export const logout = createAction('settings/LOGOUT');
-
 export const changeSignInCredentialsField = createAction<{
   property: KeysOfSignInCredentials;
   value: string;
@@ -93,6 +91,13 @@ export const signIn = createAsyncThunk(
     return data;
   }
 );
+// ---------------- LOGOUT -------------------//
+export const logout = createAsyncThunk('settings/LOGOUT', async () => {
+  const response = await fetchGet(`logout`);
+  const data = await response.json();
+
+  return data;
+});
 // ---------------- DATA USER -------------------//
 export const getUserData = createAsyncThunk('settings/USER_DATA', async () => {
   const response = await fetchGet(`user`);
@@ -173,11 +178,24 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       const { property, value } = action.payload;
       state.signUpCredentials[property] = value;
     })
-    .addCase(logout, (state) => {
-      state.isLogged = false;
-      localStorage.removeItem('token');
-    })
 
+    // ---------------- LOGOUT -------------------//
+    .addCase(logout.pending, (state) => {
+      state.isLoading = true;
+      state.message = null;
+    })
+    .addCase(logout.rejected, (state) => {
+      state.message = 'rejected';
+      state.isLoading = false;
+    })
+    .addCase(logout.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response.status) {
+        state.isLogged = false;
+        state.currentUser = initialValue.currentUser;
+        localStorage.removeItem('token');
+      }
+    })
     // ---------------- USER -------------------//
     .addCase(getUserData.pending, (state) => {
       state.isLoading = true;
@@ -261,7 +279,6 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(deleteFavori.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.status) {
-        console.log(response.user);
         state.currentUser = response.user;
       }
     })
@@ -278,7 +295,6 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(addFavori.fulfilled, (state, action) => {
       const response = action.payload;
       if (response.status) {
-        console.log(response.user);
         state.currentUser = response.user;
       }
     })
