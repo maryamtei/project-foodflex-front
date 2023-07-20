@@ -1,7 +1,7 @@
 export interface Recipe {
-  idMeal: string;
+  idDbMeal: string;
   name: string;
-  imageUrl: string;
+  image: string;
   position: number;
 }
 

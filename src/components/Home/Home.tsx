@@ -11,6 +11,7 @@ function Home() {
   const stateHome = useAppSelector((state) => state.home.stateHome);
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const recipes = useAppSelector((state) => state.recipes.list);
+  console.log(recipes);
 
   useEffect(() => {
     dispatch(fetchRandomRecipes({ count: 14 }));
