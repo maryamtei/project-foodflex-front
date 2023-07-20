@@ -1,32 +1,19 @@
-import { useEffect, useState } from 'react';
+import NukaCarousel from 'nuka-carousel';
+import { useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { nextWeek } from '../../store/reducers/settings';
-import Carousel from '../Carousel/Carousel';
 import { changeStateSchedule } from '../../store/reducers/schedule';
+import { nextWeek, addWeekSchedule } from '../../store/reducers/settings';
+import Carousel from '../Carousel/Carousel';
 
 function Schedule() {
-  const [showAnimation, setShowAnimation] = useState(true);
-  const [newSchedule, setNewSchedule] = useState([
-    {
-      idDbMeal: '',
-      name: '',
-      image: '',
-      position: 0,
-    },
-  ]);
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const schedules = useAppSelector(
     (state) => state.settings.currentUser.schedules
   );
-  console.log(schedules);
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const weekFind = schedules.find((week) => week.week === currentWeek);
-
-  const displaySchedule = useAppSelector(
-    (state) => state.settings.clickAddSchedule
-  );
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -37,44 +24,21 @@ function Schedule() {
   function handleClickBeforeWeek() {
     dispatch(nextWeek(false));
   }
+
+  useEffect(() => {
+    dispatch(addWeekSchedule({ week: currentWeek }));
+    console.log(schedules);
+  }, [dispatch, currentWeek, schedules]);
+
   useEffect(() => {
     if (!isLogged) {
       navigate('/');
     }
     dispatch(changeStateSchedule(true));
-    const newCurrentSchedule = [];
-    // eslint-disable-next-line no-plusplus
-    for (let position = 0; position < 14; position++) {
-      const userSchedule = weekFind?.meals.find(
-        (mealUser) => mealUser.position === position
-      );
-      if (userSchedule !== undefined) {
-        newCurrentSchedule.push({
-          idDbMeal: userSchedule.idDbMeal.toString(),
-          name: userSchedule.name,
-          image: userSchedule.image,
-          position: userSchedule.position,
-        });
-      } else {
-        newCurrentSchedule.push({
-          idDbMeal: position.toString(),
-          name: 'test',
-          image: '/images.jpeg',
-          position,
-        });
-      }
-    }
-    setNewSchedule(newCurrentSchedule);
     return () => {
       dispatch(changeStateSchedule(false));
     };
   }, [weekFind, dispatch, isLogged, navigate]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setShowAnimation(false);
-    }, 600);
-  }, []);
 
   return (
     <div className={` flex flex-col justify-center my-10 px-3 sm:px-8 `}>
@@ -89,15 +53,11 @@ function Schedule() {
           <ChevronRight className="text-thirdff h-16 w-16" />
         </button>
       </div>
-      {newSchedule.length === 14 && (
-        <div
-          className={`mt-10 block ${
-            showAnimation ? 'animate-scheduleSlideLeft' : ''
-          }`}
-        >
-          <Carousel recipes={newSchedule} />
-        </div>
-      )}
+      <NukaCarousel withoutControls slideIndex={currentWeek - 1}>
+        {schedules.map((schedule) => (
+          <Carousel key={schedule.week} meals={schedule.meals} />
+        ))}
+      </NukaCarousel>
     </div>
   );
 }

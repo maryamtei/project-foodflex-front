@@ -3,7 +3,7 @@ import {
   createAsyncThunk,
   createReducer,
 } from '@reduxjs/toolkit';
-import { Favorite, Meal, User } from '../../@types/Profil';
+import { Meal, User } from '../../@types/Profil';
 import { fetchPost, fetchGet, fetchDelete } from '../../utils/fetch';
 
 interface SettingsState {
@@ -156,7 +156,34 @@ export const addFavori = createAsyncThunk(
 
 // ----------------------- ADD SCHEDULE ------------------------//
 
-export const addSchedule = createAction<Meal>('favori/add-planning');
+export const addScheduleFavori = createAction<Meal>('favori/add-planning');
+
+export const addWeekSchedule = createAsyncThunk(
+  'user/add-week-schedule',
+  async (week: { week: SettingsState['currentWeek'] }) => {
+    const response = await fetchPost(`scheduleAddWeek`, week);
+    const data = await response.json();
+
+    return data;
+  }
+);
+
+export const addSchedule = createAsyncThunk(
+  'user/add-schedule',
+  async (body: {
+    meals: SettingsState['MealFavoriToAdd'];
+    week: SettingsState['currentWeek'];
+  }) => {
+    const response = await fetchPost(`schedule-Meal`, {
+      meals: body.meals,
+      week: body.week,
+    });
+    const data = await response.json();
+
+    return data;
+  }
+);
+
 export const displaySchedule = createAction<boolean>('favori/click-add-favori');
 export const selectedDay = createAction<number>('favori/selected-day');
 export const nextWeek = createAction<boolean>('schedule/current-week');
@@ -210,6 +237,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       if (response.message === 'Authentification réussie.') {
         state.isLogged = true;
         state.currentUser = response.user;
+        console.log(response);
       }
     })
     // ---------------- SIGN IN -------------------//
@@ -308,42 +336,70 @@ const settingsReducer = createReducer(initialValue, (builder) => {
         state.currentWeek -= 1;
       }
     })
-    .addCase(addSchedule, (state, action) => {
+    .addCase(addScheduleFavori, (state, action) => {
       state.MealFavoriToAdd = action.payload;
+    })
+
+    .addCase(addWeekSchedule.pending, (state) => {
+      state.isLoading = true;
+      state.message = null;
+    })
+    .addCase(addWeekSchedule.rejected, (state) => {
+      state.message = 'rejected';
+      state.isLoading = false;
+    })
+    .addCase(addWeekSchedule.fulfilled, (state, action) => {
+      const response = action.payload;
+      console.log(response);
+    })
+
+    .addCase(addSchedule.pending, (state) => {
+      state.isLoading = true;
+      state.message = null;
+    })
+    .addCase(addSchedule.rejected, (state) => {
+      state.message = 'rejected';
+      state.isLoading = false;
+    })
+    .addCase(addSchedule.fulfilled, (state, action) => {
+      const response = action.payload;
+      console.log(response);
     })
     .addCase(displaySchedule, (state, action) => {
       state.clickAddSchedule = action.payload;
     })
     .addCase(selectedDay, (state, action) => {
-      // const dayPosition = action.payload;
-      // const findWeek = state.currentUser.schedule.find(
-      //   (week) => week.week === state.currentWeek
-      // );
-      // const findFavori = findWeek?.meals.find(
-      //   (day) => day.position === dayPosition
-      // );
-      // if (!findFavori) {
-      //   state.MealFavoriToAdd.position = action.payload;
-      //   // Pour chaque semaine, on vérifie si c'est la semaine courant
-      //   // et on change la valeur
-      //   state.currentUser.schedule = state.currentUser.schedule.map((week) => {
-      //     if (week.week === state.currentWeek) {
-      //       week.meals.push(state.MealFavoriToAdd);
-      //     }
-      //     return week;
-      //   });
-      //   state.users = state.users.map((user) => {
-      //     if (user.email === state.currentUser.email) {
-      //       return {
-      //         ...user,
-      //         schedule: state.currentUser.schedule,
-      //       };
-      //     }
-      //     return user;
-      //   });
-      //   // fermer la modale planning
-      //   state.clickAddSchedule = false;
-      // }
+      const dayPosition = action.payload;
+      const findWeek = state.currentUser.schedules.find(
+        (week) => week.week === state.currentWeek
+      );
+      const findFavori = findWeek?.meals.find(
+        (day) => day.position === dayPosition
+      );
+      if (!findFavori) {
+        state.MealFavoriToAdd.position = action.payload;
+        // Pour chaque semaine, on vérifie si c'est la semaine courant
+        // et on change la valeur
+        state.currentUser.schedules = state.currentUser.schedules.map(
+          (week) => {
+            if (week.week === state.currentWeek) {
+              week.meals.push(state.MealFavoriToAdd);
+            }
+            return week;
+          }
+        );
+        // state.users = state.users.map((user) => {
+        //   if (user.email === state.currentUser.email) {
+        //     return {
+        //       ...user,
+        //       schedule: state.currentUser.schedule,
+        //     };
+        //   }
+        //   return user;
+        // });
+        // // fermer la modale planning
+        // state.clickAddSchedule = false;
+      }
     });
 });
 export default settingsReducer;

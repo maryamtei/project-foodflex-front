@@ -58,7 +58,12 @@ export const fetchRandomRecipes = createAsyncThunk(
       }
     }
 
-    return uniqueMeals;
+    return uniqueMeals.map((meal, index) => {
+      return {
+        ...meal,
+        position: index,
+      };
+    });
   }
 );
 

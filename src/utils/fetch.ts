@@ -5,6 +5,8 @@ const createHeadersWithAuthorization = () => {
   const token = localStorage.getItem('token');
   const headers = new Headers();
   headers.append('Content-Type', 'application/json');
+  // headers.append('Access-Control-Allow-Origin', '*');
+  // headers.append('Access-Control-Allow-Methods', 'POST,PATCH,OPTIONS');
   if (token) {
     headers.append('Authorization', `Bearer ${token}`);
   }
@@ -22,11 +24,9 @@ const fetchGet = (url: any) => fetchWithHeaders(url);
 
 // Function utilitaire pour effectuer les requêtes POST avec les headers mis à jour
 const fetchPost = (url: any, data: any) => {
+  console.log(JSON.stringify(data));
   return fetchWithHeaders(url, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
     body: JSON.stringify(data),
   });
 };
@@ -34,9 +34,6 @@ const fetchPost = (url: any, data: any) => {
 const fetchDelete = (url: any) => {
   return fetchWithHeaders(url, {
     method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
   });
 };
 

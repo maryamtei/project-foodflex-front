@@ -12,7 +12,11 @@ function IngredientsList({ ingredients, mesures }: IngredientsListProps) {
       <ol className="list-none list-inside py-2 p-10 text-lg">
         {ingredients.map((ingredient, index) => (
           // eslint-disable-next-line react/no-array-index-key
-          <li className="flex justify-center pb-2" key={`${ingredient}`}>
+          <li
+            className="flex justify-center pb-2"
+            // eslint-disable-next-line react/no-array-index-key
+            key={`${ingredient}_${index}`}
+          >
             <p className="font-semibold pr-2"> {ingredient}</p> -
             <p className="pl-2 italic truncate">{mesures[index]}</p>
           </li>
