@@ -18,6 +18,7 @@ import Schedule from './components/Schedule/Schedule';
 import Profil from './components/Profil/Profil';
 import store from './store';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import TermsPage from './components/TermsPage/TermsPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +33,7 @@ const router = createBrowserRouter(
       <Route path="recipes" element={<Recipes />} />
       <Route path="recipes/:id" element={<Recipe />} />
       <Route path="/404" element={<NotFoundPage />} />
+      <Route path="/terms" element={<TermsPage />} />
     </Route>
   )
 );
