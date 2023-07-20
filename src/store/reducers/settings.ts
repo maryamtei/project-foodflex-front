@@ -185,7 +185,6 @@ export const addSchedule = createAsyncThunk(
 );
 
 export const displaySchedule = createAction<boolean>('favori/click-add-favori');
-export const selectedDay = createAction<number>('favori/selected-day');
 export const nextWeek = createAction<boolean>('schedule/current-week');
 
 // ----------------- BEGIN REDUCER ------------------------- //
@@ -350,7 +349,9 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(addWeekSchedule.fulfilled, (state, action) => {
       const response = action.payload;
-      console.log(response);
+      if (response.status) {
+        state.currentUser = response.user;
+      }
     })
 
     .addCase(addSchedule.pending, (state) => {
@@ -363,43 +364,14 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(addSchedule.fulfilled, (state, action) => {
       const response = action.payload;
-      console.log(response);
+      if (response.status) {
+        state.currentUser = response.user;
+        console.log(response.user);
+        state.clickAddSchedule = false;
+      }
     })
     .addCase(displaySchedule, (state, action) => {
       state.clickAddSchedule = action.payload;
-    })
-    .addCase(selectedDay, (state, action) => {
-      const dayPosition = action.payload;
-      const findWeek = state.currentUser.schedules.find(
-        (week) => week.week === state.currentWeek
-      );
-      const findFavori = findWeek?.meals.find(
-        (day) => day.position === dayPosition
-      );
-      if (!findFavori) {
-        state.MealFavoriToAdd.position = action.payload;
-        // Pour chaque semaine, on vérifie si c'est la semaine courant
-        // et on change la valeur
-        state.currentUser.schedules = state.currentUser.schedules.map(
-          (week) => {
-            if (week.week === state.currentWeek) {
-              week.meals.push(state.MealFavoriToAdd);
-            }
-            return week;
-          }
-        );
-        // state.users = state.users.map((user) => {
-        //   if (user.email === state.currentUser.email) {
-        //     return {
-        //       ...user,
-        //       schedule: state.currentUser.schedule,
-        //     };
-        //   }
-        //   return user;
-        // });
-        // // fermer la modale planning
-        // state.clickAddSchedule = false;
-      }
     });
 });
 export default settingsReducer;

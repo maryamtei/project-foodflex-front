@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Heart, Plus } from 'react-feather';
 import { Link } from 'react-router-dom';
+import { Meal } from '../../@types/Profil';
 import { Recipe } from '../../@types/recipe';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   addFavori,
+  addSchedule,
   addScheduleFavori,
   deleteFavori,
   displaySchedule,
-  selectedDay,
   toggleIsOpen,
   toggleSignUpOpen,
 } from '../../store/reducers/settings';
@@ -22,6 +23,9 @@ function RecipeCard({ recipe }: CardProps) {
   const [recipeFavori, setRecipeFavori] = useState(false);
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const stateSchedule = useAppSelector((state) => state.schedule.stateSchedule);
+  const MealFavoriToAdd = useAppSelector(
+    (state) => state.settings.MealFavoriToAdd
+  );
   const clickAddFavori = useAppSelector(
     (state) => state.schedule.clickAddSchedule
   );
@@ -31,10 +35,18 @@ function RecipeCard({ recipe }: CardProps) {
   const favoris = useAppSelector(
     (state) => state.settings.currentUser.favorites
   );
-
+  const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const dispatch = useAppDispatch();
-  function handleClickDay(position: number) {
-    dispatch(selectedDay(position));
+
+  function handleClickDay() {
+    const newMeal = {
+      idDbMeal: MealFavoriToAdd.idDbMeal,
+      name: MealFavoriToAdd.name,
+      image: MealFavoriToAdd.image,
+      position: recipe.position,
+    };
+    dispatch(addScheduleFavori(newMeal));
+    dispatch(addSchedule({ meals: newMeal, week: currentWeek }));
   }
   // Function to handle adding the recipe to the schedule
   function handleAddSchedule(event: React.MouseEvent<HTMLButtonElement>) {
@@ -93,8 +105,8 @@ function RecipeCard({ recipe }: CardProps) {
       onClick={(event: { preventDefault: () => void }) => {
         if (displayScheduleModal) {
           event.preventDefault();
+          handleClickDay();
         }
-        handleClickDay(recipe.position);
       }}
     >
       <img

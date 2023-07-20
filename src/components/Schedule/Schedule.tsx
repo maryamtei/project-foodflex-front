@@ -27,8 +27,7 @@ function Schedule() {
 
   useEffect(() => {
     dispatch(addWeekSchedule({ week: currentWeek }));
-    console.log(schedules);
-  }, [dispatch, currentWeek, schedules]);
+  }, [dispatch, currentWeek]);
 
   useEffect(() => {
     if (!isLogged) {
