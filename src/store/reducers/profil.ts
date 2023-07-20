@@ -16,7 +16,7 @@ export const initialState: ProfilState = {
     email: '',
     password: '',
     favorites: [],
-    schedule: [],
+    schedules: [],
   },
 };
 

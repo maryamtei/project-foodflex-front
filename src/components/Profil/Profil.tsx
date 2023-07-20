@@ -1,7 +1,6 @@
 import { FormEvent, useState } from 'react';
 import { Mail, User, Key } from 'react-feather';
 
-import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Field from './Field/Field';
 import { editInfoProfil, logout } from '../../store/reducers/settings';
@@ -15,7 +14,6 @@ function Profil() {
   }
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   function handleSubmitEditProfil(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -27,8 +25,7 @@ function Profil() {
 
   function handleLogout() {
     dispatch(logout());
-    // Redirection to HomePage
-    navigate('/');
+    window.location.reload();
   }
 
   const { firstName, lastName, email, password } = useAppSelector(

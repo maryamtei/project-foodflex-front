@@ -21,6 +21,7 @@
     "vite.config.ts",
     ".eslintrc.cjs",
     "src",
+    "utils",
     "postcss.config.cjs",
     "tailwind.config.cjs"
   ],

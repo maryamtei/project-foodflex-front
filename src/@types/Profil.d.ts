@@ -4,20 +4,21 @@ export interface User {
   email: string;
   password: string;
   favorites: Favorite[];
-  schedule: Schedule[];
+  schedules: Schedule[];
 }
 
 export interface Favorite {
-  idMeal: string;
+  id: string;
+  idDbMeal: string;
   name: string;
-  imageUrl: string;
+  image: string;
   position: number;
 }
 
 export interface Meal {
-  idMeal: string;
+  idDbMeal: string;
   name: string;
-  imageUrl: string;
+  image: string;
   position: number;
 }
 

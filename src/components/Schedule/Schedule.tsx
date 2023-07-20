@@ -4,13 +4,13 @@ import { ChevronLeft, ChevronRight } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateSchedule } from '../../store/reducers/schedule';
-import { nextWeek } from '../../store/reducers/settings';
+import { nextWeek, addWeekSchedule } from '../../store/reducers/settings';
 import Carousel from '../Carousel/Carousel';
 
 function Schedule() {
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const schedules = useAppSelector(
-    (state) => state.settings.currentUser.schedule
+    (state) => state.settings.currentUser.schedules
   );
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const weekFind = schedules.find((week) => week.week === currentWeek);
@@ -24,6 +24,11 @@ function Schedule() {
   function handleClickBeforeWeek() {
     dispatch(nextWeek(false));
   }
+
+  useEffect(() => {
+    dispatch(addWeekSchedule({ week: currentWeek }));
+  }, [dispatch, currentWeek]);
+
   useEffect(() => {
     if (!isLogged) {
       navigate('/');

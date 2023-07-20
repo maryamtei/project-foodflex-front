@@ -1,11 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useState } from 'react';
 import { useDebounce } from 'react-use';
+import { X } from 'react-feather';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import Schedule from '../Schedule/Schedule';
 import SearchComponent from '../SearchComponent/SearchComponent';
 
-import { X } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   fetchRandomRecipes,
@@ -124,7 +124,7 @@ function Recipes() {
       )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
         {recipes.map((recipe) => (
-          <RecipeCard recipe={recipe} key={recipe.idMeal} />
+          <RecipeCard recipe={recipe} key={recipe.idDbMeal} />
         ))}
       </div>
     </div>

@@ -1,14 +1,15 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Heart, Plus } from 'react-feather';
 import { Link } from 'react-router-dom';
+import { Meal } from '../../@types/Profil';
 import { Recipe } from '../../@types/recipe';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   addFavori,
   addSchedule,
+  addScheduleFavori,
   deleteFavori,
   displaySchedule,
-  selectedDay,
   toggleIsOpen,
   toggleSignUpOpen,
 } from '../../store/reducers/settings';
@@ -22,6 +23,9 @@ function RecipeCard({ recipe }: CardProps) {
   const [recipeFavori, setRecipeFavori] = useState(false);
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const stateSchedule = useAppSelector((state) => state.schedule.stateSchedule);
+  const MealFavoriToAdd = useAppSelector(
+    (state) => state.settings.MealFavoriToAdd
+  );
   const clickAddFavori = useAppSelector(
     (state) => state.schedule.clickAddSchedule
   );
@@ -31,16 +35,25 @@ function RecipeCard({ recipe }: CardProps) {
   const favoris = useAppSelector(
     (state) => state.settings.currentUser.favorites
   );
-
+  const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const dispatch = useAppDispatch();
-  function handleClickDay(position: number) {
-    dispatch(selectedDay(position));
+
+  function handleClickDay() {
+    const newMeal = {
+      idDbMeal: MealFavoriToAdd.idDbMeal,
+      name: MealFavoriToAdd.name,
+      image: MealFavoriToAdd.image,
+      position: recipe.position,
+    };
+    dispatch(addScheduleFavori(newMeal));
+    dispatch(addSchedule({ meals: newMeal, week: currentWeek }));
   }
   // Function to handle adding the recipe to the schedule
   function handleAddSchedule(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     dispatch(displaySchedule(!clickAddFavori));
-    dispatch(addSchedule(recipe));
+    dispatch(addScheduleFavori(recipe));
+
     window.scrollTo({
       behavior: 'smooth',
       top: 0,
@@ -51,10 +64,10 @@ function RecipeCard({ recipe }: CardProps) {
   // re-renders
   const matchingFavori = useMemo(() => {
     const findFavori = favoris.find(
-      (favori) => favori.idMeal === recipe.idMeal
+      (favori) => favori.idDbMeal === recipe.idDbMeal
     );
     return findFavori;
-  }, [favoris, recipe.idMeal]);
+  }, [favoris, recipe.idDbMeal]);
 
   // Function to handle adding the recipe to favorites
   function handleAddFavori(event: React.MouseEvent<HTMLButtonElement>) {
@@ -64,7 +77,7 @@ function RecipeCard({ recipe }: CardProps) {
       dispatch(addFavori(recipe));
       setRecipeFavori(true);
     } else {
-      dispatch(deleteFavori(recipe.idMeal));
+      dispatch(deleteFavori(recipe.idDbMeal));
       setRecipeFavori(false);
     }
   }
@@ -87,17 +100,17 @@ function RecipeCard({ recipe }: CardProps) {
 
   return (
     <Link
-      to={`/recipes/${recipe.idMeal}`}
+      to={`/recipes/${recipe.idDbMeal}`}
       className="shadow-md rounded-lg relative hover:shadow-lg transition-all"
       onClick={(event: { preventDefault: () => void }) => {
         if (displayScheduleModal) {
           event.preventDefault();
+          handleClickDay();
         }
-        handleClickDay(recipe.position);
       }}
     >
       <img
-        src={recipe.imageUrl}
+        src={recipe.image}
         alt={recipe.name}
         className="rounded-t-md cover"
       />

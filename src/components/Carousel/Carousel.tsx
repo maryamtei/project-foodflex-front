@@ -7,7 +7,7 @@ import CarouselSlide from './CarouselSlide';
 
 const PLACEHOLDER_MEAL = {
   name: 'No recipe',
-  imageUrl: '/images.jpeg',
+  image: '/images.jpeg',
 };
 
 interface RecipeProps {
@@ -40,7 +40,7 @@ function Carousel({ meals }: RecipeProps) {
         return {
           ...PLACEHOLDER_MEAL,
           position,
-          idMeal: position.toString(),
+          idDbMeal: position.toString(),
         };
       }
 
