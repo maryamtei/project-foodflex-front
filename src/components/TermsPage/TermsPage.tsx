@@ -6,7 +6,7 @@ function TermsPage() {
           <img
             src="./img/terms.jpg"
             alt="Background"
-            className="w-full h-full object-cover object-center"
+            className="w-full h-full object-cover object-bottom"
             style={{
               objectPosition: 'center top',
             }}

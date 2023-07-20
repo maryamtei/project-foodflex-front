@@ -187,24 +187,13 @@ function Footer() {
           <ul className="flex flex-col gap-1 underline">
             <li>
               <NavLink
-                to="/"
+                to="/terms"
                 relative="path"
                 onClick={() => {
                   scrollToTop();
                 }}
               >
-                Privacy Policy
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/"
-                relative="path"
-                onClick={() => {
-                  scrollToTop();
-                }}
-              >
-                Terms & Conditions
+                Terms & Conditions of Use
               </NavLink>
             </li>
           </ul>

@@ -218,8 +218,20 @@ function HeaderMobile() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/" relative="path">
-                  Terms & Conditions
+                <NavLink
+                  to="/terms"
+                  relative="path"
+                  onClick={() => {
+                    if (modalIsOpen) {
+                      toogleModalSignUpSignIn();
+                    }
+                    if (modalIsOpenFavoriProfil) {
+                      closeProfilModal();
+                    }
+                    menuOnClick();
+                  }}
+                >
+                  Terms & Conditions of Use
                 </NavLink>
               </li>
             </ul>
