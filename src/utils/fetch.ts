@@ -24,7 +24,6 @@ const fetchGet = (url: any) => fetchWithHeaders(url);
 
 // Function utilitaire pour effectuer les requêtes POST avec les headers mis à jour
 const fetchPost = (url: any, data: any) => {
-  console.log(JSON.stringify(data));
   return fetchWithHeaders(url, {
     method: 'POST',
     body: JSON.stringify(data),
