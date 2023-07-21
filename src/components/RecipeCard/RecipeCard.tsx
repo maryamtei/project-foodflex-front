@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Heart, Plus } from 'react-feather';
+import { Heart, Plus, X } from 'react-feather';
 import { Link } from 'react-router-dom';
-import { Meal } from '../../@types/Profil';
 import { Recipe } from '../../@types/recipe';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
@@ -12,6 +11,7 @@ import {
   displaySchedule,
   toggleIsOpen,
   toggleSignUpOpen,
+  deleteMeal,
 } from '../../store/reducers/settings';
 import './RecipeCard.css';
 
@@ -40,6 +40,7 @@ function RecipeCard({ recipe }: CardProps) {
 
   function handleClickDay() {
     const newMeal = {
+      id: MealFavoriToAdd.id,
       idDbMeal: MealFavoriToAdd.idDbMeal,
       name: MealFavoriToAdd.name,
       image: MealFavoriToAdd.image,
@@ -80,6 +81,10 @@ function RecipeCard({ recipe }: CardProps) {
       dispatch(deleteFavori(recipe.idDbMeal));
       setRecipeFavori(false);
     }
+  }
+  function handleDeleteMeal(event: React.MouseEvent<HTMLButtonElement>) {
+    event.preventDefault();
+    dispatch(deleteMeal(recipe));
   }
 
   // useEffect to check if the recipe is in favorites and update recipeFavori
@@ -152,6 +157,25 @@ function RecipeCard({ recipe }: CardProps) {
             <Plus size={20} />
           </button>
         </div>
+        {recipe.id !== undefined && (
+          <div
+            className={`card-actions justify-end bg-t ${
+              stateHome ? 'hidden' : ''
+            }
+          ${stateSchedule ? '' : 'hidden'}`}
+          >
+            <button
+              type="button"
+              className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
+              onClick={(event) => {
+                event.preventDefault();
+                handleDeleteMeal(event);
+              }}
+            >
+              <X className="h-2 w-2 sm:h-4 sm:w-4 text-[rgb(255,0,0)]" />
+            </button>
+          </div>
+        )}
       </div>
       <div className="rounded-b-lg foodPattern">
         <h2 className="text-white font-semibold p-2 text-center truncate text-sm sm:text-md">
