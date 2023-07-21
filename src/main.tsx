@@ -23,7 +23,9 @@ import TermsPage from './components/TermsPage/TermsPage';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Apptest />}>
-      <Route index path="/" element={<Home />} />
+      <Route index path="/" element={<Home signInDomain="" />} />
+      <Route path="/sign-up" element={<Home signInDomain="signup" />} />
+      <Route path="/sign-in" element={<Home signInDomain="signin" />} />
       <Route path="/profil" element={<Profil />} />
       <Route path="/favoris" element={<Favoris />} />
       <Route path="/schedule" element={<Schedule />} />
