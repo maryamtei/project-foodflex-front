@@ -1,6 +1,8 @@
-import { Fragment, useState } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { Check, ChevronsDown } from 'react-feather';
+import { fetchCategoriesRecipes } from '../../../store/reducers/recipes';
+import { useAppDispatch } from '../../../hooks/redux';
 
 interface Category {
   id: number;
@@ -31,6 +33,14 @@ function CategoriesListBox() {
   const [selectedCategory, setSelectedCategory] = useState<SelectedCategory>(
     categories[0]
   );
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (selectedCategory) {
+      dispatch(fetchCategoriesRecipes(selectedCategory.name));
+    }
+  }, [dispatch, selectedCategory]);
 
   return (
     <Listbox value={selectedCategory} onChange={setSelectedCategory}>

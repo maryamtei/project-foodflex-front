@@ -20,6 +20,7 @@ export interface ApiRecipe {
   strMealThumb: string;
 }
 
+// GENERE RECETTES ALEATOIREMENT
 export const fetchRandomRecipes = createAsyncThunk(
   'recipes/fetchRandomRecipes',
   async ({ count }: { count: number }) => {
@@ -111,6 +112,25 @@ export const fetchSearchRecipe = createAsyncThunk(
   }
 );
 
+export const fetchCategoriesRecipes = createAsyncThunk(
+  'recipes/fetchCategoriesRecipes',
+  async (categorie: string) => {
+    const response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categorie}`
+    );
+    const data: { meals: ApiRecipe[] | null } = await response.json();
+    const meals = data.meals || [];
+    return meals.map((meal) => {
+      return {
+        idDbMeal: meal.idMeal,
+        name: meal.strMeal,
+        image: meal.strMealThumb,
+        position: 0,
+      };
+    });
+  }
+);
+
 // Création d'un reducer pour gérer l'état des recettes.
 const recipesReducer = createReducer(initialState, (builder) => {
   builder
@@ -126,7 +146,7 @@ const recipesReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.error =
         action.error.message ||
-        'Une erreur sur la generation des recettes aleatoires est survenue';
+        'Une erreur inattendue sur la generation des recettes aleatoires est survenue';
     })
     .addCase(fetchSearchRecipe.pending, (state) => {
       state.loading = true;
@@ -140,7 +160,21 @@ const recipesReducer = createReducer(initialState, (builder) => {
       state.loading = false;
       state.error =
         action.error.message ||
-        'Une erreur sur la recherche de recette est survenue';
+        'Une erreur inattendue sur la recherche de recette est survenue';
+    })
+    .addCase(fetchCategoriesRecipes.pending, (state) => {
+      state.loading = true;
+    })
+    .addCase(fetchCategoriesRecipes.fulfilled, (state, action) => {
+      state.list = action.payload;
+      state.loading = false;
+      state.error = null;
+    })
+    .addCase(fetchCategoriesRecipes.rejected, (state, action) => {
+      state.loading = false;
+      state.error =
+        action.error.message ||
+        'Une erreur inattendue sur la recherche par categorie est survenue';
     });
 });
 
