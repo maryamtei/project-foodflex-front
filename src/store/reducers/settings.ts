@@ -158,16 +158,6 @@ export const addFavori = createAsyncThunk(
 
 export const addScheduleFavori = createAction<Meal>('favori/add-planning');
 
-export const addWeekSchedule = createAsyncThunk(
-  'user/add-week-schedule',
-  async (week: { week: SettingsState['currentWeek'] }) => {
-    const response = await fetchPost(`scheduleAddWeek`, week);
-    const data = await response.json();
-
-    return data;
-  }
-);
-
 export const addSchedule = createAsyncThunk(
   'user/add-schedule',
   async (body: {
@@ -337,21 +327,6 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(addScheduleFavori, (state, action) => {
       state.MealFavoriToAdd = action.payload;
-    })
-
-    .addCase(addWeekSchedule.pending, (state) => {
-      state.isLoading = true;
-      state.message = null;
-    })
-    .addCase(addWeekSchedule.rejected, (state) => {
-      state.message = 'rejected';
-      state.isLoading = false;
-    })
-    .addCase(addWeekSchedule.fulfilled, (state, action) => {
-      const response = action.payload;
-      if (response.status) {
-        state.currentUser = response.user;
-      }
     })
 
     .addCase(addSchedule.pending, (state) => {
