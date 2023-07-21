@@ -12,6 +12,7 @@ import {
   fetchSearchRecipe,
 } from '../../store/reducers/recipes';
 import { displaySchedule } from '../../store/reducers/settings';
+import CategoriesListBox from './Categories/CategoriesListBox';
 
 function Recipes() {
   const [search, setSearch] = useState('');
@@ -112,11 +113,14 @@ function Recipes() {
       <h1 className="text-thirdff text-2xl sm:text-4xl font-bold md:mb-12 mb-6 text-center">
         Find exactly what you need !
       </h1>
-      <SearchComponent
-        name="RecipeSearch"
-        value={search}
-        onChange={setSearch}
-      />
+      <div className="flex gap-2 relative">
+        <SearchComponent
+          name="RecipeSearch"
+          value={search}
+          onChange={setSearch}
+        />
+        <CategoriesListBox />
+      </div>
       {recipes.length === 0 && (
         <div className="text-center text-thirdff text-2xl font-bold  mt-10">
           No recipes found
