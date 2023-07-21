@@ -34,7 +34,6 @@ const initialValue: SettingsState = {
     firstName: '',
     lastName: '',
     email: '',
-    password: '',
     favorites: [],
     schedules: [],
   },
@@ -54,6 +53,7 @@ const initialValue: SettingsState = {
   isLoading: false,
   message: null,
   MealFavoriToAdd: {
+    id: 0,
     idDbMeal: '',
     name: '',
     image: '',
@@ -158,16 +158,15 @@ export const addFavori = createAsyncThunk(
 
 export const addScheduleFavori = createAction<Meal>('favori/add-planning');
 
-export const addWeekSchedule = createAsyncThunk(
-  'user/add-week-schedule',
-  async (week: { week: SettingsState['currentWeek'] }) => {
-    const response = await fetchPost(`scheduleAddWeek`, week);
+export const deleteMeal = createAsyncThunk(
+  'user/delete-schedule',
+  async (meal: SettingsState['MealFavoriToAdd']) => {
+    const response = await fetchDelete(`schedule-delete/${meal.id}`);
     const data = await response.json();
 
     return data;
   }
 );
-
 export const addSchedule = createAsyncThunk(
   'user/add-schedule',
   async (body: {
@@ -339,21 +338,6 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.MealFavoriToAdd = action.payload;
     })
 
-    .addCase(addWeekSchedule.pending, (state) => {
-      state.isLoading = true;
-      state.message = null;
-    })
-    .addCase(addWeekSchedule.rejected, (state) => {
-      state.message = 'rejected';
-      state.isLoading = false;
-    })
-    .addCase(addWeekSchedule.fulfilled, (state, action) => {
-      const response = action.payload;
-      if (response.status) {
-        state.currentUser = response.user;
-      }
-    })
-
     .addCase(addSchedule.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -368,6 +352,22 @@ const settingsReducer = createReducer(initialValue, (builder) => {
         state.currentUser = response.user;
         console.log(response.user);
         state.clickAddSchedule = false;
+      }
+    })
+
+    .addCase(deleteMeal.pending, (state) => {
+      state.isLoading = true;
+      state.message = null;
+    })
+    .addCase(deleteMeal.rejected, (state) => {
+      state.message = 'rejected';
+      state.isLoading = false;
+    })
+    .addCase(deleteMeal.fulfilled, (state, action) => {
+      const response = action.payload;
+      if (response.status) {
+        state.currentUser = response.user;
+        console.log(response.user);
       }
     })
     .addCase(displaySchedule, (state, action) => {

@@ -2,7 +2,6 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
   favorites: Favorite[];
   schedules: Schedule[];
 }
@@ -16,6 +15,7 @@ export interface Favorite {
 }
 
 export interface Meal {
+  id: number;
   idDbMeal: string;
   name: string;
   image: string;
