@@ -19,6 +19,7 @@ import Profil from './components/Profil/Profil';
 import store from './store';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import TermsPage from './components/TermsPage/TermsPage';
+import ContactPage from './components/ContactPage/ContactPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
