@@ -4,10 +4,14 @@ import { Recipe } from '../../@types/recipe';
 // Définition de l'interface pour l'état des recettes.
 interface RecipesState {
   list: Recipe[];
+  loading: boolean;
+  error: string | null;
 }
 // Initialisation de l'état initial des recettes.
 export const initialState: RecipesState = {
   list: [],
+  loading: false,
+  error: null,
 };
 
 export interface ApiRecipe {
@@ -109,13 +113,35 @@ export const fetchSearchRecipe = createAsyncThunk(
 
 // Création d'un reducer pour gérer l'état des recettes.
 const recipesReducer = createReducer(initialState, (builder) => {
-  builder.addCase(fetchRandomRecipes.fulfilled, (state, action) => {
-    state.list = action.payload;
-  });
-
-  builder.addCase(fetchSearchRecipe.fulfilled, (state, action) => {
-    state.list = action.payload;
-  });
+  builder
+    .addCase(fetchRandomRecipes.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(fetchRandomRecipes.fulfilled, (state, action) => {
+      state.list = action.payload;
+      state.loading = false;
+    })
+    .addCase(fetchRandomRecipes.rejected, (state, action) => {
+      state.loading = false;
+      state.error =
+        action.error.message ||
+        'Une erreur sur la generation des recettes aleatoires est survenue';
+    })
+    .addCase(fetchSearchRecipe.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(fetchSearchRecipe.fulfilled, (state, action) => {
+      state.list = action.payload;
+      state.loading = false;
+    })
+    .addCase(fetchSearchRecipe.rejected, (state, action) => {
+      state.loading = false;
+      state.error =
+        action.error.message ||
+        'Une erreur sur la recherche de recette est survenue';
+    });
 });
 
 export default recipesReducer;

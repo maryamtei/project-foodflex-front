@@ -2,6 +2,14 @@ import { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { Check, ChevronsDown } from 'react-feather';
 
+interface Category {
+  id: number;
+  name: string;
+  unavailable: boolean;
+}
+
+type SelectedCategory = Category | undefined;
+
 const categories = [
   { id: 1, name: 'Beef', unavailable: false },
   { id: 2, name: 'Chicken', unavailable: false },
@@ -20,7 +28,9 @@ const categories = [
 ];
 
 function CategoriesListBox() {
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
+  const [selectedCategory, setSelectedCategory] = useState<SelectedCategory>(
+    categories[0]
+  );
 
   return (
     <Listbox value={selectedCategory} onChange={setSelectedCategory}>
@@ -32,9 +42,7 @@ function CategoriesListBox() {
               aria-hidden="true"
             />
           </span>
-          {selectedCategory.name
-            ? selectedCategory.name
-            : 'Or choose a Category'}
+          {selectedCategory?.name || 'Or choose a Category'}
         </Listbox.Button>
         <Transition
           as={Fragment}
