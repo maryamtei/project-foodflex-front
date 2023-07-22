@@ -1,4 +1,5 @@
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import HowItWorks from './HowItWorks';
 
 function HeadHome() {
   return (
@@ -22,36 +23,9 @@ function HeadHome() {
           HOW IT WORKS ?
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-fourthff">
-          <div className="flex flex-col items-center">
-            <img
-              src="/images.jpeg"
-              alt="imageHello"
-              className="mt-4 rounded-full w-24 h-24 object-cover"
-            />
-            <div className=" mt-2 text-center sm:text-center md:text-center">
-              My text
-            </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <img
-              src="/images.jpeg"
-              alt="image2"
-              className="mt-4 rounded-full w-24 h-24 object-cover"
-            />
-            <div className="mt-2 text-center sm:text-center md:text-center">
-              My text
-            </div>
-          </div>
-          <div className="flex flex-col items-center">
-            <img
-              src="/images.jpeg"
-              alt="image3"
-              className="mt-4 rounded-full w-24 h-24 object-cover"
-            />
-            <div className="mt-2 text-center sm:text-center md:text-center">
-              My text
-            </div>
-          </div>
+          <HowItWorks imageHome="/images.jpeg" content="My Text" />
+          <HowItWorks imageHome="/images.jpeg" content="My Text" />
+          <HowItWorks imageHome="/images.jpeg" content="My Text" />
         </div>
       </div>
     </div>

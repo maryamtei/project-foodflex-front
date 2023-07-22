@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import HeaderMobile from './HeaderMobile/HeaderMobile';
 import HeaderDesktop from './HeaderDesktop/HeaderDesktop';
 import { useAppSelector } from '../../hooks/redux';

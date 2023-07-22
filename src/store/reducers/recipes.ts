@@ -49,16 +49,21 @@ export const fetchRandomRecipes = createAsyncThunk(
         if (!mealIds.has(meal.idMeal)) {
           mealIds.add(meal.idMeal);
           uniqueMeals.push({
-            idMeal: meal.idMeal,
+            idDbMeal: meal.idMeal,
             name: meal.strMeal,
-            imageUrl: meal.strMealThumb,
+            image: meal.strMealThumb,
             position: 0,
           });
         }
       }
     }
 
-    return uniqueMeals;
+    return uniqueMeals.map((meal, index) => {
+      return {
+        ...meal,
+        position: index,
+      };
+    });
   }
 );
 
@@ -93,9 +98,9 @@ export const fetchSearchRecipe = createAsyncThunk(
 
     return uniqueMeals.map((meal) => {
       return {
-        idMeal: meal.idMeal,
+        idDbMeal: meal.idMeal,
         name: meal.strMeal,
-        imageUrl: meal.strMealThumb,
+        image: meal.strMealThumb,
         position: 0,
       };
     });

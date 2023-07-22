@@ -13,14 +13,19 @@ import Favoris from './components/Profil/Favoris';
 import Home from './components/Home/Home';
 import Apptest from './components/App/Apptest';
 import Recipes from './components/Recipes/Recipes';
+import Recipe from './components/Recipe/Recipe';
 import Schedule from './components/Schedule/Schedule';
 import Profil from './components/Profil/Profil';
 import store from './store';
+import NotFoundPage from './components/NotFoundPage/NotFoundPage';
+import TermsPage from './components/TermsPage/TermsPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Apptest />}>
-      <Route index path="/" element={<Home />} />
+      <Route index path="/" element={<Home signInDomain="" />} />
+      <Route path="/sign-up" element={<Home signInDomain="signup" />} />
+      <Route path="/sign-in" element={<Home signInDomain="signin" />} />
       <Route path="/profil" element={<Profil />} />
       <Route path="/favoris" element={<Favoris />} />
       <Route path="/schedule" element={<Schedule />} />
@@ -28,6 +33,9 @@ const router = createBrowserRouter(
       {/* Modifier les routes et l'élement Apptest en fonction de vos taches */}
       {/* <Route index element={<Apptest />} /> */}
       <Route path="recipes" element={<Recipes />} />
+      <Route path="recipes/:id" element={<Recipe />} />
+      <Route path="/404" element={<NotFoundPage />} />
+      <Route path="/terms" element={<TermsPage />} />
     </Route>
   )
 );

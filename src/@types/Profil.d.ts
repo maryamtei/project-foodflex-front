@@ -2,22 +2,23 @@ export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  password: string;
   favorites: Favorite[];
-  schedule: Schedule[];
+  schedules: Schedule[];
 }
 
 export interface Favorite {
-  idMeal: string;
+  id: string;
+  idDbMeal: string;
   name: string;
-  imageUrl: string;
+  image: string;
   position: number;
 }
 
 export interface Meal {
-  idMeal: string;
+  id: number;
+  idDbMeal: string;
   name: string;
-  imageUrl: string;
+  image: string;
   position: number;
 }
 

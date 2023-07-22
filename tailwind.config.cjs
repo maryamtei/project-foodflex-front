@@ -36,5 +36,5 @@ module.exports = {
     },
   },
   // eslint-disable-next-line import/no-extraneous-dependencies, global-require
-  plugins: [require('daisyui')],
+  plugins: [require('daisyui'), require('@tailwindcss/typography')],
 };
