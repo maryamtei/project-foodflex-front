@@ -25,7 +25,7 @@ interface SettingsState {
   message: string | null;
   codeMessage: number;
   MealFavoriToAdd: Meal;
-  idToDelete: string;
+  idToDelete: number;
   clickAddSchedule: boolean;
   currentWeek: number;
 }
@@ -61,7 +61,7 @@ const initialValue: SettingsState = {
     image: '',
     position: 0,
   },
-  idToDelete: '',
+  idToDelete: 1,
   currentWeek: 1,
   clickAddSchedule: false,
 };
