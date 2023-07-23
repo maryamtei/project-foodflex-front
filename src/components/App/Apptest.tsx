@@ -4,6 +4,7 @@ import ModalSign from '../settings/Modal';
 import ModalFavoriProfil from '../Profil/Modal';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Message from '../Message/message';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   changeInnerWidth,
@@ -34,7 +35,7 @@ function Apptest() {
   });
 
   const innerWidth = useAppSelector((state) => state.window.innerWidth);
-
+  const codeMessage = useAppSelector((state) => state.settings.codeMessage);
   // Check if the inner width of the window is less than 640 pixels
   useEffect(() => {
     if (innerWidth < 640) {
@@ -49,8 +50,10 @@ function Apptest() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="relative">
       <Header />
+      {codeMessage > 0 && <Message />}
+
       {/* Render the Modal component if modalIsOpen is true */}
       {modalIsOpenSign && <ModalSign />}
       {(modalIsOpenFavoriProfil || !mobileView) && isLogged && (
@@ -62,6 +65,7 @@ function Apptest() {
 
       {/* fake div to margin bottom in mobile because footer component is sticky  */}
       <div className="h-16 " />
+
       <Footer />
     </div>
   );

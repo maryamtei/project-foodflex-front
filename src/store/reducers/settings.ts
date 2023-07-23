@@ -23,6 +23,7 @@ interface SettingsState {
   };
   isLoading: boolean;
   message: string | null;
+  codeMessage: number;
   MealFavoriToAdd: Meal;
   idToDelete: string;
   clickAddSchedule: boolean;
@@ -51,7 +52,8 @@ const initialValue: SettingsState = {
     lastName: '',
   },
   isLoading: false,
-  message: null,
+  message: '',
+  codeMessage: 0,
   MealFavoriToAdd: {
     id: 0,
     idDbMeal: '',
@@ -208,54 +210,50 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(logout.pending, (state) => {
       state.isLoading = true;
       state.message = null;
+      state.codeMessage = 0;
     })
     .addCase(logout.rejected, (state) => {
-      state.message = 'rejected';
       state.isLoading = false;
     })
     .addCase(logout.fulfilled, (state, action) => {
-      const response = action.payload;
-      if (response.status) {
-        state.isLogged = false;
-        state.currentUser = initialValue.currentUser;
-        localStorage.removeItem('token');
-      }
+      state.message = action.payload.message;
+      state.codeMessage = action.payload.codeMessage;
+      state.isLogged = false;
+      state.currentUser = initialValue.currentUser;
+      localStorage.removeItem('token');
     })
     // ---------------- USER -------------------//
     .addCase(getUserData.pending, (state) => {
       state.isLoading = true;
       state.message = null;
+      state.codeMessage = 0;
     })
     .addCase(getUserData.rejected, (state) => {
-      state.message = 'rejected';
       state.isLoading = false;
     })
     .addCase(getUserData.fulfilled, (state, action) => {
-      const response = action.payload;
-      if (response.message === 'Authentification réussie.') {
-        state.isLogged = true;
-        state.currentUser = response.user;
-        console.log(response);
-      }
+      state.message = action.payload.message;
+      state.codeMessage = action.payload.codeMessage;
+      state.isLogged = true;
+      state.currentUser = action.payload.newUser;
     })
     // ---------------- SIGN IN -------------------//
     .addCase(signIn.pending, (state) => {
       state.isLoading = true;
       state.message = null;
+      state.codeMessage = 0;
     })
     .addCase(signIn.rejected, (state) => {
-      state.message = 'rejected';
       state.isLoading = false;
     })
     .addCase(signIn.fulfilled, (state, action) => {
-      const response = action.payload;
-      if (response.message === 'Connexion réussie.') {
-        const authToken = response.token;
-        localStorage.removeItem('token');
-        localStorage.setItem('token', authToken);
-        state.currentUser = response.user;
-        state.isLogged = true;
-      }
+      state.message = action.payload.message;
+      state.codeMessage = action.payload.codeMessage;
+      const authToken = action.payload.token;
+      localStorage.removeItem('token');
+      localStorage.setItem('token', authToken);
+      state.currentUser = action.payload.newUser;
+      state.isLogged = true;
       state.isLoading = false;
       state.modalIsOpen = false;
     })
@@ -264,12 +262,19 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(signUp.pending, (state) => {
       state.isLoading = true;
       state.message = null;
+      state.codeMessage = 0;
     })
     .addCase(signUp.rejected, (state) => {
-      state.message = 'rejected';
       state.isLoading = false;
     })
     .addCase(signUp.fulfilled, (state, action) => {
+      state.message = action.payload.message;
+      state.codeMessage = action.payload.codeMessage;
+      const authToken = action.payload.token;
+      localStorage.removeItem('token');
+      localStorage.setItem('token', authToken);
+      state.currentUser = action.payload.newUser;
+      state.isLogged = true;
       state.isLoading = false;
       state.modalIsOpen = false;
     })
@@ -297,32 +302,30 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(deleteFavori.pending, (state) => {
       state.isLoading = true;
       state.message = null;
+      state.codeMessage = 0;
     })
     .addCase(deleteFavori.rejected, (state) => {
-      state.message = 'rejected';
       state.isLoading = false;
     })
     .addCase(deleteFavori.fulfilled, (state, action) => {
-      const response = action.payload;
-      if (response.status) {
-        state.currentUser = response.user;
-      }
+      state.message = action.payload.message;
+      state.codeMessage = action.payload.codeMessage;
+      state.currentUser = action.payload.newUser;
     })
 
     // ---------------- ADD FAVORIS -------------------//
     .addCase(addFavori.pending, (state) => {
       state.isLoading = true;
       state.message = null;
+      state.codeMessage = 0;
     })
     .addCase(addFavori.rejected, (state) => {
-      state.message = 'rejected';
       state.isLoading = false;
     })
     .addCase(addFavori.fulfilled, (state, action) => {
-      const response = action.payload;
-      if (response.status) {
-        state.currentUser = response.user;
-      }
+      state.message = action.payload.message;
+      state.codeMessage = action.payload.codeMessage;
+      state.currentUser = action.payload.newUser;
     })
 
     // ---------------- ADD SCHEDULE -------------------//
@@ -341,34 +344,30 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(addSchedule.pending, (state) => {
       state.isLoading = true;
       state.message = null;
+      state.codeMessage = 0;
     })
     .addCase(addSchedule.rejected, (state) => {
-      state.message = 'rejected';
       state.isLoading = false;
     })
     .addCase(addSchedule.fulfilled, (state, action) => {
-      const response = action.payload;
-      if (response.status) {
-        state.currentUser = response.user;
-        console.log(response.user);
-        state.clickAddSchedule = false;
-      }
+      state.message = action.payload.message;
+      state.codeMessage = action.payload.codeMessage;
+      state.currentUser = action.payload.newUser;
+      state.clickAddSchedule = false;
     })
 
     .addCase(deleteMeal.pending, (state) => {
       state.isLoading = true;
       state.message = null;
+      state.codeMessage = 0;
     })
     .addCase(deleteMeal.rejected, (state) => {
-      state.message = 'rejected';
       state.isLoading = false;
     })
     .addCase(deleteMeal.fulfilled, (state, action) => {
-      const response = action.payload;
-      if (response.status) {
-        state.currentUser = response.user;
-        console.log(response.user);
-      }
+      state.message = action.payload.message;
+      state.codeMessage = action.payload.codeMessage;
+      state.currentUser = action.payload.newUser;
     })
     .addCase(displaySchedule, (state, action) => {
       state.clickAddSchedule = action.payload;
