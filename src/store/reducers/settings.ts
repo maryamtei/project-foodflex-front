@@ -5,6 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import { Meal, User } from '../../@types/Profil';
 import { fetchPost, fetchGet, fetchDelete } from '../../utils/fetch';
+import { MealAdd } from '../../@types/recipe';
 
 interface SettingsState {
   currentUser: User;
@@ -24,7 +25,7 @@ interface SettingsState {
   isLoading: boolean;
   message: string | null;
   codeMessage: number;
-  MealFavoriToAdd: Meal;
+  MealFavoriToAdd: MealAdd;
   idToDelete: number;
   clickAddSchedule: boolean;
   currentWeek: number;
@@ -55,7 +56,6 @@ const initialValue: SettingsState = {
   message: '',
   codeMessage: 0,
   MealFavoriToAdd: {
-    id: 0,
     idDbMeal: '',
     name: '',
     image: '',
@@ -158,12 +158,14 @@ export const addFavori = createAsyncThunk(
 
 // ----------------------- ADD SCHEDULE ------------------------//
 
-export const addScheduleFavori = createAction<Meal>('favori/add-planning');
+export const addScheduleFavori = createAction<MealAdd>('favori/add-planning');
+
+// ----------------------- DELETE MEAL ------------------------//
 
 export const deleteMeal = createAsyncThunk(
   'user/delete-schedule',
-  async (meal: SettingsState['MealFavoriToAdd']) => {
-    const response = await fetchDelete(`schedule-delete/${meal.id}`);
+  async (idToDelete: SettingsState['idToDelete']) => {
+    const response = await fetchDelete(`schedule-delete/${idToDelete}`);
     const data = await response.json();
 
     return data;
@@ -338,7 +340,10 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       }
     })
     .addCase(addScheduleFavori, (state, action) => {
-      state.MealFavoriToAdd = action.payload;
+      state.MealFavoriToAdd.idDbMeal = action.payload.idDbMeal;
+      state.MealFavoriToAdd.image = action.payload.image;
+      state.MealFavoriToAdd.name = action.payload.name;
+      state.MealFavoriToAdd.position = action.payload.position;
     })
 
     .addCase(addSchedule.pending, (state) => {

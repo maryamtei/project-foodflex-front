@@ -40,7 +40,6 @@ function RecipeCard({ recipe }: CardProps) {
 
   function handleClickDay() {
     const newMeal = {
-      id: MealFavoriToAdd.id,
       idDbMeal: MealFavoriToAdd.idDbMeal,
       name: MealFavoriToAdd.name,
       image: MealFavoriToAdd.image,
@@ -64,25 +63,26 @@ function RecipeCard({ recipe }: CardProps) {
   // useCallback to memoize the searchFavori function and prevent unnecessary
   // re-renders
   const matchingFavori = useMemo(() => {
-    const findFavori = favoris.find((favori) => favori.id === recipe.id);
+    const findFavori = favoris.find(
+      (favori) => favori.idDbMeal === recipe.idDbMeal
+    );
     return findFavori;
-  }, [favoris, recipe.id]);
+  }, [favoris, recipe.idDbMeal]);
 
   // Function to handle adding the recipe to favorites
   function handleAddFavori(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-
     if (!matchingFavori) {
       dispatch(addFavori(recipe));
       setRecipeFavori(true);
     } else {
-      dispatch(deleteFavori(recipe.id));
+      dispatch(deleteFavori(matchingFavori.id));
       setRecipeFavori(false);
     }
   }
   function handleDeleteMeal(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-    dispatch(deleteMeal(recipe));
+    dispatch(deleteMeal(recipe.id));
   }
 
   // useEffect to check if the recipe is in favorites and update recipeFavori
