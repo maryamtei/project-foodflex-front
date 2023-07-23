@@ -16,7 +16,7 @@ export interface RecipeDetails {
   videoUrl: string;
 }
 
-export interface List {
+export interface MealAdd {
   idDbMeal: string;
   name: string;
   image: string;

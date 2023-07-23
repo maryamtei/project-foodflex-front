@@ -42,12 +42,14 @@ function FavoriCard({ favori }: CardProps) {
       <div className="text-bgff absolute top-2 right-1">
         <div className="card-actions justify-end">
           <Heart
+            className="cursor-pointer"
             color="black"
             fill="red"
             onClick={() => handleDeleteFavori()}
           />
 
           <Plus
+            className="cursor-pointer"
             color="red"
             onClick={() => {
               handleModaltoggle();
