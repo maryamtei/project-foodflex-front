@@ -110,11 +110,17 @@ export const fetchSearchRecipe = createAsyncThunk(
 // Création d'un reducer pour gérer l'état des recettes.
 const recipesReducer = createReducer(initialState, (builder) => {
   builder.addCase(fetchRandomRecipes.fulfilled, (state, action) => {
-    state.list = action.payload;
+    state.list = action.payload.map((recipe) => ({
+      ...recipe,
+      id: 1,
+    }));
   });
 
   builder.addCase(fetchSearchRecipe.fulfilled, (state, action) => {
-    state.list = action.payload;
+    state.list = action.payload.map((recipe) => ({
+      ...recipe,
+      id: 1,
+    }));
   });
 });
 

@@ -7,7 +7,7 @@ export interface User {
 }
 
 export interface Favorite {
-  id: string;
+  id: number;
   idDbMeal: string;
   name: string;
   image: string;
@@ -25,4 +25,11 @@ export interface Meal {
 export interface Schedule {
   week: number;
   meals: Meal[];
+}
+
+export interface List {
+  idDbMeal: string;
+  name: string;
+  image: string;
+  position: number;
 }

@@ -28,7 +28,7 @@ function Profil() {
     window.location.reload();
   }
 
-  const { firstName, lastName, email, password } = useAppSelector(
+  const { firstName, lastName, email } = useAppSelector(
     (state) => state.settings.currentUser
   );
 
@@ -75,14 +75,6 @@ function Profil() {
               <div className="flex mb-6">
                 <Mail className="mr-2" />
                 <Field name="email" label="Mail :" value={email.trim()} />
-              </div>
-              <div className="flex mb-6">
-                <Key className="mr-2" />
-                <Field
-                  name="password"
-                  label="Password :"
-                  value={password.trim()}
-                />
               </div>
 
               <button
