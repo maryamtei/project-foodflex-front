@@ -78,7 +78,7 @@ function RecipeCard({ recipe }: CardProps) {
       dispatch(addFavori(recipe));
       setRecipeFavori(true);
     } else {
-      dispatch(deleteFavori(recipe.idDbMeal));
+      // dispatch(deleteFavori(recipe.idDbMeal));
       setRecipeFavori(false);
     }
   }

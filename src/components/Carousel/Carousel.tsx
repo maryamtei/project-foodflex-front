@@ -8,6 +8,7 @@ import CarouselSlide from './CarouselSlide';
 const PLACEHOLDER_MEAL = {
   name: 'No recipe',
   image: '/images.jpeg',
+  id: 1,
 };
 
 interface RecipeProps {
