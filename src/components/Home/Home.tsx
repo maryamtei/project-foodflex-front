@@ -18,6 +18,7 @@ function Home({ signInDomain }: HomeProps) {
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const recipes = useAppSelector((state) => state.recipes.list);
 
+  // Redirect to signIn or SignUp
   useEffect(() => {
     if (signInDomain === 'signup') {
       // We display signUp Modal

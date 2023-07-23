@@ -26,10 +26,3 @@ export interface Schedule {
   week: number;
   meals: Meal[];
 }
-
-export interface List {
-  idDbMeal: string;
-  name: string;
-  image: string;
-  position: number;
-}
