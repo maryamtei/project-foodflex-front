@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import HeadHome from './Components/HeadHome';
 import MainHome from './Components/MainHome';
