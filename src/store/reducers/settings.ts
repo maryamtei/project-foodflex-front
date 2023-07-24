@@ -3,9 +3,13 @@ import {
   createAsyncThunk,
   createReducer,
 } from '@reduxjs/toolkit';
+import dayjs from 'dayjs';
+import weekOfYear from 'dayjs/plugin/weekOfYear';
 import { Meal, User } from '../../@types/Profil';
 import { fetchPost, fetchGet, fetchDelete } from '../../utils/fetch';
 import { MealAdd } from '../../@types/recipe';
+
+dayjs.extend(weekOfYear);
 
 interface SettingsState {
   currentUser: User;
@@ -62,7 +66,7 @@ const initialValue: SettingsState = {
     position: 0,
   },
   idToDelete: 1,
-  currentWeek: 1,
+  currentWeek: dayjs().week(),
   clickAddSchedule: false,
 };
 
@@ -343,7 +347,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
-      if (state.codeMessage > 100) {
+      if (state.codeMessage >= 100) {
         state.currentUser = action.payload.newUser;
       }
     })
