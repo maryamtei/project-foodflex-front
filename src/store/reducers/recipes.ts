@@ -18,6 +18,7 @@ export interface ApiRecipe {
   idMeal: string;
   strMeal: string;
   strMealThumb: string;
+  strCategory?: string;
 }
 
 // GENERE RECETTES ALEATOIREMENT
@@ -75,51 +76,53 @@ export const fetchRandomRecipes = createAsyncThunk(
 // Création d'une action Redux async pour fetch des recettes en fonction d'une recherche nom et ingredients
 export const fetchSearchRecipe = createAsyncThunk(
   'recipes/fetchSearchRecipes',
-  async (search: string) => {
-    const [recipeResponse, ingredientResponse] = await Promise.all([
-      fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`),
-      fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`),
-    ]);
+  async ({ category, search }: { search: string; category?: string }) => {
+    if (search) {
+      const [recipeResponse, ingredientResponse] = await Promise.all([
+        fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`),
+        fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${search}`),
+      ]);
 
-    const recipeData: { meals: ApiRecipe[] | null } =
-      await recipeResponse.json();
-    const ingredientData: { meals: ApiRecipe[] | null } =
-      await ingredientResponse.json();
+      const recipeData: { meals: ApiRecipe[] | null } =
+        await recipeResponse.json();
+      const ingredientData: { meals: ApiRecipe[] | null } =
+        await ingredientResponse.json();
 
-    const recipeMeals = recipeData.meals || [];
-    const ingredientMeals = ingredientData.meals || [];
+      const recipeMeals = recipeData.meals || [];
+      const ingredientMeals = ingredientData.meals || [];
 
-    const combinedMeals = [...recipeMeals, ...ingredientMeals];
+      const meals = [...recipeMeals, ...ingredientMeals];
 
-    // Élimination des doublons
-    const mealIds = new Set();
-    const uniqueMeals = combinedMeals.filter((meal) => {
-      if (!mealIds.has(meal.idMeal)) {
-        mealIds.add(meal.idMeal);
-        return true;
-      }
-      return false;
-    });
+      const mealIds = new Set();
+      const uniqueMeals = meals.filter((meal) => {
+        if (!mealIds.has(meal.idMeal)) {
+          mealIds.add(meal.idMeal);
+          return true;
+        }
+        return false;
+      });
 
-    return uniqueMeals.map((meal) => {
-      return {
-        idDbMeal: meal.idMeal,
-        name: meal.strMeal,
-        image: meal.strMealThumb,
-        position: 0,
-      };
-    });
-  }
-);
+      return uniqueMeals
+        .filter((meal) => !category || meal.strCategory === category)
+        .map((meal) => {
+          return {
+            idDbMeal: meal.idMeal,
+            name: meal.strMeal,
+            image: meal.strMealThumb,
+            position: 0,
+          };
+        });
+    }
 
-export const fetchCategoriesRecipes = createAsyncThunk(
-  'recipes/fetchCategoriesRecipes',
-  async (categorie: string) => {
-    const response = await fetch(
-      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categorie}`
+    const categoryResponse = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
     );
-    const data: { meals: ApiRecipe[] | null } = await response.json();
-    const meals = data.meals || [];
+
+    const categoryData: { meals: ApiRecipe[] | null } =
+      await categoryResponse.json();
+
+    const meals = categoryData.meals || [];
+
     return meals.map((meal) => {
       return {
         idDbMeal: meal.idMeal,
@@ -130,6 +133,25 @@ export const fetchCategoriesRecipes = createAsyncThunk(
     });
   }
 );
+
+// export const fetchCategoriesRecipes = createAsyncThunk(
+//   'recipes/fetchCategoriesRecipes',
+//   async (categorie: string) => {
+//     const response = await fetch(
+//       `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categorie}`
+//     );
+//     const data: { meals: ApiRecipe[] | null } = await response.json();
+//     const meals = data.meals || [];
+//     return meals.map((meal) => {
+//       return {
+//         idDbMeal: meal.idMeal,
+//         name: meal.strMeal,
+//         image: meal.strMealThumb,
+//         position: 0,
+//       };
+//     });
+//   }
+// );
 
 // Création d'un reducer pour gérer l'état des recettes.
 const recipesReducer = createReducer(initialState, (builder) => {
@@ -161,20 +183,6 @@ const recipesReducer = createReducer(initialState, (builder) => {
       state.error =
         action.error.message ||
         'Une erreur inattendue sur la recherche de recette est survenue';
-    })
-    .addCase(fetchCategoriesRecipes.pending, (state) => {
-      state.loading = true;
-    })
-    .addCase(fetchCategoriesRecipes.fulfilled, (state, action) => {
-      state.list = action.payload;
-      state.loading = false;
-      state.error = null;
-    })
-    .addCase(fetchCategoriesRecipes.rejected, (state, action) => {
-      state.loading = false;
-      state.error =
-        action.error.message ||
-        'Une erreur inattendue sur la recherche par categorie est survenue';
     });
 });
 

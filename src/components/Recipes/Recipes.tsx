@@ -1,20 +1,19 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useEffect, useState } from 'react';
-import { useDebounce } from 'react-use';
+import { Fragment, useState } from 'react';
 import { X } from 'react-feather';
+import { useDebounce } from 'react-use';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import Schedule from '../Schedule/Schedule';
 import SearchComponent from './SearchComponent/SearchComponent';
 
+import { SelectedCategory } from '../../@types/recipe';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
-  fetchCategoriesRecipes,
   fetchRandomRecipes,
   fetchSearchRecipe,
 } from '../../store/reducers/recipes';
 import { displaySchedule } from '../../store/reducers/settings';
 import CategoriesListBox from './Categories/CategoriesListBox';
-import { SelectedCategory } from '../../@types/recipe';
 
 function Recipes() {
   const [search, setSearch] = useState('');
@@ -24,40 +23,31 @@ function Recipes() {
 
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
 
+  const recipes = useAppSelector((state) => state.recipes.list);
+
   // Utilisation du debounce pour limiter le nombre d'appel à l'api
   useDebounce(
     () => {
-      if (search) {
-        dispatch(fetchSearchRecipe(search));
+      if (search || selectedCategory) {
+        dispatch(
+          fetchSearchRecipe({ search, category: selectedCategory?.name })
+        );
+      } else {
+        dispatch(fetchRandomRecipes({ count: 10 }));
       }
     },
     400,
-    [dispatch, search]
+    [dispatch, search, selectedCategory]
   );
 
   const closeModal = () => {
     dispatch(displaySchedule(false));
   };
 
-  // déclenchement du random sur une chaîne de recherche vide dans la search
-  useEffect(() => {
-    if (!search) {
-      dispatch(fetchRandomRecipes({ count: 10 }));
-    }
-  }, [dispatch, search]);
-
-  const recipes = useAppSelector((state) => state.recipes.list);
-
   // affichage modale planning si on clique sur le '+'
   const showSchedule = useAppSelector(
     (state) => state.settings.clickAddSchedule
   );
-
-  useEffect(() => {
-    if (selectedCategory) {
-      dispatch(fetchCategoriesRecipes(selectedCategory.name));
-    }
-  }, [dispatch, selectedCategory]);
 
   return (
     <div

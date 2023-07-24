@@ -1,10 +1,8 @@
-import { Fragment, useEffect } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
+import { Fragment } from 'react';
 import { Check, ChevronsDown } from 'react-feather';
-import { useAppDispatch } from '../../../hooks/redux';
 
 import { Category } from '../../../@types/recipe';
-import { fetchRandomRecipes } from '../../../store/reducers/recipes';
 
 const categories = [
   { id: 1, name: 'Beef', unavailable: false },
@@ -30,12 +28,6 @@ function CategoriesListBox({
   value: Category | undefined;
   onChange: (value: Category | undefined) => void;
 }) {
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    if (value === undefined) {
-      dispatch(fetchRandomRecipes({ count: 10 }));
-    }
-  }, [value, dispatch]);
   return (
     <Listbox
       value={value}
