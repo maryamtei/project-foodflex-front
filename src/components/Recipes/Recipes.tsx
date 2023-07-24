@@ -4,21 +4,26 @@ import { useDebounce } from 'react-use';
 import { X } from 'react-feather';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import Schedule from '../Schedule/Schedule';
-import SearchComponent from '../SearchComponent/SearchComponent';
+import SearchComponent from './SearchComponent/SearchComponent';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
+  fetchCategoriesRecipes,
   fetchRandomRecipes,
   fetchSearchRecipe,
 } from '../../store/reducers/recipes';
 import { displaySchedule } from '../../store/reducers/settings';
 import CategoriesListBox from './Categories/CategoriesListBox';
+import { SelectedCategory } from '../../@types/recipe';
 
 function Recipes() {
   const [search, setSearch] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState<SelectedCategory>();
+
   const dispatch = useAppDispatch();
 
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+
   // Utilisation du debounce pour limiter le nombre d'appel à l'api
   useDebounce(
     () => {
@@ -47,6 +52,12 @@ function Recipes() {
   const showSchedule = useAppSelector(
     (state) => state.settings.clickAddSchedule
   );
+
+  useEffect(() => {
+    if (selectedCategory) {
+      dispatch(fetchCategoriesRecipes(selectedCategory.name));
+    }
+  }, [dispatch, selectedCategory]);
 
   return (
     <div
@@ -119,7 +130,10 @@ function Recipes() {
           value={search}
           onChange={setSearch}
         />
-        <CategoriesListBox />
+        <CategoriesListBox
+          value={selectedCategory}
+          onChange={setSelectedCategory}
+        />
       </div>
       {recipes.length === 0 && (
         <div className="text-center text-thirdff text-2xl font-bold  mt-10">

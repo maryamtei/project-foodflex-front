@@ -1,16 +1,10 @@
-import { Fragment, useEffect, useState } from 'react';
+import { Fragment, useEffect } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { Check, ChevronsDown } from 'react-feather';
-import { fetchCategoriesRecipes } from '../../../store/reducers/recipes';
 import { useAppDispatch } from '../../../hooks/redux';
 
-interface Category {
-  id: number;
-  name: string;
-  unavailable: boolean;
-}
-
-type SelectedCategory = Category | undefined;
+import { Category } from '../../../@types/recipe';
+import { fetchRandomRecipes } from '../../../store/reducers/recipes';
 
 const categories = [
   { id: 1, name: 'Beef', unavailable: false },
@@ -29,21 +23,30 @@ const categories = [
   { id: 14, name: 'Goat', unavailable: false },
 ];
 
-function CategoriesListBox() {
-  const [selectedCategory, setSelectedCategory] = useState<SelectedCategory>(
-    categories[0]
-  );
-
+function CategoriesListBox({
+  value,
+  onChange,
+}: {
+  value: Category | undefined;
+  onChange: (value: Category | undefined) => void;
+}) {
   const dispatch = useAppDispatch();
-
   useEffect(() => {
-    if (selectedCategory) {
-      dispatch(fetchCategoriesRecipes(selectedCategory.name));
+    if (value === undefined) {
+      dispatch(fetchRandomRecipes({ count: 10 }));
     }
-  }, [dispatch, selectedCategory]);
-
+  }, [value, dispatch]);
   return (
-    <Listbox value={selectedCategory} onChange={setSelectedCategory}>
+    <Listbox
+      value={value}
+      onChange={(newValue) => {
+        if (newValue.id === value?.id) {
+          onChange(undefined);
+        } else {
+          onChange(newValue);
+        }
+      }}
+    >
       <div className="relative flex ">
         <Listbox.Button className="w-48 cursor-default rounded-lg bg-white py-2 pl-3 pr-10 shadow-md focus:outline-none focus-visible:border-gray-500 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm grid items-center justify-start text-gray-400 focus-within:shadow-lg">
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2 text-left">
@@ -52,7 +55,7 @@ function CategoriesListBox() {
               aria-hidden="true"
             />
           </span>
-          {selectedCategory?.name || 'Or choose a Category'}
+          {value?.name || 'Choose a Category'}
         </Listbox.Button>
         <Transition
           as={Fragment}
