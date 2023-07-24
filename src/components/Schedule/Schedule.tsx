@@ -1,5 +1,5 @@
 import NukaCarousel from 'nuka-carousel';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 
@@ -10,7 +10,8 @@ import Carousel from '../Carousel/Carousel';
 
 function Schedule() {
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
-
+  const [animateLeft, setAnimateLeft] = useState(false);
+  const [animateRight, setAnimateRight] = useState(false);
   const schedules = useAppSelector(
     (state) => state.settings.currentUser.schedules
   );
@@ -21,10 +22,24 @@ function Schedule() {
   const navigate = useNavigate();
 
   function handleClickNextWeek() {
-    dispatch(nextWeek(true));
+    setAnimateLeft(true);
+    setTimeout(() => {
+      dispatch(nextWeek(true));
+    }, 250);
+
+    setTimeout(() => {
+      setAnimateLeft(false);
+    }, 500);
   }
   function handleClickBeforeWeek() {
-    dispatch(nextWeek(false));
+    setAnimateRight(true);
+
+    setTimeout(() => {
+      dispatch(nextWeek(false));
+    }, 250);
+    setTimeout(() => {
+      setAnimateRight(false);
+    }, 500);
   }
 
   useEffect(() => {
@@ -39,10 +54,7 @@ function Schedule() {
 
   function newShedulesFunction() {
     return schedules
-      .filter(
-        (schedule) =>
-          schedule.week <= currentWeek + 1 && schedule.week >= currentWeek - 1
-      )
+      .filter((schedule) => schedule.week === currentWeek)
       .map((schedule) => (
         <Carousel key={schedule.week} meals={schedule.meals} />
       ));
@@ -51,17 +63,31 @@ function Schedule() {
   return (
     <div className={` flex flex-col justify-center my-10 px-3 sm:px-8 `}>
       <div className="flex justify-center items-center gap-4 mb-8">
-        <button type="button" onClick={() => handleClickBeforeWeek()}>
+        <button
+          type="button"
+          disabled={animateRight}
+          onClick={() => handleClickBeforeWeek()}
+        >
           <ChevronLeft className="text-thirdff h-16 w-16" />
         </button>
         <p className="text-thirdff text-2xl sm:text-4xl font-bold text-center">
           Week {currentWeek}
         </p>
-        <button type="button" onClick={() => handleClickNextWeek()}>
+        <button
+          type="button"
+          disabled={animateLeft}
+          onClick={() => handleClickNextWeek()}
+        >
           <ChevronRight className="text-thirdff h-16 w-16" />
         </button>
       </div>
-      <NukaCarousel withoutControls slideIndex={1}>
+      <NukaCarousel
+        withoutControls
+        dragging={false}
+        className={`${animateLeft ? 'animate-animateCarouselLeft' : ''}${
+          animateRight ? 'animate-animateCarouselRight' : ''
+        }`}
+      >
         {newShedulesFunction()}
       </NukaCarousel>
     </div>

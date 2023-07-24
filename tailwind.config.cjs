@@ -32,10 +32,17 @@ module.exports = {
           '80%': { right: '40px' },
           '100%': { right: '-15rem' },
         },
-        selectRecipe: {
-          '0%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.2)' },
-          '100%': { transform: 'scale(1)' },
+        animateCarouselLeft: {
+          '0%': { left: '0' },
+          '50%': { left: '-100%', opacity: '0%' },
+          '51%': { left: '+100%' },
+          '100%': { left: '0', opacity: '100%' },
+        },
+        animateCarouselRight: {
+          '0%': { left: '0' },
+          '50%': { left: '+100%', opacity: '0%' },
+          '51%': { left: '-100%' },
+          '100%': { left: '0', opacity: '100%' },
         },
       },
       animation: {
@@ -44,7 +51,8 @@ module.exports = {
         CardOpen: 'CardOpen 0.6s ease-in-out',
         scheduleSlideLeft: 'scheduleSlideLeft 2s ease-in-out',
         messageAnimation: 'message 3s ease-in-out',
-        selectRecipe: 'selectRecipe 2s ease-in-out',
+        animateCarouselLeft: 'animateCarouselLeft 500ms linear',
+        animateCarouselRight: 'animateCarouselRight 500ms linear',
       },
     },
   },
