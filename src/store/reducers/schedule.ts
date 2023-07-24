@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { createAction, createReducer } from '@reduxjs/toolkit';
 
-import { ScheduleType, Week } from '../../@types/schedule';
+import { Week } from '../../@types/schedule';
 
 interface ScheduleState {
   clickAddSchedule: boolean;

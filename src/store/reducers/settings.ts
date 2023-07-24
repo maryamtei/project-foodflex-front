@@ -5,7 +5,7 @@ import {
 } from '@reduxjs/toolkit';
 import dayjs from 'dayjs';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
-import { Meal, User } from '../../@types/Profil';
+import { User } from '../../@types/Profil';
 import { fetchPost, fetchGet, fetchDelete } from '../../utils/fetch';
 import { MealAdd } from '../../@types/recipe';
 
@@ -298,23 +298,23 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
 
     // ------------ EDIT PROFIL --------------//
-    .addCase(editInfoProfil.fulfilled, (state, action) => {
-      // const editUser = action.payload;
-      /// / Edit Profil in Redux
-      // state.users = state.users.map((user) => {
-      //  if (user.email === state.currentUser.email) {
-      //    state.currentUser = {
-      //      ...state.currentUser,
-      //      ...editUser,
-      //    };
-      //    return {
-      //      ...user,
-      //      ...editUser,
-      //    };
-      //  }
-      //  return user;
-      // });
-    })
+    // .addCase(editInfoProfil.fulfilled, (state, action) => {
+    // const editUser = action.payload;
+    /// / Edit Profil in Redux
+    // state.users = state.users.map((user) => {
+    //  if (user.email === state.currentUser.email) {
+    //    state.currentUser = {
+    //      ...state.currentUser,
+    //      ...editUser,
+    //    };
+    //    return {
+    //      ...user,
+    //      ...editUser,
+    //    };
+    //  }
+    //  return user;
+    // });
+    // })
 
     // ---------------- DELETE FAVORIS -------------------//
     .addCase(deleteFavori.pending, (state) => {

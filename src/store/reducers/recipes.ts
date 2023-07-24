@@ -19,6 +19,7 @@ export interface ApiRecipe {
   strMeal: string;
   strMealThumb: string;
   strCategory?: string;
+  id: number;
 }
 
 // GENERE RECETTES ALEATOIREMENT
@@ -59,6 +60,7 @@ export const fetchRandomRecipes = createAsyncThunk(
             name: meal.strMeal,
             image: meal.strMealThumb,
             position: 0,
+            id: 0,
           });
         }
       }
@@ -110,6 +112,7 @@ export const fetchSearchRecipe = createAsyncThunk(
             name: meal.strMeal,
             image: meal.strMealThumb,
             position: 0,
+            id: 0,
           };
         });
     }
@@ -129,6 +132,7 @@ export const fetchSearchRecipe = createAsyncThunk(
         name: meal.strMeal,
         image: meal.strMealThumb,
         position: 0,
+        id: 0,
       };
     });
   }

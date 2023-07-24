@@ -55,9 +55,9 @@ function TermsPage() {
             </h2>
             <p>
               The purpose of the [Nom du site] website is to provide information
-              concerning all of the company\'s activities. [Nom du propriétaire
-              du site] endeavors to provide information on the [Nom du site]
-              website that is as accurate as possible. However, [Nom du
+              concerning all of the company&apos;s activities. [Nom du
+              propriétaire du site] endeavors to provide information on the [Nom
+              du site] website that is as accurate as possible. However, [Nom du
               propriétaire du site] cannot be held responsible for any
               omissions, inaccuracies or failures to update information, whether
               caused by [Nom du propriétaire du site] or by third-party partners
@@ -99,7 +99,7 @@ function TermsPage() {
             </h2>
             <p>
               [Nom du propriétaire du site] cannot be held responsible for
-              direct or indirect damage caused to the user\'s equipment when
+              direct or indirect damage caused to the user&apos;s equipment when
               accessing the [Nom du site] website, and resulting either from the
               use of equipment that does not meet the specifications indicated
               in point 4, or from the appearance of a bug or incompatibility.
@@ -125,31 +125,32 @@ function TermsPage() {
               the Criminal Code and the European Directive of October 24, 1995.
               When using the [Nom du site] site, the following information may
               be collected: the URL of the links via which the user accessed the
-              [Nom du site] site, the user\'s access provider, the user's
-              Internet protocol (IP) address. In any case, [Nom du propriétaire
-              du site] only collects personal information relating to the user
-              for the purpose of certain services offered by the [Nom du site]
-              website. The user provides this information with full knowledge of
-              the facts, in particular when he/she enters it him/herself. Users
-              of the [Nom du site] website are informed whether or not they are
-              required to supply this information.In accordance with the
-              provisions of Articles 38 et seq. of the French Data Protection
-              Act 78-17 of January 6, 1978, all users have the right to access,
-              rectify and object to any personal data concerning them, by
-              sending a written and signed request, accompanied by a copy of the
-              identity document bearing the signature of the holder of the
-              document, and specifying the address to which the reply is to be
-              sent. No personal information concerning the user of the [Nom du
-              site] website is published without the user\'s knowledge, nor is
-              it exchanged, transferred, ceded or sold on any medium whatsoever
-              to third parties. Only the assumption of the purchase of the blog
-              from [Nom du propriétaire du site] (and its rights), would allow
-              the transmission of the said information to the eventual purchaser
-              who would in turn be bound by the same obligation of conservation
-              and modification of the data with respect to the user of the site
-              [Nom du site].Les databases are protected by the provisions of the
-              law of July 1, 1998 transposing the directive 96/9 of March 11,
-              1996 relating to the legal protection of databases.
+              [Nom du site] site, the user&apos;s access provider, the
+              user&apos;s Internet protocol (IP) address. In any case, [Nom du
+              propriétaire du site] only collects personal information relating
+              to the user for the purpose of certain services offered by the
+              [Nom du site] website. The user provides this information with
+              full knowledge of the facts, in particular when he/she enters it
+              him/herself. Users of the [Nom du site] website are informed
+              whether or not they are required to supply this information.In
+              accordance with the provisions of Articles 38 et seq. of the
+              French Data Protection Act 78-17 of January 6, 1978, all users
+              have the right to access, rectify and object to any personal data
+              concerning them, by sending a written and signed request,
+              accompanied by a copy of the identity document bearing the
+              signature of the holder of the document, and specifying the
+              address to which the reply is to be sent. No personal information
+              concerning the user of the [Nom du site] website is published
+              without the user&apos;s knowledge, nor is it exchanged,
+              transferred, ceded or sold on any medium whatsoever to third
+              parties. Only the assumption of the purchase of the blog from [Nom
+              du propriétaire du site] (and its rights), would allow the
+              transmission of the said information to the eventual purchaser who
+              would in turn be bound by the same obligation of conservation and
+              modification of the data with respect to the user of the site [Nom
+              du site].Les databases are protected by the provisions of the law
+              of July 1, 1998 transposing the directive 96/9 of March 11, 1996
+              relating to the legal protection of databases.
             </p>
             <h2 className="text-2xl font-bold mb-4">
               8. Hypertext links and cookies
@@ -161,8 +162,8 @@ function TermsPage() {
               to check the content of sites visited in this way, and
               consequently accepts no liability in this respect. Browsing the
               [Nom du site] website may result in the installation of cookie(s)
-              on the user\'s computer. A cookie is a small file which does not
-              allow the user to be identified, but which records information
+              on the user&apos;s computer. A cookie is a small file which does
+              not allow the user to be identified, but which records information
               relating to the browsing of a computer on a site. The data
               obtained in this way is intended to facilitate subsequent browsing
               of the site, and is also used to measure visitor numbers. Refusal
@@ -176,13 +177,14 @@ function TermsPage() {
               Rules to: use personalized settings for history. Finally, uncheck
               it to disable cookies. On Safari: Click on the menu icon
               (symbolized by a cog) in the top right-hand corner of the browser.
-              Select Settings. Click on Show advanced settings. In the "Privacy"
-              section, click on "Content settings". In the "Cookies" section,
-              you can block cookies. Under Chrome: Click on the menu icon
-              (symbolized by three horizontal lines) in the top right-hand
-              corner of the browser. Select Settings. Click on Show advanced
-              settings. In the "Privacy" section, click on Preferences. In the
-              "Privacy" tab, you can block cookies.
+              Select Settings. Click on Show advanced settings. In the
+              &quot;Privacy&quot; section, click on &quot;Content
+              settings&quot;. In the &quot;Cookies&quot; section, you can block
+              cookies. Under Chrome: Click on the menu icon (symbolized by three
+              horizontal lines) in the top right-hand corner of the browser.
+              Select Settings. Click on Show advanced settings. In the
+              &quot;Privacy&quot; section, click on Preferences. In the
+              &quot;Privacy&quot; tab, you can block cookies.
             </p>
             <h2 className="text-2xl font-bold mb-4">
               9. Applicable law and jurisdiction
@@ -204,11 +206,11 @@ function TermsPage() {
             <h2 className="text-2xl font-bold mb-4">11. Lexique</h2>
             <p>
               User: Internet user connecting to and using the above-mentioned
-              site. Personal information: "information which allows, in any form
-              whatsoever, directly or indirectly, the identification of the
-              natural persons to whom it applies" (article 4 of law no. 78-17 of
-              January 6, 1978). Credits: Legal notice template provided by
-              Subdelirium.com Legal notice
+              site. Personal information: &quot;information which allows, in any
+              form whatsoever, directly or indirectly, the identification of the
+              natural persons to whom it applies&quot; (article 4 of law no.
+              78-17 of January 6, 1978). Credits: Legal notice template provided
+              by Subdelirium.com Legal notice
             </p>
           </div>
         </div>

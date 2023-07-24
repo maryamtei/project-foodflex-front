@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 
 function Message() {
-  const dispatch = useAppDispatch();
   const message = useAppSelector((state) => state.settings.message);
   const codeMessage = useAppSelector((state) => state.settings.codeMessage);
 
