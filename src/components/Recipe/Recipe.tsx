@@ -19,9 +19,23 @@ function Recipe() {
 
   const recipe = useAppSelector((state) => state.recipeDetails.recipe);
 
+  useEffect(() => {
+    // Scroll-To-Top
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  });
+
   if (!recipe) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center mt-20">
+        <div className="loading loading-ring flex justify-center align-middle w-36 " />
+      </div>
+    );
   }
+
   return (
     <div className="container mx-auto">
       <div className="flex flex-col items-center justify-center">
