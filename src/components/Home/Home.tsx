@@ -54,6 +54,7 @@ function Home({ signInDomain }: HomeProps) {
     >
       <HeadHome />
       {recipes.length === 14 && <MainHome recipes={recipes} />}
+
       <FootHome />
     </div>
   );
