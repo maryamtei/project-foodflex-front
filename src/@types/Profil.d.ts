@@ -7,7 +7,7 @@ export interface User {
 }
 
 export interface Favorite {
-  id: string;
+  id: number;
   idDbMeal: string;
   name: string;
   image: string;
