@@ -76,6 +76,14 @@ function Profil() {
                 <Mail className="mr-2" />
                 <Field name="email" label="Mail :" value={email.trim()} />
               </div>
+              {/* <div className="flex mb-6">
+                <Key className="mr-2" />
+                <Field
+                  name="password"
+                  label="Password :"
+                  value={password.trim()}
+                />
+              </div> */}
 
               <button
                 type="submit"

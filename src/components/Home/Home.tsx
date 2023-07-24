@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import HeadHome from './Components/HeadHome';
 import MainHome from './Components/MainHome';
@@ -18,6 +17,7 @@ function Home({ signInDomain }: HomeProps) {
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const recipes = useAppSelector((state) => state.recipes.list);
 
+  // Redirect to signIn or SignUp
   useEffect(() => {
     if (signInDomain === 'signup') {
       // We display signUp Modal
@@ -54,6 +54,7 @@ function Home({ signInDomain }: HomeProps) {
     >
       <HeadHome />
       {recipes.length === 14 && <MainHome recipes={recipes} />}
+
       <FootHome />
     </div>
   );

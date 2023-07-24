@@ -3,6 +3,7 @@ import { Heart, Plus, X } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { Recipe } from '../../@types/recipe';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { changeStateModalAnimation } from '../../store/reducers/favoris';
 import {
   addFavori,
   addSchedule,
@@ -23,6 +24,9 @@ function RecipeCard({ recipe }: CardProps) {
   const [recipeFavori, setRecipeFavori] = useState(false);
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const stateSchedule = useAppSelector((state) => state.schedule.stateSchedule);
+  const modaleFavoriIsOpen = useAppSelector(
+    (state) => state.favoris.modalIsOpen
+  );
   const MealFavoriToAdd = useAppSelector(
     (state) => state.settings.MealFavoriToAdd
   );
@@ -32,15 +36,14 @@ function RecipeCard({ recipe }: CardProps) {
   const displayScheduleModal = useAppSelector(
     (state) => state.settings.clickAddSchedule
   );
+
   const favoris = useAppSelector(
     (state) => state.settings.currentUser.favorites
   );
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const dispatch = useAppDispatch();
-
   function handleClickDay() {
     const newMeal = {
-      id: MealFavoriToAdd.id,
       idDbMeal: MealFavoriToAdd.idDbMeal,
       name: MealFavoriToAdd.name,
       image: MealFavoriToAdd.image,
@@ -73,22 +76,27 @@ function RecipeCard({ recipe }: CardProps) {
   // Function to handle adding the recipe to favorites
   function handleAddFavori(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-
     if (!matchingFavori) {
       dispatch(addFavori(recipe));
       setRecipeFavori(true);
     } else {
-      // dispatch(deleteFavori(recipe.idDbMeal));
+      dispatch(deleteFavori(matchingFavori.id));
       setRecipeFavori(false);
     }
   }
   function handleDeleteMeal(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
-    dispatch(deleteMeal(recipe));
+    dispatch(deleteMeal(recipe.id));
   }
 
   // useEffect to check if the recipe is in favorites and update recipeFavori
   // accordingly
+  useEffect(() => {
+    if (displayScheduleModal) {
+      dispatch(changeStateModalAnimation(1));
+    }
+  }, [dispatch, displayScheduleModal]);
+
   useEffect(() => {
     if (matchingFavori) {
       setRecipeFavori(true);
@@ -106,7 +114,11 @@ function RecipeCard({ recipe }: CardProps) {
   return (
     <Link
       to={`/recipes/${recipe.idDbMeal}`}
-      className="shadow-md rounded-lg relative hover:shadow-lg transition-all"
+      className={`shadow-md rounded-lg relative hover:shadow-lg transition-all  ${
+        displayScheduleModal
+          ? 'pointer-events-auto border-2 border-thirdff'
+          : ''
+      }`}
       onClick={(event: { preventDefault: () => void }) => {
         if (displayScheduleModal) {
           event.preventDefault();
@@ -117,12 +129,35 @@ function RecipeCard({ recipe }: CardProps) {
       <img
         src={recipe.image}
         alt={recipe.name}
-        className="rounded-t-md cover"
+        className={`rounded-t-md cover ${
+          (stateSchedule || displayScheduleModal) && recipe.id === 1
+            ? 'blur-[3px] pointer-events-none opacity-60'
+            : ''
+        }
+        ${
+          (stateSchedule || displayScheduleModal) && recipe.id !== 1
+            ? 'blur-[1px] pointer-events-none opacity-80'
+            : ''
+        }`}
       />
+      <div
+        className={` ${stateHome ? 'hidden' : ''}
+          ${displayScheduleModal ? '' : 'hidden'}`}
+      >
+        <div className="bg-black opacity-40 w-24 h-10 rounded-lg absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]" />
+        <h2 className="text-white font-bold p-2 text-center truncate text-sm sm:text-md absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]">
+          {recipe.id === 1 ? 'Add here !' : 'Replace'}
+        </h2>
+      </div>
       <div className="text-bgff absolute top-2 right-1 ">
         <div
           className={`card-actions justify-end bg-t ${stateHome ? 'hidden' : ''}
-          ${stateSchedule ? 'hidden' : ''}`}
+          ${stateSchedule ? 'hidden' : ''}
+          ${
+            (stateSchedule || displayScheduleModal) && recipe.id === 1
+              ? 'blur-[3px] pointer-events-none opacity-60'
+              : ''
+          }`}
         >
           <button
             type="button"
@@ -157,12 +192,13 @@ function RecipeCard({ recipe }: CardProps) {
             <Plus size={20} />
           </button>
         </div>
-        {recipe.id !== undefined && (
+        {recipe.id !== 1 && (
           <div
             className={`card-actions justify-end bg-t ${
               stateHome ? 'hidden' : ''
             }
-          ${stateSchedule ? '' : 'hidden'}`}
+          ${stateSchedule ? '' : 'hidden'}
+          ${displayScheduleModal ? 'hidden' : ''}`}
           >
             <button
               type="button"
@@ -177,7 +213,14 @@ function RecipeCard({ recipe }: CardProps) {
           </div>
         )}
       </div>
-      <div className="rounded-b-lg foodPattern">
+
+      <div
+        className={`rounded-b-lg foodPattern ${
+          (stateSchedule || displayScheduleModal) && recipe.id === 1
+            ? 'blur-[3px] pointer-events-none opacity-60'
+            : ''
+        }`}
+      >
         <h2 className="text-white font-semibold p-2 text-center truncate text-sm sm:text-md">
           {recipe.name}
         </h2>

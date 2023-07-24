@@ -6,6 +6,13 @@ export interface Recipe {
   position: number;
 }
 
+export interface RecipeWithoutId {
+  idDbMeal: string;
+  name: string;
+  image: string;
+  position: number;
+}
+
 export interface RecipeDetails {
   id: string;
   name: string;
@@ -16,9 +23,17 @@ export interface RecipeDetails {
   videoUrl: string;
 }
 
-export interface List {
+export interface MealAdd {
   idDbMeal: string;
   name: string;
   image: string;
   position: number;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+  unavailable: boolean;
+}
+
+export type SelectedCategory = Category | undefined;

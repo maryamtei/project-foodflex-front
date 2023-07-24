@@ -22,14 +22,7 @@ export interface Meal {
   position: number;
 }
 
-export interface Schedule {
+export interface ScheduleType {
   week: number;
   meals: Meal[];
-}
-
-export interface List {
-  idDbMeal: string;
-  name: string;
-  image: string;
-  position: number;
 }

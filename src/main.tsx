@@ -25,9 +25,9 @@ const router = createBrowserRouter(
     <Route path="/" element={<Apptest />}>
       <Route index path="/" element={<Home signInDomain="" />} />
       <Route path="/sign-up" element={<Home signInDomain="signup" />} />
+      <Route path="/sign-in" element={<Home signInDomain="signin" />} />
       <Route path="/profil" element={<Profil />} />
       <Route path="/favoris" element={<Favoris />} />
-      <Route path="/sign-in" element={<Home signInDomain="signin" />} />
       <Route path="/schedule" element={<Schedule />} />
       {/* <Route path="/login" element={<Apptest />} /> */}
       {/* Modifier les routes et l'élement Apptest en fonction de vos taches */}
