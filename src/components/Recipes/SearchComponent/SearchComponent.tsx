@@ -16,8 +16,8 @@ function SearchComponent({ name, value, onChange }: SearchProps) {
   }
 
   return (
-    <div className="flex max-w-md mx-auto items-center">
-      <div className="relative flex items-center w-full h-12 rounded-lg shadow focus-within:shadow-lg transition-all bg-white overflow-hidden ">
+    <div className="flex flex-1 items-center">
+      <div className="relative flex items-center w-full h-12 rounded-lg shadow-md focus-within:shadow-lg transition-all bg-white overflow-hidden ">
         <div className="grid place-items-center h-full w-12 text-gray-300">
           <Search
             className="h-6 w-6"
