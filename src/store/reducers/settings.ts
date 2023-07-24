@@ -218,6 +218,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(logout.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
       if (state.codeMessage > 100) {
@@ -236,6 +237,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(getUserData.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
       if (state.codeMessage > 100) {
@@ -253,6 +255,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(signIn.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
       if (state.codeMessage > 100) {
@@ -276,6 +279,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(signUp.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
       if (state.codeMessage > 100) {
@@ -318,6 +322,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(deleteFavori.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
       if (state.codeMessage > 100) {
@@ -335,6 +340,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(addFavori.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
       if (state.codeMessage > 100) {
@@ -367,6 +373,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(addSchedule.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
       if (state.codeMessage > 100) {
@@ -384,6 +391,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
     })
     .addCase(deleteMeal.fulfilled, (state, action) => {
+      state.isLoading = false;
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
       if (state.codeMessage > 100) {
