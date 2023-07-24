@@ -22,3 +22,11 @@ export interface MealAdd {
   image: string;
   position: number;
 }
+
+export interface Category {
+  id: number;
+  name: string;
+  unavailable: boolean;
+}
+
+export type SelectedCategory = Category | undefined;

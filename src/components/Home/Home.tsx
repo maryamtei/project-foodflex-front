@@ -1,4 +1,3 @@
-import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import HeadHome from './Components/HeadHome';
 import MainHome from './Components/MainHome';
@@ -55,6 +54,7 @@ function Home({ signInDomain }: HomeProps) {
     >
       <HeadHome />
       {recipes.length === 14 && <MainHome recipes={recipes} />}
+
       <FootHome />
     </div>
   );
