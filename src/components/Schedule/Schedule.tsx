@@ -2,6 +2,7 @@ import NukaCarousel from 'nuka-carousel';
 import { useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateSchedule } from '../../store/reducers/schedule';
 import { nextWeek } from '../../store/reducers/settings';
@@ -9,6 +10,7 @@ import Carousel from '../Carousel/Carousel';
 
 function Schedule() {
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
+
   const schedules = useAppSelector(
     (state) => state.settings.currentUser.schedules
   );
@@ -35,6 +37,17 @@ function Schedule() {
     };
   }, [weekFind, dispatch, isLogged, navigate]);
 
+  function newShedulesFunction() {
+    return schedules
+      .filter(
+        (schedule) =>
+          schedule.week <= currentWeek + 1 && schedule.week >= currentWeek - 1
+      )
+      .map((schedule) => (
+        <Carousel key={schedule.week} meals={schedule.meals} />
+      ));
+  }
+
   return (
     <div className={` flex flex-col justify-center my-10 px-3 sm:px-8 `}>
       <div className="flex justify-center items-center gap-4 mb-8">
@@ -48,10 +61,8 @@ function Schedule() {
           <ChevronRight className="text-thirdff h-16 w-16" />
         </button>
       </div>
-      <NukaCarousel withoutControls slideIndex={currentWeek - 1}>
-        {schedules.map((schedule) => (
-          <Carousel key={schedule.week} meals={schedule.meals} />
-        ))}
+      <NukaCarousel withoutControls slideIndex={1}>
+        {newShedulesFunction()}
       </NukaCarousel>
     </div>
   );

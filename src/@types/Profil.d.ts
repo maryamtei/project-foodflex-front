@@ -22,7 +22,7 @@ export interface Meal {
   position: number;
 }
 
-export interface Schedule {
+export interface ScheduleType {
   week: number;
   meals: Meal[];
 }
