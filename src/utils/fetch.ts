@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3000';
+const API_BASE_URL = 'http://134.122.78.76:5500';
 
 // Fonction utilitaire pour ajouter le token d'authentification aux headers
 const createHeadersWithAuthorization = () => {
