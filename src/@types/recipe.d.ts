@@ -6,6 +6,13 @@ export interface Recipe {
   position: number;
 }
 
+export interface RecipeWithoutId {
+  idDbMeal: string;
+  name: string;
+  image: string;
+  position: number;
+}
+
 export interface RecipeDetails {
   id: string;
   name: string;
