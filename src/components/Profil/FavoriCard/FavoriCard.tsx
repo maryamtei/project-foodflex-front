@@ -46,18 +46,22 @@ function FavoriCard({ favori }: CardProps) {
           className="rounded-t-md cover"
         />
         <div className="text-bgff absolute top-2 right-1">
-          <div className="card-actions justify-end">
+          <div className="card-actions justify-end z-10">
             <Heart
               className="cursor-pointer"
               color="black"
               fill="red"
-              onClick={() => handleDeleteFavori()}
+              onClick={(event) => {
+                event.preventDefault();
+                handleDeleteFavori();
+              }}
             />
 
             <Plus
               className="cursor-pointer"
               color="red"
-              onClick={() => {
+              onClick={(event) => {
+                event.preventDefault();
                 handleModaltoggle();
                 handleAddSchedule();
               }}
