@@ -220,9 +220,11 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(logout.fulfilled, (state, action) => {
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
-      state.isLogged = false;
-      state.currentUser = initialValue.currentUser;
-      localStorage.removeItem('token');
+      if (state.codeMessage > 100) {
+        state.isLogged = false;
+        state.currentUser = initialValue.currentUser;
+        localStorage.removeItem('token');
+      }
     })
     // ---------------- USER -------------------//
     .addCase(getUserData.pending, (state) => {
@@ -236,8 +238,10 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(getUserData.fulfilled, (state, action) => {
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
-      state.isLogged = true;
-      state.currentUser = action.payload.newUser;
+      if (state.codeMessage > 100) {
+        state.isLogged = true;
+        state.currentUser = action.payload.newUser;
+      }
     })
     // ---------------- SIGN IN -------------------//
     .addCase(signIn.pending, (state) => {
@@ -251,13 +255,15 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(signIn.fulfilled, (state, action) => {
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
-      const authToken = action.payload.token;
-      localStorage.removeItem('token');
-      localStorage.setItem('token', authToken);
-      state.currentUser = action.payload.newUser;
-      state.isLogged = true;
-      state.isLoading = false;
-      state.modalIsOpen = false;
+      if (state.codeMessage > 100) {
+        const authToken = action.payload.token;
+        localStorage.removeItem('token');
+        localStorage.setItem('token', authToken);
+        state.currentUser = action.payload.newUser;
+        state.isLogged = true;
+        state.isLoading = false;
+        state.modalIsOpen = false;
+      }
     })
 
     // -------------- SIGN UP ---------------- //
@@ -272,13 +278,15 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(signUp.fulfilled, (state, action) => {
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
-      const authToken = action.payload.token;
-      localStorage.removeItem('token');
-      localStorage.setItem('token', authToken);
-      state.currentUser = action.payload.newUser;
-      state.isLogged = true;
-      state.isLoading = false;
-      state.modalIsOpen = false;
+      if (state.codeMessage > 100) {
+        const authToken = action.payload.token;
+        localStorage.removeItem('token');
+        localStorage.setItem('token', authToken);
+        state.currentUser = action.payload.newUser;
+        state.isLogged = true;
+        state.isLoading = false;
+        state.modalIsOpen = false;
+      }
     })
 
     // ------------ EDIT PROFIL --------------//
@@ -312,7 +320,9 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(deleteFavori.fulfilled, (state, action) => {
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
-      state.currentUser = action.payload.newUser;
+      if (state.codeMessage > 100) {
+        state.currentUser = action.payload.newUser;
+      }
     })
 
     // ---------------- ADD FAVORIS -------------------//
@@ -327,7 +337,9 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(addFavori.fulfilled, (state, action) => {
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
-      state.currentUser = action.payload.newUser;
+      if (state.codeMessage > 100) {
+        state.currentUser = action.payload.newUser;
+      }
     })
 
     // ---------------- ADD SCHEDULE -------------------//
@@ -357,8 +369,10 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(addSchedule.fulfilled, (state, action) => {
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
-      state.currentUser = action.payload.newUser;
-      state.clickAddSchedule = false;
+      if (state.codeMessage > 100) {
+        state.currentUser = action.payload.newUser;
+        state.clickAddSchedule = false;
+      }
     })
 
     .addCase(deleteMeal.pending, (state) => {
@@ -372,7 +386,9 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(deleteMeal.fulfilled, (state, action) => {
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
-      state.currentUser = action.payload.newUser;
+      if (state.codeMessage > 100) {
+        state.currentUser = action.payload.newUser;
+      }
     })
     .addCase(displaySchedule, (state, action) => {
       state.clickAddSchedule = action.payload;
