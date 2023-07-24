@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://176.160.166.190:5500';
+const API_BASE_URL = 'http://192.168.1.48:5500';
 
 // Fonction utilitaire pour ajouter le token d'authentification aux headers
 const createHeadersWithAuthorization = () => {
