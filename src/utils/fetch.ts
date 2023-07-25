@@ -23,7 +23,7 @@ const fetchWithHeaders = (url: RequestInfo | URL, options = {}) => {
 const fetchGet = (url: string) => fetchWithHeaders(url);
 
 // Function utilitaire pour effectuer les requêtes POST avec les headers mis à jour
-const fetchPost = (url: string, data: string) => {
+const fetchPost = (url: string, data: string | object | number) => {
   return fetchWithHeaders(url, {
     method: 'POST',
     body: JSON.stringify(data),

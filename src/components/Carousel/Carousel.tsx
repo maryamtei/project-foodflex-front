@@ -1,13 +1,14 @@
 import NukaCarousel from 'nuka-carousel';
 import { useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
+import dayjs from 'dayjs';
 import { Recipe } from '../../@types/recipe';
 import { useAppSelector } from '../../hooks/redux';
 import CarouselSlide from './CarouselSlide';
 
 const PLACEHOLDER_MEAL = {
-  name: 'No recipe',
-  image: '/images.jpeg',
+  name: 'Chinon Apple Tarts',
+  image: 'https://www.themealdb.com/images/media/meals/qtqwwu1511792650.jpg',
   id: 1,
 };
 
@@ -15,6 +16,8 @@ interface RecipeProps {
   meals: Recipe[];
 }
 function Carousel({ meals }: RecipeProps) {
+  const currentWeek = useAppSelector((state) => state.settings.currentWeek);
+
   const innerWidth = useAppSelector((state) => state.window.innerWidth);
   const changeSlidesToShow = () => {
     switch (true) {
@@ -90,37 +93,40 @@ function Carousel({ meals }: RecipeProps) {
         <CarouselSlide
           recipe1={getMealByPosition(0)}
           recipe2={getMealByPosition(1)}
-          day="Monday"
+          day={dayjs().week(currentWeek).day(1).format('ddd DD MMM')}
         />
         <CarouselSlide
           recipe1={getMealByPosition(2)}
           recipe2={getMealByPosition(3)}
-          day="Tuesday"
+          day={dayjs().week(currentWeek).day(2).format('ddd DD MMM')}
         />
         <CarouselSlide
           recipe1={getMealByPosition(4)}
           recipe2={getMealByPosition(5)}
-          day="Wednesday"
+          day={dayjs().week(currentWeek).day(3).format('ddd DD MMM')}
         />
         <CarouselSlide
           recipe1={getMealByPosition(6)}
           recipe2={getMealByPosition(7)}
-          day="Thursday"
+          day={dayjs().week(currentWeek).day(4).format('ddd DD MMM')}
         />
         <CarouselSlide
           recipe1={getMealByPosition(8)}
           recipe2={getMealByPosition(9)}
-          day="Friday"
+          day={dayjs().week(currentWeek).day(5).format('ddd DD MMM')}
         />
         <CarouselSlide
           recipe1={getMealByPosition(10)}
           recipe2={getMealByPosition(11)}
-          day="Saturday"
+          day={dayjs().week(currentWeek).day(6).format('ddd DD MMM')}
         />
         <CarouselSlide
           recipe1={getMealByPosition(12)}
           recipe2={getMealByPosition(13)}
-          day="Sunday"
+          day={dayjs()
+            .week(currentWeek + 1)
+            .day(0)
+            .format('ddd DD MMM')}
         />
       </NukaCarousel>
     </div>
