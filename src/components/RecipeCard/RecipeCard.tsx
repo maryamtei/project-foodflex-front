@@ -231,6 +231,20 @@ function RecipeCard({ recipe }: CardProps) {
               className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
               onClick={(event) => {
                 event.preventDefault();
+                handleAddFavori(event);
+              }}
+            >
+              {recipeFavori ? (
+                <Heart size={20} fill="red" />
+              ) : (
+                <Heart size={20} />
+              )}
+            </button>
+            <button
+              type="button"
+              className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
+              onClick={(event) => {
+                event.preventDefault();
                 handleDeleteMeal(event);
               }}
             >
