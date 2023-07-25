@@ -92,6 +92,52 @@ function Schedule() {
       ));
   }
 
+  async function generateList() {
+    const ingredients: any[] = [];
+    const mesures: any[] = [];
+    const mealsOfTheWeek = schedules[currentWeek - 1].meals.map(
+      async (meal: { idDbMeal: any }) => {
+        const response = await fetch(
+          `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idDbMeal}`
+        );
+        const data = await response.json();
+
+        data.meals.map((currentMeal: { [x: string]: any }) => {
+          for (let i = 1; i <= 20; i += 1) {
+            if (
+              currentMeal[`strIngredient${i}`] &&
+              currentMeal[`strIngredient${i}`].trim() !== ' '
+            ) {
+              ingredients.push(currentMeal[`strIngredient${i}`]);
+            }
+          }
+
+          for (let i = 1; i <= 20; i += 1) {
+            if (
+              currentMeal[`strMeasure${i}`] &&
+              currentMeal[`strMeasure${i}`].trim() !== ''
+            ) {
+              mesures.push(currentMeal[`strMeasure${i}`]);
+            }
+          }
+        });
+
+        return data;
+      }
+    );
+    // console.log(mealsOfTheWeek);
+    await Promise.all(mealsOfTheWeek);
+    return { ingredients, mesures };
+  }
+
+  generateList().then((result) => {
+    const completeArray = result.ingredients.map((item, index) => [
+      item,
+      result.mesures[index],
+    ]);
+    console.log(completeArray);
+  });
+
   return (
     <div
       className={` flex flex-col justify-center my-10 px-3 sm:px-8 relative`}
@@ -158,6 +204,10 @@ function Schedule() {
       >
         {newShedulesFunction()}
       </section>
+
+      <button type="button" onClick={generateList}>
+        Generate my shopping list
+      </button>
     </div>
   );
 }
