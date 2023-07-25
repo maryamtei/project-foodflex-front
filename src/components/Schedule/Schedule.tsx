@@ -7,12 +7,17 @@ import {
 } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 
+// eslint-disable-next-line import/no-duplicates
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateSchedule } from '../../store/reducers/schedule';
 import { changeWeek } from '../../store/reducers/settings';
 import Carousel from '../Carousel/Carousel';
 
 function Schedule() {
+  const [shoppingList, setShoppingList] = useState<
+    [string | undefined, string | undefined][]
+  >([]);
+
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const [animateLeft, setAnimateLeft] = useState(false);
   const [animateRight, setAnimateRight] = useState(false);
@@ -92,9 +97,9 @@ function Schedule() {
       ));
   }
 
-  async function generateList() {
-    const ingredients: any[] = [];
-    const mesures: any[] = [];
+  async function createList() {
+    const ingredients: string[] = [];
+    const mesures: string[] = [];
     const mealsOfTheWeek = schedules[currentWeek - 1].meals.map(
       async (meal: { idDbMeal: any }) => {
         const response = await fetch(
@@ -121,23 +126,21 @@ function Schedule() {
             }
           }
         });
-
-        return data;
+        return { ingredients, mesures };
       }
     );
-    // console.log(mealsOfTheWeek);
     await Promise.all(mealsOfTheWeek);
     return { ingredients, mesures };
   }
 
-  generateList().then((result) => {
-    const completeArray = result.ingredients.map((item, index) => [
-      item,
-      result.mesures[index],
-    ]);
-    console.log(completeArray);
-  });
-
+  function generateList() {
+    createList().then((result) => {
+      const completeArray: [string | undefined, string | undefined][] =
+        result.ingredients.map((item, index) => [item, result.mesures[index]]);
+      console.log(completeArray);
+      setShoppingList(completeArray);
+    });
+  }
   return (
     <div
       className={` flex flex-col justify-center my-10 px-3 sm:px-8 relative`}
@@ -208,6 +211,13 @@ function Schedule() {
       <button type="button" onClick={generateList}>
         Generate my shopping list
       </button>
+      <ul>
+        {shoppingList.map(([ingredient, measure], index) => (
+          <li key={index}>
+            {ingredient}: {measure}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
