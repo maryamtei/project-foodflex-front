@@ -1,4 +1,46 @@
+import React, { useState, ChangeEvent, FormEvent } from 'react';
+
 function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setFormData((prevState) => ({ ...prevState, [name]: value }));
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('/api/submit-contact-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Message successfully sent!', data);
+        // Ajoutez ici le code pour afficher un message de succès ou rediriger l'utilisateur vers une autre page
+      } else {
+        const errorData = await response.json();
+        console.error('Error sending form', errorData);
+        // Ajoutez ici le code pour afficher un message d'erreur à l'utilisateur
+      }
+    } catch (error) {
+      console.error('Error submitting form', error);
+      // Ajoutez ici le code pour gérer les erreurs d'envoi (par exemple, afficher un message d'erreur générique)
+    }
+  };
+
   return (
     <div>
       <div className="relative w-full">
@@ -17,7 +59,9 @@ function ContactPage() {
       </div>
       <div className="flex justify-center items-center min-h-screen">
         <div className="bg-thirdff w-full max-w-md p-8 rounded shadow">
-          <h2 className="text-red-500 text-4xl text-center font-bold mb-6">Contact us</h2>
+          <h2 className="text-red-500 text-4xl text-center font-bold mb-6">
+            Contact us
+          </h2>
           <form>
             <div className="mb-4">
               <label
@@ -65,7 +109,7 @@ function ContactPage() {
                 className="w-full px-3 py-2 border border-red-200 rounded focus:outline-none focus:border-red-700"
                 placeholder="Please enter your message"
                 required
-              ></textarea>
+              />
             </div>
             <div className="flex justify-center">
               <button
