@@ -3,7 +3,6 @@ import { useAppSelector } from '../../hooks/redux';
 function Message() {
   const message = useAppSelector((state) => state.settings.message);
   const status = useAppSelector((state) => state.settings.status);
-  console.log(message, status);
   const alert = () => {
     if (status !== 200) {
       return (
