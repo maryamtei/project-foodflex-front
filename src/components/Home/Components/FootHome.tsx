@@ -19,6 +19,13 @@ function FootHome() {
   const toggleSignUp = () => {
     dispatch(toggleSignUpOpen());
   };
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  };
   return (
     <div>
       <h2 className="text-2xl sm:text-4xl font-bold mt-16 sm:mt-36 text-center sm:text-center md:text-center text-thirdff">
@@ -51,6 +58,7 @@ function FootHome() {
           }
           to="/schedule"
           relative="path"
+          onClick={scrollToTop}
         >
           My planning !
         </NavLink>

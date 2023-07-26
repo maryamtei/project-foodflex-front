@@ -60,6 +60,7 @@ function Carousel({ meals }: RecipeProps) {
         renderBottomCenterControls={null}
         enableKeyboardControls
         dragging={false}
+        swiping={false}
         className="border p-4 bg-[rgba(255,155,144,0.5)] rounded-lg shadow-lg border-fourthff"
         renderCenterLeftControls={({ previousSlide, previousDisabled }) => {
           if (previousDisabled) {

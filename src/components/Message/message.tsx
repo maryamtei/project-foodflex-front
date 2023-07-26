@@ -5,13 +5,8 @@ function Message() {
   const message = useAppSelector((state) => state.settings.message);
   const codeMessage = useAppSelector((state) => state.settings.codeMessage);
 
-  useEffect(() => {
-    console.log(message);
-    console.log(codeMessage);
-  }, [message, codeMessage]);
-
   const alert = () => {
-    if (codeMessage < 100) {
+    if (codeMessage !== 200) {
       return (
         <div
           className={`bg-orange-100 border-l-4 border-red-600 text-red-600 fixed bottom-20 sm:bottom-5 w-60 right-[-15rem] z-[100] p-5 ${
