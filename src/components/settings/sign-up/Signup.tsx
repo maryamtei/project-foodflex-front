@@ -77,7 +77,7 @@ function signup() {
     dispatch(toggleSignUpOpen());
   };
   return (
-    <div className="relative flex flex-col gap-4 p-10 w-80 text-thirdff bg-bgff sm:rounded-xl sm:shadow-xl items-center p-6">
+    <div className="relative flex flex-col gap-4 w-80 text-thirdff bg-bgff sm:rounded-xl sm:shadow-xl items-center p-6">
       <h1 className="text-3xl font-bold text-center "> Sign-Up</h1>
       <div className="flex flex-col text-center">
         <p className="text-base ">Already registered ?</p>
@@ -91,13 +91,13 @@ function signup() {
       </div>
       <form autoComplete="off" onSubmit={handleSubmit}>
         <Field
-          label="FirstName"
+          label="Firstname"
           onChange={handleChangeField('firstName')}
           type="text"
           value={firstName.trim()}
         />
         <Field
-          label="lastName"
+          label="Lastname"
           onChange={handleChangeField('lastName')}
           type="text"
           value={lastName.trim()}
@@ -114,11 +114,16 @@ function signup() {
           value={password.trim()}
           type="password"
         />
-
+        <Field
+          label="Confirm password"
+          onChange={handleChangeField('password')}
+          value={password.trim()}
+          type="password"
+        />
         <div className="flex justify-center ">
           <button
             type="submit"
-            className="text-2xl font-bold pt-1 pr-1 pb-2 pl-2 mt-10 border-fourthff rounded-lg border-2 h-8 shadow-md hover:shadow-xl ease-in duration-150 w-7/12 h-full"
+            className="text-2xl font-bold pt-1 pr-1 pb-2 pl-2 mt-10 border-fourthff rounded-lg border-2  shadow-md hover:shadow-xl ease-in duration-150 w-7/12 h-full"
           >
             Sign-Up
           </button>

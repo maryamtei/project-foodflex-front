@@ -30,6 +30,14 @@ const fetchPost = (url: string, data: string | object | number) => {
   });
 };
 
+// Function utilitaire pour effectuer les requêtes POST avec les headers mis à jour
+const fetchPatch = (url: string, data: string | object | number) => {
+  return fetchWithHeaders(url, {
+    method: 'PATCH',
+    body: JSON.stringify(data),
+  });
+};
+
 const fetchDelete = (url: string) => {
   return fetchWithHeaders(url, {
     method: 'DELETE',
@@ -37,4 +45,4 @@ const fetchDelete = (url: string) => {
 };
 
 // Exporter les fonctions utilitaires
-export { fetchGet, fetchPost, fetchDelete };
+export { fetchGet, fetchPost, fetchDelete, fetchPatch };

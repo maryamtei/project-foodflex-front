@@ -94,16 +94,6 @@ function Recipes() {
                   <div className="mt-2">
                     <Schedule />
                   </div>
-
-                  <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent hover:border-fourthff bg-fourthff px-4 py-2 text-sm font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                    >
-                      This schedule looks awesome !
-                    </button>
-                  </div>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
