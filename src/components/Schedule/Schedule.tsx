@@ -1,4 +1,3 @@
-import NukaCarousel from 'nuka-carousel';
 import { useEffect, useState } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
@@ -25,21 +24,21 @@ function Schedule() {
     setAnimateLeft(true);
     setTimeout(() => {
       dispatch(nextWeek(true));
-    }, 250);
+    }, 400);
 
     setTimeout(() => {
       setAnimateLeft(false);
-    }, 500);
+    }, 800);
   }
   function handleClickBeforeWeek() {
     setAnimateRight(true);
 
     setTimeout(() => {
       dispatch(nextWeek(false));
-    }, 250);
+    }, 400);
     setTimeout(() => {
       setAnimateRight(false);
-    }, 500);
+    }, 800);
   }
 
   useEffect(() => {
@@ -61,8 +60,10 @@ function Schedule() {
   }
 
   return (
-    <div className={` flex flex-col justify-center my-10 px-3 sm:px-8 `}>
-      <div className="flex justify-center items-center gap-4 mb-8">
+    <div
+      className={` flex flex-col justify-center my-10 px-3 sm:px-8 relative`}
+    >
+      <div className="flex justify-center items-center gap-4 mb-8 ">
         <button
           type="button"
           disabled={animateRight}
@@ -81,15 +82,13 @@ function Schedule() {
           <ChevronRight className="text-thirdff h-16 w-16" />
         </button>
       </div>
-      <NukaCarousel
-        withoutControls
-        dragging={false}
-        className={`${animateLeft ? 'animate-animateCarouselLeft' : ''}${
-          animateRight ? 'animate-animateCarouselRight' : ''
-        }`}
+      <section
+        className={` relative ${
+          animateLeft ? 'animate-animateCarouselLeft' : ''
+        }${animateRight ? 'animate-animateCarouselRight' : ''}`}
       >
         {newShedulesFunction()}
-      </NukaCarousel>
+      </section>
     </div>
   );
 }
