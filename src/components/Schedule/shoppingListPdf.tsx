@@ -49,8 +49,10 @@ const styles = StyleSheet.create({
 
 function MyShoppingList({
   shoppingList,
+  currentWeek,
 }: {
   shoppingList: [string | undefined, string | undefined][];
+  currentWeek: number;
 }) {
   const midPoint = Math.ceil(shoppingList.length / 2);
   const column1Items = shoppingList.slice(0, midPoint);
@@ -59,7 +61,9 @@ function MyShoppingList({
   return (
     <Document>
       <Page size="A4" style={styles.page}>
-        <Text style={styles.title}>My Shopping List by FoodFlex</Text>
+        <Text style={styles.title}>
+          My Shopping List by FoodFlex - Semaine {currentWeek}
+        </Text>{' '}
         <View style={styles.section}>
           <View style={styles.column}>
             {column1Items.map((ingredient, index) => (

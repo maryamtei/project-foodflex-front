@@ -1,5 +1,5 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import {
   Check,
   ChevronLeft,
@@ -16,17 +16,9 @@ import Carousel from '../Carousel/Carousel';
 import MyShoppingList from './shoppingListPdf';
 
 function Schedule() {
-  const [shoppingList, setShoppingList] = useState<
-    [string | undefined, string | undefined][]
-  >([]);
-
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const [animateLeft, setAnimateLeft] = useState(false);
   const [animateRight, setAnimateRight] = useState(false);
-
-  useEffect(() => {
-    setShoppingList([]);
-  }, [currentWeek]);
 
   const schedules = useAppSelector(
     (state) => state.settings.currentUser.schedules
@@ -103,30 +95,41 @@ function Schedule() {
       ));
   }
 
-  async function createList() {
+  // SHOPPING LIST
+  const [shoppingList, setShoppingList] = useState<
+    [string | undefined, string | undefined][]
+  >([]);
+  const [isListReady, setIsListReady] = useState(false);
+  const [isListVisible, setIsListVisible] = useState(false);
+
+  useEffect(() => {
+    setShoppingList([]);
+    setIsListReady(false);
+  }, [currentWeek]);
+
+  // RECUPERAION DES INGREDIENTS ET MESURES CORRESPONDANTES
+  const createList = useCallback(async () => {
     const ingredients: string[] = [];
     const mesures: string[] = [];
+
     const mealsOfTheWeek = schedules[currentWeek - 1].meals.map(
-      async (meal: { idDbMeal: any }) => {
+      async (meal: { idDbMeal: number }) => {
         const response = await fetch(
           `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idDbMeal}`
         );
         const data = await response.json();
 
-        data.meals.map((currentMeal: { [x: string]: any }) => {
+        data.meals.map((currentMeal: { [x: string]: string | undefined }) => {
           for (let i = 1; i <= 20; i += 1) {
-            if (
-              currentMeal[`strIngredient${i}`] &&
-              currentMeal[`strIngredient${i}`].trim() !== ' '
-            ) {
-              ingredients.push(currentMeal[`strIngredient${i}`]);
+            const ingredient = currentMeal[`strIngredient${i}`];
+            const measure = currentMeal[`strMeasure${i}`];
+
+            if (ingredient && ingredient.trim() !== ' ') {
+              ingredients.push(ingredient);
             }
 
-            if (
-              currentMeal[`strMeasure${i}`] &&
-              currentMeal[`strMeasure${i}`].trim() !== ''
-            ) {
-              mesures.push(currentMeal[`strMeasure${i}`]);
+            if (measure && measure.trim() !== ' ') {
+              mesures.push(measure);
             }
           }
 
@@ -136,32 +139,44 @@ function Schedule() {
     );
     await Promise.all(mealsOfTheWeek);
     return { ingredients, mesures };
-  }
+  }, [currentWeek, schedules]);
 
-  function generateList() {
-    createList().then((result) => {
-      const completeArray: [string | undefined, string | undefined][] =
-        result.ingredients.map((item, index) => [item, result.mesures[index]]);
+  // CREATION DE LA LISTE
+  const generateList = useCallback(async () => {
+    setIsListReady(false);
+    const result = await createList();
+    const completeArray: [string | undefined, string | undefined][] =
+      result.ingredients.map((item, index) => [item, result.mesures[index]]);
 
-      const combined: { [key: string]: string | undefined } = {};
+    const combined: { [key: string]: string | undefined } = {};
 
-      // combinaison quantites lorsqu'il y des doublons
-      completeArray.forEach(([ingredient, quantity]) => {
-        if (!ingredient) {
-          return;
-        }
-        if (combined[ingredient]) {
-          combined[ingredient] = `${combined[ingredient]}, ${quantity}`;
-        } else {
-          combined[ingredient] = quantity;
-        }
-      });
-
-      const newList = Object.entries(combined);
-      newList.sort((a, b) => a[0].localeCompare(b[0]));
-
-      setShoppingList(newList);
+    // combinaison quantites lorsqu'il y des doublons
+    completeArray.forEach(([ingredient, quantity]) => {
+      if (!ingredient) {
+        return;
+      }
+      if (combined[ingredient]) {
+        combined[ingredient] = `${combined[ingredient]}, ${quantity}`;
+      } else {
+        combined[ingredient] = quantity;
+      }
     });
+    const newList = Object.entries(combined);
+    newList.sort((a, b) => a[0].localeCompare(b[0]));
+    setShoppingList(newList);
+    setIsListReady(true);
+  }, [createList]);
+
+  useEffect(() => {
+    generateList();
+  }, [generateList]);
+
+  // AFFICHAGE DE LA LISTE
+  function toggleListVisibility() {
+    setIsListVisible(!isListVisible);
+    if (!isListReady) {
+      generateList();
+    }
   }
   return (
     <div
@@ -231,28 +246,42 @@ function Schedule() {
       </section>
 
       <div className="text-center">
-        <button
-          type="button"
-          onClick={generateList}
-          className="rounded-md border border-transparent hover:border-fourthff bg-fourthff py-2 px-4 text-sm font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2 m-10"
-        >
-          Show my shopping list
-        </button>
-        <PDFDownloadLink
-          document={<MyShoppingList shoppingList={shoppingList} />}
-          className="rounded-md border border-transparent hover:border-fourthff bg-fourthff py-2 px-4 text-sm font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2 my-10"
-        >
-          Export my shopping list as pdf
-        </PDFDownloadLink>
-        <ul>
-          {shoppingList.map(([ingredient, measure], index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <li key={index} className="flex items-center">
-              <Check className="h-5 w-5 mx-3" aria-hidden="true" />
-              {ingredient}: {measure}
-            </li>
-          ))}
-        </ul>
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4  my-10">
+          <button
+            type="button"
+            onClick={toggleListVisibility}
+            className="transition duration-500 ease-in-out rounded-md border border-transparent hover:border-fourthff bg-fourthff py-2 px-4 text-sm font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2"
+          >
+            {isListVisible ? 'Hide my shopping list' : 'Show my shopping list'}
+          </button>
+          {isListReady ? (
+            <PDFDownloadLink
+              document={
+                <MyShoppingList
+                  shoppingList={shoppingList}
+                  currentWeek={currentWeek}
+                />
+              }
+              className="transition duration-500 ease-in-out rounded-md border border-transparent hover:border-fourthff bg-fourthff py-2 px-4 text-sm font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2"
+              fileName="MyShoppingList.pdf"
+            >
+              Export my shopping list to PDF
+            </PDFDownloadLink>
+          ) : (
+            <p>Generating list...</p>
+          )}
+        </div>
+        {isListVisible && (
+          <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-2">
+            {shoppingList.map(([ingredient, measure], index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <li key={index} className="flex items-center text-left">
+                <Check className="h-5 w-5 mx-3" aria-hidden="true" />
+                {ingredient}: {measure}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </div>
   );
