@@ -1,4 +1,5 @@
-const API_BASE_URL = 'https://foodflex-oclock-46f540112ea5.herokuapp.com';
+// const API_BASE_URL = 'https://foodflex-oclock-46f540112ea5.herokuapp.com';
+const API_BASE_URL = 'http://localhost:3000';
 
 // Fonction utilitaire pour ajouter le token d'authentification aux headers
 const createHeadersWithAuthorization = () => {
