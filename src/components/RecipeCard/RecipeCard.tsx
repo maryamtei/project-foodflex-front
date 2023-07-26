@@ -63,16 +63,19 @@ function RecipeCard({ recipe }: CardProps) {
 
   // useCallback to memoize the searchFavori function and prevent unnecessary
   // re-renders
+
   const matchingFavori = useMemo(() => {
     const findFavori = favoris.find(
       (favori) => favori.idDbMeal === recipe.idDbMeal
     );
+
     return findFavori;
   }, [favoris, recipe.idDbMeal]);
 
   // Function to handle adding the recipe to favorites
   function handleAddFavori(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
+
     if (!matchingFavori) {
       dispatch(addFavori(recipe));
       setRecipeFavori(true);
@@ -154,11 +157,7 @@ function RecipeCard({ recipe }: CardProps) {
             ? 'blur-[3px] pointer-events-none opacity-60'
             : ''
         }
-        ${
-          (stateSchedule || displayScheduleModal) && recipe.id !== 1
-            ? 'blur-[1px] pointer-events-none opacity-80'
-            : ''
-        }`}
+       `}
       />
       <div
         className={` ${stateHome ? 'hidden' : ''}

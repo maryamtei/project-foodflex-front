@@ -4,6 +4,7 @@ import ModalSign from '../settings/Modal';
 import ModalFavoriProfil from '../Profil/Modal';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Loader from '../Loader/Loader';
 import Message from '../Message/message';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
@@ -19,6 +20,8 @@ function Apptest() {
     (state) => state.favoris.modalIsOpen
   );
   const isLogged = useAppSelector((state) => state.settings.isLogged);
+  const isLoading = useAppSelector((state) => state.settings.isLoading);
+  console.log(isLoading);
   const mobileView = useAppSelector((state) => state.window.mobileView);
   // Triggered when the window is resized
   useEffect(() => {
@@ -35,7 +38,7 @@ function Apptest() {
   });
 
   const innerWidth = useAppSelector((state) => state.window.innerWidth);
-  const codeMessage = useAppSelector((state) => state.settings.codeMessage);
+  const status = useAppSelector((state) => state.settings.status);
   // Check if the inner width of the window is less than 640 pixels
   useEffect(() => {
     if (innerWidth < 640) {
@@ -46,14 +49,16 @@ function Apptest() {
   }, [innerWidth, dispatch]);
 
   useEffect(() => {
-    dispatch(getUserData());
+    if (localStorage.token) {
+      dispatch(getUserData());
+    }
   }, [dispatch]);
 
   return (
     <div className="relative">
       <Header />
-      {codeMessage > 0 && <Message />}
-
+      {status > 0 && <Message />}
+      {isLoading && <Loader />}
       {/* Render the Modal component if modalIsOpen is true */}
       {modalIsOpenSign && <ModalSign />}
       {(modalIsOpenFavoriProfil || !mobileView) && isLogged && (
