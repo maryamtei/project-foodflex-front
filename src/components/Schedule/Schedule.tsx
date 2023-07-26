@@ -1,5 +1,7 @@
+import { PDFDownloadLink } from '@react-pdf/renderer';
 import { ChangeEvent, useEffect, useState } from 'react';
 import {
+  Check,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
@@ -7,11 +9,11 @@ import {
 } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 
-// eslint-disable-next-line import/no-duplicates
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateSchedule } from '../../store/reducers/schedule';
 import { changeWeek } from '../../store/reducers/settings';
 import Carousel from '../Carousel/Carousel';
+import MyShoppingList from './shoppingListPdf';
 
 function Schedule() {
   const [shoppingList, setShoppingList] = useState<
@@ -21,6 +23,10 @@ function Schedule() {
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const [animateLeft, setAnimateLeft] = useState(false);
   const [animateRight, setAnimateRight] = useState(false);
+
+  useEffect(() => {
+    setShoppingList([]);
+  }, [currentWeek]);
 
   const schedules = useAppSelector(
     (state) => state.settings.currentUser.schedules
@@ -115,9 +121,7 @@ function Schedule() {
             ) {
               ingredients.push(currentMeal[`strIngredient${i}`]);
             }
-          }
 
-          for (let i = 1; i <= 20; i += 1) {
             if (
               currentMeal[`strMeasure${i}`] &&
               currentMeal[`strMeasure${i}`].trim() !== ''
@@ -125,8 +129,9 @@ function Schedule() {
               mesures.push(currentMeal[`strMeasure${i}`]);
             }
           }
+
+          return { ingredients, mesures };
         });
-        return { ingredients, mesures };
       }
     );
     await Promise.all(mealsOfTheWeek);
@@ -137,8 +142,25 @@ function Schedule() {
     createList().then((result) => {
       const completeArray: [string | undefined, string | undefined][] =
         result.ingredients.map((item, index) => [item, result.mesures[index]]);
-      console.log(completeArray);
-      setShoppingList(completeArray);
+
+      const combined: { [key: string]: string | undefined } = {};
+
+      // combinaison quantites lorsqu'il y des doublons
+      completeArray.forEach(([ingredient, quantity]) => {
+        if (!ingredient) {
+          return;
+        }
+        if (combined[ingredient]) {
+          combined[ingredient] = `${combined[ingredient]}, ${quantity}`;
+        } else {
+          combined[ingredient] = quantity;
+        }
+      });
+
+      const newList = Object.entries(combined);
+      newList.sort((a, b) => a[0].localeCompare(b[0]));
+
+      setShoppingList(newList);
     });
   }
   return (
@@ -208,16 +230,30 @@ function Schedule() {
         {newShedulesFunction()}
       </section>
 
-      <button type="button" onClick={generateList}>
-        Generate my shopping list
-      </button>
-      <ul>
-        {shoppingList.map(([ingredient, measure], index) => (
-          <li key={index}>
-            {ingredient}: {measure}
-          </li>
-        ))}
-      </ul>
+      <div className="text-center">
+        <button
+          type="button"
+          onClick={generateList}
+          className="rounded-md border border-transparent hover:border-fourthff bg-fourthff py-2 px-4 text-sm font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2 m-10"
+        >
+          Show my shopping list
+        </button>
+        <PDFDownloadLink
+          document={<MyShoppingList shoppingList={shoppingList} />}
+          className="rounded-md border border-transparent hover:border-fourthff bg-fourthff py-2 px-4 text-sm font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2 my-10"
+        >
+          Export my shopping list as pdf
+        </PDFDownloadLink>
+        <ul>
+          {shoppingList.map(([ingredient, measure], index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <li key={index} className="flex items-center">
+              <Check className="h-5 w-5 mx-3" aria-hidden="true" />
+              {ingredient}: {measure}
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
