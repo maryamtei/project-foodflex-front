@@ -111,7 +111,9 @@ function Schedule() {
   const createList = useCallback(async () => {
     const ingredients: string[] = [];
     const mesures: string[] = [];
-
+    if (!schedules[currentWeek - 1]) {
+      return { ingredients, mesures };
+    }
     const mealsOfTheWeek = schedules[currentWeek - 1].meals.map(
       async (meal: { idDbMeal: number }) => {
         const response = await fetch(
@@ -132,7 +134,6 @@ function Schedule() {
               mesures.push(measure);
             }
           }
-
           return { ingredients, mesures };
         });
       }

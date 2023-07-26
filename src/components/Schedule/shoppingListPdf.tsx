@@ -62,8 +62,8 @@ function MyShoppingList({
     <Document>
       <Page size="A4" style={styles.page}>
         <Text style={styles.title}>
-          My Shopping List by FoodFlex - Semaine {currentWeek}
-        </Text>{' '}
+          My Shopping List by FoodFlex - Week {currentWeek}
+        </Text>
         <View style={styles.section}>
           <View style={styles.column}>
             {column1Items.map((ingredient, index) => (
