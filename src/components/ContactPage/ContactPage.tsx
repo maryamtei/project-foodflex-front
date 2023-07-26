@@ -26,11 +26,10 @@ function ContactPage() {
         },
         body: JSON.stringify(formData),
       });
-
+  
       if (response.ok) {
         const data = await response.json();
         console.log('Message successfully sent!', data);
-
         setFormData({ name: '', email: '', message: '' });
       } else {
         const errorData = await response.json();
