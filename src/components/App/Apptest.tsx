@@ -4,6 +4,7 @@ import ModalSign from '../settings/Modal';
 import ModalFavoriProfil from '../Profil/Modal';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
+import Loader from '../Loader/Loader';
 import Message from '../Message/message';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
@@ -19,6 +20,8 @@ function Apptest() {
     (state) => state.favoris.modalIsOpen
   );
   const isLogged = useAppSelector((state) => state.settings.isLogged);
+  const isLoading = useAppSelector((state) => state.settings.isLoading);
+  console.log(isLoading);
   const mobileView = useAppSelector((state) => state.window.mobileView);
   // Triggered when the window is resized
   useEffect(() => {
@@ -55,7 +58,7 @@ function Apptest() {
     <div className="relative">
       <Header />
       {status > 0 && <Message />}
-
+      {isLoading && <Loader />}
       {/* Render the Modal component if modalIsOpen is true */}
       {modalIsOpenSign && <ModalSign />}
       {(modalIsOpenFavoriProfil || !mobileView) && isLogged && (
