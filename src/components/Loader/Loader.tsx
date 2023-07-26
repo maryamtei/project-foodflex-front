@@ -2,7 +2,7 @@ function Loader() {
   return (
     <div
       role="status"
-      className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%"
+      className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
     >
       <svg
         aria-hidden="true"
