@@ -35,7 +35,7 @@ function Apptest() {
   });
 
   const innerWidth = useAppSelector((state) => state.window.innerWidth);
-  const codeMessage = useAppSelector((state) => state.settings.codeMessage);
+  const status = useAppSelector((state) => state.settings.status);
   // Check if the inner width of the window is less than 640 pixels
   useEffect(() => {
     if (innerWidth < 640) {
@@ -52,7 +52,7 @@ function Apptest() {
   return (
     <div className="relative">
       <Header />
-      {codeMessage > 0 && <Message />}
+      {status > 0 && <Message />}
 
       {/* Render the Modal component if modalIsOpen is true */}
       {modalIsOpenSign && <ModalSign />}

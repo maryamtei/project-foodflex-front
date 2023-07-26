@@ -338,6 +338,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
       state.message = action.payload.data.message;
       state.status = action.payload.status;
+
       if (state.status === 200) {
         state.currentUser = action.payload.data.newUser;
       }
