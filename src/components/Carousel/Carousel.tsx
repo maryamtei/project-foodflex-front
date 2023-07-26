@@ -2,7 +2,6 @@ import NukaCarousel from 'nuka-carousel';
 import { useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'react-feather';
 import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { Recipe } from '../../@types/recipe';
 import { useAppSelector } from '../../hooks/redux';
 import CarouselSlide from './CarouselSlide';
