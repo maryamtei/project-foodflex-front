@@ -157,11 +157,7 @@ function RecipeCard({ recipe }: CardProps) {
             ? 'blur-[3px] pointer-events-none opacity-60'
             : ''
         }
-        ${
-          (stateSchedule || displayScheduleModal) && recipe.id !== 1
-            ? 'blur-[1px] pointer-events-none opacity-80'
-            : ''
-        }`}
+       `}
       />
       <div
         className={` ${stateHome ? 'hidden' : ''}
