@@ -46,7 +46,10 @@ function Apptest() {
   }, [innerWidth, dispatch]);
 
   useEffect(() => {
-    dispatch(getUserData());
+    if (localStorage.token) {
+      console.log(localStorage.token);
+      dispatch(getUserData());
+    }
   }, [dispatch]);
 
   return (

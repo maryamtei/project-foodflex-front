@@ -235,10 +235,10 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
       state.message = action.payload.data.message;
       state.status = action.payload.status;
-      if (state.status > 100) {
+      if (state.status === 200) {
+        localStorage.removeItem('token');
         state.isLogged = false;
         state.currentUser = initialValue.currentUser;
-        localStorage.removeItem('token');
       }
     })
     // ---------------- USER -------------------//
@@ -338,7 +338,6 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
       state.message = action.payload.data.message;
       state.status = action.payload.status;
-
       if (state.status === 200) {
         state.currentUser = action.payload.data.newUser;
       }
