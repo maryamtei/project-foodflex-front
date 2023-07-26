@@ -34,7 +34,7 @@ interface SettingsState {
   };
   isLoading: boolean;
   message: string | null;
-  codeMessage: number;
+  status: number;
   MealFavoriToAdd: MealAdd;
   idToDelete: number;
   clickAddSchedule: boolean;
@@ -64,7 +64,7 @@ const initialValue: SettingsState = {
   },
   isLoading: false,
   message: '',
-  codeMessage: 0,
+  status: 0,
   MealFavoriToAdd: {
     idDbMeal: '',
     name: '',
@@ -99,23 +99,26 @@ export const signIn = createAsyncThunk(
   async (credentials: SettingsState['signInCredentials']) => {
     const response = await fetchPost(`login`, credentials);
     const data = await response.json();
+    const status = await response.status;
 
-    return data;
+    return { data, status };
   }
 );
 // ---------------- LOGOUT -------------------//
 export const logout = createAsyncThunk('settings/LOGOUT', async () => {
   const response = await fetchGet(`logout`);
   const data = await response.json();
+  const status = await response.status;
 
-  return data;
+  return { data, status };
 });
 // ---------------- DATA USER -------------------//
 export const getUserData = createAsyncThunk('settings/USER_DATA', async () => {
   const response = await fetchGet(`user`);
   const data = await response.json();
+  const status = await response.status;
 
-  return data;
+  return { data, status };
 });
 
 // ---------------- SIGN UP -------------------//
@@ -124,8 +127,9 @@ export const signUp = createAsyncThunk(
   async (credentials: SettingsState['signUpCredentials']) => {
     const response = await fetchPost(`signup`, credentials);
     const data = await response.json();
+    const status = await response.status;
 
-    return data;
+    return { data, status };
   }
 );
 // ------------ EDIT PROFIL --------------//
@@ -135,8 +139,9 @@ export const editInfoProfil = createAsyncThunk(
     const objData = Object.fromEntries(formData);
     const response = await fetchPatch(`profil`, objData);
     const data = await response.json();
+    const status = await response.status;
 
-    return data;
+    return { data, status };
   }
 );
 
@@ -146,19 +151,20 @@ export const deleteFavori = createAsyncThunk(
   async (idToDelete: SettingsState['idToDelete']) => {
     const response = await fetchDelete(`favorite-delete/${idToDelete}`);
     const data = await response.json();
+    const status = await response.status;
 
-    return data;
+    return { data, status };
   }
 );
 
 export const addFavori = createAsyncThunk(
   'user/add-favori',
   async (MealFavoriToAdd: SettingsState['MealFavoriToAdd']) => {
-    console.log(MealFavoriToAdd);
     const response = await fetchPost(`favorite-add`, MealFavoriToAdd);
     const data = await response.json();
+    const status = await response.status;
 
-    return data;
+    return { data, status };
   }
 );
 
@@ -173,8 +179,9 @@ export const deleteMeal = createAsyncThunk(
   async (idToDelete: SettingsState['idToDelete']) => {
     const response = await fetchDelete(`schedule-delete/${idToDelete}`);
     const data = await response.json();
+    const status = await response.status;
 
-    return data;
+    return { data, status };
   }
 );
 export const addSchedule = createAsyncThunk(
@@ -188,8 +195,9 @@ export const addSchedule = createAsyncThunk(
       week: body.week,
     });
     const data = await response.json();
+    const status = await response.status;
 
-    return data;
+    return { data, status };
   }
 );
 
@@ -218,16 +226,16 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(logout.pending, (state) => {
       state.isLoading = true;
       state.message = null;
-      state.codeMessage = 0;
+      state.status = 0;
     })
     .addCase(logout.rejected, (state) => {
       state.isLoading = false;
     })
     .addCase(logout.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.message;
-      state.codeMessage = action.payload.codeMessage;
-      if (state.codeMessage > 100) {
+      state.message = action.payload.data.message;
+      state.status = action.payload.status;
+      if (state.status > 100) {
         state.isLogged = false;
         state.currentUser = initialValue.currentUser;
         localStorage.removeItem('token');
@@ -237,38 +245,38 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(getUserData.pending, (state) => {
       state.isLoading = true;
       state.message = null;
-      state.codeMessage = 0;
+      state.status = 0;
     })
     .addCase(getUserData.rejected, (state) => {
       state.isLoading = false;
     })
     .addCase(getUserData.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.message;
-      state.codeMessage = action.payload.codeMessage;
-      if (state.codeMessage > 100) {
+      state.message = action.payload.data.message;
+      state.status = action.payload.status;
+      if (state.status === 200) {
         state.isLogged = true;
-        state.currentUser = action.payload.newUser;
+        state.currentUser = action.payload.data.newUser;
       }
     })
     // ---------------- SIGN IN -------------------//
     .addCase(signIn.pending, (state) => {
       state.isLoading = true;
       state.message = null;
-      state.codeMessage = 0;
+      state.status = 0;
     })
     .addCase(signIn.rejected, (state) => {
       state.isLoading = false;
     })
     .addCase(signIn.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.message;
-      state.codeMessage = action.payload.codeMessage;
-      if (state.codeMessage > 100) {
-        const authToken = action.payload.token;
+      state.message = action.payload.data.message;
+      state.status = action.payload.status;
+      if (state.status === 200) {
+        const authToken = action.payload.data.token;
         localStorage.removeItem('token');
         localStorage.setItem('token', authToken);
-        state.currentUser = action.payload.newUser;
+        state.currentUser = action.payload.data.newUser;
         state.isLogged = true;
         state.isLoading = false;
         state.modalIsOpen = false;
@@ -279,20 +287,20 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(signUp.pending, (state) => {
       state.isLoading = true;
       state.message = null;
-      state.codeMessage = 0;
+      state.status = 0;
     })
     .addCase(signUp.rejected, (state) => {
       state.isLoading = false;
     })
     .addCase(signUp.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.message;
-      state.codeMessage = action.payload.codeMessage;
-      if (state.codeMessage > 100) {
-        const authToken = action.payload.token;
+      state.message = action.payload.data.message;
+      state.status = action.payload.status;
+      if (state.status === 200) {
+        const authToken = action.payload.data.token;
         localStorage.removeItem('token');
         localStorage.setItem('token', authToken);
-        state.currentUser = action.payload.newUser;
+        state.currentUser = action.payload.data.newUser;
         state.isLogged = true;
         state.isLoading = false;
         state.modalIsOpen = false;
@@ -303,17 +311,17 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(editInfoProfil.pending, (state) => {
       state.isLoading = true;
       state.message = null;
-      state.codeMessage = 0;
+      state.status = 0;
     })
     .addCase(editInfoProfil.rejected, (state) => {
       state.isLoading = false;
     })
     .addCase(editInfoProfil.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.message;
-      state.codeMessage = action.payload.codeMessage;
-      if (state.codeMessage > 100) {
-        state.currentUser = action.payload.newUser;
+      state.message = action.payload.data.message;
+      state.status = action.payload.status;
+      if (state.status === 200) {
+        state.currentUser = action.payload.data.newUser;
       }
     })
 
@@ -321,17 +329,17 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(deleteFavori.pending, (state) => {
       state.isLoading = true;
       state.message = null;
-      state.codeMessage = 0;
+      state.status = 0;
     })
     .addCase(deleteFavori.rejected, (state) => {
       state.isLoading = false;
     })
     .addCase(deleteFavori.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.message;
-      state.codeMessage = action.payload.codeMessage;
-      if (state.codeMessage > 100) {
-        state.currentUser = action.payload.newUser;
+      state.message = action.payload.data.message;
+      state.status = action.payload.status;
+      if (state.status === 200) {
+        state.currentUser = action.payload.data.newUser;
       }
     })
 
@@ -339,17 +347,17 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(addFavori.pending, (state) => {
       state.isLoading = true;
       state.message = null;
-      state.codeMessage = 0;
+      state.status = 0;
     })
     .addCase(addFavori.rejected, (state) => {
       state.isLoading = false;
     })
     .addCase(addFavori.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.message;
-      state.codeMessage = action.payload.codeMessage;
-      if (state.codeMessage === 200) {
-        state.currentUser = action.payload.newUser;
+      state.message = action.payload.data.message;
+      state.status = action.payload.status;
+      if (state.status === 200) {
+        state.currentUser = action.payload.data.newUser;
       }
     })
 
@@ -367,35 +375,35 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     .addCase(addSchedule.pending, (state) => {
       state.isLoading = true;
       state.message = null;
-      state.codeMessage = 0;
+      state.status = 0;
     })
     .addCase(addSchedule.rejected, (state) => {
       state.isLoading = false;
     })
     .addCase(addSchedule.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.message;
-      state.codeMessage = action.payload.codeMessage;
-      if (state.codeMessage > 100) {
-        state.currentUser = action.payload.newUser;
+      state.message = action.payload.data.message;
+      state.status = action.payload.status;
+      if (state.status === 200) {
         state.clickAddSchedule = false;
+        state.currentUser = action.payload.data.newUser;
       }
     })
 
     .addCase(deleteMeal.pending, (state) => {
       state.isLoading = true;
       state.message = null;
-      state.codeMessage = 0;
+      state.status = 0;
     })
     .addCase(deleteMeal.rejected, (state) => {
       state.isLoading = false;
     })
     .addCase(deleteMeal.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.message;
-      state.codeMessage = action.payload.codeMessage;
-      if (state.codeMessage > 100) {
-        state.currentUser = action.payload.newUser;
+      state.message = action.payload.data.message;
+      state.status = action.payload.status;
+      if (state.status === 200) {
+        state.currentUser = action.payload.data.newUser;
       }
     })
     .addCase(displaySchedule, (state, action) => {
