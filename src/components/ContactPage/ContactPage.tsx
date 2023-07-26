@@ -75,7 +75,7 @@ function ContactPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-500 rounded focus:outline-none focus:border-black text-gray-600 bg-bgff"
+                  className="w-full px-3 py-2 border-2 border-gray-400 rounded focus:outline-none focus:border-gray-500 text-gray-600 bg-bgff"
                   placeholder="Please enter your full name"
                   required
                 />
@@ -93,7 +93,7 @@ function ContactPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-500 rounded focus:outline-none focus:border-black text-gray-600 bg-bgff"
+                  className="w-full px-3 py-2 border-2 border-gray-400 rounded focus:outline-none focus:border-gray-500 text-gray-600 bg-bgff"
                   placeholder="Please enter your e-mail address"
                   required
                 />
@@ -111,7 +111,7 @@ function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-3 py-2 border border-gray-500 rounded focus:outline-none focus:border-black text-gray-600 bg-bgff"
+                  className="w-full px-3 py-2 border-2 border-gray-400 rounded focus:outline-none focus:border-gray-500 text-gray-600 bg-bgff"
                   placeholder="Please enter your message"
                   required
                 />
