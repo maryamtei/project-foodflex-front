@@ -52,7 +52,11 @@ function Profil() {
           Profil
         </button>
       </div>
-      <div className="flex flex-col sm:text-bgff text-fourthff">
+      <div
+        className={`  text-fourthff sm:text-bgff flex flex-col ${
+          editProfil ? '' : ''
+        } `}
+      >
         <form onSubmit={handleSubmitEditProfil}>
           {editProfil ? (
             <>
@@ -76,14 +80,6 @@ function Profil() {
                 <Mail className="mr-2" />
                 <Field name="email" label="Mail :" value={email.trim()} />
               </div>
-              {/* <div className="flex mb-6">
-                <Key className="mr-2" />
-                <Field
-                  name="password"
-                  label="Password :"
-                  value={password.trim()}
-                />
-              </div> */}
 
               <button
                 type="submit"
@@ -108,12 +104,6 @@ function Profil() {
                   <Mail className="mr-2" />
                 </p>
                 <p className="flex ">{email}</p>
-              </div>
-              <div className=" flex gap-1 mb-4 border rounded-lg border-fourthff sm:border-bgff p-1">
-                <p className=" flex">
-                  <Key className="mr-2" />
-                </p>
-                <p className="flex"> *********</p>
               </div>
             </div>
           )}

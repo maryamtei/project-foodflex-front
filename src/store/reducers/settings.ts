@@ -6,7 +6,12 @@ import {
 import dayjs from 'dayjs';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 import { User } from '../../@types/Profil';
-import { fetchPost, fetchGet, fetchDelete } from '../../utils/fetch';
+import {
+  fetchPost,
+  fetchGet,
+  fetchDelete,
+  fetchPatch,
+} from '../../utils/fetch';
 import { MealAdd } from '../../@types/recipe';
 
 dayjs.extend(weekOfYear);
@@ -23,6 +28,7 @@ interface SettingsState {
   signUpCredentials: {
     email: string;
     password: string;
+
     firstName: string;
     lastName: string;
   };
@@ -127,15 +133,10 @@ export const editInfoProfil = createAsyncThunk(
   'user/Edit-Info-Profil',
   async (formData: FormData) => {
     const objData = Object.fromEntries(formData);
-    // const response = await fetch('http://localhost:3000/profil', objData);
-    // const data = await response.json();
+    const response = await fetchPatch(`profil`, objData);
+    const data = await response.json();
 
-    return objData as {
-      firstName: string;
-      lastName: string;
-      email: string;
-      password: string;
-    };
+    return data;
   }
 );
 
@@ -153,6 +154,7 @@ export const deleteFavori = createAsyncThunk(
 export const addFavori = createAsyncThunk(
   'user/add-favori',
   async (MealFavoriToAdd: SettingsState['MealFavoriToAdd']) => {
+    console.log(MealFavoriToAdd);
     const response = await fetchPost(`favorite-add`, MealFavoriToAdd);
     const data = await response.json();
 
@@ -298,23 +300,22 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
 
     // ------------ EDIT PROFIL --------------//
-    // .addCase(editInfoProfil.fulfilled, (state, action) => {
-    // const editUser = action.payload;
-    /// / Edit Profil in Redux
-    // state.users = state.users.map((user) => {
-    //  if (user.email === state.currentUser.email) {
-    //    state.currentUser = {
-    //      ...state.currentUser,
-    //      ...editUser,
-    //    };
-    //    return {
-    //      ...user,
-    //      ...editUser,
-    //    };
-    //  }
-    //  return user;
-    // });
-    // })
+    .addCase(editInfoProfil.pending, (state) => {
+      state.isLoading = true;
+      state.message = null;
+      state.codeMessage = 0;
+    })
+    .addCase(editInfoProfil.rejected, (state) => {
+      state.isLoading = false;
+    })
+    .addCase(editInfoProfil.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload.message;
+      state.codeMessage = action.payload.codeMessage;
+      if (state.codeMessage > 100) {
+        state.currentUser = action.payload.newUser;
+      }
+    })
 
     // ---------------- DELETE FAVORIS -------------------//
     .addCase(deleteFavori.pending, (state) => {
@@ -347,7 +348,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
       state.isLoading = false;
       state.message = action.payload.message;
       state.codeMessage = action.payload.codeMessage;
-      if (state.codeMessage >= 100) {
+      if (state.codeMessage === 200) {
         state.currentUser = action.payload.newUser;
       }
     })

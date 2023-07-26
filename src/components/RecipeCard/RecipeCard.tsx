@@ -24,9 +24,6 @@ function RecipeCard({ recipe }: CardProps) {
   const [recipeFavori, setRecipeFavori] = useState(false);
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const stateSchedule = useAppSelector((state) => state.schedule.stateSchedule);
-  const modaleFavoriIsOpen = useAppSelector(
-    (state) => state.favoris.modalIsOpen
-  );
   const MealFavoriToAdd = useAppSelector(
     (state) => state.settings.MealFavoriToAdd
   );
@@ -248,7 +245,7 @@ function RecipeCard({ recipe }: CardProps) {
                 handleDeleteMeal(event);
               }}
             >
-              <X className="h-2 w-2 sm:h-4 sm:w-4 text-[rgb(255,0,0)]" />
+              <X size={20} className=" text-[rgb(255,0,0)]" />
             </button>
           </div>
         ) : (
@@ -268,7 +265,7 @@ function RecipeCard({ recipe }: CardProps) {
                 handleShuffleMeal(event);
               }}
             >
-              <Shuffle className="h-2 w-2 sm:h-4 sm:w-4 text-[rgb(255,0,0)]" />
+              <Shuffle size={20} className=" text-[rgb(255,0,0)]" />
             </button>
           </div>
         )}
