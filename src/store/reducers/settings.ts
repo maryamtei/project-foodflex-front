@@ -192,7 +192,7 @@ export const addSchedule = createAsyncThunk(
 );
 
 export const displaySchedule = createAction<boolean>('favori/click-add-favori');
-export const nextWeek = createAction<boolean>('schedule/current-week');
+export const changeWeek = createAction<number>('schedule/current-week');
 
 // ----------------- BEGIN REDUCER ------------------------- //
 const settingsReducer = createReducer(initialValue, (builder) => {
@@ -353,13 +353,8 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
 
     // ---------------- ADD SCHEDULE -------------------//
-    .addCase(nextWeek, (state, action) => {
-      if (action.payload && state.currentWeek < 52) {
-        state.currentWeek += 1;
-      }
-      if (!action.payload && state.currentWeek > 1) {
-        state.currentWeek -= 1;
-      }
+    .addCase(changeWeek, (state, action) => {
+      state.currentWeek = action.payload;
     })
     .addCase(addScheduleFavori, (state, action) => {
       state.MealFavoriToAdd.idDbMeal = action.payload.idDbMeal;

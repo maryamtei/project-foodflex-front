@@ -4,13 +4,14 @@ import { useNavigate } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateSchedule } from '../../store/reducers/schedule';
-import { nextWeek } from '../../store/reducers/settings';
+import { changeWeek } from '../../store/reducers/settings';
 import Carousel from '../Carousel/Carousel';
 
 function Schedule() {
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const [animateLeft, setAnimateLeft] = useState(false);
   const [animateRight, setAnimateRight] = useState(false);
+  const [weekInput, setweekInput] = useState(currentWeek);
   const schedules = useAppSelector(
     (state) => state.settings.currentUser.schedules
   );
@@ -21,24 +22,32 @@ function Schedule() {
   const navigate = useNavigate();
 
   function handleClickNextWeek() {
-    setAnimateLeft(true);
-    setTimeout(() => {
-      dispatch(nextWeek(true));
-    }, 400);
+    if (currentWeek < 52) {
+      setAnimateLeft(true);
+      setTimeout(() => {
+        dispatch(changeWeek(currentWeek + 1));
+      }, 400);
 
-    setTimeout(() => {
-      setAnimateLeft(false);
-    }, 800);
+      setTimeout(() => {
+        setAnimateLeft(false);
+      }, 800);
+    }
   }
   function handleClickBeforeWeek() {
-    setAnimateRight(true);
+    if (currentWeek > 1) {
+      setAnimateRight(true);
 
-    setTimeout(() => {
-      dispatch(nextWeek(false));
-    }, 400);
-    setTimeout(() => {
-      setAnimateRight(false);
-    }, 800);
+      setTimeout(() => {
+        dispatch(changeWeek(currentWeek - 1));
+      }, 400);
+      setTimeout(() => {
+        setAnimateRight(false);
+      }, 800);
+    }
+  }
+
+  function changeInputCurrentWeek() {
+    setweekInput();
   }
 
   useEffect(() => {
@@ -66,18 +75,31 @@ function Schedule() {
       <div className="flex justify-center items-center gap-4 mb-8 ">
         <button
           type="button"
+          className={` ${currentWeek <= 1 ? 'hidden' : ''}`}
           disabled={animateRight}
-          onClick={() => handleClickBeforeWeek()}
+          onClick={() => {
+            handleClickBeforeWeek();
+          }}
         >
           <ChevronLeft className="text-thirdff h-16 w-16" />
         </button>
-        <p className="text-thirdff text-2xl sm:text-4xl font-bold text-center">
-          Week {currentWeek}
-        </p>
+        <input
+          type="number"
+          id="weekInput"
+          min="1"
+          max="52"
+          className="text-thirdff text-2xl sm:text-4xl font-bold text-center"
+          value={weekInput}
+          // onChange={changeInputCurrentWeek()}
+        />
+
         <button
           type="button"
+          className={` ${currentWeek >= 52 ? 'hidden' : ''}`}
           disabled={animateLeft}
-          onClick={() => handleClickNextWeek()}
+          onClick={() => {
+            handleClickNextWeek();
+          }}
         >
           <ChevronRight className="text-thirdff h-16 w-16" />
         </button>
