@@ -28,7 +28,7 @@ function ContactPage() {
       <div className="relative w-full h-screen">
         {/* Apply overlay and blur effect to the image */}
         <img
-          src="./img/contact.jpg"
+          src="./public/contact.jpg"
           alt="Background"
           className="w-full h-full object-cover object-bottom absolute inset-0"
           style={{
