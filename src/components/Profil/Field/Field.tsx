@@ -24,7 +24,7 @@ function Field({ name, label, value, ...props }: FieldProps) {
         {label}
       </label>
       <input
-        className="ml-1 pl-1 bg-bgff border"
+        className="ml-1 pl-1 text-fourthff border"
         name={name}
         value={valueControl}
         onChange={handleChange}
