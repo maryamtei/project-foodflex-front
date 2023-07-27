@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import { Recipe } from '../../@types/recipe';
 
@@ -21,13 +22,11 @@ export default function CarouselSlide({
         <p className="text-fourthff text-sm sm:text-md font-bold text-center mb-2 bt-2 sm:mb-4 sm:mt-4  ">
           Lunch :
         </p>
-
-        <RecipeCard recipe={recipe1} key={recipe1.idDbMeal} />
-
+        <RecipeCard recipe={recipe1} key={uuidv4()} />
         <p className="text-fourthff text-sm sm:text-md font-bold text-center bt-2 mb-4 mt-4 ">
           Dinner :
         </p>
-        <RecipeCard recipe={recipe2} key={recipe2.idDbMeal} />
+        <RecipeCard recipe={recipe2} key={uuidv4()} />
       </div>
     </div>
   );

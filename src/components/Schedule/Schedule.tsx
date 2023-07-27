@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import {
@@ -274,9 +275,8 @@ function Schedule() {
         </div>
         {isListVisible && (
           <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-2">
-            {shoppingList.map(([ingredient, measure], index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <li key={index} className="flex items-center text-left">
+            {shoppingList.map(([ingredient, measure]) => (
+              <li key={uuidv4()} className="flex items-center text-left">
                 <Check className="h-5 w-5 mx-3" aria-hidden="true" />
                 {ingredient}: {measure}
               </li>

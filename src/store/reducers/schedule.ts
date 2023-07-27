@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { createAction, createReducer } from '@reduxjs/toolkit';
 
 import { Week } from '../../@types/schedule';
