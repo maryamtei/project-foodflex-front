@@ -130,7 +130,7 @@ function Schedule() {
               ingredients.push(ingredient);
             }
 
-            if (measure && measure.trim() !== ' ') {
+            if (measure && measure.trim() !== '') {
               mesures.push(measure);
             }
           }
@@ -275,17 +275,47 @@ function Schedule() {
           )}
         </div>
         {isListVisible && (
-          <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-2">
-            {shoppingList.map(([ingredient, measure]) => (
-              <li
-                key={`${ingredient}${measure}`}
-                className="flex items-center text-left"
-              >
-                <Check className="h-5 w-5 mx-3" aria-hidden="true" />
-                {ingredient}: {measure}
-              </li>
-            ))}
-          </ul>
+          <div>
+            <div className="flex justify-center mb-8">
+              {(() => {
+                if (shoppingList.length === 0) {
+                  return <span>Nothing on the menu 🤷‍♂️</span>;
+                }
+
+                let statusMessage;
+                if (shoppingList.length < 30) {
+                  statusMessage = `The shopping should be quick 🕺🏿`;
+                } else if (shoppingList.length <= 80) {
+                  statusMessage = `That's a nice shopping list ✨`;
+                } else {
+                  statusMessage = `That's a lot of ingredients 😱`;
+                }
+
+                return (
+                  <>
+                    <span className="font-bold pr-2">
+                      {shoppingList.length} ingredients:
+                    </span>
+                    <span>{statusMessage}</span>
+                  </>
+                );
+              })()}
+            </div>
+            <div className="flex justify-center">
+              <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-4 gap-y-2">
+                {shoppingList.map(([ingredient, measure]) => (
+                  <li
+                    key={`${ingredient}${measure}`}
+                    className="flex items-center text-left"
+                  >
+                    <Check className="h-5 w-5 mx-3" aria-hidden="true" />
+                    <span className="font-bold pr-2">{ingredient}:</span>
+                    {measure}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         )}
       </div>
     </div>

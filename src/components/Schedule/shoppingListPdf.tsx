@@ -12,15 +12,15 @@ const styles = StyleSheet.create({
   page: {
     backgroundColor: '#E4E4E4',
     fontSize: 12,
+    paddingBottom: 30,
   },
   section: {
     flexDirection: 'row',
     marginLeft: 10,
-    padding: 10,
-    paddingTop: 0,
     flexGrow: 1,
     lineHeight: 1.3,
     marginBottom: 30,
+    padding: '15 20 10 30',
   },
   column: {
     width: '50%',
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   title: {
     color: 'white',
     fontSize: 18,
+    fontWeight: 'semibold',
     textAlign: 'center',
     width: '100%',
     backgroundColor: '#ff6f61',
