@@ -171,7 +171,7 @@ function Footer() {
             </li>
             <li>
               <NavLink
-                to="/"
+                to="/contact"
                 relative="path"
                 onClick={() => {
                   scrollToTop();

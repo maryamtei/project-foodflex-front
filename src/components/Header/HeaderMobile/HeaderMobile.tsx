@@ -203,7 +203,19 @@ function HeaderMobile() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/" relative="path">
+                <NavLink
+                  to="/contact"
+                  relative="path"
+                  onClick={() => {
+                    if (modalIsOpen) {
+                      toogleModalSignUpSignIn();
+                    }
+                    if (modalIsOpenFavoriProfil) {
+                      closeProfilModal();
+                    }
+                    menuOnClick();
+                  }}
+                >
                   Contact
                 </NavLink>
               </li>
@@ -212,11 +224,6 @@ function HeaderMobile() {
           <div>
             <h2 className="text-md font-bold ">Legal :</h2>
             <ul className="flex flex-col gap-1 underline">
-              <li>
-                <NavLink to="/" relative="path">
-                  Privacy Policy
-                </NavLink>
-              </li>
               <li>
                 <NavLink
                   to="/terms"
