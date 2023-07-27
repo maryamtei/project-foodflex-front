@@ -35,9 +35,7 @@ const router = createBrowserRouter(
       {/* <Route index element={<Apptest />} /> */}
       <Route path="recipes" element={<Recipes />} />
       <Route path="recipes/:id" element={<Recipe />} />
-      <Route path="/404" element={<NotFoundPage />} />
       <Route path="/terms" element={<TermsPage />} />
-      <Route path="/contact" element={<ContactPage />} />
     </Route>
   )
 );
