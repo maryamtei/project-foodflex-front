@@ -160,7 +160,7 @@ function Footer() {
           <ul className="flex flex-col gap-1 underline">
             <li>
               <NavLink
-                to="/"
+                to="/about"
                 relative="path"
                 onClick={() => {
                   scrollToTop();

@@ -20,6 +20,7 @@ import store from './store';
 import NotFoundPage from './components/NotFoundPage/NotFoundPage';
 import TermsPage from './components/TermsPage/TermsPage';
 import ContactPage from './components/ContactPage/ContactPage';
+import AboutUsPage from './components/AboutUsPage/AboutUsPage';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,6 +38,9 @@ const router = createBrowserRouter(
       <Route path="recipes/:id" element={<Recipe />} />
       <Route path="/terms" element={<TermsPage />} />
       <Route path="/contact" element={<ContactPage />} />
+      <Route path="/about" element={<AboutUsPage />} />
+      {/* <Route path="/404" element={<NotFoundPage />} /> */}
+      <Route path="*" element={<NotFoundPage />} />
     </Route>
   )
 );
