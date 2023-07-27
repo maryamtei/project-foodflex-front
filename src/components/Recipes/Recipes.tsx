@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment, useState } from 'react';
 import { X } from 'react-feather';
@@ -123,7 +122,7 @@ function Recipes() {
       )}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
         {recipes.map((recipe) => (
-          <RecipeCard recipe={recipe} key={uuidv4()} />
+          <RecipeCard recipe={recipe} key={recipe.idDbMeal} />
         ))}
       </div>
     </div>

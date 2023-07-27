@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Image,
 } from '@react-pdf/renderer';
-import { v4 as uuidv4 } from 'uuid';
 import square from './pngegg.png';
 
 const styles = StyleSheet.create({
@@ -68,7 +67,10 @@ function MyShoppingList({
         <View style={styles.section}>
           <View style={styles.column}>
             {column1Items.map((ingredient) => (
-              <View style={styles.listItem} key={uuidv4()}>
+              <View
+                style={styles.listItem}
+                key={`${ingredient[0]} ${ingredient[1]}`}
+              >
                 <Image style={styles.checkbox} src={square} />
                 <Text>
                   {ingredient[0]} {ingredient[1]}
@@ -78,7 +80,10 @@ function MyShoppingList({
           </View>
           <View style={styles.column}>
             {column2Items.map((ingredient) => (
-              <View style={styles.listItem} key={uuidv4()}>
+              <View
+                style={styles.listItem}
+                key={`${ingredient[0]} ${ingredient[1]}`}
+              >
                 <Image style={styles.checkbox} src={square} />
                 <Text>
                   {ingredient[0]} {ingredient[1]}

@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import ReactPlayer from 'react-player';
@@ -21,6 +20,7 @@ function Recipe() {
   const recipe = useAppSelector((state) => state.recipeDetails.recipe);
 
   useEffect(() => {
+    // Scroll-To-Top
     window.scrollTo({
       top: 0,
       left: 0,
@@ -60,7 +60,7 @@ function Recipe() {
           <h2 className="text-xl font-bold mb-2">Instructions:</h2>
           <div className="prose lg:prose-lg">
             {recipe.instruction.split('\n').map((line) => (
-              <p key={uuidv4()}>{line}</p>
+              <p key={line}>{line}</p>
             ))}
           </div>
         </div>

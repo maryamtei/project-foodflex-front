@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import {
@@ -270,13 +269,18 @@ function Schedule() {
               Export my shopping list to PDF
             </PDFDownloadLink>
           ) : (
-            <p>Generating list...</p>
+            <p className=" transition rounded-md border border-transparent hover:border-fourthff bg-fourthff py-2 px-4 text-sm font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2">
+              Export my shopping list to PDF
+            </p>
           )}
         </div>
         {isListVisible && (
           <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-2">
             {shoppingList.map(([ingredient, measure]) => (
-              <li key={uuidv4()} className="flex items-center text-left">
+              <li
+                key={`${ingredient}${measure}`}
+                className="flex items-center text-left"
+              >
                 <Check className="h-5 w-5 mx-3" aria-hidden="true" />
                 {ingredient}: {measure}
               </li>
