@@ -181,11 +181,7 @@ function Schedule() {
   }
   return (
     <div
-<<<<<<< HEAD
-      className={` flex flex-col justify-center my-10 px-3 sm:px-8 relative overflow-hidden`}
-=======
-      className={` overFlow-hiden flex flex-col justify-center my-10 px-3 sm:px-8 relative`}
->>>>>>> develop
+      className={`flex flex-col justify-center my-10 px-3 sm:px-8 relative  overFlow-hiden `}
     >
       <div className="flex justify-center items-center gap-4 mb-8 ">
         <button
