@@ -1,4 +1,5 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
+import { fetchPost } from '../../utils/fetch';
 
 function ContactPage() {
   const [formData, setFormData] = useState({
@@ -15,28 +16,18 @@ function ContactPage() {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
 
     try {
-      console.log(JSON.stringify(formData));
-      const response = await fetch('http://localhost:3000/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetchPost('contact', formData);
   
       if (response.ok) {
         const data = await response.json();
-        console.log('Message successfully sent!', data);
+  
         setFormData({ name: '', email: '', message: '' });
       } else {
         const errorData = await response.json();
-        console.error('Error sending form', errorData);
       }
     } catch (error) {
-      console.error('Error submitting form', error);
     }
   };
 
