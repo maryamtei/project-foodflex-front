@@ -37,7 +37,6 @@ const router = createBrowserRouter(
       <Route path="recipes/:id" element={<Recipe />} />
       <Route path="/terms" element={<TermsPage />} />
       <Route path="/contact" element={<ContactPage />} />
-      <Route path="*" element={<NotFoundPage />} />
     </Route>
   )
 );
