@@ -1,5 +1,6 @@
 import Carousel from '../../Carousel/Carousel';
 import { Recipe } from '../../../@types/recipe';
+import HomeTitle from './HomeTitles';
 
 interface RecipeProps {
   recipes: Recipe[];
@@ -7,12 +8,9 @@ interface RecipeProps {
 
 function MainHome({ recipes }: RecipeProps) {
   return (
-    <div className="">
-      <h2 className="text-3xl sm:text-4xl font-bold mt-36 text-center sm:text-center md:text-center text-thirdff">
-        EXAMPLE MENU
-      </h2>
-
-      <div className="mt-10 block ">
+    <div>
+      <HomeTitle content="EXAMPLE MENU" />
+      <div>
         <Carousel meals={recipes} />
       </div>
     </div>
