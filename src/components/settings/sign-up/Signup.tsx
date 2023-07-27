@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { FormEvent } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { X } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import Field from '../Field/index';
@@ -13,11 +13,21 @@ import {
 
 function signup() {
   const dispatch = useAppDispatch();
+  const [confirmePassword, setConfirmePassword] = useState('');
+  const [disabled, setDisabled] = useState(true);
   const { email, password, firstName, lastName } = useAppSelector(
     (state) => state.settings.signUpCredentials
   );
 
-  const isLoading = useAppSelector((state) => state.settings.isLoading);
+  useEffect(() => {
+    if (password) {
+      if (password.length >= 8 && confirmePassword === password) {
+        setDisabled(false);
+      } else {
+        setDisabled(true);
+      }
+    }
+  }, [setDisabled, confirmePassword, password]);
 
   const resetField = () => {
     dispatch(
@@ -68,6 +78,10 @@ function signup() {
       );
     };
 
+  const handleChangeConfirmPassword = (value: string) => {
+    setConfirmePassword(value);
+  };
+
   const handleModaltoggle = () => {
     resetField();
     dispatch(toggleIsOpen());
@@ -114,14 +128,30 @@ function signup() {
           value={password.trim()}
           type="password"
         />
+        {password && password.length < 8 && (
+          <p className=" text-red-500 text-sm text-center">
+            8 characters minimum
+          </p>
+        )}
         <Field
           label="Confirm password"
-          onChange={handleChangeField('password')}
-          value={password.trim()}
+          onChange={handleChangeConfirmPassword}
+          value={confirmePassword.trim()}
           type="password"
         />
+        {password && !disabled && (
+          <p className=" text-green-500 text-sm text-center ">
+            Both passwords are similar
+          </p>
+        )}
+        {password && disabled && (
+          <p className=" text-red-500 text-sm text-center">
+            Both passwords are not similar
+          </p>
+        )}
         <div className="flex justify-center ">
           <button
+            disabled={disabled}
             type="submit"
             className="text-2xl font-bold pt-1 pr-1 pb-2 pl-2 mt-10 border-fourthff rounded-lg border-2  shadow-md hover:shadow-xl ease-in duration-150 w-7/12 h-full"
           >

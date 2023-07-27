@@ -28,7 +28,6 @@ interface SettingsState {
   signUpCredentials: {
     email: string;
     password: string;
-
     firstName: string;
     lastName: string;
   };
