@@ -1,7 +1,10 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { fetchPost } from '../../utils/fetch';
+import { useAppDispatch } from '../../hooks/redux';
+import { contact } from '../../store/reducers/settings';
+
 
 function ContactPage() {
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,21 +19,10 @@ function ContactPage() {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-
-    try {
-      const response = await fetchPost('contact', formData);
-  
-      if (response.ok) {
-        const data = await response.json();
-  
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        const errorData = await response.json();
-      }
-    } catch (error) {
-    }
-  };
-
+    dispatch(
+      contact(formData))
+  }
+    
   return (
     <div>
       <div className="relative w-full h-screen">
