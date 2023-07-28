@@ -167,9 +167,9 @@ function Schedule() {
   }
   return (
     <div
-      className={` overFlow-hiden flex flex-col justify-center my-10 px-3 sm:px-8 relative`}
+      className={` overFlow-hiden flex flex-col justify-center sm:my-2 md:my-10 px-3 sm:px-8 relative`}
     >
-      <div className="flex justify-center items-center gap-4 mb-8 ">
+      <div className="flex justify-center items-center gap-4 sm:mb-2 md:mb-8 ">
         <button
           type="button"
           className={` ${currentWeek <= 5 ? 'hidden' : ''}`}
