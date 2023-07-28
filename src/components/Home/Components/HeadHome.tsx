@@ -19,7 +19,7 @@ function HeadHome() {
             Culinary creativity unleashed with Food-flex!
           </h1>
         </div>
-        <h2 className="text-thirdff text-3xl sm:text-4xl font-bold mb-0 text-center sm:text-center md:text-center">
+        <h2 className="text-titleff text-3xl sm:text-4xl font-bold mb-0 text-center sm:text-center md:text-center">
           HOW IT WORKS ?
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-fourthff">
