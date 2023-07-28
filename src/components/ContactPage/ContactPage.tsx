@@ -2,7 +2,6 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch } from '../../hooks/redux';
 import { contact } from '../../store/reducers/settings';
 
-
 function ContactPage() {
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
@@ -19,10 +18,9 @@ function ContactPage() {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    dispatch(
-      contact(formData))
-  }
-    
+    dispatch(contact(formData));
+  };
+
   return (
     <div>
       <div className="relative w-full h-screen">
@@ -38,7 +36,9 @@ function ContactPage() {
           }}
         />
         <div className="flex justify-center items-center min-h-screen">
-        <div className="bg-thirdff w-full max-w-md p-8 rounded shadow-md border border-gray-600"> {/* Add shadow */}
+          <div className="bg-thirdff w-full max-w-md p-8 rounded shadow-md border border-gray-600">
+            {' '}
+            {/* Add shadow */}
             <h1 className="text-red-500 text-4xl text-center font-bold mb-6">
               Contact us
             </h1>

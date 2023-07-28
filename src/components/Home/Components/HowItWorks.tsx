@@ -5,13 +5,13 @@ interface HowItWorksProps {
 
 function HowItWorks({ imageHome, content }: HowItWorksProps) {
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center space-around mt-20">
       <img
         src={imageHome}
         alt="image2"
-        className="mt-4 rounded-full w-24 h-24 object-cover"
+        className="rounded-sm w-20 h-20 object-cover"
       />
-      <div className="mt-2 text-center sm:text-center md:text-center">
+      <div className="m-6 text-center sm:text-center md:text-center leading-loos max-w-md">
         {content}
       </div>
     </div>
