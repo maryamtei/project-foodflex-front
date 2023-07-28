@@ -27,48 +27,58 @@ function AboutUsPage() {
                 Our Story
               </h2>
               <p className="text-gray-500 leading-relaxed mb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                tempus justo a orci dignissim, vel blandit dui auctor. Sed ac
-                fringilla ex. Donec interdum, nisl vitae ultrices laoreet, nulla
-                eros volutpat turpis, quis congue sapien neque a felis. Nunc nec
-                ante quis nisi luctus viverra vel nec metus.
+                Welcome to the utterly wacky and delightfully offbeat world of
+                "Geek-Chefs"! We are a team of five high-spirited developers:
+                Jonathan, the keyboard genius who codes while dancing the
+                Macarena; Maryam, the algorithm expert who juggles virtual
+                vegetables like a pro; Romain, the maestro of amusing bugs who
+                turns errors into unique culinary creations; Mathilde, the queen
+                of quirky recipes who skillfully blends improbable ingredients;
+                and Gabriele, the virtuoso of cheerful interfaces that make
+                cooking as playful as a video game!
               </p>
               <p className="text-gray-500 leading-relaxed mb-6">
-                Proin vel augue id nunc tincidunt volutpat. Curabitur tristique
-                nisi et ante posuere, nec vestibulum justo laoreet. Integer vel
-                eros et purus gravida vulputate. Nunc at lacus eget odio
-                fermentum bibendum vel vitae nulla.
+                We had an epiphany while seeking a creative way to combine our
+                passion for coding with our love for cooking. And behold the
+                brilliant idea that hit us like a snowball in summer: creating
+                an incredibly fun app to plan your meals and discover recipes as
+                wild and wonderful as you are! Say goodbye to dull and
+                conventional dishes, and embrace meals that will make your taste
+                buds and funny bones explode with happiness!
               </p>
               <p className="text-gray-500 leading-relaxed mb-6">
-                Fusce malesuada, urna ac fermentum euismod, justo elit luctus
-                libero, ac auctor tellus erat a eros. Nullam in ex urna. Vivamus
-                faucibus ultrices consectetur.
+                With us, cooking becomes a thrilling adventure where imagination
+                knows no bounds. Our mischievous robot chefs and playful lines
+                of code team up to whip up dishes that are both impressive and
+                delicious. From flying pancakes to dancing pizzas, and cakes
+                that sing, nothing is too crazy for our unleashed team!
               </p>
               <p className="text-gray-500 leading-relaxed mb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                tempus justo a orci dignissim, vel blandit dui auctor. Sed ac
-                fringilla ex. Donec interdum, nisl vitae ultrices laoreet, nulla
-                eros volutpat turpis, quis congue sapien neque a felis. Nunc nec
-                ante quis nisi luctus viverra vel nec metus.
+                And our team meetings? They are a true circus show! Juggling
+                with vegetables, fiery debates on the best culinary libraries,
+                and lively dance contests to debug technical issues – we never
+                have a dull moment as Geek-Chefs!
               </p>
               <p className="text-gray-500 leading-relaxed mb-6">
-                Proin vel augue id nunc tincidunt volutpat. Curabitur tristique
-                nisi et ante posuere, nec vestibulum justo laoreet. Integer vel
-                eros et purus gravida vulputate. Nunc at lacus eget odio
-                fermentum bibendum vel vitae nulla.
+                So, if you have an appetite for adventure and dream of pushing
+                the boundaries of traditional cooking, join us in this merry
+                adventure of the Geek-Chefs! Together, we will revolutionize
+                your meals and introduce you to a flavorful and laughter-filled
+                universe where code and cooking go hand in hand!
               </p>
               <p className="text-gray-500 leading-relaxed mb-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-                tempus justo a orci dignissim, vel blandit dui auctor. Sed ac
-                fringilla ex. Donec interdum, nisl vitae ultrices laoreet, nulla
-                eros volutpat turpis, quis congue sapien neque a felis. Nunc nec
-                ante quis nisi luctus viverra vel nec metus.
+                Beware, get ready for bursts of laughter, unprecedented culinary
+                discoveries, and delightful moments of sharing with the
+                Geek-Chefs. With us, each day is a celebration where the passion
+                for code and the love for cooking come together to create
+                unforgettable memories!
               </p>
               <p className="text-gray-500 leading-relaxed mb-6">
-                Proin vel augue id nunc tincidunt volutpat. Curabitur tristique
-                nisi et ante posuere, nec vestibulum justo laoreet. Integer vel
-                eros et purus gravida vulputate. Nunc at lacus eget odio
-                fermentum bibendum vel vitae nulla.
+                So, are you ready to dive into the zany cauldron of the
+                Geek-Chefs? Strap on your aprons and put on your coding glasses,
+                because it\'s going to be an incredibly wild and hilariously
+                funny adventure! We eagerly await your arrival for a culinary
+                experience that's vibrant and full of laughter!
               </p>
             </article>
           </div>
