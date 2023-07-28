@@ -4,7 +4,7 @@ function TermsPage() {
       <div className="flex flex-col items-center justify-center h-auto object-cover">
         <div className="relative w-full">
           <img
-            src="./img/terms.jpg"
+            src="./public/terms.jpg"
             alt="Background"
             className="w-full h-full object-cover object-bottom"
             style={{

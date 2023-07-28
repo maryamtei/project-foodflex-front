@@ -167,6 +167,18 @@ export const addFavori = createAsyncThunk(
   }
 );
 
+// ---------------- CONTACT -------------------//
+export const contact = createAsyncThunk(
+  'settings/CONTACT',
+  async (formData: object) => {
+    const response = await fetchPost(`contact`, formData);
+    const data = await response.json();
+    const status = await response.status;
+
+    return { data, status };
+  }
+);
+
 // ----------------------- ADD SCHEDULE ------------------------//
 
 export const addScheduleFavori = createAction<MealAdd>('favori/add-planning');
@@ -407,6 +419,19 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(displaySchedule, (state, action) => {
       state.clickAddSchedule = action.payload;
+    })
+    .addCase(contact.pending, (state) => {
+      state.isLoading = true;
+      state.message = null;
+      state.status = 0;
+    })
+    .addCase(contact.rejected, (state) => {
+      state.isLoading = false;
+    })
+    .addCase(contact.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.message = action.payload.data.message;
+      state.status = action.payload.status;
     });
 });
 export default settingsReducer;
