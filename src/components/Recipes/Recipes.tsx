@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDebounce } from 'react-use';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import SearchComponent from './SearchComponent/SearchComponent';
-import ScheduleModal from '../ScheduleModal/ScheduleModal';
 
 import { SelectedCategory } from '../../@types/recipe';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
@@ -42,8 +41,6 @@ function Recipes() {
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       }`}
     >
-      <ScheduleModal />
-
       <h1 className="text-thirdff text-2xl sm:text-4xl font-bold md:mb-12 mb-6 text-center">
         Find exactly what you need !
       </h1>

@@ -12,6 +12,7 @@ import {
   changeMobileView,
 } from '../../store/reducers/window';
 import { getUserData } from '../../store/reducers/settings';
+import ScheduleModal from '../ScheduleModal/ScheduleModal';
 
 function Apptest() {
   const dispatch = useAppDispatch();
@@ -64,6 +65,7 @@ function Apptest() {
       {(modalIsOpenFavoriProfil || !mobileView) && isLogged && (
         <ModalFavoriProfil />
       )}
+      <ScheduleModal />
       {/* Render the Outlet component if modalIsOpen is false and Mobile is true or Mobile is false */}
       {((!modalIsOpenSign && !modalIsOpenFavoriProfil && mobileView) ||
         !mobileView) && <Outlet />}
