@@ -1,10 +1,43 @@
+import React, { useEffect } from 'react';
+import { useAppSelector } from '../../hooks/redux';
+
 function TermsPage() {
+  const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+
+  useEffect(() => {
+    // Fonction pour gérer le comportement du scroll
+    const handleScroll = (e: Event) => {
+      if (modalIsOpen) {
+        e.preventDefault();
+        e.stopPropagation();
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'visible';
+      }
+    };
+
+    // Ajouter ou supprimer l'écouteur d'événement en fonction du modalIsOpen
+    if (modalIsOpen) {
+      document.addEventListener('scroll', handleScroll, { passive: false });
+    } else {
+      document.removeEventListener('scroll', handleScroll);
+    }
+    return () => {
+      document.body.style.overflow = 'visible';
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, [modalIsOpen]);
+
   return (
-    <div>
+    <div
+      className={`bg-bgff relative mb-20 ${
+        modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
+      } `}
+    >
       <div className="flex flex-col items-center justify-center h-auto object-cover">
         <div className="relative w-full">
           <img
-            src="./public/terms.jpg"
+            src="/terms.jpg"
             alt="Background"
             className="w-full h-full object-cover object-bottom"
             style={{

@@ -198,7 +198,19 @@ function HeaderMobile() {
             <h2 className="text-md font-bold ">Team :</h2>
             <ul className="flex flex-col gap-1 underline">
               <li>
-                <NavLink to="/" relative="path">
+                <NavLink
+                  to="/about"
+                  relative="path"
+                  onClick={() => {
+                    if (modalIsOpen) {
+                      toogleModalSignUpSignIn();
+                    }
+                    if (modalIsOpenFavoriProfil) {
+                      closeProfilModal();
+                    }
+                    menuOnClick();
+                  }}
+                >
                   About us
                 </NavLink>
               </li>

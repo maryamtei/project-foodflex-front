@@ -4,7 +4,7 @@ function NotFoundPage() {
   return (
     <div className="relative translate-y-[-64px]">
       <img
-        src="./public/404.jpg"
+        src="/404.jpg"
         alt="Background"
         className="w-full h-screen sm:h-auto sm:max-h-128 object-cover object-bottom"
         style={{

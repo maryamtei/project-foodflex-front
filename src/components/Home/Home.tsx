@@ -46,6 +46,32 @@ function Home({ signInDomain }: HomeProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Ne pas supprimer sinon le code fonctionne plus
 
+  useEffect(() => {
+    // Fonction pour gérer le comportement du scroll
+    const handleScroll = (e: Event) => {
+      if (modalIsOpen) {
+        e.preventDefault();
+        e.stopPropagation();
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'visible';
+      }
+    };
+
+    // Ajouter ou supprimer l'écouteur d'événement en fonction du modalIsOpen
+    if (modalIsOpen) {
+      document.addEventListener('scroll', handleScroll, { passive: false });
+    } else {
+      document.removeEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      // Nettoyage lorsqu'il est désabonné de l'effet
+      document.body.style.overflow = 'visible';
+      document.removeEventListener('scroll', handleScroll);
+    };
+  }, [modalIsOpen]);
+
   return (
     <div
       className={`bg-bgff relative mb-20 ${
