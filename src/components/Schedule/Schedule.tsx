@@ -109,74 +109,60 @@ function Schedule() {
 
   // RECUPERAION DES INGREDIENTS ET MESURES CORRESPONDANTES
   const createList = useCallback(async () => {
-    const ingredients: string[] = [];
-    const mesures: string[] = [];
+    const list: Array<{ ingredient: string; mesure: string }> = [];
+
     if (!schedules[currentWeek - 1]) {
-      return { ingredients, mesures };
+      return;
     }
-    const mealsOfTheWeek = schedules[currentWeek - 1].meals.map(
-      async (meal: { idDbMeal: number }) => {
-        const response = await fetch(
+    const meals = await Promise.all(
+      schedules[currentWeek - 1].meals.map((meal: { idDbMeal: number }) =>
+        fetch(
           `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idDbMeal}`
-        );
-        const data = await response.json();
-
-        data.meals.map((currentMeal: { [x: string]: string | undefined }) => {
-          for (let i = 1; i <= 20; i += 1) {
-            const ingredient = currentMeal[`strIngredient${i}`];
-            const measure = currentMeal[`strMeasure${i}`];
-
-            if (ingredient && ingredient.trim() !== ' ') {
-              ingredients.push(ingredient);
-            }
-
-            if (measure && measure.trim() !== '') {
-              mesures.push(measure);
-            }
-          }
-          return { ingredients, mesures };
-        });
-      }
+        ).then((response) => response.json())
+      )
     );
-    await Promise.all(mealsOfTheWeek);
-    return { ingredients, mesures };
-  }, [currentWeek, schedules]);
-
-  // CREATION DE LA LISTE
-  const generateList = useCallback(async () => {
+    meals.forEach((meal) => {
+      meal.meals.forEach((currentMeal: { [x: string]: string | undefined }) => {
+        for (let i = 1; i <= 20; i += 1) {
+          const ingredient = currentMeal[`strIngredient${i}`];
+          const measure = currentMeal[`strMeasure${i}`];
+          if (ingredient?.trim() && measure?.trim()) {
+            list.push({ ingredient, mesure: measure });
+          }
+        }
+      });
+    });
     setIsListReady(false);
-    const result = await createList();
-    const completeArray: [string | undefined, string | undefined][] =
-      result.ingredients.map((item, index) => [item, result.mesures[index]]);
 
     const combined: { [key: string]: string | undefined } = {};
 
     // combinaison quantites lorsqu'il y des doublons
-    completeArray.forEach(([ingredient, quantity]) => {
+    list.forEach(({ ingredient, mesure }) => {
       if (!ingredient) {
         return;
       }
       if (combined[ingredient]) {
-        combined[ingredient] = `${combined[ingredient]}, ${quantity}`;
+        combined[ingredient] = `${combined[ingredient]}, ${mesure}`;
       } else {
-        combined[ingredient] = quantity;
+        combined[ingredient] = mesure;
       }
     });
     const newList = Object.entries(combined);
     newList.sort((a, b) => a[0].localeCompare(b[0]));
     setShoppingList(newList);
     setIsListReady(true);
-  }, [createList]);
+  }, [currentWeek, schedules]);
 
+  // CREATION DE LA LISTE
   useEffect(() => {
-    generateList();
-  }, [generateList]);
+    createList();
+  }, [createList]);
 
   // AFFICHAGE DE LA LISTE
   function toggleListVisibility() {
     setIsListVisible(!isListVisible);
     if (!isListReady) {
-      generateList();
+      createList();
     }
   }
   return (

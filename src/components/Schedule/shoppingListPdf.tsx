@@ -74,7 +74,7 @@ function MyShoppingList({
               >
                 <Image style={styles.checkbox} src={square} />
                 <Text>
-                  {ingredient[0]} {ingredient[1]}
+                  {ingredient[0]}: {ingredient[1]}
                 </Text>
               </View>
             ))}
@@ -87,7 +87,7 @@ function MyShoppingList({
               >
                 <Image style={styles.checkbox} src={square} />
                 <Text>
-                  {ingredient[0]} {ingredient[1]}
+                  {ingredient[0]}: {ingredient[1]}
                 </Text>
               </View>
             ))}
