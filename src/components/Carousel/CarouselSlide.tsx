@@ -21,9 +21,7 @@ export default function CarouselSlide({
         <p className="text-fourthff text-sm sm:text-md font-bold text-center mb-2 bt-2 sm:mb-4 sm:mt-4  ">
           Lunch :
         </p>
-
         <RecipeCard recipe={recipe1} key={recipe1.idDbMeal} />
-
         <p className="text-fourthff text-sm sm:text-md font-bold text-center bt-2 mb-4 mt-4 ">
           Dinner :
         </p>

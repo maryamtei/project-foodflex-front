@@ -4,6 +4,7 @@ import {
   toggleIsOpen,
   toggleSignUpOpen,
 } from '../../../store/reducers/settings';
+import HomeTitle from './HomeTitles';
 
 function FootHome() {
   const isLogged = useAppSelector((state) => state.settings.isLogged);
@@ -28,9 +29,7 @@ function FootHome() {
   };
   return (
     <div>
-      <h2 className="text-2xl sm:text-4xl font-bold mt-16 sm:mt-36 text-center sm:text-center md:text-center text-thirdff">
-        GET STARTED ?
-      </h2>
+      <HomeTitle content="GET STARTED ?" />
       <div className="mt-4 sm:mt-8 flex justify-center">
         <button
           className={
