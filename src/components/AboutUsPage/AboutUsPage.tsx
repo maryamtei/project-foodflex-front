@@ -1,4 +1,5 @@
 import { useAppSelector } from '../../hooks/redux';
+import ScheduleModal from '../ScheduleModal/ScheduleModal';
 
 function AboutUsPage() {
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
@@ -9,6 +10,7 @@ function AboutUsPage() {
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       } `}
     >
+      <ScheduleModal />
       <div className="min-h-screen bg-bgff py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <h1 className="text-4xl font-bold text-center text-thirdff mb-8">
