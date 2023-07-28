@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Image,
 } from '@react-pdf/renderer';
-import square from './pngegg.png';
+import square from './square.png';
 
 const styles = StyleSheet.create({
   page: {
