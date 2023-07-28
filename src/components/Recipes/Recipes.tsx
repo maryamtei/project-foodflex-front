@@ -32,7 +32,7 @@ function Recipes() {
         dispatch(
           fetchSearchRecipe({ search, category: selectedCategory?.name })
         );
-      } else {
+      } else if (recipes.length === 0) {
         dispatch(fetchRandomRecipes({ count: 10 }));
       }
     },

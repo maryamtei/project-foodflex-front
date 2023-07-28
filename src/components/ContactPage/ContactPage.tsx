@@ -1,7 +1,11 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
-import { fetchPost } from '../../utils/fetch';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { contact } from '../../store/reducers/settings';
 
 function ContactPage() {
+  const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
+
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,28 +20,19 @@ function ContactPage() {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetchPost('contact', formData);
-
-      if (response.ok) {
-        const data = await response.json();
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        const errorData = await response.json();
-      }
-    } catch (error) {
-      console.error('Error submitting form', error);
-    }
+    dispatch(contact(formData));
   };
 
   return (
-    <div>
+    <div
+      className={`relative mb-20 ${
+        modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
+      } `}
+    >
       <div className="relative w-full h-screen">
         {/* Apply overlay and blur effect to the image */}
         <img
-          src="./img/contact.jpg"
+          src="/contact.jpg"
           alt="Background"
           className="w-full h-full object-cover object-bottom absolute inset-0"
           style={{
@@ -47,9 +42,7 @@ function ContactPage() {
           }}
         />
         <div className="flex justify-center items-center min-h-screen">
-          <div className="bg-thirdff w-full max-w-md p-8 rounded shadow-md border border-gray-700">
-            {' '}
-            {/* Add shadow */}
+        <div className="bg-thirdff w-full max-w-md p-8 rounded shadow-md border border-gray-600"> {/* Add shadow */}
             <h1 className="text-red-500 text-4xl text-center font-bold mb-6">
               Contact us
             </h1>
@@ -67,7 +60,7 @@ function ContactPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-500 rounded focus:outline-none focus:border-black text-gray-600 bg-bgff"
+                  className="w-full px-3 py-2 border-2 border-gray-400 rounded focus:outline-none focus:border-gray-500 text-gray-600 bg-bgff"
                   placeholder="Please enter your full name"
                   required
                 />
@@ -85,7 +78,7 @@ function ContactPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-500 rounded focus:outline-none focus:border-black text-gray-600 bg-bgff"
+                  className="w-full px-3 py-2 border-2 border-gray-400 rounded focus:outline-none focus:border-gray-500 text-gray-600 bg-bgff"
                   placeholder="Please enter your e-mail address"
                   required
                 />
@@ -103,7 +96,7 @@ function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-3 py-2 border border-gray-500 rounded focus:outline-none focus:border-black text-gray-600 bg-bgff"
+                  className="w-full px-3 py-2 border-2 border-gray-400 rounded focus:outline-none focus:border-gray-500 text-gray-600 bg-bgff"
                   placeholder="Please enter your message"
                   required
                 />
@@ -125,3 +118,4 @@ function ContactPage() {
 }
 
 export default ContactPage;
+
