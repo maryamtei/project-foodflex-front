@@ -1,9 +1,6 @@
-import { Dialog, Transition } from '@headlessui/react';
-import { Fragment, useState } from 'react';
-import { X } from 'react-feather';
+import { useState } from 'react';
 import { useDebounce } from 'react-use';
 import RecipeCard from '../RecipeCard/RecipeCard';
-import Schedule from '../Schedule/Schedule';
 import SearchComponent from './SearchComponent/SearchComponent';
 
 import { SelectedCategory } from '../../@types/recipe';
@@ -12,7 +9,6 @@ import {
   fetchRandomRecipes,
   fetchSearchRecipe,
 } from '../../store/reducers/recipes';
-import { displaySchedule } from '../../store/reducers/settings';
 import CategoriesListBox from './Categories/CategoriesListBox';
 
 function Recipes() {
@@ -25,7 +21,6 @@ function Recipes() {
 
   const recipes = useAppSelector((state) => state.recipes.list);
 
-  // Utilisation du debounce pour limiter le nombre d'appel à l'api
   useDebounce(
     () => {
       if (search || selectedCategory) {
@@ -40,67 +35,12 @@ function Recipes() {
     [dispatch, search, selectedCategory]
   );
 
-  const closeModal = () => {
-    dispatch(displaySchedule(false));
-  };
-
-  // affichage modale planning si on clique sur le '+'
-  const showSchedule = useAppSelector(
-    (state) => state.settings.clickAddSchedule
-  );
-
   return (
     <div
       className={`my-10 px-3 sm:px-8 ${
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       }`}
     >
-      {/* // affichage modale planning si on clique sur le '+' */}
-      {/* {showSchedule && <Schedule />} */}
-
-      <Transition appear show={showSchedule} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
-          </Transition.Child>
-
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-full transform overflow-hidden rounded-2xl bg-white p-6  align-middle shadow-xl transition-all">
-                  <div className=" flex justify-end">
-                    <X onClick={closeModal} />
-                  </div>
-                  <h2 className="text-2xl  font-bold text-gray-900">
-                    Which day to eat this dish?
-                  </h2>
-
-                  <div className="mt-2">
-                    <Schedule />
-                  </div>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
-
       <h1 className="text-thirdff text-2xl sm:text-4xl font-bold md:mb-12 mb-6 text-center">
         Find exactly what you need !
       </h1>
