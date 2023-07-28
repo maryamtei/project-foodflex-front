@@ -1,6 +1,8 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch } from '../../hooks/redux';
 import { contact } from '../../store/reducers/settings';
+import { fetchPost } from '../../utils/fetch';
+
 
 function ContactPage() {
   const dispatch = useAppDispatch();
@@ -18,7 +20,11 @@ function ContactPage() {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+
     dispatch(contact(formData));
+
+   
+
   };
 
   return (
