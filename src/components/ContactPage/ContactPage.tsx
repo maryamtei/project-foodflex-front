@@ -25,24 +25,17 @@ function ContactPage() {
 
   return (
     <div
-      className={`relative mb-20 ${
+      className={`relative bg-cover bg-no-repeat bg-center ${
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       } `}
+      style={{ backgroundImage: 'url(/contact.jpg)' }}
     >
       <div className="relative w-full h-screen">
         {/* Apply overlay and blur effect to the image */}
-        <img
-          src="/contact.jpg"
-          alt="Background"
-          className="w-full h-full object-cover object-bottom absolute inset-0"
-          style={{
-            objectPosition: 'center top',
-            zIndex: -1,
-            filter: 'blur(4px)',
-          }}
-        />
         <div className="flex justify-center items-center min-h-screen">
-        <div className="bg-thirdff w-full max-w-md p-8 rounded shadow-md border border-gray-600"> {/* Add shadow */}
+          <div className="bg-thirdff w-full max-w-md p-8 rounded shadow-md border border-gray-600">
+            {' '}
+            {/* Add shadow */}
             <h1 className="text-red-500 text-4xl text-center font-bold mb-6">
               Contact us
             </h1>
@@ -118,4 +111,3 @@ function ContactPage() {
 }
 
 export default ContactPage;
-
