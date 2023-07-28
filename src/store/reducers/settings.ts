@@ -17,27 +17,30 @@ import { MealAdd } from '../../@types/recipe';
 dayjs.extend(weekOfYear);
 
 interface SettingsState {
-  currentUser: User;
-  modalIsOpen: boolean;
-  isLogged: boolean;
-  signUpOpen: boolean;
+  currentUser: User; // Represents the current user object
+  modalIsOpen: boolean; // Indicates whether if profil modal is open or not (true/false)
+  isLogged: boolean; // Indicates if the user is logged in or not (true/false)
+  signUpOpen: boolean; // Indicates if the sign-up/sign-in form is open or not (true/false)
   signInCredentials: {
-    email: string;
-    password: string;
+    // Object containing sign-in credentials
+    email: string; // Email associated with the sign-in credentials
+    password: string; // Password associated with the sign-in credentials
   };
   signUpCredentials: {
-    email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
+    // Object containing sign-up credentials
+    email: string; // Email associated with the sign-up credentials
+    password: string; // Password associated with the sign-up credentials
+    confirmPassword: string; // confirmPassword associated with password
+    firstName: string; // First name of the user signing up
+    lastName: string; // Last name of the user signing up
   };
-  isLoading: boolean;
-  message: string | null;
-  status: number;
-  MealFavoriToAdd: MealAdd;
-  idToDelete: number;
-  clickAddSchedule: boolean;
-  currentWeek: number;
+  isLoading: boolean; // Indicates if the application is currently loading (pending)(true/false)
+  message: string | null; // message coming from the back, null if no message is present
+  status: number; // Represents the status of HTTP status code
+  MealFavoriToAdd: MealAdd; // Saving meal object when we need to add to favorites
+  idToDelete: number; // Represents the ID of a meal to be deleted in schedule
+  clickAddSchedule: boolean; // Indicates if there's a click to add a schedule (true/false)
+  currentWeek: number; // Represents the current week number
 }
 
 const initialValue: SettingsState = {
@@ -58,6 +61,7 @@ const initialValue: SettingsState = {
   signUpCredentials: {
     email: '',
     password: '',
+    confirmPassword: '',
     firstName: '',
     lastName: '',
   },
@@ -400,7 +404,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
         state.currentUser = action.payload.data.newUser;
       }
     })
-
+    // ---------------- delete SCHEDULE -------------------//
     .addCase(deleteMeal.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -417,9 +421,12 @@ const settingsReducer = createReducer(initialValue, (builder) => {
         state.currentUser = action.payload.data.newUser;
       }
     })
+    // ---------------- DISPLAY SCHEDULE -------------------//
     .addCase(displaySchedule, (state, action) => {
       state.clickAddSchedule = action.payload;
     })
+
+    // ---------------- CONTACT -------------------//
     .addCase(contact.pending, (state) => {
       state.isLoading = true;
       state.message = null;

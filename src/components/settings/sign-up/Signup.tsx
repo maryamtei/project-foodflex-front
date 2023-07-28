@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { X } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import Field from '../Field/index';
@@ -13,54 +13,41 @@ import {
 
 function signup() {
   const dispatch = useAppDispatch();
-  const [confirmePassword, setConfirmePassword] = useState('');
   const [disabled, setDisabled] = useState(true);
-  const { email, password, firstName, lastName } = useAppSelector(
-    (state) => state.settings.signUpCredentials
-  );
+  const { email, password, confirmPassword, firstName, lastName } =
+    useAppSelector((state) => state.settings.signUpCredentials);
 
   useEffect(() => {
     if (password) {
-      if (password.length >= 8 && confirmePassword === password) {
+      if (password.length >= 8 && confirmPassword === password) {
         setDisabled(false);
       } else {
         setDisabled(true);
       }
     }
-  }, [setDisabled, confirmePassword, password]);
+  }, [setDisabled, confirmPassword, password]);
 
   const resetField = () => {
-    dispatch(
-      changeSignUpCredentialsField({
-        property: 'email',
-        value: '',
-      })
-    );
-    dispatch(
-      changeSignUpCredentialsField({
-        property: 'password',
-        value: '',
-      })
-    );
-    dispatch(
-      changeSignUpCredentialsField({
-        property: 'firstName',
-        value: '',
-      })
-    );
-    dispatch(
-      changeSignUpCredentialsField({
-        property: 'lastName',
-        value: '',
-      })
-    );
+    const fields: (
+      | 'email'
+      | 'password'
+      | 'firstName'
+      | 'lastName'
+      | 'confirmPassword'
+    )[] = ['email', 'password', 'firstName', 'lastName', 'confirmPassword'];
+
+    fields.forEach((name) => {
+      dispatch(changeSignUpCredentialsField({ property: name, value: '' }));
+    });
   };
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(
       signUp({
         email,
         password,
+        confirmPassword,
         firstName,
         lastName,
       })
@@ -68,7 +55,9 @@ function signup() {
     resetField();
   };
   const handleChangeField =
-    (name: 'email' | 'password' | 'firstName' | 'lastName') =>
+    (
+      name: 'email' | 'password' | 'firstName' | 'lastName' | 'confirmPassword'
+    ) =>
     (value: string) => {
       dispatch(
         changeSignUpCredentialsField({
@@ -77,10 +66,6 @@ function signup() {
         })
       );
     };
-
-  const handleChangeConfirmPassword = (value: string) => {
-    setConfirmePassword(value);
-  };
 
   const handleModaltoggle = () => {
     resetField();
@@ -135,8 +120,8 @@ function signup() {
         )}
         <Field
           label="Confirm password"
-          onChange={handleChangeConfirmPassword}
-          value={confirmePassword.trim()}
+          onChange={handleChangeField('confirmPassword')}
+          value={confirmPassword.trim()}
           type="password"
         />
         {password && !disabled && (

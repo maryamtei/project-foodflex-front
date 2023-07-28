@@ -1,5 +1,5 @@
 import { Plus, Heart } from 'react-feather';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
   addScheduleFavori,
@@ -31,6 +31,7 @@ function FavoriCard({ favori }: CardProps) {
   function handleAddSchedule() {
     dispatch(displaySchedule(!clickAddSchedule));
     dispatch(addScheduleFavori(favori));
+    return redirect('/schedule');
   }
 
   return (

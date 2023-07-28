@@ -69,7 +69,7 @@ function Apptest() {
         !mobileView) && <Outlet />}
 
       {/* fake div to margin bottom in mobile because footer component is sticky  */}
-      <div className="h-16 " />
+      {mobileView && <div className="h-16 " />}
 
       <Footer />
     </div>
