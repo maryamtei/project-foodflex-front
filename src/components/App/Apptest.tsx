@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import ModalSign from '../settings/Modal';
 import ModalFavoriProfil from '../Profil/Modal';
 import Header from '../Header/Header';
@@ -16,6 +16,7 @@ import ScheduleModal from '../ScheduleModal/ScheduleModal';
 
 function Apptest() {
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const modalIsOpenSign = useAppSelector((state) => state.settings.modalIsOpen);
   const modalIsOpenFavoriProfil = useAppSelector(
     (state) => state.favoris.modalIsOpen
@@ -36,6 +37,8 @@ function Apptest() {
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
+
+    const showScheduleModal = location.pathname !== '/page-to-exclude';
   });
 
   const innerWidth = useAppSelector((state) => state.window.innerWidth);
@@ -55,6 +58,8 @@ function Apptest() {
     }
   }, [dispatch]);
 
+  const showScheduleModal = location.pathname !== '/schedule';
+
   return (
     <div className="relative">
       <Header />
@@ -65,7 +70,7 @@ function Apptest() {
       {(modalIsOpenFavoriProfil || !mobileView) && isLogged && (
         <ModalFavoriProfil />
       )}
-      <ScheduleModal />
+      {showScheduleModal && <ScheduleModal />}
       {/* Render the Outlet component if modalIsOpen is false and Mobile is true or Mobile is false */}
       {((!modalIsOpenSign && !modalIsOpenFavoriProfil && mobileView) ||
         !mobileView) && <Outlet />}
