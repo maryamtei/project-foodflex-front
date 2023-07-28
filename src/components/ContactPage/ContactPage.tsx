@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { contact } from '../../store/reducers/settings';
+import ScheduleModal from '../ScheduleModal/ScheduleModal';
 
 function ContactPage() {
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
@@ -29,6 +30,7 @@ function ContactPage() {
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       } `}
     >
+      <ScheduleModal />
       <div className="relative w-full h-screen">
         {/* Apply overlay and blur effect to the image */}
         <img
@@ -42,7 +44,9 @@ function ContactPage() {
           }}
         />
         <div className="flex justify-center items-center min-h-screen">
-        <div className="bg-thirdff w-full max-w-md p-8 rounded shadow-md border border-gray-600"> {/* Add shadow */}
+          <div className="bg-thirdff w-full max-w-md p-8 rounded shadow-md border border-gray-600">
+            {' '}
+            {/* Add shadow */}
             <h1 className="text-red-500 text-4xl text-center font-bold mb-6">
               Contact us
             </h1>
@@ -118,4 +122,3 @@ function ContactPage() {
 }
 
 export default ContactPage;
-
