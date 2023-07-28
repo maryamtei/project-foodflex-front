@@ -11,7 +11,7 @@ function AboutUsPage() {
     >
       <div className="min-h-screen bg-bgff py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl font-bold text-center text-thirdff mb-8">
+          <h1 className="text-4xl font-bold text-center text-[#AF4136] mb-8">
             About Us
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -23,7 +23,7 @@ function AboutUsPage() {
               />
             </div>
             <article className="md:order-first">
-              <h2 className="text-2xl font-semibold text-thirdff mb-4">
+              <h2 className="text-2xl font-semibold text-[#AF4136] mb-4">
                 Our Story
               </h2>
               <p className="text-gray-500 leading-relaxed mb-6">
@@ -76,7 +76,7 @@ function AboutUsPage() {
               <p className="text-gray-500 leading-relaxed mb-6">
                 So, are you ready to dive into the zany cauldron of the
                 Geek-Chefs? Strap on your aprons and put on your coding glasses,
-                because it\'s going to be an incredibly wild and hilariously
+                because it's going to be an incredibly wild and hilariously
                 funny adventure! We eagerly await your arrival for a culinary
                 experience that's vibrant and full of laughter!
               </p>

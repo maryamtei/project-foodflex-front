@@ -15,7 +15,7 @@ function Field({ value, type, label, onChange }: FieldProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 bg-bgff">
       <label htmlFor={inputId}>{label}</label>
       <input
         // React - state
