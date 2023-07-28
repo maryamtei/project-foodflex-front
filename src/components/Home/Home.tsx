@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateHome } from '../../store/reducers/home';
 import { fetchRandomRecipes } from '../../store/reducers/recipes';
 import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/settings';
+import ScheduleModal from '../ScheduleModal/ScheduleModal';
 
 interface HomeProps {
   signInDomain: string;
@@ -78,6 +79,8 @@ function Home({ signInDomain }: HomeProps) {
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       } `}
     >
+      <ScheduleModal />
+
       <HeadHome />
       {recipes.length === 14 && <MainHome recipes={recipes} />}
 
