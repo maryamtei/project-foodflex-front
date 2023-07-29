@@ -13,6 +13,7 @@ import {
 
 function signup() {
   const dispatch = useAppDispatch();
+
   const [disabled, setDisabled] = useState(true);
   const { email, password, confirmPassword, firstName, lastName } =
     useAppSelector((state) => state.settings.signUpCredentials);
@@ -75,6 +76,7 @@ function signup() {
     resetField();
     dispatch(toggleSignUpOpen());
   };
+
   return (
     <div className="relative flex flex-col gap-4 w-80 text-thirdff bg-bgff sm:rounded-xl sm:shadow-xl items-center p-6">
       <h1 className="text-3xl font-bold text-center "> Sign-Up</h1>
@@ -134,6 +136,7 @@ function signup() {
             Both passwords are not similar
           </p>
         )}
+
         <div className="flex justify-center ">
           <button
             disabled={disabled}

@@ -11,7 +11,7 @@ import {
   changeInnerWidth,
   changeMobileView,
 } from '../../store/reducers/window';
-import { getUserData } from '../../store/reducers/settings';
+import { getUserData, initialValue } from '../../store/reducers/settings';
 import ScheduleModal from '../ScheduleModal/ScheduleModal';
 
 function Apptest() {
@@ -23,6 +23,7 @@ function Apptest() {
   );
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const isLoading = useAppSelector((state) => state.settings.isLoading);
+  const currentUser = useAppSelector((state) => state.settings.currentUser);
   console.log(isLoading);
   const mobileView = useAppSelector((state) => state.window.mobileView);
   // Triggered when the window is resized
@@ -53,10 +54,10 @@ function Apptest() {
   }, [innerWidth, dispatch]);
 
   useEffect(() => {
-    if (localStorage.token) {
+    if (localStorage.token && currentUser === initialValue.currentUser) {
       dispatch(getUserData());
     }
-  }, [dispatch]);
+  }, [dispatch, currentUser]);
 
   const showScheduleModal = location.pathname !== '/schedule';
 

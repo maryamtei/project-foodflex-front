@@ -1,4 +1,5 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
+
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import {
   Check,
@@ -8,6 +9,7 @@ import {
   ChevronsRight,
 } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
+import { useDebounce } from 'react-use';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateSchedule } from '../../store/reducers/schedule';
@@ -55,7 +57,14 @@ function Schedule() {
   }
 
   const changeInputCurrentWeek = (event: ChangeEvent<HTMLInputElement>) => {
-    const newInputValue = event.target.value;
+    let newInputValue = event.target.value;
+
+    if (Number(newInputValue) < 1) {
+      newInputValue = '1';
+    }
+    if (Number(newInputValue) > 52) {
+      newInputValue = '52';
+    }
     if (currentWeek > Number(newInputValue)) {
       setAnimateRight(true);
       setTimeout(() => {

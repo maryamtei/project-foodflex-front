@@ -25,7 +25,6 @@ function Profil() {
 
   function handleLogout() {
     dispatch(logout());
-    window.location.reload();
   }
 
   const { firstName, lastName, email } = useAppSelector(

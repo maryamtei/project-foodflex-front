@@ -43,7 +43,7 @@ interface SettingsState {
   currentWeek: number; // Represents the current week number
 }
 
-const initialValue: SettingsState = {
+export const initialValue: SettingsState = {
   currentUser: {
     firstName: '',
     lastName: '',
@@ -254,6 +254,7 @@ const settingsReducer = createReducer(initialValue, (builder) => {
         localStorage.removeItem('token');
         state.isLogged = false;
         state.currentUser = initialValue.currentUser;
+        window.location.reload();
       }
     })
     // ---------------- USER -------------------//
