@@ -39,14 +39,14 @@ function Recipe() {
   return (
     <div className="container mx-auto">
       <div className="flex flex-col items-center justify-center">
-        <h1 className="text-4xl font-bold m-8">{recipe.name}</h1>
+        <h1 className="text-4xl font-bold m-8 text-titleff">{recipe.name}</h1>
         <img
           src={recipe.imageUrl}
           alt={recipe.name}
           className="rounded-lg flex"
         />
       </div>
-      <h2 className="text-3xl font-bold sm:mt-8 md:m-10 text-center">
+      <h2 className="text-3xl font-bold sm:mt-8 md:m-10 text-center text-titleff">
         Meal Preparation
       </h2>
       <div className="flex flex-col md:flex-row p-4">
@@ -57,7 +57,7 @@ function Recipe() {
           />
         </div>
         <div className="md:w-2/3 md:pr-8 pt-4 md:p-0">
-          <h2 className="text-xl font-bold mb-2">Instructions:</h2>
+          <h2 className="text-xl font-bold mb-2 text-titleff">Instructions:</h2>
           <div className="prose lg:prose-lg">
             {recipe.instruction.split('\n').map((line) => (
               <p key={line}>{line}</p>

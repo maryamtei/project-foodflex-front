@@ -30,12 +30,12 @@ function CategoriesListBox({
 }) {
   return (
     <Listbox
-      value={value}
+      value={value || null}
       onChange={(newValue) => {
-        if (newValue.id === value?.id) {
+        if (newValue && newValue.id === value?.id) {
           onChange(undefined);
         } else {
-          onChange(newValue);
+          onChange(newValue || undefined);
         }
       }}
     >
