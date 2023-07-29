@@ -22,9 +22,9 @@ function Carousel({ meals }: RecipeProps) {
   const changeSlidesToShow = () => {
     switch (true) {
       case innerWidth < 640:
-        return 1;
-      case innerWidth >= 640 && innerWidth < 800:
         return 2;
+      case innerWidth >= 640 && innerWidth < 800:
+        return 3;
       case innerWidth >= 800 && innerWidth < 960:
         return 4;
       case innerWidth >= 960 && innerWidth < 1120:

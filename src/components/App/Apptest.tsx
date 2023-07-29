@@ -1,4 +1,6 @@
 import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { Outlet, useLocation } from 'react-router-dom';
 import ModalSign from '../settings/Modal';
 import ModalFavoriProfil from '../Profil/Modal';
@@ -27,6 +29,9 @@ function Apptest() {
   console.log(isLoading);
   const mobileView = useAppSelector((state) => state.window.mobileView);
   // Triggered when the window is resized
+  useEffect(() => {
+    AOS.init();
+  }, []);
   useEffect(() => {
     const handleWindowResize = () => {
       dispatch(changeInnerWidth(window.innerWidth));
