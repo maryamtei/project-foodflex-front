@@ -1,14 +1,12 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Heart, Plus, Shuffle, X } from 'react-feather';
+import { useEffect } from 'react';
+import { Plus, Shuffle, X } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { MealAdd, Recipe } from '../../@types/recipe';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateModalAnimation } from '../../store/reducers/favoris';
 import {
-  addFavori,
   addSchedule,
   addScheduleFavori,
-  deleteFavori,
   displaySchedule,
   toggleIsOpen,
   toggleSignUpOpen,

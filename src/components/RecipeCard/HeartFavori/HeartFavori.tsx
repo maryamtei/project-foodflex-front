@@ -1,5 +1,5 @@
 import { Heart } from 'react-feather';
-import { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
   addFavori,
@@ -70,7 +70,11 @@ function HeartFavori({ recipe }: HeartFavoriProps) {
         }
       }}
     >
-      {recipeFavori ? <Heart size={20} fill="red" /> : <Heart size={20} />}
+      {recipeFavori ? (
+        <Heart data-testid="heart-icon" size={20} fill="red" />
+      ) : (
+        <Heart data-testid="heart-icon" size={20} />
+      )}
     </button>
   );
 }
