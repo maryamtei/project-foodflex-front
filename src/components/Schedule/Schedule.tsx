@@ -17,6 +17,7 @@ import Carousel from '../Carousel/Carousel';
 import MyShoppingList from './shoppingListPdf';
 
 function Schedule() {
+  // Component State and Redux State
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const [animateLeft, setAnimateLeft] = useState(false);
   const [animateRight, setAnimateRight] = useState(false);
@@ -29,51 +30,59 @@ function Schedule() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  // Init animation duration
+  const animationDuration = 400;
+  const resetAnimationDuration = 800;
+
+  // Function for animating week next animate left
   function handleClickNextWeek(nbrSchedule: number) {
     if (currentWeek < 52) {
       setAnimateLeft(true);
       setTimeout(() => {
         dispatch(changeWeek(currentWeek + nbrSchedule));
-      }, 400);
+      }, animationDuration);
 
       setTimeout(() => {
         setAnimateLeft(false);
-      }, 800);
+      }, resetAnimationDuration);
     }
   }
+  // Function for animating week next animate right
   function handleClickBeforeWeek(nbrSchedule: number) {
     if (currentWeek > 1) {
       setAnimateRight(true);
       setTimeout(() => {
         dispatch(changeWeek(currentWeek - nbrSchedule));
-      }, 400);
+      }, animationDuration);
 
       setTimeout(() => {
         setAnimateRight(false);
-      }, 800);
+      }, resetAnimationDuration);
     }
   }
-
+  // Function for animating week and change value of currentWeek with Listbox
   const changeInputCurrentWeek = (newValue: number | undefined) => {
     if (newValue) {
+      // Animate Right
       if (currentWeek > newValue) {
         setAnimateRight(true);
         setTimeout(() => {
           dispatch(changeWeek(newValue));
-        }, 400);
+        }, animationDuration);
 
         setTimeout(() => {
           setAnimateRight(false);
-        }, 800);
+        }, resetAnimationDuration);
       } else {
+        // Animate Left
         setAnimateLeft(true);
         setTimeout(() => {
           dispatch(changeWeek(newValue));
-        }, 400);
+        }, animationDuration);
 
         setTimeout(() => {
           setAnimateLeft(false);
-        }, 800);
+        }, resetAnimationDuration);
       }
     }
   };
@@ -88,6 +97,7 @@ function Schedule() {
     };
   }, [weekFind, dispatch, isLogged, navigate]);
 
+  // Render schedule week
   function newShedulesFunction() {
     return schedules
       .filter((schedule) => schedule.week === currentWeek)
@@ -96,7 +106,7 @@ function Schedule() {
       ));
   }
 
-  // SHOPPING LIST
+  // Side effects and functions for Shopping List
   const [shoppingList, setShoppingList] = useState<
     [string | undefined, string | undefined][]
   >([]);
