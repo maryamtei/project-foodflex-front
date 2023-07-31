@@ -1,13 +1,11 @@
 import { createAsyncThunk, createReducer } from '@reduxjs/toolkit';
-
 import { Recipe } from '../../@types/recipe';
-// Définition de l'interface pour l'état des recettes.
+
 interface RecipesState {
   list: Recipe[];
   loading: boolean;
   error: string | null;
 }
-// Initialisation de l'état initial des recettes.
 export const initialState: RecipesState = {
   list: [],
   loading: false,
@@ -22,7 +20,7 @@ export interface ApiRecipe {
   id: number;
 }
 
-// GENERE RECETTES ALEATOIREMENT
+// Random recipes
 export const fetchRandomRecipes = createAsyncThunk(
   'recipes/fetchRandomRecipes',
   async ({ count }: { count: number }) => {
@@ -75,7 +73,7 @@ export const fetchRandomRecipes = createAsyncThunk(
   }
 );
 
-// Création d'une action Redux async pour fetch des recettes en fonction d'une recherche nom et ingredients
+// Creating an async Redux action to fetch recipes based on a name and ingredients search.
 export const fetchSearchRecipe = createAsyncThunk(
   'recipes/fetchSearchRecipes',
   async ({ category, search }: { search: string; category?: string }) => {
@@ -138,26 +136,6 @@ export const fetchSearchRecipe = createAsyncThunk(
   }
 );
 
-// export const fetchCategoriesRecipes = createAsyncThunk(
-//   'recipes/fetchCategoriesRecipes',
-//   async (categorie: string) => {
-//     const response = await fetch(
-//       `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categorie}`
-//     );
-//     const data: { meals: ApiRecipe[] | null } = await response.json();
-//     const meals = data.meals || [];
-//     return meals.map((meal) => {
-//       return {
-//         idDbMeal: meal.idMeal,
-//         name: meal.strMeal,
-//         image: meal.strMealThumb,
-//         position: 0,
-//       };
-//     });
-//   }
-// );
-
-// Création d'un reducer pour gérer l'état des recettes.
 const recipesReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(fetchRandomRecipes.pending, (state) => {

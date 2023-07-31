@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { MealAdd, Recipe } from '../../@types/recipe';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateModalAnimation } from '../../store/reducers/favoris';
+
 import {
   addSchedule,
   addScheduleFavori,
@@ -97,7 +98,7 @@ function RecipeCard({ recipe }: CardProps) {
       <img
         src={recipe.image}
         alt={recipe.name}
-        className={`rounded-t-md cover ${
+        className={`rounded-t-md h-42 lg:h-60 object-cover  w-full ${
           (stateSchedule || displayScheduleModal) && recipe.id === 1
             ? 'blur-[3px] pointer-events-none opacity-60'
             : ''
@@ -150,7 +151,10 @@ function RecipeCard({ recipe }: CardProps) {
                 handleDeleteMeal(event);
               }}
             >
-              <X size={20} className=" text-[rgb(255,0,0)]" />
+              <X
+                size={20}
+                className=" text-[rgb(255,0,0)] transition-transform duration-500 hover:rotate-90"
+              />
             </button>
           </div>
         ) : (
