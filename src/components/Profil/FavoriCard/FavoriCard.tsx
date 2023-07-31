@@ -24,6 +24,8 @@ function FavoriCard({ favori }: CardProps) {
   function handleDeleteFavori() {
     dispatch(deleteFavori(favori.id));
   }
+
+  // Function to handle toggling the modal
   const handleModaltoggle = () => {
     dispatch(toggleIsOpenProfil());
   };
@@ -47,6 +49,7 @@ function FavoriCard({ favori }: CardProps) {
         />
         <div className="text-bgff absolute top-2 right-1">
           <div className="card-actions justify-end">
+            {/* ------ Button to delete the favori -------- */}
             <button
               aria-label="add meal in favorite"
               type="button"
@@ -58,6 +61,7 @@ function FavoriCard({ favori }: CardProps) {
             >
               <Heart size={20} color="black" fill="red" />
             </button>
+            {/*  ------ Button to add the favori to the schedule -------- */}
             <button
               aria-label="add meal in schedule"
               type="button"
