@@ -1,8 +1,5 @@
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import HowItWorks from './HowItWorks';
-import poke from './poke-bowl.png';
-import shoppingList from './shoppingList.png';
-import calendar from './calendar.png';
 
 function HeadHome() {
   return (
@@ -22,20 +19,20 @@ function HeadHome() {
             Culinary creativity unleashed with Food-flex!
           </h1>
         </div>
-        <h2 className="text-thirdff text-3xl sm:text-4xl font-bold mb-0 text-center sm:text-center md:text-center">
+        <h2 className="text-titleff text-3xl sm:text-4xl font-bold mb-0 text-center sm:text-center md:text-center">
           HOW IT WORKS ?
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-fourthff">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-gray-500">
           <HowItWorks
-            imageHome={poke}
+            imageHome="./poke.png"
             content="Immerse yourself in our collection of recipes designed for the delight of your taste buds, promising a gastronomic journey of unparalleled pleasure"
           />
           <HowItWorks
-            imageHome={calendar}
+            imageHome="./calendar.png"
             content="Orchestrate your culinary journey for the current week and the next ones, delineating a gastronomic roadmap for your upcoming meals"
           />
           <HowItWorks
-            imageHome={shoppingList}
+            imageHome="./shoppingList.png"
             content="Employ the convenience of exporting your grocery list, a feature designed to streamline your life, leaving you more time to relish the joys of cooking"
           />
         </div>

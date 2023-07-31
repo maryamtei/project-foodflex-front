@@ -35,7 +35,7 @@ function FootHome() {
           className={
             isLogged
               ? 'hidden'
-              : 'px-8 py-4 bg-thirdff hover:bg-red-500 text-bgff rounded-lg text-2xl font-bold'
+              : 'px-8 py-4 bg-titleff hover:bg-fourthff text-bgff rounded-lg text-2xl font-bold'
           }
           type="button"
           onClick={() => {
@@ -52,7 +52,7 @@ function FootHome() {
         <NavLink
           className={
             isLogged
-              ? 'px-8 py-4 bg-thirdff text-bgff rounded-lg text-2xl font-bold'
+              ? 'px-8 py-4 bg-fourthff text-bgff rounded-lg text-2xl font-bold'
               : 'hidden'
           }
           to="/schedule"

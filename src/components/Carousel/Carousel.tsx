@@ -54,14 +54,14 @@ function Carousel({ meals }: RecipeProps) {
   );
 
   return (
-    <div className="px-6 text-fourthff">
+    <div className="text-fourthff">
       <NukaCarousel
         slidesToShow={changeSlidesToShow()}
         renderBottomCenterControls={null}
         enableKeyboardControls
         dragging={false}
         swiping={false}
-        className="border p-4 bg-[rgba(255,155,144,0.5)] rounded-lg shadow-lg border-fourthff"
+        className="border p-4 bg-[rgba(255,155,144,0.3)] rounded-lg shadow-lg border-fourthff"
         renderCenterLeftControls={({ previousSlide, previousDisabled }) => {
           if (previousDisabled) {
             return null;

@@ -10,7 +10,7 @@ function MainHome({ recipes }: RecipeProps) {
   return (
     <div>
       <HomeTitle content="EXAMPLE MENU" />
-      <div>
+      <div className="px-6">
         <Carousel meals={recipes} />
       </div>
     </div>

@@ -51,14 +51,16 @@ function TermsPage() {
         </div>
         <div className="prose ml-4 bg-bgff p-8">
           <div className="prose max-w-screen-xl mx-auto">
-            <h2 className="text-2xl font-bold mb-4">1. Site presentation</h2>
-            <p>
+            <h2 className="text-2xl text-titleff font-bold mb-4">
+              1. Site presentation
+            </h2>
+            <p className="text-gray-500">
               Pursuant to Article 6 of French Law No. 2004-575 of June 21, 2004
               on confidence in the digital economy, users of the [Nom du site]
               website are informed of the identity of the various parties
               involved in its creation and follow-up:
             </p>
-            <ul className="list-none leading-5">
+            <ul className="list-none leading-5 text-gray-500">
               <li>Owner :</li>
               <li>Cretor :</li>
               <li>Responsible for publication:</li>
@@ -66,10 +68,10 @@ function TermsPage() {
               <li>Webmaster:</li>
               <li>Host:</li>
             </ul>
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               2. General terms and conditions of use and services
             </h2>
-            <p>
+            <p className="text-gray-500">
               Use of the [Nom du site] website implies full acceptance of the
               general conditions of use described below. These conditions of use
               may be modified or supplemented at any time, and users of the [Nom
@@ -83,10 +85,10 @@ function TermsPage() {
               time: they are nevertheless binding on the user, who is invited to
               refer to them as often as possible in order to review them.
             </p>
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               3. Description of services provided
             </h2>
-            <p>
+            <p className="text-gray-500">
               The purpose of the [Nom du site] website is to provide information
               concerning all of the company&apos;s activities. [Nom du
               propriétaire du site] endeavors to provide information on the [Nom
@@ -100,20 +102,20 @@ function TermsPage() {
               website is not exhaustive. It is subject to modifications having
               been made since it was put online.
             </p>
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               4. Contractual limitations on technical data
             </h2>
-            <p>
+            <p className="text-gray-500">
               The site uses JavaScript technology. The website cannot be held
               responsible for any material damage arising from use of the site.
               In addition, the user of the site undertakes to access the site
               using recent, virus-free equipment, and with an up-to-date
               browser.
             </p>
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               5. Intellectual property and counterfeiting
             </h2>
-            <p>
+            <p className="text-gray-500">
               [Nom du propriétaire du site] is the owner of the intellectual
               property rights or holds the rights of use on all the elements
               accessible on the site, in particular the texts, images, graphics,
@@ -127,10 +129,10 @@ function TermsPage() {
               in accordance with the provisions of articles L.335-2 et seq. of
               the French Intellectual Property Code.
             </p>
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               6. Limitation of liability
             </h2>
-            <p>
+            <p className="text-gray-500">
               [Nom du propriétaire du site] cannot be held responsible for
               direct or indirect damage caused to the user&apos;s equipment when
               accessing the [Nom du site] website, and resulting either from the
@@ -149,10 +151,10 @@ function TermsPage() {
               messages of a racist, insulting, defamatory or pornographic
               nature, whatever the medium used (text, photographs, etc.).
             </p>
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               7. Personal data management
             </h2>
-            <p>
+            <p className="text-gray-500">
               In France, personal data is protected by law no. 78-87 of January
               6, 1978, law no. 2004-801 of August 6, 2004, article L. 226-13 of
               the Criminal Code and the European Directive of October 24, 1995.
@@ -185,10 +187,10 @@ function TermsPage() {
               of July 1, 1998 transposing the directive 96/9 of March 11, 1996
               relating to the legal protection of databases.
             </p>
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               8. Hypertext links and cookies
             </h2>
-            <p>
+            <p className="text-gray-500">
               The [Nom du site] website contains a number of hyperlinks to other
               sites, set up with the authorization of [Nom du propriétaire du
               site]. However, [Nom du propriétaire du site] is not in a position
@@ -219,25 +221,27 @@ function TermsPage() {
               &quot;Privacy&quot; section, click on Preferences. In the
               &quot;Privacy&quot; tab, you can block cookies.
             </p>
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               9. Applicable law and jurisdiction
             </h2>
-            <p>
+            <p className="text-gray-500">
               Any dispute arising in connection with the use of the [Nom du
               site] website is subject to French law. Exclusive jurisdiction is
               granted to the competent courts of Paris.
             </p>
-            <h2 className="text-2xl font-bold mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               10. The main laws concerned
             </h2>
-            <p>
+            <p className="text-gray-500">
               Act no. 78-17 of January 6, 1978, as amended by Act no. 2004-801
               of August 6, 2004 on data processing, data files and individual
               liberties. Law no. 2004-575 of June 21, 2004 on confidence in the
               digital economy.
             </p>
-            <h2 className="text-2xl font-bold mb-4">11. Lexique</h2>
-            <p>
+            <h2 className="text-2xl font-bold text-titleff mb-4">
+              11. Lexique
+            </h2>
+            <p className="text-gray-500">
               User: Internet user connecting to and using the above-mentioned
               site. Personal information: &quot;information which allows, in any
               form whatsoever, directly or indirectly, the identification of the
