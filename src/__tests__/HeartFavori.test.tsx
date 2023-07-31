@@ -14,14 +14,14 @@ const recipe = {
 
 describe('HeartFavori', () => {
   it('Should render without crash', async () => {
-    // Créez un store mock avec des valeurs de base
+    // Create a mock store with initial values
     const mockStore = configureMockStore();
     const initialState = {
       settings: {
         currentUser: {
-          favorites: [], // Vous pouvez définir les favoris de l'utilisateur ici
+          favorites: [], // You can define the user's favorites here
         },
-        isLogged: true, // Définissez la valeur de isLogged pour le test
+        isLogged: true, // Set the value of isLogged for the test
       },
     };
     const store = mockStore(initialState);
@@ -39,9 +39,9 @@ describe('HeartFavori', () => {
     const initialState = {
       settings: {
         currentUser: {
-          favorites: [], // Vous pouvez définir les favoris de l'utilisateur ici
+          favorites: [], // You can define the user's favorites here
         },
-        isLogged: true, // Définissez la valeur de isLogged pour le test
+        isLogged: true, // Set the value of isLogged for the test
       },
     };
     const store = mockStore(initialState);
@@ -51,21 +51,21 @@ describe('HeartFavori', () => {
         <HeartFavori recipe={recipe} />
       </Provider>
     );
-    // Vérifie que le bouton est présent
+    // Verify that the button is present
     const addFavoriButton = screen.getByRole('button');
     expect(addFavoriButton).toBeInTheDocument();
 
-    // Vérifie si l'icône est présent
+    // Verify if the heart icon is present
     const heartIcon = screen.getByTestId('heart-icon');
     expect(heartIcon).toBeInTheDocument();
 
-    // Vérifie la valeur de l'attribut "fill"
+    // Verify the value of the "fill" attribute
     const fillAttribute = heartIcon.getAttribute('fill');
     expect(fillAttribute).toEqual('none');
   });
 
   it('Recipe in favorites', async () => {
-    // Créez un store mock avec des valeurs de base
+    // Create a mock store with initial values
     const mockStore = configureMockStore();
     const initialState = {
       settings: {
@@ -79,9 +79,9 @@ describe('HeartFavori', () => {
               id: 1,
               position: 0,
             },
-          ], // Vous pouvez définir les favoris de l'utilisateur ici
+          ], // You can define the user's favorites here
         },
-        isLogged: true, // Définissez la valeur de isLogged pour le test
+        isLogged: true, // Set the value of isLogged for the test
       },
     };
     const store = mockStore(initialState);
@@ -91,15 +91,15 @@ describe('HeartFavori', () => {
         <HeartFavori recipe={recipe} />
       </Provider>
     );
-    // Vérifie que le bouton est présent
+    // Verify that the button is present
     const addFavoriButton = screen.getByRole('button');
     expect(addFavoriButton).toBeInTheDocument();
 
-    // Vérifie si l'icône est présent
+    // Verify if the heart icon is present
     const heartIcon = screen.getByTestId('heart-icon');
     expect(heartIcon).toBeInTheDocument();
 
-    // Vérifie la valeur de l'attribut "fill" = RED
+    // Verify the value of the "fill" attribute = RED
     const fillAttribute = heartIcon.getAttribute('fill');
     expect(fillAttribute).toEqual('red');
   });
