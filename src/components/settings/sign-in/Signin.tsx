@@ -60,7 +60,7 @@ function signin() {
     resetField();
   };
   return (
-    <div className="relative flex flex-col gap-4 w-80 text-titleff font-medium bg-bgff sm:rounded-xl sm:shadow-xl items-center p-6">
+    <div className="relative flex flex-col gap-4 w-80 text-titleff font-medium bg-thirdff bg-opacity-80 sm:rounded-xl sm:shadow-xl items-center p-6">
       <h1 className="text-3xl font-bold text-center "> Sign-In</h1>
       <div className="flex flex-col text-center">
         <p className="text-base ">New customer ?</p>
@@ -89,7 +89,7 @@ function signin() {
         <div className="flex justify-center ">
           <button
             type="submit"
-            className="text-2xl font-bold pt-1 pr-1 pb-2 pl-2 mt-10  border-titleff hover:border-thirdff hover:text-thirdff rounded-lg border-2 h-8 shadow-md hover:shadow-xl ease-in duration-150 w-7/12 h-full"
+            className="text-2xl font-bold pt-1 pr-1 pb-2 pl-2 mt-10 bg-white border-titleff hover:border-fourthff hover:text-fourthff rounded-lg border-2 h-8 shadow-md hover:shadow-xl ease-in duration-150 w-7/12 h-full"
             disabled={isLoading}
           >
             Sign-In

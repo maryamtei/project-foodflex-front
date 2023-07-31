@@ -56,7 +56,7 @@ function Recipes() {
         />
       </div>
       {recipes.length === 0 && (
-        <div className="text-center text-thirdff text-2xl font-bold  mt-10">
+        <div className="text-center text-titleff text-2xl font-bold  mt-10">
           No recipes found
         </div>
       )}

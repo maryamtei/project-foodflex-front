@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { X } from 'react-feather';
+import { useMediaQuery } from 'react-responsive';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import Field from '../Field/index';
 
@@ -12,6 +13,7 @@ import {
 } from '../../../store/reducers/settings';
 
 function signup() {
+  const isDesktop = useMediaQuery({ minWidth: 1024 });
   const dispatch = useAppDispatch();
   const [confirmePassword, setConfirmePassword] = useState('');
   const [disabled, setDisabled] = useState(true);
@@ -91,7 +93,13 @@ function signup() {
     dispatch(toggleSignUpOpen());
   };
   return (
-    <div className="relative flex flex-col gap-4 w-80 text-thirdff bg-bgff sm:rounded-xl sm:shadow-xl items-center p-6">
+    <div
+      className={`${
+        isDesktop
+          ? 'relative mt-[-90px] flex flex-col gap-4 w-80 text-titleff bg-thirdff bg-opacity-80 sm:rounded-xl sm:shadow-xl items-center p-6'
+          : 'relative flex flex-col gap-4 w-80 text-titleff bg-thirdff bg-opacity-80 sm:rounded-xl sm:shadow-xl items-center p-6'
+      }`}
+    >
       <h1 className="text-3xl font-bold text-center "> Sign-Up</h1>
       <div className="flex flex-col text-center">
         <p className="text-base ">Already registered ?</p>
@@ -153,7 +161,7 @@ function signup() {
           <button
             disabled={disabled}
             type="submit"
-            className="text-2xl font-bold pt-1 pr-1 pb-2 pl-2 mt-10 border-fourthff rounded-lg border-2  shadow-md hover:shadow-xl ease-in duration-150 w-7/12 h-full"
+            className="text-2xl font-bold pt-1 pr-1 pb-2 pl-2 mt-10 bg-white border-titleff hover:border-fourthff hover:text-fourthff rounded-lg border-2 shadow-md hover:shadow-xl ease-in duration-150 w-7/12 h-full"
           >
             Sign-Up
           </button>
