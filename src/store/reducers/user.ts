@@ -18,7 +18,7 @@ dayjs.extend(weekOfYear);
 
 interface SettingsState {
   currentUser: User; // Represents the current user object
-  modalIsOpen: boolean; // Indicates whether if profil modal is open or not (true/false)
+  modalIsOpen: boolean; // Indicates whether if login modal is open or not (true/false)
   isLogged: boolean; // Indicates if the user is logged in or not (true/false)
   signUpOpen: boolean; // Indicates if the sign-up/sign-in form is open or not (true/false)
   signInCredentials: {
@@ -79,12 +79,14 @@ export const initialValue: SettingsState = {
   clickAddSchedule: false,
 };
 
+// ------------------DEFINE KEYS--------------------------//
+
+// Define a custom type alias 'KeysOfSignInCredentials'
 export type KeysOfSignInCredentials = keyof SettingsState['signInCredentials'];
+// Define a custom type alias 'KeysOfSignUpCredentials'
 export type KeysOfSignUpCredentials = keyof SettingsState['signUpCredentials'];
 
-export const toggleIsOpen = createAction('settings/TOGGLE_IS_OPEN');
-
-export const toggleSignUpOpen = createAction('settings/TOGGLE_SIGN_UP');
+// ------------------CREATE ACTION--------------------------//
 
 export const changeSignInCredentialsField = createAction<{
   property: KeysOfSignInCredentials;
@@ -96,14 +98,21 @@ export const changeSignUpCredentialsField = createAction<{
   value: string;
 }>('settings/CHANGE_SIGN_UP_CREDENTIALS_FIELD');
 
+export const toggleIsOpen = createAction('settings/TOGGLE_IS_OPEN');
+export const toggleSignUpOpen = createAction('settings/TOGGLE_SIGN_UP');
+
 // ---------------- SIGN IN -------------------//
+// This thunk represents the process of signing in with the provided credentials.
 export const signIn = createAsyncThunk(
   'settings/SIGNIN',
   async (credentials: SettingsState['signInCredentials']) => {
+    // Inside the async function, an HTTP POST request is made to a 'login' endpoint with the provided 'credentials'
     const response = await fetchPost(`login`, credentials);
+    // The response is processed, parsing the JSON data from the server.
     const data = await response.json();
+    // The HTTP status code of the response is extracted to show up message.
     const status = await response.status;
-
+    // The data and status are returned as an object.
     return { data, status };
   }
 );
@@ -116,11 +125,16 @@ export const logout = createAsyncThunk('settings/LOGOUT', async () => {
   return { data, status };
 });
 // ---------------- DATA USER -------------------//
+// Define an asynchronous thunk function called 'getUserData'.
+// This thunk represents the process of fetching user data from the server.
 export const getUserData = createAsyncThunk('settings/USER_DATA', async () => {
+  // Inside the async function, an HTTP GET request is made to the 'user' endpoint.
   const response = await fetchGet(`user`);
+  // The response is processed, parsing the JSON data from the server.
   const data = await response.json();
+  // The HTTP status code of the response is extracted.
   const status = await response.status;
-
+  // The data and status are returned as an object.
   return { data, status };
 });
 
@@ -222,22 +236,34 @@ export const changeWeek = createAction<number>('schedule/current-week');
 // ----------------- BEGIN REDUCER ------------------------- //
 const settingsReducer = createReducer(initialValue, (builder) => {
   builder
+    // Action: 'toggleIsOpen'
+    // When the 'toggleIsOpen' action is dispatched, it toggles the 'modalIsOpen' property.
     .addCase(toggleIsOpen, (state) => {
       state.modalIsOpen = !state.modalIsOpen;
     })
+
+    // Action: 'toggleSignUpOpen'
+    // When the 'toggleSignUpOpen' action is dispatched, it toggles the 'signUpOpen' property.
     .addCase(toggleSignUpOpen, (state) => {
       state.signUpOpen = !state.signUpOpen;
     })
+
+    // Action: 'changeSignInCredentialsField'
+    // When the 'changeSignInCredentialsField' action is dispatched, it updates a specific property of 'signInCredentials'.
     .addCase(changeSignInCredentialsField, (state, action) => {
       const { property, value } = action.payload;
       state.signInCredentials[property] = value;
     })
+
+    // Action: 'changeSignUpCredentialsField'
+    // When the 'changeSignUpCredentialsField' action is dispatched, it updates a specific property of 'signUpCredentials'.
     .addCase(changeSignUpCredentialsField, (state, action) => {
       const { property, value } = action.payload;
       state.signUpCredentials[property] = value;
     })
 
     // ---------------- LOGOUT -------------------//
+    // ... Handling actions for the 'logout' asynchronous thunk (pending, rejected, fulfilled).
     .addCase(logout.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -248,16 +274,18 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(logout.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.data.message;
-      state.status = action.payload.status;
+      state.message = action.payload.data.message; // message to display
+      state.status = action.payload.status; // code status
       if (state.status === 200) {
-        localStorage.removeItem('token');
+        // If status OK
+        localStorage.removeItem('token'); // Remove item token to localStorage
         state.isLogged = false;
-        state.currentUser = initialValue.currentUser;
-        window.location.reload();
+        state.currentUser = initialValue.currentUser; // init data user
+        window.location.reload(); // reload
       }
     })
     // ---------------- USER -------------------//
+    // ... Handling actions for the 'USER' asynchronous thunk (pending, rejected, fulfilled).
     .addCase(getUserData.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -268,14 +296,15 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(getUserData.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.data.message;
-      state.status = action.payload.status;
+      state.message = action.payload.data.message; // message to display
+      state.status = action.payload.status; // code status
       if (state.status === 200) {
-        state.isLogged = true;
-        state.currentUser = action.payload.data.newUser;
+        state.isLogged = true; // User is logged
+        state.currentUser = action.payload.data.newUser; // init data user
       }
     })
     // ---------------- SIGN IN -------------------//
+    // ... Handling actions for the 'SIGN IN' asynchronous thunk (pending, rejected, fulfilled).
     .addCase(signIn.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -286,20 +315,21 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(signIn.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.data.message;
-      state.status = action.payload.status;
+      state.message = action.payload.data.message; // message to display
+      state.status = action.payload.status; // code status
       if (state.status === 200) {
-        const authToken = action.payload.data.token;
-        localStorage.removeItem('token');
-        localStorage.setItem('token', authToken);
-        state.currentUser = action.payload.data.newUser;
-        state.isLogged = true;
+        const authToken = action.payload.data.token; // Token recovery sent by the back
+        localStorage.removeItem('token'); // init token to null
+        localStorage.setItem('token', authToken); // Set token to localStorage
+        state.currentUser = action.payload.data.newUser; // init data user
+        state.isLogged = true; // User is logged
         state.isLoading = false;
-        state.modalIsOpen = false;
+        state.modalIsOpen = false; // Sign-up modale is closed
       }
     })
 
     // -------------- SIGN UP ---------------- //
+    // ... Handling actions for the 'SIGN UP' asynchronous thunk (pending, rejected, fulfilled).
     .addCase(signUp.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -310,20 +340,21 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(signUp.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.data.message;
-      state.status = action.payload.status;
+      state.message = action.payload.data.message; // message to display
+      state.status = action.payload.status; // code status
       if (state.status === 200) {
-        const authToken = action.payload.data.token;
-        localStorage.removeItem('token');
-        localStorage.setItem('token', authToken);
-        state.currentUser = action.payload.data.newUser;
-        state.isLogged = true;
+        const authToken = action.payload.data.token; // Token recovery sent by the back
+        localStorage.removeItem('token'); // init token to null
+        localStorage.setItem('token', authToken); // Set token to localStorage
+        state.currentUser = action.payload.data.newUser; // Init data user
+        state.isLogged = true; // User is logged
         state.isLoading = false;
-        state.modalIsOpen = false;
+        state.modalIsOpen = false; // Sign-in modale is closed
       }
     })
 
     // ------------ EDIT PROFIL --------------//
+    // ... Handling actions for the 'EDIT PROFIL' asynchronous thunk (pending, rejected, fulfilled).
     .addCase(editInfoProfil.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -334,14 +365,15 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(editInfoProfil.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.data.message;
-      state.status = action.payload.status;
+      state.message = action.payload.data.message; // message to display
+      state.status = action.payload.status; // code status
       if (state.status === 200) {
-        state.currentUser = action.payload.data.newUser;
+        state.currentUser = action.payload.data.newUser; // init data user
       }
     })
 
     // ---------------- DELETE FAVORIS -------------------//
+    // ... Handling actions for the 'DELETE FAVORIS' asynchronous thunk (pending, rejected, fulfilled).
     .addCase(deleteFavori.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -352,14 +384,15 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(deleteFavori.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.data.message;
-      state.status = action.payload.status;
+      state.message = action.payload.data.message; // message to display
+      state.status = action.payload.status; // code status
       if (state.status === 200) {
-        state.currentUser = action.payload.data.newUser;
+        state.currentUser = action.payload.data.newUser; // init data user
       }
     })
 
     // ---------------- ADD FAVORIS -------------------//
+    // ... Handling actions for the 'ADD FAVORIS' asynchronous thunk (pending, rejected, fulfilled).
     .addCase(addFavori.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -370,18 +403,20 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(addFavori.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.data.message;
-      state.status = action.payload.status;
+      state.message = action.payload.data.message; // message to display
+      state.status = action.payload.status; // code status
       if (state.status === 200) {
-        state.currentUser = action.payload.data.newUser;
+        state.currentUser = action.payload.data.newUser; // init data user
       }
     })
 
     // ---------------- ADD SCHEDULE -------------------//
+    // ... Handling actions for the 'ADD SCHEDULE' asynchronous thunk (pending, rejected, fulfilled).
     .addCase(changeWeek, (state, action) => {
-      state.currentWeek = action.payload;
+      state.currentWeek = action.payload; // CurrentWeek was changed
     })
     .addCase(addScheduleFavori, (state, action) => {
+      // Save meal information in MealFavoriToAdd
       state.MealFavoriToAdd.idDbMeal = action.payload.idDbMeal;
       state.MealFavoriToAdd.image = action.payload.image;
       state.MealFavoriToAdd.name = action.payload.name;
@@ -398,14 +433,15 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(addSchedule.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.data.message;
-      state.status = action.payload.status;
+      state.message = action.payload.data.message; // message to display
+      state.status = action.payload.status; // code status
       if (state.status === 200) {
-        state.clickAddSchedule = false;
-        state.currentUser = action.payload.data.newUser;
+        state.clickAddSchedule = false; // Schedule modale is closed
+        state.currentUser = action.payload.data.newUser; // init data user
       }
     })
     // ---------------- delete SCHEDULE -------------------//
+    // ... Handling actions for the 'delete SCHEDULE' asynchronous thunk (pending, rejected, fulfilled).
     .addCase(deleteMeal.pending, (state) => {
       state.isLoading = true;
       state.message = null;
@@ -416,15 +452,16 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(deleteMeal.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.data.message;
-      state.status = action.payload.status;
+      state.message = action.payload.data.message; // message to display
+      state.status = action.payload.status; // code status
       if (state.status === 200) {
-        state.currentUser = action.payload.data.newUser;
+        state.currentUser = action.payload.data.newUser; // init data user
       }
     })
     // ---------------- DISPLAY SCHEDULE -------------------//
+    // ... Handling actions for the 'display schedule' asynchronous thunk (pending, rejected, fulfilled).
     .addCase(displaySchedule, (state, action) => {
-      state.clickAddSchedule = action.payload;
+      state.clickAddSchedule = action.payload; // Schedule modale is open
     })
 
     // ---------------- CONTACT -------------------//
@@ -438,8 +475,8 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
     .addCase(contact.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.message = action.payload.data.message;
-      state.status = action.payload.status;
+      state.message = action.payload.data.message; // message to display
+      state.status = action.payload.status; // code status
     });
 });
 export default settingsReducer;
