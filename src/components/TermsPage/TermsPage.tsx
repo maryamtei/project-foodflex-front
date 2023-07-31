@@ -51,7 +51,7 @@ function TermsPage() {
         </div>
         <div className="prose ml-4 bg-bgff p-8">
           <div className="prose max-w-screen-xl mx-auto">
-            <h2 className="text-2xl text-[#AF4136] font-bold mb-4">
+            <h2 className="text-2xl text-titleff font-bold mb-4">
               1. Site presentation
             </h2>
             <p className="text-gray-500">
@@ -68,7 +68,7 @@ function TermsPage() {
               <li>Webmaster:</li>
               <li>Host:</li>
             </ul>
-            <h2 className="text-2xl font-bold text-[#AF4136] mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               2. General terms and conditions of use and services
             </h2>
             <p className="text-gray-500">
@@ -85,7 +85,7 @@ function TermsPage() {
               time: they are nevertheless binding on the user, who is invited to
               refer to them as often as possible in order to review them.
             </p>
-            <h2 className="text-2xl font-bold text-[#AF4136] mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               3. Description of services provided
             </h2>
             <p className="text-gray-500">
@@ -102,7 +102,7 @@ function TermsPage() {
               website is not exhaustive. It is subject to modifications having
               been made since it was put online.
             </p>
-            <h2 className="text-2xl font-bold text-[#AF4136] mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               4. Contractual limitations on technical data
             </h2>
             <p className="text-gray-500">
@@ -112,7 +112,7 @@ function TermsPage() {
               using recent, virus-free equipment, and with an up-to-date
               browser.
             </p>
-            <h2 className="text-2xl font-bold text-[#AF4136] mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               5. Intellectual property and counterfeiting
             </h2>
             <p className="text-gray-500">
@@ -129,7 +129,7 @@ function TermsPage() {
               in accordance with the provisions of articles L.335-2 et seq. of
               the French Intellectual Property Code.
             </p>
-            <h2 className="text-2xl font-bold text-[#AF4136] mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               6. Limitation of liability
             </h2>
             <p className="text-gray-500">
@@ -151,7 +151,7 @@ function TermsPage() {
               messages of a racist, insulting, defamatory or pornographic
               nature, whatever the medium used (text, photographs, etc.).
             </p>
-            <h2 className="text-2xl font-bold text-[#AF4136] mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               7. Personal data management
             </h2>
             <p className="text-gray-500">
@@ -187,7 +187,7 @@ function TermsPage() {
               of July 1, 1998 transposing the directive 96/9 of March 11, 1996
               relating to the legal protection of databases.
             </p>
-            <h2 className="text-2xl font-bold text-[#AF4136] mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               8. Hypertext links and cookies
             </h2>
             <p className="text-gray-500">
@@ -221,7 +221,7 @@ function TermsPage() {
               &quot;Privacy&quot; section, click on Preferences. In the
               &quot;Privacy&quot; tab, you can block cookies.
             </p>
-            <h2 className="text-2xl font-bold text-[#AF4136] mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               9. Applicable law and jurisdiction
             </h2>
             <p className="text-gray-500">
@@ -229,7 +229,7 @@ function TermsPage() {
               site] website is subject to French law. Exclusive jurisdiction is
               granted to the competent courts of Paris.
             </p>
-            <h2 className="text-2xl font-bold text-[#AF4136] mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               10. The main laws concerned
             </h2>
             <p className="text-gray-500">

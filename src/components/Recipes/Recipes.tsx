@@ -41,7 +41,7 @@ function Recipes() {
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       }`}
     >
-      <h1 className="text-thirdff text-2xl sm:text-4xl text-[#AF4136] font-bold md:mb-12 mb-6 text-center">
+      <h1 className="text-titleff text-2xl sm:text-4xl font-bold md:mb-12 mb-6 text-center">
         Find exactly what you need !
       </h1>
       <div className="flex gap-2 relative">

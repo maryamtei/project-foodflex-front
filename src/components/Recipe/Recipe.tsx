@@ -70,14 +70,14 @@ function Recipe() {
         } `}
       >
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-4xl text-[#AF4136] font-bold m-8">{recipe.name}</h1>
+          <h1 className="text-4xl text-titleff font-bold m-8">{recipe.name}</h1>
           <img
             src={recipe.imageUrl}
             alt={recipe.name}
             className="rounded-lg flex"
           />
         </div>
-        <h2 className="text-3xl font-bold text-[#AF4136] sm:mt-8 md:m-10 text-center">
+        <h2 className="text-3xl font-bold text-titleff sm:mt-8 md:m-10 text-center">
           Meal Preparation
         </h2>
         <div className="flex flex-col md:flex-row p-4">
@@ -88,7 +88,7 @@ function Recipe() {
             />
           </div>
           <div className="md:w-2/3 md:pr-8 pt-4 md:p-0">
-            <h2 className="text-xl font-bold text-[#AF4136] mb-2">Instructions:</h2>
+            <h2 className="text-xl font-bold text-titleff mb-2">Instructions:</h2>
             <div className="prose lg:prose-lg">
               {recipe.instruction.split('\n').map((line) => (
                 <p className='text-gray-500' key={line}>{line}</p>
@@ -105,7 +105,7 @@ function Recipe() {
 
         {recipe.videoUrl && (
           <>
-            <h2 className="text-3xl font-bold sm:mt-8 md:m-10 text-[#AF4136] text-center">
+            <h2 className="text-3xl font-bold sm:mt-8 md:m-10 text-titleff text-center">
               Step-by-Step Video Guide
             </h2>
             <div className="py-4 flex justify-center">

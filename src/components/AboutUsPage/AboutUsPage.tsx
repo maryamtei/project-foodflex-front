@@ -11,7 +11,7 @@ function AboutUsPage() {
     >
       <div className="min-h-screen bg-bgff py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h1 className="text-4xl font-bold text-center text-[#AF4136] mb-8">
+          <h1 className="text-4xl font-bold text-center text-titleff mb-8">
             About Us
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -23,7 +23,7 @@ function AboutUsPage() {
               />
             </div>
             <article className="md:order-first">
-              <h2 className="text-2xl font-semibold text-[#AF4136] mb-4">
+              <h2 className="text-2xl font-semibold text-titleff mb-4">
                 Our Story
               </h2>
               <p className="text-gray-500 leading-relaxed mb-6">
