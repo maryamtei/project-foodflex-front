@@ -1,5 +1,4 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
-
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 import {
   Check,
@@ -10,6 +9,7 @@ import {
 } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
 import { useDebounce } from 'react-use';
+import ListBox from './ListBox/ListBox';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateSchedule } from '../../store/reducers/schedule';
@@ -21,7 +21,6 @@ function Schedule() {
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const [animateLeft, setAnimateLeft] = useState(false);
   const [animateRight, setAnimateRight] = useState(false);
-
   const schedules = useAppSelector(
     (state) => state.settings.currentUser.schedules
   );
@@ -56,33 +55,27 @@ function Schedule() {
     }
   }
 
-  const changeInputCurrentWeek = (event: ChangeEvent<HTMLInputElement>) => {
-    let newInputValue = event.target.value;
+  const changeInputCurrentWeek = (newValue: number | undefined) => {
+    if (newValue) {
+      if (currentWeek > newValue) {
+        setAnimateRight(true);
+        setTimeout(() => {
+          dispatch(changeWeek(newValue));
+        }, 400);
 
-    if (Number(newInputValue) < 1) {
-      newInputValue = '1';
-    }
-    if (Number(newInputValue) > 52) {
-      newInputValue = '52';
-    }
-    if (currentWeek > Number(newInputValue)) {
-      setAnimateRight(true);
-      setTimeout(() => {
-        dispatch(changeWeek(Number(newInputValue)));
-      }, 400);
+        setTimeout(() => {
+          setAnimateRight(false);
+        }, 800);
+      } else {
+        setAnimateLeft(true);
+        setTimeout(() => {
+          dispatch(changeWeek(newValue));
+        }, 400);
 
-      setTimeout(() => {
-        setAnimateRight(false);
-      }, 800);
-    } else {
-      setAnimateLeft(true);
-      setTimeout(() => {
-        dispatch(changeWeek(Number(newInputValue)));
-      }, 400);
-
-      setTimeout(() => {
-        setAnimateLeft(false);
-      }, 800);
+        setTimeout(() => {
+          setAnimateLeft(false);
+        }, 800);
+      }
     }
   };
 
@@ -187,7 +180,7 @@ function Schedule() {
             handleClickBeforeWeek(5);
           }}
         >
-          <ChevronsLeft className="text-thirdff h-16 w-16" />
+          <ChevronsLeft className="text-titleff h-16 w-16" />
         </button>
         <button
           type="button"
@@ -197,20 +190,12 @@ function Schedule() {
             handleClickBeforeWeek(1);
           }}
         >
-          <ChevronLeft className="text-thirdff h-16 w-16" />
+          <ChevronLeft className="text-titleff h-16 w-16" />
         </button>
-        <p className="text-thirdff text-2xl sm:text-4xl font-bold text-center">
+        <p className="text-titleff text-2xl sm:text-4xl font-bold text-center">
           Week
         </p>
-        <input
-          type="number"
-          id="weekInput"
-          min="1"
-          max="52"
-          className="text-thirdff text-2xl sm:text-4xl font-bold text-center w-8 sm:w-16"
-          value={currentWeek}
-          onChange={changeInputCurrentWeek}
-        />
+        <ListBox value={currentWeek} onChange={changeInputCurrentWeek} />
 
         <button
           type="button"
@@ -220,7 +205,7 @@ function Schedule() {
             handleClickNextWeek(1);
           }}
         >
-          <ChevronRight className="text-thirdff h-16 w-16" />
+          <ChevronRight className="text-titleff h-16 w-16" />
         </button>
         <button
           type="button"
@@ -230,7 +215,7 @@ function Schedule() {
             handleClickNextWeek(5);
           }}
         >
-          <ChevronsRight className="text-thirdff h-16 w-16" />
+          <ChevronsRight className="text-titleff h-16 w-16" />
         </button>
       </div>
       <section
