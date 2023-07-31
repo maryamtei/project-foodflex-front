@@ -8,10 +8,9 @@ interface SearchProps {
 }
 
 function SearchComponent({ name, value, onChange }: SearchProps) {
-  // Définition de la fonction à appeler quand la valeur du champ de saisie change.
+  // Defining the function to call when the value of the input field changes.
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const newValue = event.target.value;
-    // Appel de la fonction onChange passée en prop avec la nouvelle valeur.
     onChange(newValue);
   }
 
