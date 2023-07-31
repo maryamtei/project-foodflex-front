@@ -42,11 +42,11 @@ function ScheduleModal() {
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="w-full transform overflow-hidden rounded-2xl bg-white p-6  align-middle shadow-xl transition-all">
-                <div className=" flex justify-end">
+              <Dialog.Panel className="w-full transform overflow-hidden rounded-2xl bg-white p-2 align-middle shadow-xl transition-all">
+                <div className="flex justify-end">
                   <X onClick={closeModal} />
                 </div>
-                <h2 className="text-2xl  font-bold text-gray-900">
+                <h2 className="text-2xl mt-6 font-bold text-gray-900">
                   Which day to eat this dish?
                 </h2>
 
