@@ -9,7 +9,7 @@ import {
   changeSignUpCredentialsField,
   signUp,
   toggleIsOpen,
-} from '../../../store/reducers/settings';
+} from '../../../store/reducers/user';
 
 function signup() {
   const dispatch = useAppDispatch();

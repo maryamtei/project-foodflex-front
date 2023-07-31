@@ -7,7 +7,7 @@ import {
   toggleIsOpenProfil,
   changeStateModalAnimation,
 } from '../../store/reducers/favoris';
-import { getUserData } from '../../store/reducers/settings';
+import { getUserData } from '../../store/reducers/user';
 
 function Modal() {
   const favoriIsOpen = useAppSelector((state) => state.favoris.favoriIsOpen);

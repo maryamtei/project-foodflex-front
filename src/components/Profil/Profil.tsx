@@ -1,9 +1,9 @@
 import { FormEvent, useState } from 'react';
-import { Mail, User, Key } from 'react-feather';
+import { Mail, User } from 'react-feather';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import Field from './Field/Field';
-import { editInfoProfil, logout } from '../../store/reducers/settings';
+import { editInfoProfil, logout } from '../../store/reducers/user';
 import { changeFavoriIsOpen } from '../../store/reducers/favoris';
 
 function Profil() {

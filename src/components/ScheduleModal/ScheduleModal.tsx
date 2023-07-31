@@ -2,7 +2,7 @@ import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { X } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { displaySchedule } from '../../store/reducers/settings';
+import { displaySchedule } from '../../store/reducers/user';
 import Schedule from '../Schedule/Schedule';
 
 function ScheduleModal() {

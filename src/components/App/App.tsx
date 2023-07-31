@@ -13,7 +13,7 @@ import {
   changeInnerWidth,
   changeMobileView,
 } from '../../store/reducers/window';
-import { getUserData, initialValue } from '../../store/reducers/settings';
+import { getUserData, initialValue } from '../../store/reducers/user';
 import ScheduleModal from '../ScheduleModal/ScheduleModal';
 
 function App() {
@@ -26,7 +26,6 @@ function App() {
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const isLoading = useAppSelector((state) => state.settings.isLoading);
   const currentUser = useAppSelector((state) => state.settings.currentUser);
-  console.log(isLoading);
   const mobileView = useAppSelector((state) => state.window.mobileView);
   // Triggered when the window is resized
   useEffect(() => {
@@ -43,8 +42,6 @@ function App() {
     return () => {
       window.removeEventListener('resize', handleWindowResize);
     };
-
-    const showScheduleModal = location.pathname !== '/page-to-exclude';
   });
 
   const innerWidth = useAppSelector((state) => state.window.innerWidth);

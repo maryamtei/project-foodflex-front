@@ -22,7 +22,7 @@ function HeadHome() {
         <h2 className="text-titleff text-3xl sm:text-4xl font-bold mb-0 text-center sm:text-center md:text-center">
           HOW IT WORKS ?
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-fourthff">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-gray-500">
           <HowItWorks
             imageHome="./poke.png"
             content="Immerse yourself in our collection of recipes designed for the delight of your taste buds, promising a gastronomic journey of unparalleled pleasure"

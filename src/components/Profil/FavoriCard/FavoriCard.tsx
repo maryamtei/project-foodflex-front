@@ -5,7 +5,7 @@ import {
   addScheduleFavori,
   displaySchedule,
   deleteFavori,
-} from '../../../store/reducers/settings';
+} from '../../../store/reducers/user';
 import { Favorite } from '../../../@types/Profil';
 import { toggleIsOpenProfil } from '../../../store/reducers/favoris';
 

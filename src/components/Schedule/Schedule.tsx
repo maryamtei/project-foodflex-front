@@ -1,5 +1,5 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Check,
   ChevronLeft,
@@ -8,12 +8,11 @@ import {
   ChevronsRight,
 } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
-import { useDebounce } from 'react-use';
 import ListBox from './ListBox/ListBox';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateSchedule } from '../../store/reducers/schedule';
-import { changeWeek } from '../../store/reducers/settings';
+import { changeWeek } from '../../store/reducers/user';
 import Carousel from '../Carousel/Carousel';
 import MyShoppingList from './shoppingListPdf';
 

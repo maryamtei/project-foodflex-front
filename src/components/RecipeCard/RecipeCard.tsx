@@ -13,7 +13,7 @@ import {
   toggleIsOpen,
   toggleSignUpOpen,
   deleteMeal,
-} from '../../store/reducers/settings';
+} from '../../store/reducers/user';
 import './RecipeCard.css';
 
 interface CardProps {

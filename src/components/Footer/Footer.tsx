@@ -2,7 +2,7 @@ import { Twitter, Instagram, Facebook, GitHub, Youtube } from 'react-feather';
 
 import { NavLink } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../../hooks/redux';
-import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/settings';
+import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/user';
 import {
   toggleIsOpenProfil,
   changeFavoriIsOpen,
@@ -63,7 +63,9 @@ function Footer() {
               <GitHub className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
               <Instagram className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
             </div>
-            <p className="text-sm italic ">@2023 Foodflex</p>
+            <p className="text-sm italic ">
+              Crafted with a dash of gluttony by FoodFlex - @2023
+            </p>
           </div>
         </div>
 

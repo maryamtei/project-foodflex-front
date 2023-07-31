@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { contact } from '../../store/reducers/settings';
+import { contact } from '../../store/reducers/user';
 
 function ContactPage() {
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
@@ -25,34 +25,25 @@ function ContactPage() {
 
   return (
     <div
-      className={`relative mb-20 ${
+      className={`relative bg-cover bg-no-repeat bg-center ${
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       } `}
+      style={{ backgroundImage: 'url(/contact.jpg)' }}
     >
       <div className="relative w-full h-screen">
         {/* Apply overlay and blur effect to the image */}
-        <img
-          src="/contact.jpg"
-          alt="Background"
-          className="w-full h-full object-cover object-bottom absolute inset-0"
-          style={{
-            objectPosition: 'center top',
-            zIndex: -1,
-            filter: 'blur(4px)',
-          }}
-        />
         <div className="flex justify-center items-center min-h-screen">
           <div className="bg-thirdff w-full max-w-md p-8 rounded shadow-md border border-gray-600">
             {' '}
             {/* Add shadow */}
-            <h1 className="text-red-500 text-4xl text-center font-bold mb-6">
+            <h1 className="text-titleff text-4xl text-center font-bold mb-6">
               Contact us
             </h1>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label
                   htmlFor="name"
-                  className="block text-red-500 font-medium mb-2 "
+                  className="block text-titleff font-medium mb-2 "
                 >
                   Name
                 </label>
@@ -70,7 +61,7 @@ function ContactPage() {
               <div className="mb-4">
                 <label
                   htmlFor="email"
-                  className="block text-red-500 font-medium mb-2"
+                  className="block text-titleff font-medium mb-2"
                 >
                   E-mail address
                 </label>
@@ -88,7 +79,7 @@ function ContactPage() {
               <div className="mb-4">
                 <label
                   htmlFor="message"
-                  className="block text-red-500 font-medium mb-2"
+                  className="block text-titleff font-medium mb-2"
                 >
                   Message
                 </label>
@@ -106,7 +97,7 @@ function ContactPage() {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="bg-fourthff hover:bg-red-500 text-white font-medium py-2 px-4 rounded focus:outline-none"
+                  className="bg-titleff hover:bg-red-500 text-white font-medium py-2 px-4 rounded focus:outline-none"
                 >
                   Submit
                 </button>
