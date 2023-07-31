@@ -88,10 +88,14 @@ function Recipe() {
             />
           </div>
           <div className="md:w-2/3 md:pr-8 pt-4 md:p-0">
-            <h2 className="text-xl font-bold text-titleff mb-2">Instructions:</h2>
+            <h2 className="text-xl font-bold text-titleff mb-2">
+              Instructions:
+            </h2>
             <div className="prose lg:prose-lg">
               {recipe.instruction.split('\n').map((line) => (
-                <p className='text-gray-500' key={line}>{line}</p>
+                <p className="text-gray-500" key={line}>
+                  {line}
+                </p>
               ))}
             </div>
           </div>

@@ -1,11 +1,11 @@
 import { Plus, Heart } from 'react-feather';
-import { Link } from 'react-router-dom';
+import { Link, redirect } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import {
   addScheduleFavori,
   displaySchedule,
   deleteFavori,
-} from '../../../store/reducers/settings';
+} from '../../../store/reducers/user';
 import { Favorite } from '../../../@types/Profil';
 import { toggleIsOpenProfil } from '../../../store/reducers/favoris';
 
@@ -31,6 +31,7 @@ function FavoriCard({ favori }: CardProps) {
   function handleAddSchedule() {
     dispatch(displaySchedule(!clickAddSchedule));
     dispatch(addScheduleFavori(favori));
+    return redirect('/schedule');
   }
 
   return (

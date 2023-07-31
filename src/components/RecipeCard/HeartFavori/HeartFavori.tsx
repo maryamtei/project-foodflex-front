@@ -6,7 +6,7 @@ import {
   deleteFavori,
   toggleIsOpen,
   toggleSignUpOpen,
-} from '../../../store/reducers/settings';
+} from '../../../store/reducers/user';
 import { Recipe } from '../../../@types/recipe';
 
 interface HeartFavoriProps {

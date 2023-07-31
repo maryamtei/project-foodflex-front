@@ -1,5 +1,5 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Check,
   ChevronLeft,
@@ -8,18 +8,19 @@ import {
   ChevronsRight,
 } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
+import ListBox from './ListBox/ListBox';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateSchedule } from '../../store/reducers/schedule';
-import { changeWeek } from '../../store/reducers/settings';
+import { changeWeek } from '../../store/reducers/user';
 import Carousel from '../Carousel/Carousel';
 import MyShoppingList from './shoppingListPdf';
 
 function Schedule() {
+  // Component State and Redux State
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const [animateLeft, setAnimateLeft] = useState(false);
   const [animateRight, setAnimateRight] = useState(false);
-
   const schedules = useAppSelector(
     (state) => state.settings.currentUser.schedules
   );
@@ -29,51 +30,60 @@ function Schedule() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  // Init animation duration
+  const animationDuration = 400;
+  const resetAnimationDuration = 800;
+
+  // Function for animating week next animate left
   function handleClickNextWeek(nbrSchedule: number) {
     if (currentWeek < 52) {
       setAnimateLeft(true);
       setTimeout(() => {
         dispatch(changeWeek(currentWeek + nbrSchedule));
-      }, 400);
+      }, animationDuration);
 
       setTimeout(() => {
         setAnimateLeft(false);
-      }, 800);
+      }, resetAnimationDuration);
     }
   }
+  // Function for animating week next animate right
   function handleClickBeforeWeek(nbrSchedule: number) {
     if (currentWeek > 1) {
       setAnimateRight(true);
       setTimeout(() => {
         dispatch(changeWeek(currentWeek - nbrSchedule));
-      }, 400);
+      }, animationDuration);
 
       setTimeout(() => {
         setAnimateRight(false);
-      }, 800);
+      }, resetAnimationDuration);
     }
   }
+  // Function for animating week and change value of currentWeek with Listbox
+  const changeInputCurrentWeek = (newValue: number | undefined) => {
+    if (newValue) {
+      // Animate Right
+      if (currentWeek > newValue) {
+        setAnimateRight(true);
+        setTimeout(() => {
+          dispatch(changeWeek(newValue));
+        }, animationDuration);
 
-  const changeInputCurrentWeek = (event: ChangeEvent<HTMLInputElement>) => {
-    const newInputValue = event.target.value;
-    if (currentWeek > Number(newInputValue)) {
-      setAnimateRight(true);
-      setTimeout(() => {
-        dispatch(changeWeek(Number(newInputValue)));
-      }, 400);
+        setTimeout(() => {
+          setAnimateRight(false);
+        }, resetAnimationDuration);
+      } else {
+        // Animate Left
+        setAnimateLeft(true);
+        setTimeout(() => {
+          dispatch(changeWeek(newValue));
+        }, animationDuration);
 
-      setTimeout(() => {
-        setAnimateRight(false);
-      }, 800);
-    } else {
-      setAnimateLeft(true);
-      setTimeout(() => {
-        dispatch(changeWeek(Number(newInputValue)));
-      }, 400);
-
-      setTimeout(() => {
-        setAnimateLeft(false);
-      }, 800);
+        setTimeout(() => {
+          setAnimateLeft(false);
+        }, resetAnimationDuration);
+      }
     }
   };
 
@@ -87,6 +97,7 @@ function Schedule() {
     };
   }, [weekFind, dispatch, isLogged, navigate]);
 
+  // Render schedule week
   function newShedulesFunction() {
     return schedules
       .filter((schedule) => schedule.week === currentWeek)
@@ -95,7 +106,7 @@ function Schedule() {
       ));
   }
 
-  // SHOPPING LIST
+  // Side effects and functions for Shopping List
   const [shoppingList, setShoppingList] = useState<
     [string | undefined, string | undefined][]
   >([]);
@@ -178,7 +189,7 @@ function Schedule() {
             handleClickBeforeWeek(5);
           }}
         >
-          <ChevronsLeft className="text-thirdff h-16 w-16" />
+          <ChevronsLeft className="text-titleff h-16 w-16" />
         </button>
         <button
           type="button"
@@ -188,20 +199,12 @@ function Schedule() {
             handleClickBeforeWeek(1);
           }}
         >
-          <ChevronLeft className="text-thirdff h-16 w-16" />
+          <ChevronLeft className="text-titleff h-16 w-16" />
         </button>
-        <p className="text-thirdff text-2xl sm:text-4xl font-bold text-center">
+        <p className="text-titleff text-2xl sm:text-4xl font-bold text-center">
           Week
         </p>
-        <input
-          type="number"
-          id="weekInput"
-          min="1"
-          max="52"
-          className="text-thirdff text-2xl sm:text-4xl font-bold text-center w-8 sm:w-16"
-          value={currentWeek}
-          onChange={changeInputCurrentWeek}
-        />
+        <ListBox value={currentWeek} onChange={changeInputCurrentWeek} />
 
         <button
           type="button"
@@ -211,7 +214,7 @@ function Schedule() {
             handleClickNextWeek(1);
           }}
         >
-          <ChevronRight className="text-thirdff h-16 w-16" />
+          <ChevronRight className="text-titleff h-16 w-16" />
         </button>
         <button
           type="button"
@@ -221,7 +224,7 @@ function Schedule() {
             handleClickNextWeek(5);
           }}
         >
-          <ChevronsRight className="text-thirdff h-16 w-16" />
+          <ChevronsRight className="text-titleff h-16 w-16" />
         </button>
       </div>
       <section

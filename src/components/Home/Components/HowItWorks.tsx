@@ -5,7 +5,10 @@ interface HowItWorksProps {
 
 function HowItWorks({ imageHome, content }: HowItWorksProps) {
   return (
-    <div className="flex flex-col items-center space-around mt-20">
+    <div
+      className="flex flex-col items-center space-around mt-20"
+      data-aos="flip-left"
+    >
       <img
         src={imageHome}
         alt="image2"
