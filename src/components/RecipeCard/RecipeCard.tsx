@@ -1,44 +1,36 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Heart, Plus, Shuffle, X } from 'react-feather';
+import { useEffect } from 'react';
+import { Shuffle, X } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { MealAdd, Recipe } from '../../@types/recipe';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateModalAnimation } from '../../store/reducers/favoris';
 import {
-  addFavori,
   addSchedule,
   addScheduleFavori,
-  deleteFavori,
-  displaySchedule,
-  toggleIsOpen,
-  toggleSignUpOpen,
   deleteMeal,
-} from '../../store/reducers/settings';
+} from '../../store/reducers/user';
 import './RecipeCard.css';
+import HeartFavori from './HeartFavori/HeartFavori';
+import AddScheduleButton from './AddScheduleButton/AddScheduleButton';
 
 interface CardProps {
   recipe: Recipe;
 }
 
 function RecipeCard({ recipe }: CardProps) {
-  const [recipeFavori, setRecipeFavori] = useState(false);
-  const isLogged = useAppSelector((state) => state.settings.isLogged);
   const stateSchedule = useAppSelector((state) => state.schedule.stateSchedule);
   const MealFavoriToAdd = useAppSelector(
     (state) => state.settings.MealFavoriToAdd
   );
-  const clickAddFavori = useAppSelector(
-    (state) => state.schedule.clickAddSchedule
-  );
+
   const displayScheduleModal = useAppSelector(
     (state) => state.settings.clickAddSchedule
   );
 
-  const favoris = useAppSelector(
-    (state) => state.settings.currentUser.favorites
-  );
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const dispatch = useAppDispatch();
+
+  // Function to handle adding a recipe to the schedule on a specific day
   function handleClickDay() {
     const newMeal = {
       idDbMeal: MealFavoriToAdd.idDbMeal,
@@ -49,41 +41,6 @@ function RecipeCard({ recipe }: CardProps) {
     dispatch(addScheduleFavori(newMeal));
     dispatch(addSchedule({ meals: newMeal, week: currentWeek }));
   }
-  // Function to handle adding the recipe to the schedule
-  function handleAddSchedule(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-    dispatch(displaySchedule(!clickAddFavori));
-    dispatch(addScheduleFavori(recipe));
-
-    window.scrollTo({
-      behavior: 'smooth',
-      top: 0,
-    });
-  }
-
-  // useCallback to memoize the searchFavori function and prevent unnecessary
-  // re-renders
-
-  const matchingFavori = useMemo(() => {
-    const findFavori = favoris.find(
-      (favori) => favori.idDbMeal === recipe.idDbMeal
-    );
-
-    return findFavori;
-  }, [favoris, recipe.idDbMeal]);
-
-  // Function to handle adding the recipe to favorites
-  function handleAddFavori(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-
-    if (!matchingFavori) {
-      dispatch(addFavori(recipe));
-      setRecipeFavori(true);
-    } else {
-      dispatch(deleteFavori(matchingFavori.id));
-      setRecipeFavori(false);
-    }
-  }
 
   // Function to handle delete the recipe to schedule
   function handleDeleteMeal(event: React.MouseEvent<HTMLButtonElement>) {
@@ -91,7 +48,7 @@ function RecipeCard({ recipe }: CardProps) {
     dispatch(deleteMeal(recipe.id));
   }
 
-  // Function to handle shuffle when there are No Recipe
+  // Function to handle shuffling and adding a new random recipe to the schedule
   async function handleShuffleMeal(event: React.MouseEvent<HTMLButtonElement>) {
     event.preventDefault();
 
@@ -112,26 +69,14 @@ function RecipeCard({ recipe }: CardProps) {
     dispatch(addSchedule({ meals: uniqueMeal, week: currentWeek }));
   }
 
-  // useEffect to check if the recipe is in favorites and update recipeFavori
-  // accordingly
+  // useEffect to check if the recipe is in favorites and update recipeFavori accordingly
+
   useEffect(() => {
     if (displayScheduleModal) {
       dispatch(changeStateModalAnimation(1));
     }
   }, [dispatch, displayScheduleModal]);
 
-  useEffect(() => {
-    if (matchingFavori) {
-      setRecipeFavori(true);
-    } else {
-      setRecipeFavori(false);
-    }
-  }, [recipe, matchingFavori]);
-
-  const toggleSignUp = () => {
-    dispatch(toggleSignUpOpen());
-    dispatch(toggleIsOpen());
-  };
   const stateHome = useAppSelector((state) => state.home.stateHome);
 
   return (
@@ -178,38 +123,10 @@ function RecipeCard({ recipe }: CardProps) {
               : ''
           }`}
         >
-          <button
-            type="button"
-            className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
-            onClick={(event) => {
-              event.preventDefault();
-              if (!isLogged) {
-                toggleSignUp();
-              } else {
-                handleAddFavori(event);
-              }
-            }}
-          >
-            {recipeFavori ? (
-              <Heart size={20} fill="red" />
-            ) : (
-              <Heart size={20} />
-            )}
-          </button>
-          <button
-            type="button"
-            className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
-            onClick={(event) => {
-              event.preventDefault();
-              if (!isLogged) {
-                toggleSignUp();
-              } else {
-                handleAddSchedule(event);
-              }
-            }}
-          >
-            <Plus size={20} />
-          </button>
+          {/* ---------------- COMPONENT ADD TO FAVORI --------------- */}
+          <HeartFavori recipe={recipe} />
+          {/* ---------------- COMPONENT ADD TO SCHEDULE --------------- */}
+          <AddScheduleButton recipe={recipe} />
         </div>
 
         {/* Is there a recipe on this card? If yes, we display the delete function; otherwise, we display the shuffle function. */}
@@ -221,21 +138,10 @@ function RecipeCard({ recipe }: CardProps) {
               displayScheduleModal ? 'hidden' : ''
             }`}
           >
-            {/* ----------- Function DELETE ----------- */}
-            <button
-              type="button"
-              className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
-              onClick={(event) => {
-                event.preventDefault();
-                handleAddFavori(event);
-              }}
-            >
-              {recipeFavori ? (
-                <Heart size={20} fill="red" />
-              ) : (
-                <Heart size={20} />
-              )}
-            </button>
+            {/* ---------------- Function DELETE ---------------- */}
+            {/* ---------------- COMPONENT ADDFAVORI --------------- */}
+            <HeartFavori recipe={recipe} />
+
             <button
               type="button"
               className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"

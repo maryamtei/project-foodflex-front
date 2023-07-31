@@ -6,7 +6,7 @@ import FootHome from './Components/FootHome';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateHome } from '../../store/reducers/home';
 import { fetchRandomRecipes } from '../../store/reducers/recipes';
-import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/settings';
+import { toggleIsOpen, toggleSignUpOpen } from '../../store/reducers/user';
 
 // Define the props interface for the Home component
 interface HomeProps {

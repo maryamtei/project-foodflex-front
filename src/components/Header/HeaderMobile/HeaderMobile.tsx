@@ -12,10 +12,7 @@ import {
 } from 'react-feather';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import {
-  toggleIsOpen,
-  toggleSignUpOpen,
-} from '../../../store/reducers/settings';
+import { toggleIsOpen, toggleSignUpOpen } from '../../../store/reducers/user';
 import {
   toggleIsOpenProfil,
   changeFavoriIsOpen,

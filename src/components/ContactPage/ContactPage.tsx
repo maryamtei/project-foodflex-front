@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
-import { contact } from '../../store/reducers/settings';
+import { contact } from '../../store/reducers/user';
 
 function ContactPage() {
   // Get the "modalIsOpen" state from the store using "useAppSelector"

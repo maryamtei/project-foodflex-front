@@ -1,28 +1,27 @@
+// The base URL for the API
 const API_BASE_URL = 'http://localhost:3000';
 
-// Fonction utilitaire pour ajouter le token d'authentification aux headers
+// Utility function to add the authentication token to the headers
 const createHeadersWithAuthorization = () => {
-  const token = localStorage.getItem('token');
-  const headers = new Headers();
+  const token = localStorage.getItem('token'); // Retrieve the authentication token from the local storage
+  const headers = new Headers(); // Create new headers object
   headers.append('Content-Type', 'application/json');
-  // headers.append('Access-Control-Allow-Origin', '*');
-  // headers.append('Access-Control-Allow-Methods', 'POST,PATCH,OPTIONS');
   if (token) {
-    headers.append('Authorization', `Bearer ${token}`);
+    headers.append('Authorization', `Bearer ${token}`); // If a token exists, add it to the Authorization header with the Bearer scheme
   }
   return headers;
 };
 
-// Fonction utilitaire pour effectuer les requêtes fetch avec les headers mis à jour
+// Utility function to perform fetch requests with updated headers
 const fetchWithHeaders = (url: RequestInfo | URL, options = {}) => {
-  const headers = createHeadersWithAuthorization();
-  return fetch(`${API_BASE_URL}/${url}`, { ...options, headers });
+  const headers = createHeadersWithAuthorization(); // Get the headers with authorization token
+  return fetch(`${API_BASE_URL}/${url}`, { ...options, headers }); // Fetch request with the provided URL and headers
 };
 
-// Fonction utilitaire pour effectuer les requêtes GET avec les headers mis à jour
+// Utility function to perform GET requests with updated headers
 const fetchGet = (url: string) => fetchWithHeaders(url);
 
-// Function utilitaire pour effectuer les requêtes POST avec les headers mis à jour
+// Utility function to perform POST requests with updated headers
 const fetchPost = (url: string, data: string | object | number) => {
   return fetchWithHeaders(url, {
     method: 'POST',
@@ -30,19 +29,19 @@ const fetchPost = (url: string, data: string | object | number) => {
   });
 };
 
-// Function utilitaire pour effectuer les requêtes POST avec les headers mis à jour
+// Utility function to perform PATCH requests with updated headers
 const fetchPatch = (url: string, data: string | object | number) => {
   return fetchWithHeaders(url, {
     method: 'PATCH',
     body: JSON.stringify(data),
   });
 };
-
+// Utility function to perform DELETE requests with updated headers
 const fetchDelete = (url: string) => {
   return fetchWithHeaders(url, {
     method: 'DELETE',
   });
 };
 
-// Exporter les fonctions utilitaires
+// Export the utility functions for external use
 export { fetchGet, fetchPost, fetchDelete, fetchPatch };

@@ -1,14 +1,20 @@
+// Import necessary modules and components
 import { scroller } from 'react-scroll';
 import { useEffect, useRef } from 'react';
 import Signup from './sign-up/Signup';
 import Signin from './sign-in/Signin';
 import { useAppSelector } from '../../hooks/redux';
 
+// Define the 'Modal' component
 function Modal() {
+  // Get the 'modalIsOpen' and 'signUpOpen' states from the Redux store using the 'useAppSelector' hook
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
   const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
+
+  // Create a ref for the modal container element
   const modalRef = useRef(null);
 
+  // Function to conditionally render the 'Signup' or 'Signin' component based on the 'signUpOpen' state
   const modalCondition = () => {
     if (!signUpOpen) {
       return <Signin />;
@@ -16,14 +22,16 @@ function Modal() {
     return <Signup />;
   };
 
+  // useEffect to scroll to the modal when it becomes open ('modalIsOpen' changes)
   useEffect(() => {
     scroller.scrollTo('modalSignUpSignIn', {
       duration: 500,
       smooth: true,
-      offset: -150,
+      offset: -100,
     });
   }, [modalIsOpen]);
 
+  // Render the modal component with 'Signup' or 'Signin' component based on 'signUpOpen' state
   return (
     <div
       ref={modalRef}
@@ -34,5 +42,5 @@ function Modal() {
     </div>
   );
 }
-
+// Export the 'Modal' component as the default export
 export default Modal;

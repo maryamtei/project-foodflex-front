@@ -2,11 +2,11 @@ function Loader() {
   return (
     <div
       role="status"
-      className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+      className="z-50 absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
     >
       <svg
         aria-hidden="true"
-        className="w-16 h-16 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-thirdff"
+        className="w-20 h-20 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-thirdff"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
