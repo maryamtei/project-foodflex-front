@@ -48,10 +48,7 @@ function Footer() {
     >
       <div className="text-bgff flex items-center h-full p-5 text-center gap-3 justify-between flex-row ">
         <div className="flex flex-col gap-3 ">
-          <p className="text-md font-medium">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Blanditiis, fuga.
-          </p>
+         
           <div className="flex flex-col gap-3">
             <h2 className="text-md font-bold ">Folow Us On :</h2>
             <div className="flex gap-3 justify-center">
@@ -61,7 +58,7 @@ function Footer() {
               <GitHub className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
               <Instagram className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
             </div>
-            <p className="text-sm italic ">@2023 Foodflex</p>
+            <p className="text-sm italic ">Crafted with a dash of gluttony by FoodFlex - @2023</p>
           </div>
         </div>
 
