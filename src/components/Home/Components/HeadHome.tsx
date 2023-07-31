@@ -12,12 +12,11 @@ function HeadHome() {
         {/* Background image section */}
         <div className="relative translate-y-[-64px]">
           {/* Background image */}
-          <img
-            src="/ingredients.jpg"
-            alt="Background"
-            className="w-full h-screen sm:h-auto sm:max-h-128 object-cover object-bottom "
+          <div
+            className="relative bg-cover bg-center"
             style={{
-              objectPosition: 'center top',
+              backgroundImage: `url('/ingredients.jpg')`,
+              height: '750px',
             }}
           />
           {/* Semi-transparent overlay */}

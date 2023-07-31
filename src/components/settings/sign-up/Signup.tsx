@@ -15,7 +15,7 @@ import {
 } from '../../../store/reducers/user';
 
 // Define the 'signup' component
-function signup() {
+function Signup() {
   // Get the Redux dispatch function
   const dispatch = useAppDispatch();
 
@@ -28,12 +28,10 @@ function signup() {
 
   // useEffect to check if the password is valid and set 'disabled' accordingly
   useEffect(() => {
-    if (password) {
-      if (password.length >= 8 && confirmPassword === password) {
-        setDisabled(false);
-      } else {
-        setDisabled(true);
-      }
+    if (confirmPassword && confirmPassword === password) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
     }
   }, [setDisabled, confirmPassword, password]);
 
@@ -92,6 +90,10 @@ function signup() {
     resetField();
     dispatch(toggleSignUpOpen());
   };
+
+  const isDesktop = useMediaQuery({
+    query: '(min-width: 768px)', // Use the useMediaQuery hook to detect if the screen is of type "Desktop" (at least 768px wide)
+  });
 
   // Render the sign-up form component
   return (
@@ -191,4 +193,4 @@ function signup() {
   );
 }
 
-export default signup;
+export default Signup;

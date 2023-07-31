@@ -8,7 +8,7 @@ import CarouselSlide from './CarouselSlide';
 
 const PLACEHOLDER_MEAL = {
   name: 'burger',
-  image: '/public/burger.svg',
+  image: '/burger.svg',
   id: 1,
 };
 

@@ -31,29 +31,22 @@ function TermsPage() {
   return (
     // Container for the Terms and Conditions page
     <div
-      className={`bg-bgff relative mb-20 ${
+      className={`bg-bgff relative mb-20 col ${
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
-      } `}
+      }`}
     >
-      <div className="flex flex-col items-center justify-center h-auto object-cover">
-        <div className="relative w-full">
-          {/* Background image */}
-          <img
-            src="/terms.jpg"
-            alt="Background"
-            className="w-full h-full object-cover object-bottom"
-            style={{
-              objectPosition: 'center top',
-            }}
-          />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black opacity-50" />
-          {/* Title */}
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white text-center sm:text-center md:text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 uppercase">
-            Terms and Conditions of Use
-          </h1>
-        </div>
-        {/* Terms content */}
+      {/* Background image container */}
+      <div
+        className="relative bg-cover bg-center"
+        style={{ backgroundImage: `url('/terms.jpg')`, height: '700px' }}
+      >
+        <div className="absolute inset-0 bg-black opacity-50" />
+        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white text-center sm:text-center md:text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 uppercase">
+          Terms and Conditions of Use
+        </h1>
+      </div>
+      {/* Terms content */}
+      <div className="flex flex-col items-center space-around mt-20">
         <div className="prose ml-4 bg-bgff p-8">
           <div className="prose max-w-screen-xl mx-auto">
             {/* Section 1 */}

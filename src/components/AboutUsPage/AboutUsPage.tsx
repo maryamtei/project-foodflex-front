@@ -21,11 +21,11 @@ function AboutUsPage() {
           </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
-              {/* Display an image of the Geek-Chefs team */}
+              {/* Display an image of the Geek-Chefs team using img tag */}
               <img
-                src="/about.jpg"
-                alt="About Us"
                 className="w-full h-auto rounded-lg shadow-md"
+                src="./about.jpg"
+                alt="Geek-Chefs Team"
               />
             </div>
             <article className="md:order-first">
