@@ -1,27 +1,25 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Heart, Plus, Shuffle, X } from 'react-feather';
+import { useEffect } from 'react';
+import { Plus, Shuffle, X } from 'react-feather';
 import { Link } from 'react-router-dom';
 import { MealAdd, Recipe } from '../../@types/recipe';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateModalAnimation } from '../../store/reducers/favoris';
 import {
-  addFavori,
   addSchedule,
   addScheduleFavori,
-  deleteFavori,
   displaySchedule,
   toggleIsOpen,
   toggleSignUpOpen,
   deleteMeal,
 } from '../../store/reducers/settings';
 import './RecipeCard.css';
+import HeartFavori from './HeartFavori/HeartFavori';
 
 interface CardProps {
   recipe: Recipe;
 }
 
 function RecipeCard({ recipe }: CardProps) {
-  const [recipeFavori, setRecipeFavori] = useState(false);
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const stateSchedule = useAppSelector((state) => state.schedule.stateSchedule);
   const MealFavoriToAdd = useAppSelector(
@@ -34,9 +32,6 @@ function RecipeCard({ recipe }: CardProps) {
     (state) => state.settings.clickAddSchedule
   );
 
-  const favoris = useAppSelector(
-    (state) => state.settings.currentUser.favorites
-  );
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const dispatch = useAppDispatch();
   function handleClickDay() {
@@ -59,30 +54,6 @@ function RecipeCard({ recipe }: CardProps) {
       behavior: 'smooth',
       top: 0,
     });
-  }
-
-  // useCallback to memoize the searchFavori function and prevent unnecessary
-  // re-renders
-
-  const matchingFavori = useMemo(() => {
-    const findFavori = favoris.find(
-      (favori) => favori.idDbMeal === recipe.idDbMeal
-    );
-
-    return findFavori;
-  }, [favoris, recipe.idDbMeal]);
-
-  // Function to handle adding the recipe to favorites
-  function handleAddFavori(event: React.MouseEvent<HTMLButtonElement>) {
-    event.preventDefault();
-
-    if (!matchingFavori) {
-      dispatch(addFavori(recipe));
-      setRecipeFavori(true);
-    } else {
-      dispatch(deleteFavori(matchingFavori.id));
-      setRecipeFavori(false);
-    }
   }
 
   // Function to handle delete the recipe to schedule
@@ -119,14 +90,6 @@ function RecipeCard({ recipe }: CardProps) {
       dispatch(changeStateModalAnimation(1));
     }
   }, [dispatch, displayScheduleModal]);
-
-  useEffect(() => {
-    if (matchingFavori) {
-      setRecipeFavori(true);
-    } else {
-      setRecipeFavori(false);
-    }
-  }, [recipe, matchingFavori]);
 
   const toggleSignUp = () => {
     dispatch(toggleSignUpOpen());
@@ -178,24 +141,8 @@ function RecipeCard({ recipe }: CardProps) {
               : ''
           }`}
         >
-          <button
-            type="button"
-            className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
-            onClick={(event) => {
-              event.preventDefault();
-              if (!isLogged) {
-                toggleSignUp();
-              } else {
-                handleAddFavori(event);
-              }
-            }}
-          >
-            {recipeFavori ? (
-              <Heart size={20} fill="red" />
-            ) : (
-              <Heart size={20} />
-            )}
-          </button>
+          {/* ---------------- COMPONENT ADDFAVORI --------------- */}
+          <HeartFavori recipe={recipe} />
           <button
             type="button"
             className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
@@ -222,20 +169,10 @@ function RecipeCard({ recipe }: CardProps) {
             }`}
           >
             {/* ----------- Function DELETE ----------- */}
-            <button
-              type="button"
-              className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
-              onClick={(event) => {
-                event.preventDefault();
-                handleAddFavori(event);
-              }}
-            >
-              {recipeFavori ? (
-                <Heart size={20} fill="red" />
-              ) : (
-                <Heart size={20} />
-              )}
-            </button>
+            {/* ---------------- COMPONENT ADDFAVORI --------------- */}
+
+            <HeartFavori recipe={recipe} />
+
             <button
               type="button"
               className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
