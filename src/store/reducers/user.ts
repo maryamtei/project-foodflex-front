@@ -75,7 +75,7 @@ export const initialValue: SettingsState = {
     position: 0,
   },
   idToDelete: 1,
-  currentWeek: dayjs().week(),
+  currentWeek: dayjs().week(), // Init currentWeek with dayjs
   clickAddSchedule: false,
 };
 
@@ -117,13 +117,8 @@ export const signIn = createAsyncThunk(
   }
 );
 // ---------------- LOGOUT -------------------//
-export const logout = createAsyncThunk('settings/LOGOUT', async () => {
-  const response = await fetchGet(`logout`);
-  const data = await response.json();
-  const status = await response.status;
+export const logout = createAction('settings/LOGOUT');
 
-  return { data, status };
-});
 // ---------------- DATA USER -------------------//
 // Define an asynchronous thunk function called 'getUserData'.
 // This thunk represents the process of fetching user data from the server.
@@ -263,26 +258,12 @@ const settingsReducer = createReducer(initialValue, (builder) => {
     })
 
     // ---------------- LOGOUT -------------------//
-    // ... Handling actions for the 'logout' asynchronous thunk (pending, rejected, fulfilled).
-    .addCase(logout.pending, (state) => {
-      state.isLoading = true;
-      state.message = null;
-      state.status = 0;
-    })
-    .addCase(logout.rejected, (state) => {
-      state.isLoading = false;
-    })
-    .addCase(logout.fulfilled, (state, action) => {
-      state.isLoading = false;
-      state.message = action.payload.data.message; // message to display
-      state.status = action.payload.status; // code status
-      if (state.status === 200) {
-        // If status OK
-        localStorage.removeItem('token'); // Remove item token to localStorage
-        state.isLogged = false;
-        state.currentUser = initialValue.currentUser; // init data user
-        window.location.reload(); // reload
-      }
+
+    .addCase(logout, (state) => {
+      localStorage.removeItem('token'); // Remove item token to localStorage
+      state.isLogged = false;
+      state.currentUser = initialValue.currentUser; // init data user
+      window.location.reload(); // reload
     })
     // ---------------- USER -------------------//
     // ... Handling actions for the 'USER' asynchronous thunk (pending, rejected, fulfilled).
