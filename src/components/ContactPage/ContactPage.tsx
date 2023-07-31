@@ -36,14 +36,14 @@ function ContactPage() {
           <div className="bg-thirdff w-full max-w-md p-8 rounded shadow-md border border-gray-600">
             {' '}
             {/* Add shadow */}
-            <h1 className="text-red-500 text-4xl text-center font-bold mb-6">
+            <h1 className="text-titleff text-4xl text-center font-bold mb-6">
               Contact us
             </h1>
             <form onSubmit={handleSubmit}>
               <div className="mb-4">
                 <label
                   htmlFor="name"
-                  className="block text-red-500 font-medium mb-2 "
+                  className="block text-titleff font-medium mb-2 "
                 >
                   Name
                 </label>
@@ -61,7 +61,7 @@ function ContactPage() {
               <div className="mb-4">
                 <label
                   htmlFor="email"
-                  className="block text-red-500 font-medium mb-2"
+                  className="block text-titleff font-medium mb-2"
                 >
                   E-mail address
                 </label>
@@ -79,7 +79,7 @@ function ContactPage() {
               <div className="mb-4">
                 <label
                   htmlFor="message"
-                  className="block text-red-500 font-medium mb-2"
+                  className="block text-titleff font-medium mb-2"
                 >
                   Message
                 </label>
@@ -97,7 +97,7 @@ function ContactPage() {
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="bg-fourthff hover:bg-red-500 text-white font-medium py-2 px-4 rounded focus:outline-none"
+                  className="bg-titleff hover:bg-red-500 text-white font-medium py-2 px-4 rounded focus:outline-none"
                 >
                   Submit
                 </button>

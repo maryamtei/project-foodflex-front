@@ -238,7 +238,7 @@ function TermsPage() {
               liberties. Law no. 2004-575 of June 21, 2004 on confidence in the
               digital economy.
             </p>
-            <h2 className="text-2xl font-bold text-[#AF4136] mb-4">
+            <h2 className="text-2xl font-bold text-titleff mb-4">
               11. Lexique
             </h2>
             <p className="text-gray-500">
