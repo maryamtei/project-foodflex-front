@@ -54,7 +54,7 @@ function Carousel({ meals }: RecipeProps) {
   );
 
   return (
-    <div className="text-fourthff">
+    <div className="text-fourthff max-w-max m-auto">
       <NukaCarousel
         slidesToShow={changeSlidesToShow()}
         renderBottomCenterControls={null}

@@ -82,7 +82,7 @@ function RecipeCard({ recipe }: CardProps) {
 
   return (
     <Link
-      to={`/recipes/${recipe.idDbMeal}`}
+      to={recipe.id === 1 ? `/recipes` : `/recipes/${recipe.idDbMeal}`}
       className={`shadow-md rounded-lg relative hover:shadow-lg transition-all  ${
         displayScheduleModal
           ? 'pointer-events-auto border-2 border-thirdff'

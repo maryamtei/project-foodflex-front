@@ -1,13 +1,13 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import ReactPlayer from 'react-player';
+import { v4 as uuidv4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchRecipeDetails } from '../../store/reducers/recipeDetails';
 import '../RecipeCard/RecipeCard.css';
 import IngredientsList from './ingredient';
 import HeartFavori from '../RecipeCard/HeartFavori/HeartFavori';
 import AddScheduleButton from '../RecipeCard/AddScheduleButton/AddScheduleButton';
-import { v4 as uuidv4 } from 'uuid';
 
 function Recipe() {
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
@@ -126,7 +126,7 @@ function Recipe() {
             />
           </div>
           <div className="md:w-2/3 md:pr-8 pt-4 md:p-0">
-            <h2 className="text-xl font-bold text-titleff mt-10 mb-4 md:m-10 ">
+            <h2 className="text-xl font-bold text-titleff mt-10 mb-4 md:my-10 ">
               Instructions:
             </h2>
             {/* Render the recipe instructions */}
