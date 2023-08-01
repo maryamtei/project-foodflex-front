@@ -1,5 +1,6 @@
 import RecipeCard from '../RecipeCard/RecipeCard';
 import { Recipe } from '../../@types/recipe';
+import { v4 as uuidv4 } from 'uuid';
 
 interface CarouselSlideProps {
   day: string;
@@ -21,11 +22,11 @@ export default function CarouselSlide({
         <p className="text-titleff text-sm sm:text-md font-bold text-center mb-2 sm:mt-4 ">
           Lunch
         </p>
-        <RecipeCard recipe={recipe1} key={recipe1.idDbMeal} />
+        <RecipeCard recipe={recipe1} key={uuidv4()} />
         <p className="text-titleff text-sm sm:text-md font-bold text-center mb-2 mt-8">
           Dinner
         </p>
-        <RecipeCard recipe={recipe2} key={recipe2.idDbMeal} />
+        <RecipeCard recipe={recipe2} key={uuidv4()} />
       </div>
     </div>
   );

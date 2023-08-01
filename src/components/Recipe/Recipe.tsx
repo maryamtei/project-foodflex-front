@@ -7,6 +7,7 @@ import '../RecipeCard/RecipeCard.css';
 import IngredientsList from './ingredient';
 import HeartFavori from '../RecipeCard/HeartFavori/HeartFavori';
 import AddScheduleButton from '../RecipeCard/AddScheduleButton/AddScheduleButton';
+import { v4 as uuidv4 } from 'uuid';
 
 function Recipe() {
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
@@ -131,7 +132,7 @@ function Recipe() {
             {/* Render the recipe instructions */}
             <div className="prose lg:prose-lg">
               {recipe.instruction.split('\n').map((line) => (
-                <p className="text-gray-500" key={line}>
+                <p className="text-gray-500" key={uuidv4()}>
                   {line}
                 </p>
               ))}
