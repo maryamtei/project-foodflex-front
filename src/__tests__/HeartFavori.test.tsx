@@ -34,14 +34,14 @@ describe('HeartFavori', () => {
   });
 
   it('Recipe not in favorites', async () => {
-    // Créez un store mock avec des valeurs de base
+    // Create a mock store with initial values
     const mockStore = configureMockStore();
     const initialState = {
       settings: {
         currentUser: {
-          favorites: [], // You can define the user's favorites here
+          favorites: [],
         },
-        isLogged: true, // Set the value of isLogged for the test
+        isLogged: true,
       },
     };
     const store = mockStore(initialState);
@@ -79,9 +79,9 @@ describe('HeartFavori', () => {
               id: 1,
               position: 0,
             },
-          ], // You can define the user's favorites here
+          ],
         },
-        isLogged: true, // Set the value of isLogged for the test
+        isLogged: true,
       },
     };
     const store = mockStore(initialState);
