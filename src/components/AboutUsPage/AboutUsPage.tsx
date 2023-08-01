@@ -28,14 +28,14 @@ function AboutUsPage() {
               </h2>
               <p className="text-gray-500 leading-relaxed mb-6">
                 Welcome to the utterly wacky and delightfully offbeat world of
-                "Geek-Chefs"! We are a team of five high-spirited developers:
-                Jonathan, the keyboard genius who codes while dancing the
-                Macarena; Maryam, the algorithm expert who juggles virtual
-                vegetables like a pro; Romain, the maestro of amusing bugs who
-                turns errors into unique culinary creations; Mathilde, the queen
-                of quirky recipes who skillfully blends improbable ingredients;
-                and Gabriele, the virtuoso of cheerful interfaces that make
-                cooking as playful as a video game!
+                &quot;Geek-Chefs&quot;! We are a team of five high-spirited
+                developers: Jonathan, the keyboard genius who codes while
+                dancing the Macarena; Maryam, the algorithm expert who juggles
+                virtual vegetables like a pro; Romain, the maestro of amusing
+                bugs who turns errors into unique culinary creations; Mathilde,
+                the queen of quirky recipes who skillfully blends improbable
+                ingredients; and Gabriele, the virtuoso of cheerful interfaces
+                that make cooking as playful as a video game!
               </p>
               <p className="text-gray-500 leading-relaxed mb-6">
                 We had an epiphany while seeking a creative way to combine our
@@ -76,9 +76,9 @@ function AboutUsPage() {
               <p className="text-gray-500 leading-relaxed mb-6">
                 So, are you ready to dive into the zany cauldron of the
                 Geek-Chefs? Strap on your aprons and put on your coding glasses,
-                because it's going to be an incredibly wild and hilariously
+                because it&apos;s going to be an incredibly wild and hilariously
                 funny adventure! We eagerly await your arrival for a culinary
-                experience that's vibrant and full of laughter!
+                experience that&apos;s vibrant and full of laughter!
               </p>
             </article>
           </div>
