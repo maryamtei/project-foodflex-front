@@ -64,7 +64,7 @@ function Recipe() {
   if (!recipe) {
     return (
       <div className="flex justify-center mt-20">
-        <div className="loading loading-ring flex justify-center align-middle w-36 " />
+        <div className="loading loading-ring flex justify-center align-middle w-36" />
       </div>
     );
   }
@@ -78,8 +78,8 @@ function Recipe() {
         } `}
       >
         <div className="flex flex-col items-center">
-          <div className="flex items-center justify-evenly w-full max-w-2xl">
-            <h1 className="text-4xl text-titleff font-bold mb-4 md:my-8">
+          <div className="flex items-center justify-between w-full max-w-2xl">
+            <h1 className="text-4xl text-titleff font-bold my-4 md:my-8">
               {recipe.name}
             </h1>
             <div className="flex text-white min-w-max">
@@ -110,7 +110,7 @@ function Recipe() {
           <img
             src={recipe.imageUrl}
             alt={recipe.name}
-            className="rounded-lg flex"
+            className="rounded-lg flex md:max-w-2xl"
           />
         </div>
         <h2 className="text-3xl font-bold text-titleff mt-10 mb-4 md:m-10 text-center">
