@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 // Import necessary modules and custom hooks
-import { FormEvent, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { X } from 'react-feather';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import Field from '../Field/index';

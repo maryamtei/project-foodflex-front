@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { Search } from 'react-feather';
 
 interface SearchProps {
@@ -28,7 +28,8 @@ function SearchComponent({ name, value, onChange }: SearchProps) {
         </div>
 
         <input
-          className="peer h-full w-full outline-none text-sm font-semibold text-gray-500 pr-2 bg-bgff"
+          data-testid="search"
+          className="peer h-full w-full outline-none text-sm text-gray-700 pr-2 bg-bgff"
           type="text"
           id="search"
           placeholder="Search something.."
