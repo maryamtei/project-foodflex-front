@@ -28,12 +28,8 @@ function SearchComponent({ name, value, onChange }: SearchProps) {
         </div>
 
         <input
-<<<<<<< HEAD
           data-testid="search"
           className="peer h-full w-full outline-none text-sm text-gray-700 pr-2 bg-bgff"
-=======
-          className="peer h-full w-full outline-none text-sm font-semibold text-gray-500 pr-2 bg-bgff"
->>>>>>> develop
           type="text"
           id="search"
           placeholder="Search something.."
