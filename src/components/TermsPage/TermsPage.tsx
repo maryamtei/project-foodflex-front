@@ -5,7 +5,7 @@ function TermsPage() {
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
 
   useEffect(() => {
-    // Fonction pour gérer le comportement du scroll
+    // Function to handle scroll behavior
     const handleScroll = (e: Event) => {
       if (modalIsOpen) {
         e.preventDefault();
@@ -16,7 +16,7 @@ function TermsPage() {
       }
     };
 
-    // Ajouter ou supprimer l'écouteur d'événement en fonction du modalIsOpen
+    // Add or remove the event listener based on modalIsOpen
     if (modalIsOpen) {
       document.addEventListener('scroll', handleScroll, { passive: false });
     } else {
@@ -29,31 +29,31 @@ function TermsPage() {
   }, [modalIsOpen]);
 
   return (
+    // Container for the Terms and Conditions page
     <div
-      className={`bg-bgff relative mb-20 ${
+      className={`bg-bgff relative mb-20 col ${
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
-      } `}
+      }`}
     >
-      <div className="flex flex-col items-center justify-center h-auto object-cover">
-        <div className="relative w-full">
-          <img
-            src="/terms.jpg"
-            alt="Background"
-            className="w-full h-full object-cover object-bottom"
-            style={{
-              objectPosition: 'center top',
-            }}
-          />
-          <div className="absolute inset-0 bg-black opacity-50" />
-          <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white text-center sm:text-center md:text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 uppercase">
-            Terms and Conditions of Use
-          </h1>
-        </div>
+      {/* Background image container */}
+      <div
+        className="relative bg-cover bg-center"
+        style={{ backgroundImage: `url('/terms.jpg')`, height: '700px' }}
+      >
+        <div className="absolute inset-0 bg-black opacity-50" />
+        <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-white text-center sm:text-center md:text-center absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 uppercase">
+          Terms and Conditions of Use
+        </h1>
+      </div>
+      {/* Terms content */}
+      <div className="flex flex-col items-center space-around mt-20">
         <div className="prose ml-4 bg-bgff p-8">
           <div className="prose max-w-screen-xl mx-auto">
+            {/* Section 1 */}
             <h2 className="text-2xl text-titleff font-bold mb-4">
               1. Site presentation
             </h2>
+            {/* Content */}
             <p className="text-gray-500">
               Pursuant to Article 6 of French Law No. 2004-575 of June 21, 2004
               on confidence in the digital economy, users of the [Nom du site]
@@ -68,9 +68,11 @@ function TermsPage() {
               <li>Webmaster:</li>
               <li>Host:</li>
             </ul>
+            {/* Section 2 */}
             <h2 className="text-2xl font-bold text-titleff mb-4">
               2. General terms and conditions of use and services
             </h2>
+            {/* Content */}
             <p className="text-gray-500">
               Use of the [Nom du site] website implies full acceptance of the
               general conditions of use described below. These conditions of use
@@ -85,9 +87,11 @@ function TermsPage() {
               time: they are nevertheless binding on the user, who is invited to
               refer to them as often as possible in order to review them.
             </p>
+            {/* Section 3 */}
             <h2 className="text-2xl font-bold text-titleff mb-4">
               3. Description of services provided
             </h2>
+            {/* Content */}
             <p className="text-gray-500">
               The purpose of the [Nom du site] website is to provide information
               concerning all of the company&apos;s activities. [Nom du
@@ -102,9 +106,11 @@ function TermsPage() {
               website is not exhaustive. It is subject to modifications having
               been made since it was put online.
             </p>
+            {/* Section 4 */}
             <h2 className="text-2xl font-bold text-titleff mb-4">
               4. Contractual limitations on technical data
             </h2>
+            {/* Content */}
             <p className="text-gray-500">
               The site uses JavaScript technology. The website cannot be held
               responsible for any material damage arising from use of the site.
@@ -112,9 +118,11 @@ function TermsPage() {
               using recent, virus-free equipment, and with an up-to-date
               browser.
             </p>
+            {/* Section 5 */}
             <h2 className="text-2xl font-bold text-titleff mb-4">
               5. Intellectual property and counterfeiting
             </h2>
+            {/* Content */}
             <p className="text-gray-500">
               [Nom du propriétaire du site] is the owner of the intellectual
               property rights or holds the rights of use on all the elements
@@ -129,9 +137,11 @@ function TermsPage() {
               in accordance with the provisions of articles L.335-2 et seq. of
               the French Intellectual Property Code.
             </p>
+            {/* Section 6 */}
             <h2 className="text-2xl font-bold text-titleff mb-4">
               6. Limitation of liability
             </h2>
+            {/* Content */}
             <p className="text-gray-500">
               [Nom du propriétaire du site] cannot be held responsible for
               direct or indirect damage caused to the user&apos;s equipment when
@@ -151,9 +161,11 @@ function TermsPage() {
               messages of a racist, insulting, defamatory or pornographic
               nature, whatever the medium used (text, photographs, etc.).
             </p>
+            {/* Section 7 */}
             <h2 className="text-2xl font-bold text-titleff mb-4">
               7. Personal data management
             </h2>
+            {/* Content */}
             <p className="text-gray-500">
               In France, personal data is protected by law no. 78-87 of January
               6, 1978, law no. 2004-801 of August 6, 2004, article L. 226-13 of
@@ -187,9 +199,11 @@ function TermsPage() {
               of July 1, 1998 transposing the directive 96/9 of March 11, 1996
               relating to the legal protection of databases.
             </p>
+            {/* Section 8 */}
             <h2 className="text-2xl font-bold text-titleff mb-4">
               8. Hypertext links and cookies
             </h2>
+            {/* Content */}
             <p className="text-gray-500">
               The [Nom du site] website contains a number of hyperlinks to other
               sites, set up with the authorization of [Nom du propriétaire du
@@ -221,26 +235,32 @@ function TermsPage() {
               &quot;Privacy&quot; section, click on Preferences. In the
               &quot;Privacy&quot; tab, you can block cookies.
             </p>
+            {/* Section 9 */}
             <h2 className="text-2xl font-bold text-titleff mb-4">
               9. Applicable law and jurisdiction
             </h2>
+            {/* Content */}
             <p className="text-gray-500">
               Any dispute arising in connection with the use of the [Nom du
               site] website is subject to French law. Exclusive jurisdiction is
               granted to the competent courts of Paris.
             </p>
+            {/* Section 10 */}
             <h2 className="text-2xl font-bold text-titleff mb-4">
               10. The main laws concerned
             </h2>
+            {/* Content */}
             <p className="text-gray-500">
               Act no. 78-17 of January 6, 1978, as amended by Act no. 2004-801
               of August 6, 2004 on data processing, data files and individual
               liberties. Law no. 2004-575 of June 21, 2004 on confidence in the
               digital economy.
             </p>
+            {/* Section 11 */}
             <h2 className="text-2xl font-bold text-titleff mb-4">
               11. Lexique
             </h2>
+            {/* Content */}
             <p className="text-gray-500">
               User: Internet user connecting to and using the above-mentioned
               site. Personal information: &quot;information which allows, in any

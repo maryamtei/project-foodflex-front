@@ -15,7 +15,7 @@ function Field({ value, type, label, onChange }: FieldProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2 bg-bgff">
+    <div className="flex flex-col font-bold gap-2 bg-thirdff-opacity-80">
       <label htmlFor={inputId}>{label}</label>
       <input
         // React - state
@@ -25,7 +25,7 @@ function Field({ value, type, label, onChange }: FieldProps) {
         required
         id={inputId}
         type={type}
-        className="mb-4 bg-bgff  border-titleff rounded-lg border-2 h-8 shadow-md hover:shadow-xl focus:outline-none focus:border-thirdff ease-in duration-150 p-2"
+        className="mb-4 bg-bgff  border-titleff font-bold rounded-lg border-2 h-8 shadow-md hover:shadow-xl focus:outline-none focus:border-fourthff ease-in duration-150 p-2"
       />
     </div>
   );

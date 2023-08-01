@@ -57,9 +57,14 @@ function Recipes() {
           onChange={setSelectedCategory}
         />
       </div>
+<<<<<<< HEAD
+      {recipes.length === 0 && (
+        <div className="text-center text-titleff text-2xl font-bold  mt-10">
+=======
 
       {!loading && recipes.length === 0 && (
         <div className="text-center text-thirdff text-2xl font-bold  mt-10">
+>>>>>>> develop
           No recipes found
         </div>
       )}
