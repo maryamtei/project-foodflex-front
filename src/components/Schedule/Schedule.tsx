@@ -118,7 +118,7 @@ function Schedule() {
     setIsListReady(false);
   }, [currentWeek]);
 
-  // RECUPERAION DES INGREDIENTS ET MESURES CORRESPONDANTES
+  // RETRIEVAL OF CORRESPONDING INGREDIENTS AND MEASURES
   const createList = useCallback(async () => {
     const list: Array<{ ingredient: string; mesure: string }> = [];
 
@@ -147,7 +147,7 @@ function Schedule() {
 
     const combined: { [key: string]: string | undefined } = {};
 
-    // combinaison quantites lorsqu'il y des doublons
+    // COMBINING QUANTITIES WHEN THERE ARE DUPLICATES
     list.forEach(({ ingredient, mesure }) => {
       if (!ingredient) {
         return;
@@ -164,12 +164,12 @@ function Schedule() {
     setIsListReady(true);
   }, [currentWeek, schedules]);
 
-  // CREATION DE LA LISTE
+  // CREATION OF THE LIST
   useEffect(() => {
     createList();
   }, [createList]);
 
-  // AFFICHAGE DE LA LISTE
+  // DISPLAYING THE LIST
   function toggleListVisibility() {
     setIsListVisible(!isListVisible);
     if (!isListReady) {

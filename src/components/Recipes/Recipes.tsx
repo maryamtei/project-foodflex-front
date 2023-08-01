@@ -17,6 +17,8 @@ function Recipes() {
 
   const dispatch = useAppDispatch();
 
+  const loading = useAppSelector((state) => state.recipes.loading);
+
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
 
   const recipes = useAppSelector((state) => state.recipes.list);
@@ -37,7 +39,7 @@ function Recipes() {
 
   return (
     <div
-      className={`my-10 px-3 sm:px-8 ${
+      className={`my-10 px-3 sm:px-8 container mx-auto ${
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       }`}
     >
@@ -55,12 +57,19 @@ function Recipes() {
           onChange={setSelectedCategory}
         />
       </div>
+<<<<<<< HEAD
       {recipes.length === 0 && (
         <div className="text-center text-titleff text-2xl font-bold  mt-10">
+=======
+
+      {!loading && recipes.length === 0 && (
+        <div className="text-center text-thirdff text-2xl font-bold  mt-10">
+>>>>>>> develop
           No recipes found
         </div>
       )}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 mt-10">
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  gap-4 mt-10">
         {recipes.map((recipe) => (
           <RecipeCard recipe={recipe} key={recipe.idDbMeal} />
         ))}

@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import {
-  Menu,
   Twitter,
   Instagram,
   Facebook,
@@ -17,6 +16,7 @@ import {
   toggleIsOpenProfil,
   changeFavoriIsOpen,
 } from '../../../store/reducers/favoris';
+import MenuIcon from './burgerMenu';
 
 function HeaderMobile() {
   const btnMenuRef = useRef<HTMLButtonElement>(null);
@@ -48,6 +48,7 @@ function HeaderMobile() {
   const closeProfilModal = () => {
     dispatch(toggleIsOpenProfil());
   };
+
   return (
     <header className="relative mt-20 ">
       <div
@@ -82,7 +83,7 @@ function HeaderMobile() {
             onClick={menuOnClick}
             className="h-9 w-9 cursor"
           >
-            <Menu className="h-9 w-9" />
+            <MenuIcon menuActive={menuActive} />
           </button>
         </div>
         <div className="text-bgff flex items-center h-full flex-col p-5 text-center gap-3 z-10 ease-in duration-500 justify-between">

@@ -45,7 +45,7 @@ function FavoriCard({ favori }: CardProps) {
         <img
           src={favori.image}
           alt={favori.name}
-          className="rounded-t-md cover"
+          className="rounded-t-md h-40 object-cover w-full"
         />
         <div className="text-bgff absolute top-2 right-1">
           <div className="card-actions justify-end">
@@ -53,7 +53,7 @@ function FavoriCard({ favori }: CardProps) {
             <button
               aria-label="add meal in favorite"
               type="button"
-              className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-1"
+              className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-1 hover:animate-pulse"
               onClick={(event) => {
                 event.preventDefault();
                 handleDeleteFavori();
@@ -65,7 +65,7 @@ function FavoriCard({ favori }: CardProps) {
             <button
               aria-label="add meal in schedule"
               type="button"
-              className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-1"
+              className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-1 transform hover:rotate-90 duration-300"
               onClick={(event) => {
                 event.preventDefault();
                 handleModaltoggle();
