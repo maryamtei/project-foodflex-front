@@ -71,18 +71,18 @@ function Recipe() {
 
   // Render the recipe details
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto p-4">
       <div
         className={`bg-bgff relative mb-20 ${
           modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
         } `}
       >
-        <div className="flex flex-col items-center justify-center">
-          <div className="flex items-center ">
-            <h1 className="text-4xl text-titleff font-bold m-8">
+        <div className="flex flex-col items-center">
+          <div className="flex items-center justify-evenly w-full max-w-2xl">
+            <h1 className="text-4xl text-titleff font-bold mb-4 md:my-8">
               {recipe.name}
             </h1>
-            <div className="flex text-white">
+            <div className="flex text-white min-w-max">
               <div className="m-1">
                 <HeartFavori
                   recipe={{
@@ -113,10 +113,10 @@ function Recipe() {
             className="rounded-lg flex"
           />
         </div>
-        <h2 className="text-3xl font-bold text-titleff sm:mt-8 md:m-10 text-center">
+        <h2 className="text-3xl font-bold text-titleff mt-10 mb-4 md:m-10 text-center">
           Meal Preparation
         </h2>
-        <div className="flex flex-col md:flex-row p-4">
+        <div className="flex flex-col md:flex-row">
           {/* Display the ingredient list in a column on mobile and in a row on larger screens */}
           <div className="md:hidden md:w-1/3 md:pl-8">
             <IngredientsList
@@ -125,7 +125,7 @@ function Recipe() {
             />
           </div>
           <div className="md:w-2/3 md:pr-8 pt-4 md:p-0">
-            <h2 className="text-xl font-bold text-titleff mb-2">
+            <h2 className="text-xl font-bold text-titleff mt-10 mb-4 md:m-10 ">
               Instructions:
             </h2>
             {/* Render the recipe instructions */}
@@ -149,7 +149,7 @@ function Recipe() {
         {/* Display the step-by-step video guide if available */}
         {recipe.videoUrl && (
           <>
-            <h2 className="text-3xl font-bold sm:mt-8 md:m-10 text-titleff text-center">
+            <h2 className="text-3xl font-bold mt-10 mb-4 md:m-10 text-titleff text-center">
               Step-by-Step Video Guide
             </h2>
             <div className="py-4 flex justify-center">
