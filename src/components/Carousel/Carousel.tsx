@@ -7,8 +7,8 @@ import { useAppSelector } from '../../hooks/redux';
 import CarouselSlide from './CarouselSlide';
 
 const PLACEHOLDER_MEAL = {
-  name: 'Chinon Apple Tarts',
-  image: 'https://www.themealdb.com/images/media/meals/qtqwwu1511792650.jpg',
+  name: 'burger',
+  image: '/burger.svg',
   id: 1,
 };
 
