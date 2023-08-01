@@ -5,6 +5,8 @@ import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { fetchRecipeDetails } from '../../store/reducers/recipeDetails';
 import '../RecipeCard/RecipeCard.css';
 import IngredientsList from './ingredient';
+import HeartFavori from '../RecipeCard/HeartFavori/HeartFavori';
+import AddScheduleButton from '../RecipeCard/AddScheduleButton/AddScheduleButton';
 
 function Recipe() {
   const modalIsOpen = useAppSelector((state) => state.settings.modalIsOpen);
@@ -76,7 +78,35 @@ function Recipe() {
         } `}
       >
         <div className="flex flex-col items-center justify-center">
-          <h1 className="text-4xl text-titleff font-bold m-8">{recipe.name}</h1>
+          <div className="flex items-center ">
+            <h1 className="text-4xl text-titleff font-bold m-8">
+              {recipe.name}
+            </h1>
+            <div className="flex text-white">
+              <div className="m-1">
+                <HeartFavori
+                  recipe={{
+                    id: Number(id),
+                    name: recipe.name,
+                    position: 1,
+                    image: recipe.imageUrl,
+                    idDbMeal: recipe.id,
+                  }}
+                />
+              </div>
+              <div className="m-1 ">
+                <AddScheduleButton
+                  recipe={{
+                    id: Number(id),
+                    idDbMeal: recipe.id,
+                    image: recipe.imageUrl,
+                    name: recipe.name,
+                    position: 1,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
           <img
             src={recipe.imageUrl}
             alt={recipe.name}
