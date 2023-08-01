@@ -1,6 +1,6 @@
+import { v4 as uuidv4 } from 'uuid';
 import RecipeCard from '../RecipeCard/RecipeCard';
 import { Recipe } from '../../@types/recipe';
-import { v4 as uuidv4 } from 'uuid';
 
 interface CarouselSlideProps {
   day: string;
@@ -14,7 +14,7 @@ export default function CarouselSlide({
   recipe2,
 }: CarouselSlideProps) {
   return (
-    <div className="p-4 mx-2">
+    <div className="p-4">
       <div className="text-titleff text-md sm:text-xl font-bold text-center mb-4 sm:mb-4 underline underline-offset-4">
         {day}
       </div>

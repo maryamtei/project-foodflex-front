@@ -98,7 +98,7 @@ function RecipeCard({ recipe }: CardProps) {
       <img
         src={recipe.image}
         alt={recipe.name}
-        className={`rounded-t-md h-42 lg:h-60 object-cover  w-full ${
+        className={`rounded-t-md h-42 2xl:h-60 object-cover w-full ${
           (stateSchedule || displayScheduleModal) && recipe.id === 1
             ? 'blur-[3px] pointer-events-none opacity-60'
             : ''
