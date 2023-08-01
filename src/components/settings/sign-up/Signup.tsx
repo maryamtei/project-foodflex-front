@@ -106,7 +106,7 @@ function signup() {
           Sign-in !
         </button>
       </div>
-      <form autoComplete="off" onSubmit={handleSubmit}>
+      <form autoComplete="off" data-testid="Sign-Up" onSubmit={handleSubmit}>
         {/* Field component for entering firstname */}
         <Field
           label="Firstname"
