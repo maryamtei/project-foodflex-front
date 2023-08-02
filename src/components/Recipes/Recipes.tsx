@@ -43,7 +43,7 @@ function Recipes() {
         modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
       }`}
     >
-      <h1 className="text-titleff text-2xl sm:text-4xl font-bold md:mb-12 mb-6 text-center">
+      <h1 className="text-titleff text-2xl sm:text-4xl font-bold md:mb-8 m-6 text-center">
         Find exactly what you need !
       </h1>
       <div className="flex gap-2 relative">
@@ -57,19 +57,14 @@ function Recipes() {
           onChange={setSelectedCategory}
         />
       </div>
-<<<<<<< HEAD
-      {recipes.length === 0 && (
-        <div className="text-center text-titleff text-2xl font-bold  mt-10">
-=======
 
       {!loading && recipes.length === 0 && (
-        <div className="text-center text-thirdff text-2xl font-bold  mt-10">
->>>>>>> develop
+        <div className="text-center text-thirdff text-2xl font-bold mt-10">
           No recipes found
         </div>
       )}
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5  gap-4 mt-10">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-6 mb-20">
         {recipes.map((recipe) => (
           <RecipeCard recipe={recipe} key={recipe.idDbMeal} />
         ))}

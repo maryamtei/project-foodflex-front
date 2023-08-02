@@ -82,7 +82,7 @@ function RecipeCard({ recipe }: CardProps) {
 
   return (
     <Link
-      to={`/recipes/${recipe.idDbMeal}`}
+      to={recipe.id === 1 ? `/recipes` : `/recipes/${recipe.idDbMeal}`}
       className={`shadow-md rounded-lg relative hover:shadow-lg transition-all  ${
         displayScheduleModal
           ? 'pointer-events-auto border-2 border-thirdff'
@@ -98,7 +98,7 @@ function RecipeCard({ recipe }: CardProps) {
       <img
         src={recipe.image}
         alt={recipe.name}
-        className={`rounded-t-md h-42 lg:h-60 object-cover  w-full ${
+        className={`rounded-t-md h-42 2xl:h-60 object-cover w-full ${
           (stateSchedule || displayScheduleModal) && recipe.id === 1
             ? 'blur-[3px] pointer-events-none opacity-60'
             : ''
