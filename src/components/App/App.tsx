@@ -7,7 +7,6 @@ import ModalFavoriProfil from '../Profil/Modal';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Loader from '../Loader/Loader';
-import Message from '../Message/message';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   changeInnerWidth,
@@ -15,6 +14,7 @@ import {
 } from '../../store/reducers/window';
 import { getUserData, initialValue } from '../../store/reducers/user';
 import ScheduleModal from '../ScheduleModal/ScheduleModal';
+import Message from '../Message/message';
 
 function App() {
   const dispatch = useAppDispatch();
