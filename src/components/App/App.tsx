@@ -7,7 +7,7 @@ import ModalFavoriProfil from '../Profil/Modal';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Loader from '../Loader/Loader';
-import Message from '../Message/Message';
+import Message from '../Message/message';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import {
   changeInnerWidth,
