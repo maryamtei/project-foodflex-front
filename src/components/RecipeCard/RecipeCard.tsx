@@ -168,7 +168,7 @@ function RecipeCard({ recipe }: CardProps) {
             {/* ----------- Function SHUFFLE ----------- */}
             <button
               type="button"
-              className="hover:text-secondaryff transition-all bg-gray-500/50 rounded-full p-2"
+              className="hover:text-secondaryff transition-all bg-gray-500/30 rounded-full p-2"
               onClick={(event) => {
                 event.preventDefault();
                 handleShuffleMeal(event);
