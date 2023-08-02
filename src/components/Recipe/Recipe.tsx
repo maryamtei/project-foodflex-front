@@ -72,13 +72,13 @@ function Recipe() {
 
   // Render the recipe details
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 ">
       <div
         className={`bg-bgff relative mb-20 ${
           modalIsOpen ? 'sm:blur-[3px] sm:pointer-events-none' : ''
         } `}
       >
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center ">
           <div className="flex items-center justify-between w-full max-w-2xl">
             <h1 className="text-4xl text-titleff font-bold my-4 md:my-8">
               {recipe.name}

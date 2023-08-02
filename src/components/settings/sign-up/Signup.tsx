@@ -2,7 +2,6 @@
 // Import necessary modules and custom hooks
 import React, { FormEvent, useEffect, useState } from 'react';
 import { X } from 'react-feather';
-import { useMediaQuery } from 'react-responsive';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import Field from '../Field/index';
 
@@ -91,18 +90,11 @@ function Signup() {
     dispatch(toggleSignUpOpen());
   };
 
-  const isDesktop = useMediaQuery({
-    query: '(min-width: 768px)', // Use the useMediaQuery hook to detect if the screen is of type "Desktop" (at least 768px wide)
-  });
-
   // Render the sign-up form component
   return (
     <div
-      className={`${
-        isDesktop
-          ? 'relative mt-[-90px] flex flex-col gap-4 w-80 text-titleff bg-thirdff bg-opacity-80 sm:rounded-xl sm:shadow-xl items-center p-6'
-          : 'relative flex flex-col gap-4 w-80 text-titleff bg-thirdff bg-opacity-80 sm:rounded-xl sm:shadow-xl items-center p-6'
-      }`}
+      className="
+          relative  flex flex-col gap-4 w-80 text-titleff sm:bg-thirdff sm:bg-opacity-95 sm:rounded-xl sm:shadow-xl items-center p-6"
     >
       <h1 className="text-3xl font-bold text-center "> Sign-Up</h1>
       <div className="flex flex-col text-center">

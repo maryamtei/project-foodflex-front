@@ -59,12 +59,12 @@ function Recipes() {
       </div>
 
       {!loading && recipes.length === 0 && (
-        <div className="text-center text-thirdff text-2xl font-bold mt-10">
+        <div className="text-center text-thirdff text-2xl font-bold mt-10 sm:mb-[400px]">
           No recipes found
         </div>
       )}
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-6 mb-20">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 mt-6 mb-20 sm:mb-[400px]">
         {recipes.map((recipe) => (
           <RecipeCard recipe={recipe} key={recipe.idDbMeal} />
         ))}

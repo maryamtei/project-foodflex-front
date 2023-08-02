@@ -41,24 +41,19 @@ function ContactPage() {
       <img
         src="./img/contact.jpg"
         alt="Background"
-        className="w-full h-full object-cover object-bottom absolute inset-0"
-        style={{
-          objectPosition: 'center top',
-          zIndex: -1,
-          filter: 'blur(4px)',
-        }}
+        className="w-full h-full object-cover object-bottom absolute inset-0 z-[-1] blur-[4px] "
       />
       <div className="relative w-full h-screen">
         <div className="flex justify-center items-center min-h-screen">
-          <div className="bg-thirdff w-full max-w-md p-8 rounded-lg shadow-md border-2 border-gray-200">
+          <div className="relative flex flex-col gap-4 w-80 text-titleff font-medium sm:bg-thirdff bg-bgff bg-opacity-80 rounded-xl shadow-xl items-center p-6 ">
             {' '}
             {/* Add shadow */}
-            <h1 className="text-titleff text-4xl text-center font-bold mb-6">
+            <h1 className="text-titleff text-3xl text-center font-bold mb-6">
               Contact us
             </h1>
             <form onSubmit={handleSubmit}>
               {/* ...form content... */}
-              <div className="mb-4">
+              <div className="mb-2">
                 <label
                   htmlFor="name"
                   className="block text-titleff font-medium mb-2 "
@@ -71,12 +66,11 @@ function ContactPage() {
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border-2 border-gray-400 rounded-lg shadow-md hover:shadow-xl focus:outline-none focus:border-gray-600 text-gray-700 bg-bgff"
-                  placeholder="Please enter your full name"
+                  className="mb-4 bg-bgff  border-titleff font-bold rounded-lg border-2 h-8 shadow-md hover:shadow-xl focus:outline-none focus:border-fourthff ease-in duration-150 p-2"
                   required
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-2">
                 <label
                   htmlFor="email"
                   className="block text-titleff font-medium mb-2"
@@ -89,12 +83,11 @@ function ContactPage() {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-3 py-2 border-2 border-gray-400 rounded-lg shadow-md hover:shadow-xl focus:outline-none focus:border-gray-600 text-gray-700 bg-bgff"
-                  placeholder="Please enter your e-mail address"
+                  className="mb-4 bg-bgff  border-titleff font-bold rounded-lg border-2 h-8 shadow-md hover:shadow-xl focus:outline-none focus:border-fourthff ease-in duration-150 p-2"
                   required
                 />
               </div>
-              <div className="mb-4">
+              <div className="mb-2">
                 <label
                   htmlFor="message"
                   className="block text-titleff font-medium mb-2"
@@ -107,15 +100,14 @@ function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={4}
-                  className="w-full px-3 py-2 border-2 border-gray-400 rounded-lg shadow-md hover:shadow-xl focus:outline-none focus:border-gray-600 text-gray-700 bg-bgff"
-                  placeholder="Please enter your message"
+                  className="mb-2 bg-bgff h-16 w-full border-titleff font-bold rounded-lg border-2 shadow-md hover:shadow-xl focus:outline-none focus:border-fourthff ease-in duration-150 p-2"
                   required
                 />
               </div>
               <div className="flex justify-center">
                 <button
                   type="submit"
-                  className="bg-titleff border-2 hover:border-white hover:bg-thirdff rounded-lg text-white text-2xl font-bold py-2 px-4 hover:text-titleff"
+                  className="text-2xl font-bold pt-1 pr-1 pb-2 pl-2 mt-10 bg-white border-titleff hover:border-fourthff hover:text-fourthff rounded-lg border-2 shadow-md hover:shadow-xl ease-in duration-150 w-7/12 h-full"
                 >
                   Submit
                 </button>

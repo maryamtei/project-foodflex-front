@@ -41,7 +41,7 @@ function Modal() {
   };
   return (
     <div
-      className={`flex flex-col items-center h-screen p-4 sm:p-6 w-full  sm:w-80 sm:fixed bg-bgff sm:bg-fourthff sm:top-0 sm:z-50 overflow-auto ${
+      className={`flex flex-col items-center h-screen p-4 sm:p-6 w-full sm:w-80 sm:fixed bg-bgff sm:bg-fourthff sm:top-0 sm:z-50 overflow-auto  ${
         modalAnimationState === 2 && !mobileView
           ? 'right-0 animate-modalProfilOpen'
           : ''
@@ -58,7 +58,7 @@ function Modal() {
       >
         <X className="w-12 h-12 text-bgff" />
       </button>
-      <h1 className="text-3xl hidden sm:block font-bold text-fourthff sm:text-bgff">
+      <h1 className="text-3xl sm:block font-bold text-titleff sm:text-bgff">
         Profil
       </h1>
       {modalCondition()}
