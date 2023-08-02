@@ -7,7 +7,7 @@ import { useAppSelector } from '../../hooks/redux';
 import CarouselSlide from './CarouselSlide';
 
 const PLACEHOLDER_MEAL = {
-  name: 'burger',
+  name: 'No Recipe',
   image: '/burger.svg',
   id: 1,
 };

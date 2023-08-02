@@ -64,7 +64,7 @@ function App() {
   const showScheduleModal = location.pathname !== '/schedule';
 
   return (
-    <div className="relative">
+    <div className="relative min-h-screen">
       <Header />
       {status > 0 && <Message />}
       {isLoading && <Loader />}

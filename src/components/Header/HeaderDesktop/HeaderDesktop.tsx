@@ -39,16 +39,17 @@ function HeaderDesktop() {
       } ${stateHome ? 'sm:bg-transparent sm:z-50' : ''}`}
     >
       <div className="flex gap-3">
-        <Facebook className="rounded-full border border-solid p-0.5 w-6 h-6 duration-300 ease-linear hover:scale-125" />
-        <Twitter className="rounded-full border border-solid p-0.5 w-6 h-6 duration-300 ease-linear hover:scale-125" />
-        <Youtube className="rounded-full border border-solid p-0.5 w-6 h-6 duration-300 ease-linear hover:scale-125" />
-        <GitHub className="rounded-full border border-solid p-0.5 w-6 h-6 duration-300 ease-linear hover:scale-125" />
-        <Instagram className="rounded-full border border-solid p-0.5 w-6 h-6 duration-300 ease-linear hover:scale-125" />
+        <Facebook className="rounded-full border-3 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-[#AF4A40] border-white hover:border-[#AF4A40] focus:text-secondaryff focus:border-secondaryff" />
+        <Twitter className="rounded-full border-23border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-[#AF4A40] border-white hover:border-[#AF4A40] focus:text-secondaryff focus:border-secondaryff" />
+        <Youtube className="rounded-full border-3 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-[#AF4A40] border-white hover:border-[#AF4A40] focus:text-secondaryff focus:border-secondaryff" />
+        <GitHub className="rounded-full border-3 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-[#AF4A40] border-white hover:border-[#AF4A40] focus:text-secondaryff focus:border-secondaryff" />
+        <Instagram className="rounded-full border-3 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-[#AF4A40] border-white hover:border-[#AF4A40] focus:text-secondaryff focus:border-secondaryff" />
       </div>
       <h1 className="text-3xl font-bold ">
         <NavLink
           to="/"
           relative="path"
+          className="no-underline font-semibold uppercase text-white  transition-all duration-300 hover:text-titleff "
           onClick={() => {
             if (modalIsOpen) {
               toogleModalSignUpSignIn();
@@ -61,11 +62,11 @@ function HeaderDesktop() {
           FoodFlex
         </NavLink>
       </h1>
-      <div className="flex justify-between text-md gap-5 ">
+      <div className="flex justify-between text-lg gap-5 ">
         <NavLink
           to="/recipes"
           relative="path"
-          className={({ isActive }) => (isActive ? 'active font-bold' : '')}
+          className="uppercase font-bold text-white transition-all duration-300  hover:text-titleff"
           onClick={() => {
             if (modalIsOpen) {
               toogleModalSignUpSignIn();
@@ -80,7 +81,9 @@ function HeaderDesktop() {
         <NavLink
           to="/schedule"
           relative="path"
-          className={!isLogged ? 'hidden' : ''}
+          className={`uppercase font-bold text-white transition-all duration-300  hover:text-titleff ${
+            isLogged ? '' : 'hidden'
+          } `}
           onClick={() => {
             if (modalIsOpenFavoriProfil) {
               closeProfilModal();
@@ -90,14 +93,18 @@ function HeaderDesktop() {
           Planning
         </NavLink>
         <button
-          className={!isLogged ? 'hidden' : ''}
+          className={`uppercase font-bold text-white transition-all duration-300 hover:text-titleff ${
+            isLogged ? '' : 'hidden'
+          } `}
           type="button"
           onClick={openProfilModal}
         >
           Profil
         </button>
         <button
-          className={isLogged ? 'hidden' : ''}
+          className={`uppercase font-bold text-white transition-all duration-300  hover:text-titleff ${
+            isLogged ? 'hidden' : ''
+          }`}
           type="button"
           onClick={() => {
             if (signUpOpen) {
@@ -111,7 +118,9 @@ function HeaderDesktop() {
           Sign-In
         </button>
         <button
-          className={isLogged ? 'hidden' : ''}
+          className={`uppercase font-bold text-white transition-all duration-300  hover:text-titleff ${
+            isLogged ? 'hidden' : ''
+          }`}
           type="button"
           onClick={() => {
             if (!signUpOpen) {

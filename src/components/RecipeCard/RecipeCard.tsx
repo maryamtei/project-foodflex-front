@@ -100,7 +100,7 @@ function RecipeCard({ recipe }: CardProps) {
         alt={recipe.name}
         className={`rounded-t-md h-42 2xl:h-60 object-cover w-full ${
           (stateSchedule || displayScheduleModal) && recipe.id === 1
-            ? 'blur-[3px] pointer-events-none opacity-60'
+            ? 'pointer-events-none opacity-60'
             : ''
         }
        `}
@@ -168,7 +168,7 @@ function RecipeCard({ recipe }: CardProps) {
             {/* ----------- Function SHUFFLE ----------- */}
             <button
               type="button"
-              className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
+              className="hover:text-secondaryff transition-all bg-gray-500/50 rounded-full p-2"
               onClick={(event) => {
                 event.preventDefault();
                 handleShuffleMeal(event);
@@ -183,7 +183,7 @@ function RecipeCard({ recipe }: CardProps) {
       <div
         className={`rounded-b-lg foodPattern ${
           (stateSchedule || displayScheduleModal) && recipe.id === 1
-            ? 'blur-[3px] pointer-events-none opacity-60'
+            ? ' pointer-events-none opacity-60'
             : ''
         }`}
       >
