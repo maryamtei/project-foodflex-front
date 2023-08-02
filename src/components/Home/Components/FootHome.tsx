@@ -1,9 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import {
-  toggleIsOpen,
-  toggleSignUpOpen,
-} from '../../../store/reducers/settings';
+import { toggleIsOpen, toggleSignUpOpen } from '../../../store/reducers/user';
+import HomeTitle from './HomeTitles';
 
 function FootHome() {
   const isLogged = useAppSelector((state) => state.settings.isLogged);
@@ -28,15 +26,13 @@ function FootHome() {
   };
   return (
     <div>
-      <h2 className="text-2xl sm:text-4xl font-bold mt-16 sm:mt-36 text-center sm:text-center md:text-center text-thirdff">
-        GET STARTED ?
-      </h2>
+      <HomeTitle content="GET STARTED ?" />
       <div className="mt-4 sm:mt-8 flex justify-center">
         <button
           className={
             isLogged
               ? 'hidden'
-              : 'px-8 py-4 bg-thirdff text-bgff rounded-lg text-2xl font-bold'
+              : 'px-8 py-4 bg-titleff hover:bg-fourthff text-bgff rounded-lg text-2xl font-bold'
           }
           type="button"
           onClick={() => {
@@ -53,7 +49,7 @@ function FootHome() {
         <NavLink
           className={
             isLogged
-              ? 'px-8 py-4 bg-thirdff text-bgff rounded-lg text-2xl font-bold'
+              ? 'px-8 py-4 bg-fourthff text-bgff rounded-lg text-2xl font-bold'
               : 'hidden'
           }
           to="/schedule"

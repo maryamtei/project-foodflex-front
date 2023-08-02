@@ -1,6 +1,5 @@
 import { useRef, useState } from 'react';
 import {
-  Menu,
   Twitter,
   Instagram,
   Facebook,
@@ -12,14 +11,12 @@ import {
 } from 'react-feather';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
-import {
-  toggleIsOpen,
-  toggleSignUpOpen,
-} from '../../../store/reducers/settings';
+import { toggleIsOpen, toggleSignUpOpen } from '../../../store/reducers/user';
 import {
   toggleIsOpenProfil,
   changeFavoriIsOpen,
 } from '../../../store/reducers/favoris';
+import MenuIcon from './burgerMenu';
 
 function HeaderMobile() {
   const btnMenuRef = useRef<HTMLButtonElement>(null);
@@ -51,6 +48,7 @@ function HeaderMobile() {
   const closeProfilModal = () => {
     dispatch(toggleIsOpenProfil());
   };
+
   return (
     <header className="relative mt-20 ">
       <div
@@ -85,7 +83,7 @@ function HeaderMobile() {
             onClick={menuOnClick}
             className="h-9 w-9 cursor"
           >
-            <Menu className="h-9 w-9" />
+            <MenuIcon menuActive={menuActive} />
           </button>
         </div>
         <div className="text-bgff flex items-center h-full flex-col p-5 text-center gap-3 z-10 ease-in duration-500 justify-between">
@@ -198,7 +196,19 @@ function HeaderMobile() {
             <h2 className="text-md font-bold ">Team :</h2>
             <ul className="flex flex-col gap-1 underline">
               <li>
-                <NavLink to="/" relative="path">
+                <NavLink
+                  to="/about"
+                  relative="path"
+                  onClick={() => {
+                    if (modalIsOpen) {
+                      toogleModalSignUpSignIn();
+                    }
+                    if (modalIsOpenFavoriProfil) {
+                      closeProfilModal();
+                    }
+                    menuOnClick();
+                  }}
+                >
                   About us
                 </NavLink>
               </li>

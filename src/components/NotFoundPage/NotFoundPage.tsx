@@ -2,19 +2,25 @@ import { Link } from 'react-router-dom';
 
 function NotFoundPage() {
   return (
-    <div className="relative translate-y-[-64px]">
-      <img
-        src="./img/404.jpg"
-        alt="Background"
-        className="w-full h-screen sm:h-auto sm:max-h-128 object-cover object-bottom"
-        style={{
-          objectPosition: 'center top',
-        }}
-      />
-      <div className="absolute inset-x-0 bottom-20 flex justify-center">
+    // Container for the Not Found page
+    <div
+      className="relative"
+      style={{
+        height: '100vh',
+        backgroundImage: "url('/404.jpg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top',
+      }}
+    >
+      {/* Absolute positioning for the link */}
+      <div
+        className="absolute inset-x-0 top-5 flex justify-center"
+        style={{ marginBottom: '20px' }}
+      >
+        {/* Link to the home page */}
         <Link
           to="/"
-          className="px-8 py-3 text-lg font-bold text-red-700 bg-fourthff rounded hover:bg-thirdff"
+          className="px-8 py-3 border-2 border-gray-500 focus:outline-none rounded-lg text-2xl font-bold text-center text-white bg-titleff hover:bg-thirdff hover:text-titleff"
         >
           HOME
         </Link>

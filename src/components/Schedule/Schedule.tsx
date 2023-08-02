@@ -1,5 +1,5 @@
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
   Check,
   ChevronLeft,
@@ -8,18 +8,19 @@ import {
   ChevronsRight,
 } from 'react-feather';
 import { useNavigate } from 'react-router-dom';
+import ListBox from './ListBox/ListBox';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { changeStateSchedule } from '../../store/reducers/schedule';
-import { changeWeek } from '../../store/reducers/settings';
+import { changeWeek } from '../../store/reducers/user';
 import Carousel from '../Carousel/Carousel';
 import MyShoppingList from './shoppingListPdf';
 
 function Schedule() {
+  // Component State and Redux State
   const currentWeek = useAppSelector((state) => state.settings.currentWeek);
   const [animateLeft, setAnimateLeft] = useState(false);
   const [animateRight, setAnimateRight] = useState(false);
-
   const schedules = useAppSelector(
     (state) => state.settings.currentUser.schedules
   );
@@ -29,51 +30,60 @@ function Schedule() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  // Init animation duration
+  const animationDuration = 400;
+  const resetAnimationDuration = 800;
+
+  // Function for animating week next animate left
   function handleClickNextWeek(nbrSchedule: number) {
     if (currentWeek < 52) {
       setAnimateLeft(true);
       setTimeout(() => {
         dispatch(changeWeek(currentWeek + nbrSchedule));
-      }, 400);
+      }, animationDuration);
 
       setTimeout(() => {
         setAnimateLeft(false);
-      }, 800);
+      }, resetAnimationDuration);
     }
   }
+  // Function for animating week next animate right
   function handleClickBeforeWeek(nbrSchedule: number) {
     if (currentWeek > 1) {
       setAnimateRight(true);
       setTimeout(() => {
         dispatch(changeWeek(currentWeek - nbrSchedule));
-      }, 400);
+      }, animationDuration);
 
       setTimeout(() => {
         setAnimateRight(false);
-      }, 800);
+      }, resetAnimationDuration);
     }
   }
+  // Function for animating week and change value of currentWeek with Listbox
+  const changeInputCurrentWeek = (newValue: number | undefined) => {
+    if (newValue) {
+      // Animate Right
+      if (currentWeek > newValue) {
+        setAnimateRight(true);
+        setTimeout(() => {
+          dispatch(changeWeek(newValue));
+        }, animationDuration);
 
-  const changeInputCurrentWeek = (event: ChangeEvent<HTMLInputElement>) => {
-    const newInputValue = event.target.value;
-    if (currentWeek > Number(newInputValue)) {
-      setAnimateRight(true);
-      setTimeout(() => {
-        dispatch(changeWeek(Number(newInputValue)));
-      }, 400);
+        setTimeout(() => {
+          setAnimateRight(false);
+        }, resetAnimationDuration);
+      } else {
+        // Animate Left
+        setAnimateLeft(true);
+        setTimeout(() => {
+          dispatch(changeWeek(newValue));
+        }, animationDuration);
 
-      setTimeout(() => {
-        setAnimateRight(false);
-      }, 800);
-    } else {
-      setAnimateLeft(true);
-      setTimeout(() => {
-        dispatch(changeWeek(Number(newInputValue)));
-      }, 400);
-
-      setTimeout(() => {
-        setAnimateLeft(false);
-      }, 800);
+        setTimeout(() => {
+          setAnimateLeft(false);
+        }, resetAnimationDuration);
+      }
     }
   };
 
@@ -87,6 +97,7 @@ function Schedule() {
     };
   }, [weekFind, dispatch, isLogged, navigate]);
 
+  // Render schedule week
   function newShedulesFunction() {
     return schedules
       .filter((schedule) => schedule.week === currentWeek)
@@ -95,7 +106,7 @@ function Schedule() {
       ));
   }
 
-  // SHOPPING LIST
+  // Side effects and functions for Shopping List
   const [shoppingList, setShoppingList] = useState<
     [string | undefined, string | undefined][]
   >([]);
@@ -107,83 +118,69 @@ function Schedule() {
     setIsListReady(false);
   }, [currentWeek]);
 
-  // RECUPERAION DES INGREDIENTS ET MESURES CORRESPONDANTES
+  // RETRIEVAL OF CORRESPONDING INGREDIENTS AND MEASURES
   const createList = useCallback(async () => {
-    const ingredients: string[] = [];
-    const mesures: string[] = [];
+    const list: Array<{ ingredient: string; mesure: string }> = [];
+
     if (!schedules[currentWeek - 1]) {
-      return { ingredients, mesures };
+      return;
     }
-    const mealsOfTheWeek = schedules[currentWeek - 1].meals.map(
-      async (meal: { idDbMeal: number }) => {
-        const response = await fetch(
+    const meals = await Promise.all(
+      schedules[currentWeek - 1].meals.map((meal: { idDbMeal: number }) =>
+        fetch(
           `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idDbMeal}`
-        );
-        const data = await response.json();
-
-        data.meals.map((currentMeal: { [x: string]: string | undefined }) => {
-          for (let i = 1; i <= 20; i += 1) {
-            const ingredient = currentMeal[`strIngredient${i}`];
-            const measure = currentMeal[`strMeasure${i}`];
-
-            if (ingredient && ingredient.trim() !== ' ') {
-              ingredients.push(ingredient);
-            }
-
-            if (measure && measure.trim() !== ' ') {
-              mesures.push(measure);
-            }
-          }
-          return { ingredients, mesures };
-        });
-      }
+        ).then((response) => response.json())
+      )
     );
-    await Promise.all(mealsOfTheWeek);
-    return { ingredients, mesures };
-  }, [currentWeek, schedules]);
-
-  // CREATION DE LA LISTE
-  const generateList = useCallback(async () => {
+    meals.forEach((meal) => {
+      meal.meals.forEach((currentMeal: { [x: string]: string | undefined }) => {
+        for (let i = 1; i <= 20; i += 1) {
+          const ingredient = currentMeal[`strIngredient${i}`];
+          const measure = currentMeal[`strMeasure${i}`];
+          if (ingredient?.trim() && measure?.trim()) {
+            list.push({ ingredient, mesure: measure });
+          }
+        }
+      });
+    });
     setIsListReady(false);
-    const result = await createList();
-    const completeArray: [string | undefined, string | undefined][] =
-      result.ingredients.map((item, index) => [item, result.mesures[index]]);
 
     const combined: { [key: string]: string | undefined } = {};
 
-    // combinaison quantites lorsqu'il y des doublons
-    completeArray.forEach(([ingredient, quantity]) => {
+    // COMBINING QUANTITIES WHEN THERE ARE DUPLICATES
+    list.forEach(({ ingredient, mesure }) => {
       if (!ingredient) {
         return;
       }
       if (combined[ingredient]) {
-        combined[ingredient] = `${combined[ingredient]}, ${quantity}`;
+        combined[ingredient] = `${combined[ingredient]}, ${mesure}`;
       } else {
-        combined[ingredient] = quantity;
+        combined[ingredient] = mesure;
       }
     });
     const newList = Object.entries(combined);
     newList.sort((a, b) => a[0].localeCompare(b[0]));
     setShoppingList(newList);
     setIsListReady(true);
+  }, [currentWeek, schedules]);
+
+  // CREATION OF THE LIST
+  useEffect(() => {
+    createList();
   }, [createList]);
 
-  useEffect(() => {
-    generateList();
-  }, [generateList]);
-
-  // AFFICHAGE DE LA LISTE
+  // DISPLAYING THE LIST
   function toggleListVisibility() {
     setIsListVisible(!isListVisible);
     if (!isListReady) {
-      generateList();
+      createList();
     }
   }
   return (
     <div
-      className={`flex flex-col justify-center my-10 px-3 sm:px-8 relative  overFlow-hiden `}
+      className={` overFlow-hiden flex flex-col justify-center my-10 px-3 relative`}
     >
-      <div className="flex justify-center items-center gap-4 mb-8 ">
+      <div className="flex justify-center items-center gap-4 sm:mb-8 ">
         <button
           type="button"
           className={` ${currentWeek <= 5 ? 'hidden' : ''}`}
@@ -192,7 +189,7 @@ function Schedule() {
             handleClickBeforeWeek(5);
           }}
         >
-          <ChevronsLeft className="text-thirdff h-16 w-16" />
+          <ChevronsLeft className="text-titleff h-16 w-16" />
         </button>
         <button
           type="button"
@@ -202,20 +199,12 @@ function Schedule() {
             handleClickBeforeWeek(1);
           }}
         >
-          <ChevronLeft className="text-thirdff h-16 w-16" />
+          <ChevronLeft className="text-titleff h-16 w-16" />
         </button>
-        <p className="text-thirdff text-2xl sm:text-4xl font-bold text-center">
+        <p className="text-titleff text-2xl sm:text-4xl font-bold text-center">
           Week
         </p>
-        <input
-          type="number"
-          id="weekInput"
-          min="1"
-          max="52"
-          className="text-thirdff text-2xl sm:text-4xl font-bold text-center w-8 sm:w-16"
-          value={currentWeek}
-          onChange={changeInputCurrentWeek}
-        />
+        <ListBox value={currentWeek} onChange={changeInputCurrentWeek} />
 
         <button
           type="button"
@@ -225,7 +214,7 @@ function Schedule() {
             handleClickNextWeek(1);
           }}
         >
-          <ChevronRight className="text-thirdff h-16 w-16" />
+          <ChevronRight className="text-titleff h-16 w-16" />
         </button>
         <button
           type="button"
@@ -235,7 +224,7 @@ function Schedule() {
             handleClickNextWeek(5);
           }}
         >
-          <ChevronsRight className="text-thirdff h-16 w-16" />
+          <ChevronsRight className="text-titleff h-16 w-16" />
         </button>
       </div>
       <section
@@ -269,19 +258,53 @@ function Schedule() {
               Export my shopping list to PDF
             </PDFDownloadLink>
           ) : (
-            <p>Generating list...</p>
+            <p className=" transition rounded-md border border-transparent hover:border-fourthff bg-fourthff py-2 px-4 text-sm font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2">
+              Export my shopping list to PDF
+            </p>
           )}
         </div>
         {isListVisible && (
-          <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-x-4 gap-y-2">
-            {shoppingList.map(([ingredient, measure], index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <li key={index} className="flex items-center text-left">
-                <Check className="h-5 w-5 mx-3" aria-hidden="true" />
-                {ingredient}: {measure}
-              </li>
-            ))}
-          </ul>
+          <div>
+            <div className="flex justify-center mb-8">
+              {(() => {
+                if (shoppingList.length === 0) {
+                  return <span>Nothing on the menu 🤷‍♂️</span>;
+                }
+
+                let statusMessage;
+                if (shoppingList.length < 30) {
+                  statusMessage = `The shopping should be quick 🕺🏿`;
+                } else if (shoppingList.length <= 80) {
+                  statusMessage = `That's a nice shopping list ✨`;
+                } else {
+                  statusMessage = `That's a lot of ingredients 😱`;
+                }
+
+                return (
+                  <>
+                    <span className="font-bold pr-2">
+                      {shoppingList.length} ingredients:
+                    </span>
+                    <span>{statusMessage}</span>
+                  </>
+                );
+              })()}
+            </div>
+            <div className="flex justify-center">
+              <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-x-4 gap-y-2">
+                {shoppingList.map(([ingredient, measure]) => (
+                  <li
+                    key={`${ingredient}${measure}`}
+                    className="flex items-center text-left"
+                  >
+                    <Check className="h-5 w-5 mx-3" aria-hidden="true" />
+                    <span className="font-bold pr-2">{ingredient}:</span>
+                    {measure}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
         )}
       </div>
     </div>

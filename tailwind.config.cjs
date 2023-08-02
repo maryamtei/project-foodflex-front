@@ -6,6 +6,7 @@ module.exports = {
         bgff: '#FFFFFF',
         primaryff: '#D3DFAF',
         secondaryff: '#FFE177',
+        titleff: '#cc4639',
         thirdff: '#ff9b90', // #1F7551 notre couleur #ff9b90 marmiton #E26A6B cuisineAZ
         fourthff: '#ff6f61', // 9DC2B7 notre couleur #ff6f61 marmiton #333333 cuisineAZ
       },

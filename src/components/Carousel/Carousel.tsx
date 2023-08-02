@@ -7,8 +7,8 @@ import { useAppSelector } from '../../hooks/redux';
 import CarouselSlide from './CarouselSlide';
 
 const PLACEHOLDER_MEAL = {
-  name: 'Chinon Apple Tarts',
-  image: 'https://www.themealdb.com/images/media/meals/qtqwwu1511792650.jpg',
+  name: 'burger',
+  image: '/burger.svg',
   id: 1,
 };
 
@@ -54,14 +54,14 @@ function Carousel({ meals }: RecipeProps) {
   );
 
   return (
-    <div className="px-6 text-fourthff">
+    <div className="text-fourthff max-w-max m-auto">
       <NukaCarousel
         slidesToShow={changeSlidesToShow()}
         renderBottomCenterControls={null}
         enableKeyboardControls
         dragging={false}
         swiping={false}
-        className="border p-4 bg-[rgba(255,155,144,0.5)] rounded-lg shadow-lg border-fourthff"
+        className="border p-4 bg-[rgba(255,155,144,0.3)] rounded-lg shadow-lg border-fourthff"
         renderCenterLeftControls={({ previousSlide, previousDisabled }) => {
           if (previousDisabled) {
             return null;
