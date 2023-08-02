@@ -75,7 +75,7 @@ function signin() {
   };
   // Render the sign-in form component
   return (
-    <div className="relative flex flex-col gap-4 w-80 text-titleff font-medium sm:bg-thirdff sm:bg-opacity-80 sm:rounded-xl sm:shadow-xl items-center p-6">
+    <div className="relative flex flex-col gap-4 w-80 text-titleff font-medium sm:bg-thirdff sm:bg-opacity-95 sm:rounded-xl sm:shadow-xl items-center p-6">
       <h1 className="text-3xl font-bold text-center "> Sign-In</h1>
       <div className="flex flex-col text-center">
         <p className="text-base ">New customer ?</p>

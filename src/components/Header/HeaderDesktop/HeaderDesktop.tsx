@@ -66,7 +66,7 @@ function HeaderDesktop() {
         <NavLink
           to="/recipes"
           relative="path"
-          className="uppercase font-bold text-white transition-all duration-300 transition-all duration-300 hover:text-titleff"
+          className="uppercase font-bold text-white transition-all duration-300  hover:text-titleff"
           onClick={() => {
             if (modalIsOpen) {
               toogleModalSignUpSignIn();

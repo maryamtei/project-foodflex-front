@@ -9,7 +9,7 @@ import {
   Calendar,
   User,
 } from 'react-feather';
-import { NavLink } from 'react-router-dom';
+import { NavLink, redirect } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../hooks/redux';
 import { toggleIsOpen, toggleSignUpOpen } from '../../../store/reducers/user';
 import {
@@ -104,7 +104,7 @@ function HeaderMobile() {
           </button>
         </div>
         {/* Menu items */}
-        <div className="text-bgff flex items-center flex-col h-full p-5 gap-3 z-10 ease-in duration-500 text-center ">
+        <div className="text-bgff flex items-center flex-col h-full p-5 gap-7 z-10 ease-in duration-500 text-center ">
           <p className="text-md text-center font-medium text-white">
             Culinary creativity unleashed with FoodFlex!
           </p>
@@ -150,7 +150,7 @@ function HeaderMobile() {
                 </NavLink>
               </li>
               {/* Display the "Planning" option only if the user is logged in */}
-              <li className={isLogged ? 'hidden' : ''}>
+              <li className={!isLogged ? 'hidden' : ''}>
                 <NavLink
                   to="/schedule"
                   className="no-underline font-semibold uppercase text-lg text-white hover:text-titleff"
@@ -340,13 +340,13 @@ function HeaderMobile() {
         >
           <Calendar className="h-9 w-9" />
         </NavLink>
-        <button
+        <NavLink
           className={
             modalIsOpenFavoriProfil
               ? 'active text-titleff font-bold '
               : 'text-white'
           }
-          type="button"
+          to="/"
           onClick={() => {
             if (!isLogged && !modalIsOpen) {
               toogleModalSignUpSignIn();
@@ -357,7 +357,7 @@ function HeaderMobile() {
           }}
         >
           <User className="h-9 w-9" />{' '}
-        </button>
+        </NavLink>
       </div>
     </header>
   );

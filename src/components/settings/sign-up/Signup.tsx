@@ -94,7 +94,7 @@ function Signup() {
   return (
     <div
       className="
-          relative  flex flex-col gap-4 w-80 text-titleff sm:bg-thirdff sm:bg-opacity-80 sm:rounded-xl sm:shadow-xl items-center p-6"
+          relative  flex flex-col gap-4 w-80 text-titleff sm:bg-thirdff sm:bg-opacity-95 sm:rounded-xl sm:shadow-xl items-center p-6"
     >
       <h1 className="text-3xl font-bold text-center "> Sign-Up</h1>
       <div className="flex flex-col text-center">

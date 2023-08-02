@@ -32,7 +32,7 @@ function FootHome() {
           className={
             isLogged
               ? 'hidden'
-              : 'px-8 py-4 bg-titleff hover:bg-fourthff text-bgff rounded-lg text-2xl font-bold'
+              : 'transition duration-500 ease-in-out rounded-md border border-transparent hover:border-fourthff bg-fourthff py-3 px-6 text-2xl font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2'
           }
           type="button"
           onClick={() => {
@@ -49,7 +49,7 @@ function FootHome() {
         <NavLink
           className={
             isLogged
-              ? 'px-8 py-4 bg-fourthff text-bgff rounded-lg text-2xl font-bold'
+              ? 'transition duration-500 ease-in-out rounded-md border border-transparent hover:border-fourthff bg-fourthff py-3 px-6 text-2xl font-medium text-bgff hover:text-fourthff hover:bg-bgff focus:outline-none focus-visible:ring-2 focus-visible:ring-fourthff focus-visible:ring-offset-2'
               : 'hidden'
           }
           to="/schedule"
