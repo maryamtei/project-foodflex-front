@@ -28,6 +28,7 @@ function ContactPage() {
   // Handle form submission
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     // Trigger the "contact" action with the form data
+    e.preventDefault();
     dispatch(contact(formData));
   };
 
@@ -39,7 +40,7 @@ function ContactPage() {
     >
       {/* Background image & Apply overlay and blur effect to the image  */}
       <img
-        src="./img/contact.jpg"
+        src="/img/contact.jpg"
         alt="Background"
         className="w-full h-full object-cover object-bottom absolute inset-0 z-[-1] blur-[4px] "
       />

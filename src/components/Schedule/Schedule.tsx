@@ -177,9 +177,7 @@ function Schedule() {
     }
   }
   return (
-    <div
-      className={` overFlow-hiden flex flex-col justify-center my-10 px-3 relative overflow-hidden`}
-    >
+    <div className="flex flex-col justify-center my-10 px-3 relative overflow-hidden">
       <div className="flex justify-center items-center gap-4 sm:mb-8 ">
         <button
           type="button"
