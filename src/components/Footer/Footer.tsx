@@ -60,10 +60,10 @@ function Footer() {
                 <Facebook className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 " />
               </NavLink>
 
-              <Twitter className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff focus:text-secondaryff focus:border-secondaryff" />
-              <Youtube className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff focus:text-secondaryff focus:border-secondaryff" />
-              <GitHub className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff focus:text-secondaryff focus:border-secondaryff" />
-              <Instagram className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff focus:text-secondaryff focus:border-secondaryff" />
+              <Twitter className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff  focus:border-secondaryff" />
+              <Youtube className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff  focus:border-secondaryff" />
+              <GitHub className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff  focus:border-secondaryff" />
+              <Instagram className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff  focus:border-secondaryff" />
             </div>
             <p className="text-sm italic ">
               Crafted with a dash of gluttony by FoodFlex - @2023
@@ -80,7 +80,7 @@ function Footer() {
               <NavLink
                 to="/"
                 relative="path"
-                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff "
                 onClick={() => {
                   if (modalIsOpen) {
                     toogleModalSignUpSignIn();
@@ -98,7 +98,7 @@ function Footer() {
               <NavLink
                 to="/recipes"
                 relative="path"
-                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff "
                 onClick={() => {
                   if (modalIsOpen) {
                     toogleModalSignUpSignIn();
@@ -116,7 +116,7 @@ function Footer() {
               <NavLink
                 to="/schedule"
                 relative="path"
-                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff "
                 onClick={() => {
                   if (modalIsOpenFavoriProfil) {
                     closeProfilModal();
@@ -130,7 +130,7 @@ function Footer() {
             <li className={`${!isLogged ? 'hidden' : ''} `}>
               <button
                 type="button"
-                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff "
                 onClick={openProfilModal}
               >
                 Profil
@@ -138,7 +138,7 @@ function Footer() {
             </li>
             <li className={`${isLogged ? 'hidden' : ''} `}>
               <button
-                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff "
                 type="button"
                 onClick={() => {
                   if (signUpOpen) {
@@ -154,7 +154,7 @@ function Footer() {
             </li>
             <li className={`${isLogged ? 'hidden' : ''} `}>
               <button
-                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff "
                 type="button"
                 onClick={() => {
                   if (!signUpOpen) {
@@ -179,7 +179,7 @@ function Footer() {
               <NavLink
                 to="/about"
                 relative="path"
-                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff "
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -191,7 +191,7 @@ function Footer() {
               <NavLink
                 to="/contact"
                 relative="path"
-                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff "
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -210,7 +210,7 @@ function Footer() {
               <NavLink
                 to="/terms"
                 relative="path"
-                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff "
                 onClick={() => {
                   scrollToTop();
                 }}
