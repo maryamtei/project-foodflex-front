@@ -41,12 +41,7 @@ function ContactPage() {
       <img
         src="./img/contact.jpg"
         alt="Background"
-        className="w-full h-full object-cover object-bottom absolute inset-0"
-        style={{
-          objectPosition: 'center top',
-          zIndex: -1,
-          filter: 'blur(4px)',
-        }}
+        className="w-full h-full object-cover object-bottom absolute inset-0 z-[-1] blur-[4px] "
       />
       <div className="relative w-full h-screen">
         <div className="flex justify-center items-center min-h-screen">
