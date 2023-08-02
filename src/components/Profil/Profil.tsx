@@ -39,14 +39,14 @@ function Profil() {
       <div className="mt-10 gap-3 flex justify-center mb-16">
         <button
           type="button"
-          className="text-fourthff bg-bgff sm:text-bgff sm:bg-fourthff btn rounded-3xl  w-28 shadow-lg"
+          className="text-fourthff bg-bgff sm:text-bgff sm:bg-fourthff rounded-3xl  w-28 shadow-lg"
           onClick={toggleFavoriProfil}
         >
           Favorites
         </button>
         <button
           type="button"
-          className="text-bgff bg-fourthff sm:text-fourthff sm:bg-bgff btn rounded-3xl  w-28 shadow-lg"
+          className="text-bgff bg-fourthff sm:text-fourthff sm:bg-bgff rounded-3xl  w-28 shadow-lg"
         >
           Profil
         </button>
@@ -111,14 +111,14 @@ function Profil() {
       <div className="flex justify-center mt-6">
         <button
           type="button"
-          className=" text-fourthff bg-bgff btn text-sm rounded-3xl  w-32 shadow-lg mr-5"
+          className=" text-fourthff bg-bgff  text-sm rounded-3xl  w-32 shadow-lg mr-5"
           onClick={() => handleEditProfil()}
         >
           {editProfil ? 'Cancelled' : 'Edit Profil'}
         </button>
         <button
           type="button"
-          className="text-bgff bg-fourthff btn rounded-3xl  w-32 h-1 shadow-lg"
+          className="text-bgff bg-fourthff  rounded-3xl  w-32 h-1 shadow-lg"
           onClick={() => handleLogout()}
         >
           Logout
