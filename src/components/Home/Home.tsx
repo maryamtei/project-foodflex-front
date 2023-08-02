@@ -51,7 +51,7 @@ function Home({ signInDomain }: HomeProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Do not remove, otherwise the code may not work
 
-   // Function to handle scroll behavior
+  // Function to handle scroll behavior
   useEffect(() => {
     const handleScroll = (e: Event) => {
       if (modalIsOpen) {

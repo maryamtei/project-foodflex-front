@@ -18,7 +18,11 @@ function ScheduleModal() {
 
   return (
     <Transition appear show={showSchedule} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={closeModal}>
+      <Dialog
+        as="div"
+        className="relative z-10 text-titleff"
+        onClose={closeModal}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -46,7 +50,7 @@ function ScheduleModal() {
                 <div className="flex justify-end">
                   <X onClick={closeModal} />
                 </div>
-                <h2 className="text-2xl mt-6 font-bold text-gray-900">
+                <h2 className="text-2xl mt-6 font-bold text-titleff">
                   Which day to eat this dish?
                 </h2>
 

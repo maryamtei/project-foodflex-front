@@ -14,7 +14,7 @@ import {
 } from '../../store/reducers/window';
 import { getUserData, initialValue } from '../../store/reducers/user';
 import ScheduleModal from '../ScheduleModal/ScheduleModal';
-import Message from '../Message/message';
+import Message from '../Message/Message';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -64,7 +64,7 @@ function App() {
   const showScheduleModal = location.pathname !== '/schedule';
 
   return (
-    <div className="relative">
+    <div className="relative min-h-screen">
       <Header />
       {status > 0 && <Message />}
       {isLoading && <Loader />}

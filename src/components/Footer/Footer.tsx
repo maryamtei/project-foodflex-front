@@ -49,19 +49,21 @@ function Footer() {
       <div className="text-bgff flex items-center h-full p-5 text-center gap-3 justify-between flex-row ">
         <div className="flex flex-col gap-3 ">
           <p className="text-md font-medium">
-            Culinary creativity unleashed with Food-flex!
+            Culinary creativity unleashed with FoodFlex!
           </p>
           <div className="flex flex-col gap-3">
-            <h2 className="text-md font-bold ">Folow Us On :</h2>
+            <h2 className="text-xl font-bold uppercase underline underline-offset-4 text-white">
+              Folow Us On :
+            </h2>
             <div className="flex gap-3 justify-center">
               <NavLink to="https://www.facebook.com/profile.php?id=100095063211456">
-                <Facebook className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
+                <Facebook className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 " />
               </NavLink>
 
-              <Twitter className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
-              <Youtube className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
-              <GitHub className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
-              <Instagram className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
+              <Twitter className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff focus:text-secondaryff focus:border-secondaryff" />
+              <Youtube className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff focus:text-secondaryff focus:border-secondaryff" />
+              <GitHub className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff focus:text-secondaryff focus:border-secondaryff" />
+              <Instagram className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-titleff border-white hover:border-titleff focus:text-secondaryff focus:border-secondaryff" />
             </div>
             <p className="text-sm italic ">
               Crafted with a dash of gluttony by FoodFlex - @2023
@@ -69,13 +71,16 @@ function Footer() {
           </div>
         </div>
 
-        <div>
-          <h2 className="text-md font-bold ">Quick Links :</h2>
-          <ul className="flex flex-col gap-1 underline">
+        <div className="flex-col mb-5">
+          <h2 className="text-xl font-bold uppercase underline underline-offset-4 text-white">
+            Quick Links :
+          </h2>
+          <ul className="flex flex-col gap-1">
             <li>
               <NavLink
                 to="/"
                 relative="path"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
                 onClick={() => {
                   if (modalIsOpen) {
                     toogleModalSignUpSignIn();
@@ -93,6 +98,7 @@ function Footer() {
               <NavLink
                 to="/recipes"
                 relative="path"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
                 onClick={() => {
                   if (modalIsOpen) {
                     toogleModalSignUpSignIn();
@@ -110,6 +116,7 @@ function Footer() {
               <NavLink
                 to="/schedule"
                 relative="path"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
                 onClick={() => {
                   if (modalIsOpenFavoriProfil) {
                     closeProfilModal();
@@ -121,13 +128,17 @@ function Footer() {
               </NavLink>
             </li>
             <li className={`${!isLogged ? 'hidden' : ''} `}>
-              <button type="button" onClick={openProfilModal}>
+              <button
+                type="button"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
+                onClick={openProfilModal}
+              >
                 Profil
               </button>
             </li>
             <li className={`${isLogged ? 'hidden' : ''} `}>
               <button
-                className="underline"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
                 type="button"
                 onClick={() => {
                   if (signUpOpen) {
@@ -143,7 +154,7 @@ function Footer() {
             </li>
             <li className={`${isLogged ? 'hidden' : ''} `}>
               <button
-                className="underline"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
                 type="button"
                 onClick={() => {
                   if (!signUpOpen) {
@@ -159,13 +170,16 @@ function Footer() {
             </li>
           </ul>
         </div>
-        <div>
-          <h2 className="text-md font-bold ">Team :</h2>
-          <ul className="flex flex-col gap-1 underline">
+        <div className="flex-col mb-5">
+          <h2 className="text-xl font-bold uppercase underline underline-offset-4 text-white">
+            Team :
+          </h2>
+          <ul className="flex flex-col gap-1">
             <li>
               <NavLink
                 to="/about"
                 relative="path"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -177,6 +191,7 @@ function Footer() {
               <NavLink
                 to="/contact"
                 relative="path"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
                 onClick={() => {
                   scrollToTop();
                 }}
@@ -186,13 +201,16 @@ function Footer() {
             </li>
           </ul>
         </div>
-        <div>
-          <h2 className="text-md font-bold ">Legal :</h2>
-          <ul className="flex flex-col gap-1 underline">
+        <div className="flex-col mb-5">
+          <h2 className="text-xl font-bold uppercase underline underline-offset-4 text-white">
+            Legal :
+          </h2>
+          <ul className="flex flex-col gap-1">
             <li>
               <NavLink
                 to="/terms"
                 relative="path"
+                className="no-underline font-semibold uppercase text-white hover:text-titleff focus:text-secondaryff"
                 onClick={() => {
                   scrollToTop();
                 }}
