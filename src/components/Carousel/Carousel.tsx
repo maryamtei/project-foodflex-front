@@ -7,7 +7,7 @@ import { useAppSelector } from '../../hooks/redux';
 import CarouselSlide from './CarouselSlide';
 
 const PLACEHOLDER_MEAL = {
-  name: 'burger',
+  name: 'No Recipe',
   image: '/burger.svg',
   id: 1,
 };
@@ -54,7 +54,7 @@ function Carousel({ meals }: RecipeProps) {
   );
 
   return (
-    <div className="text-fourthff">
+    <div className="text-fourthff max-w-max m-auto">
       <NukaCarousel
         slidesToShow={changeSlidesToShow()}
         renderBottomCenterControls={null}

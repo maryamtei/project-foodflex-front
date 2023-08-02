@@ -82,7 +82,7 @@ function RecipeCard({ recipe }: CardProps) {
 
   return (
     <Link
-      to={`/recipes/${recipe.idDbMeal}`}
+      to={recipe.id === 1 ? `/recipes` : `/recipes/${recipe.idDbMeal}`}
       className={`shadow-md rounded-lg relative hover:shadow-lg transition-all  ${
         displayScheduleModal
           ? 'pointer-events-auto border-2 border-thirdff'
@@ -98,9 +98,9 @@ function RecipeCard({ recipe }: CardProps) {
       <img
         src={recipe.image}
         alt={recipe.name}
-        className={`rounded-t-md h-42 lg:h-60 object-cover  w-full ${
+        className={`rounded-t-md h-42 2xl:h-60 object-cover w-full ${
           (stateSchedule || displayScheduleModal) && recipe.id === 1
-            ? 'blur-[3px] pointer-events-none opacity-60'
+            ? 'pointer-events-none opacity-60'
             : ''
         }
        `}
@@ -168,7 +168,7 @@ function RecipeCard({ recipe }: CardProps) {
             {/* ----------- Function SHUFFLE ----------- */}
             <button
               type="button"
-              className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
+              className="hover:text-secondaryff transition-all bg-gray-500/50 rounded-full p-2"
               onClick={(event) => {
                 event.preventDefault();
                 handleShuffleMeal(event);
@@ -183,7 +183,7 @@ function RecipeCard({ recipe }: CardProps) {
       <div
         className={`rounded-b-lg foodPattern ${
           (stateSchedule || displayScheduleModal) && recipe.id === 1
-            ? 'blur-[3px] pointer-events-none opacity-60'
+            ? ' pointer-events-none opacity-60'
             : ''
         }`}
       >

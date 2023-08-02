@@ -63,7 +63,7 @@ function HeartFavori({ recipe }: HeartFavoriProps) {
   return (
     <button
       type="button"
-      className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2"
+      className="hover:text-secondaryff transition-all bg-gray-700/50 rounded-full p-2 hover:animate-pulse"
       onClick={(event) => {
         event.preventDefault();
         // If the user is not logged in, toggle the SignUp modal

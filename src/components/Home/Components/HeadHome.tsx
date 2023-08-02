@@ -31,7 +31,7 @@ function HeadHome() {
           HOW IT WORKS ?
         </h2>
         {/* Grid layout for the HowItWorks components */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-gray-500">
+        <div className="grid grid-cols-1  lg:grid-cols-3 gap-4 text-gray-500">
           {/* Display the HowItWorks component with poke image and content */}
           <HowItWorks
             imageHome="./poke.png"

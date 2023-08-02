@@ -19,8 +19,13 @@ import {
 import MenuIcon from './burgerMenu';
 
 function HeaderMobile() {
+  // Ref for the menu button
   const btnMenuRef = useRef<HTMLButtonElement>(null);
+
+  // State for menu activation
   const [menuActive, setmenuActive] = useState(false);
+
+  // Fetch data from Redux store
   const isLogged = useAppSelector((state) => state.settings.isLogged);
   const modalIsOpenFavoriProfil = useAppSelector(
     (state) => state.favoris.modalIsOpen
@@ -29,39 +34,50 @@ function HeaderMobile() {
   const signUpOpen = useAppSelector((state) => state.settings.signUpOpen);
   const dispatch = useAppDispatch();
 
+  // Function to handle modal for Sign-Up and Sign-In
   const toogleModalSignUpSignIn = () => {
     if (!isLogged) {
       dispatch(toggleIsOpen());
     }
   };
 
+  // Function to handle menu button click
   const menuOnClick = () => {
     setmenuActive(!menuActive);
   };
+
+  // Function to toggle Sign-Up modal
   const toggleSignUp = () => {
     dispatch(toggleSignUpOpen());
   };
+
+  // Function to open the Profile modal
   const openProfilModal = () => {
     dispatch(changeFavoriIsOpen(true));
     dispatch(toggleIsOpenProfil());
   };
+
+  // Function to close the Profile modal
   const closeProfilModal = () => {
     dispatch(toggleIsOpenProfil());
   };
 
   return (
-    <header className="relative mt-20 ">
+    <header className="relative mt-20">
+      {/* Header container for mobile devices */}
       <div
         className={`bg-fourthff w-full border-none fixed top-0 px-7 py-4 z-20 ease-in duration-500 overflow-hidden ${
-          menuActive ? ' h-screen ' : 'h-16'
+          menuActive ? 'h-screen' : 'h-16'
         }`}
       >
-        <div className="sm:hidden text-bgff flex items-center justify-between ">
+        <div className="sm:hidden text-bgff flex items-center justify-between">
+          {/* Logo */}
           <div className="h-9 w-9" />
-          <h1 className="text-3xl font-bold ">
+          <h1 className="text-3xl font-bold">
             <NavLink
               to="/"
               relative="path"
+              className="text-white hover:text-[#AF4A40]"
               onClick={() => {
                 if (modalIsOpen) {
                   toogleModalSignUpSignIn();
@@ -77,6 +93,7 @@ function HeaderMobile() {
               FoodFlex
             </NavLink>
           </h1>
+          {/* Menu button */}
           <button
             ref={btnMenuRef}
             type="button"
@@ -86,19 +103,22 @@ function HeaderMobile() {
             <MenuIcon menuActive={menuActive} />
           </button>
         </div>
-        <div className="text-bgff flex items-center h-full flex-col p-5 text-center gap-3 z-10 ease-in duration-500 justify-between">
-          <p className="text-md font-medium">
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-            Blanditiis, fuga.
+        {/* Menu items */}
+        <div className="text-bgff flex items-center flex-col h-full p-5 gap-3 z-10 ease-in duration-500 text-center ">
+          <p className="text-md text-center font-medium text-white">
+            Culinary creativity unleashed with FoodFlex!
           </p>
-
-          <div>
-            <h2 className="text-md font-bold ">Quick Links :</h2>
-            <ul className="flex flex-col gap-1 underline">
+          {/* Quick Links */}
+          <div className="flex-col mt-4">
+            <h2 className="text-2xl font-bold uppercase underline text-white">
+              Quick Links :
+            </h2>
+            <ul className="flex flex-col gap-1">
               <li>
                 <NavLink
                   to="/"
                   relative="path"
+                  className="no-underline font-semibold uppercase text-lg text-white hover:text-titleff"
                   onClick={() => {
                     if (modalIsOpen) {
                       toogleModalSignUpSignIn();
@@ -115,7 +135,7 @@ function HeaderMobile() {
               <li>
                 <NavLink
                   to="/recipes"
-                  relative="path"
+                  className="no-underline font-semibold uppercase text-white text-lg hover:text-titleff "
                   onClick={() => {
                     if (modalIsOpen) {
                       toogleModalSignUpSignIn();
@@ -129,10 +149,11 @@ function HeaderMobile() {
                   Recipes
                 </NavLink>
               </li>
-              <li className={`${!isLogged ? 'hidden' : ''} `}>
+              {/* Display the "Planning" option only if the user is logged in */}
+              <li className={isLogged ? 'hidden' : ''}>
                 <NavLink
                   to="/schedule"
-                  relative="path"
+                  className="no-underline font-semibold uppercase text-lg text-white hover:text-titleff"
                   onClick={() => {
                     if (modalIsOpenFavoriProfil) {
                       closeProfilModal();
@@ -143,9 +164,10 @@ function HeaderMobile() {
                   Planning
                 </NavLink>
               </li>
-              <li className={`${!isLogged ? 'hidden' : ''} `}>
+              {/* Display the "Profil" option only if the user is logged in */}
+              <li className={!isLogged ? 'hidden' : ''}>
                 <button
-                  className="underline"
+                  className="no-underline font-semibold uppercase text-lg text-white hover:text-titleff"
                   type="button"
                   onClick={() => {
                     menuOnClick();
@@ -155,9 +177,10 @@ function HeaderMobile() {
                   Profil
                 </button>
               </li>
-              <li className={`${isLogged ? 'hidden' : ''} `}>
+              {/* Display the "Sign-In" option only if the user is not logged in */}
+              <li className={isLogged ? 'hidden' : ''}>
                 <button
-                  className="underline"
+                  className="no-underline font-semibold uppercase text-lg text-white hover:text-titleff "
                   type="button"
                   onClick={() => {
                     if (signUpOpen) {
@@ -166,16 +189,16 @@ function HeaderMobile() {
                     if (!modalIsOpen) {
                       toogleModalSignUpSignIn();
                     }
-
                     menuOnClick();
                   }}
                 >
                   Sign-In
                 </button>
               </li>
-              <li className={`${isLogged ? 'hidden' : ''} `}>
+              {/* Display the "Sign-Up" option only if the user is not logged in */}
+              <li className={isLogged ? 'hidden' : ''}>
                 <button
-                  className="underline"
+                  className="no-underline font-semibold uppercase text-lg text-white hover:text-titleff"
                   type="button"
                   onClick={() => {
                     if (!signUpOpen) {
@@ -192,13 +215,17 @@ function HeaderMobile() {
               </li>
             </ul>
           </div>
-          <div>
-            <h2 className="text-md font-bold ">Team :</h2>
-            <ul className="flex flex-col gap-1 underline">
+          {/* Team section */}
+          <div className="flex-col mt-4">
+            <h2 className="text-2xl font-bold uppercase underline text-white">
+              Team :
+            </h2>
+            <ul className="flex flex-col gap-1">
               <li>
                 <NavLink
                   to="/about"
                   relative="path"
+                  className="no-underline font-semibold uppercase text-lg text-white hover:text-titleff"
                   onClick={() => {
                     if (modalIsOpen) {
                       toogleModalSignUpSignIn();
@@ -216,6 +243,7 @@ function HeaderMobile() {
                 <NavLink
                   to="/contact"
                   relative="path"
+                  className="no-underline font-semibold uppercase text-lg text-white hover:text-titleff"
                   onClick={() => {
                     if (modalIsOpen) {
                       toogleModalSignUpSignIn();
@@ -231,13 +259,17 @@ function HeaderMobile() {
               </li>
             </ul>
           </div>
-          <div>
-            <h2 className="text-md font-bold ">Legal :</h2>
-            <ul className="flex flex-col gap-1 underline">
+          {/* Legal section */}
+          <div className="flex-col mt-4">
+            <h2 className="text-2xl font-bold uppercase underline text-white">
+              Legal :
+            </h2>
+            <ul className="flex flex-col gap-1">
               <li>
                 <NavLink
                   to="/terms"
                   relative="path"
+                  className="no-underline font-semibold uppercase text-lg text-white hover:text-titleff"
                   onClick={() => {
                     if (modalIsOpen) {
                       toogleModalSignUpSignIn();
@@ -253,22 +285,30 @@ function HeaderMobile() {
               </li>
             </ul>
           </div>
-
-          <h2 className="text-md font-bold ">Folow Us On :</h2>
-          <div className="flex gap-3">
-            <Facebook className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
-            <Twitter className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
-            <Youtube className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
-            <GitHub className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
-            <Instagram className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125" />
+          {/* Social Media */}
+          <div className="flex flex-col items-left gap-3">
+            <h2 className="text-2xl font-bold uppercase underline text-white">
+              Follow Us On:
+            </h2>
+            <div className="flex gap-3">
+              <Facebook className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-[#AF4A40] border-white hover:border-[#AF4A40] focus:text-secondaryff focus:border-secondaryff" />
+              <Twitter className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-[#AF4A40] border-white hover:border-[#AF4A40] focus:text-secondaryff focus:border-secondaryff" />
+              <Youtube className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-[#AF4A40] border-white hover:border-[#AF4A40] focus:text-secondaryff focus:border-secondaryff" />
+              <GitHub className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-[#AF4A40] border-white hover:border-[#AF4A40] focus:text-secondaryff focus:border-secondaryff" />
+              <Instagram className="rounded-full border-2 border-solid p-1 w-8 h-8 duration-300 ease-linear hover:scale-125 text-white hover:text-[#AF4A40] border-white hover:border-[#AF4A40] focus:text-secondaryff focus:border-secondaryff" />
+            </div>
           </div>
-          <p className="text-sm italic ">@2023 Foodflex</p>
+          <p className="text-md italic mb-2 text-white">
+            Crafted with a dash of gluttony by FoodFlex - @2023
+          </p>
         </div>
       </div>
+
+      {/* Bottom navigation */}
       <div className="bg-fourthff w-full border-none fixed bottom-0 px-8 py-4 z-10 h-16 overflow-hidden flex justify-between text-bgff">
         <NavLink
           className={({ isActive }) =>
-            isActive ? 'active font-bold text-bgff ' : 'text-thirdff'
+            isActive ? 'active text-titleff font-bold ' : 'text-white'
           }
           to="/recipes"
           relative="path"
@@ -285,7 +325,7 @@ function HeaderMobile() {
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            isActive ? 'active font-bold text-bgff ' : 'text-thirdff'
+            isActive ? 'active text-titleff font-bold ' : 'text-white'
           }
           to="/schedule"
           relative="path"
@@ -303,8 +343,8 @@ function HeaderMobile() {
         <button
           className={
             modalIsOpenFavoriProfil
-              ? 'text-bgff font-bold active'
-              : 'text-thirdff'
+              ? 'active text-titleff font-bold '
+              : 'text-white'
           }
           type="button"
           onClick={() => {
@@ -316,7 +356,7 @@ function HeaderMobile() {
             }
           }}
         >
-          <User className="h-9 w-9 " />
+          <User className="h-9 w-9" />{' '}
         </button>
       </div>
     </header>
