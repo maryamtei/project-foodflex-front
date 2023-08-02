@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import React, { ChangeEvent } from 'react';
 import { Search } from 'react-feather';
 
 interface SearchProps {
@@ -8,16 +8,15 @@ interface SearchProps {
 }
 
 function SearchComponent({ name, value, onChange }: SearchProps) {
-  // Définition de la fonction à appeler quand la valeur du champ de saisie change.
+  // Defining the function to call when the value of the input field changes.
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const newValue = event.target.value;
-    // Appel de la fonction onChange passée en prop avec la nouvelle valeur.
     onChange(newValue);
   }
 
   return (
     <div className="flex flex-1 items-center">
-      <div className="relative flex items-center w-full h-12 rounded-lg shadow-md focus-within:shadow-lg transition-all bg-white overflow-hidden ">
+      <div className="relative flex items-center w-full h-12 rounded-lg shadow-md focus-within:shadow-lg transition-all bg-white overflow-hidden">
         <div className="grid place-items-center h-full w-12 text-gray-300">
           <Search
             className="h-6 w-6"
@@ -29,7 +28,8 @@ function SearchComponent({ name, value, onChange }: SearchProps) {
         </div>
 
         <input
-          className="peer h-full w-full outline-none text-sm text-gray-700 pr-2"
+          data-testid="search"
+          className="peer h-full w-full outline-none text-sm text-gray-700 pr-2 bg-bgff"
           type="text"
           id="search"
           placeholder="Search something.."

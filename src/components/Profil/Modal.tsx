@@ -7,7 +7,7 @@ import {
   toggleIsOpenProfil,
   changeStateModalAnimation,
 } from '../../store/reducers/favoris';
-import { getUserData } from '../../store/reducers/settings';
+import { getUserData } from '../../store/reducers/user';
 
 function Modal() {
   const favoriIsOpen = useAppSelector((state) => state.favoris.favoriIsOpen);
@@ -53,7 +53,7 @@ function Modal() {
     >
       <button
         type="button"
-        className="absolute top-1 right-2  w-10 h-10 mt-2 hidden sm:block"
+        className="absolute top-1 right-2  w-10 h-10 mt-2 hidden sm:block transition-transform duration-500 hover:rotate-90"
         onClick={handleModaltoggle}
       >
         <X className="w-12 h-12 text-bgff" />
