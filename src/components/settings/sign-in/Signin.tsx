@@ -117,7 +117,7 @@ function signin() {
       {/* Close button (X icon) for the sign-in form */}
       <button
         type="button"
-        className="absolute top-1 right-1  w-10 h-10 mt-2 hidden sm:block"
+        className="absolute top-1 right-1  w-10 h-10 mt-2 block"
         onClick={handleModaltoggle}
       >
         <X className="w-12 h-12" />
