@@ -42,7 +42,7 @@ function AboutUsPage() {
                 virtual vegetables like a pro; Romain, the maestro of amusing
                 bugs who turns errors into unique culinary creations; Mathilde,
                 the queen of quirky recipes who skillfully blends improbable
-                ingredients; and Gabriele, the virtuoso of cheerful interfaces
+                ingredients; and Gabrielle, the virtuoso of cheerful interfaces
                 that make cooking as playful as a video game!
               </p>
               {/* Story paragraph 2 */}
