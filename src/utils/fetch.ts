@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://foodflex-c0b021a422d7.herokuapp.com/';
+const API_BASE_URL = 'https://foodflex-f09a01aee880.herokuapp.com/';
 
 // Utility function to add the authentication token to the headers
 const createHeadersWithAuthorization = () => {
